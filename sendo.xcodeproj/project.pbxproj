@@ -1,0 +1,646 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		20858D58272448B200993B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D57272448B200993B5E /* AppDelegate.swift */; };
+		20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D59272448B200993B5E /* SceneDelegate.swift */; };
+		20858D5C272448B200993B5E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D5B272448B200993B5E /* ViewController.swift */; };
+		20858D5F272448B200993B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D5D272448B200993B5E /* Main.storyboard */; };
+		20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20858D60272448B200993B5E /* sendo.xcdatamodeld */; };
+		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
+		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
+		20858D72272448D200993B5E /* sendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D71272448D200993B5E /* sendoTests.swift */; };
+		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
+		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20858D6E272448D200993B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20858D4C272448B200993B5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20858D53272448B200993B5E;
+			remoteInfo = sendo;
+		};
+		20858D78272448D200993B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20858D4C272448B200993B5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20858D53272448B200993B5E;
+			remoteInfo = sendo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		20858D54272448B200993B5E /* sendo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sendo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D57272448B200993B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		20858D5B272448B200993B5E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
+		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		20858D66272448D000993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		20858D68272448D000993B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20858D6D272448D200993B5E /* sendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D71272448D200993B5E /* sendoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoTests.swift; sourceTree = "<group>"; };
+		20858D77272448D200993B5E /* sendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
+		20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20858D51272448B200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D6A272448D200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D74272448D200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20858D4B272448B200993B5E = {
+			isa = PBXGroup;
+			children = (
+				20858D56272448B200993B5E /* sendo */,
+				20858D70272448D200993B5E /* sendoTests */,
+				20858D7A272448D200993B5E /* sendoUITests */,
+				20858D55272448B200993B5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		20858D55272448B200993B5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20858D54272448B200993B5E /* sendo.app */,
+				20858D6D272448D200993B5E /* sendoTests.xctest */,
+				20858D77272448D200993B5E /* sendoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20858D56272448B200993B5E /* sendo */ = {
+			isa = PBXGroup;
+			children = (
+				20858D57272448B200993B5E /* AppDelegate.swift */,
+				20858D59272448B200993B5E /* SceneDelegate.swift */,
+				20858D5B272448B200993B5E /* ViewController.swift */,
+				20858D5D272448B200993B5E /* Main.storyboard */,
+				20858D63272448D000993B5E /* Assets.xcassets */,
+				20858D65272448D000993B5E /* LaunchScreen.storyboard */,
+				20858D68272448D000993B5E /* Info.plist */,
+				20858D60272448B200993B5E /* sendo.xcdatamodeld */,
+			);
+			path = sendo;
+			sourceTree = "<group>";
+		};
+		20858D70272448D200993B5E /* sendoTests */ = {
+			isa = PBXGroup;
+			children = (
+				20858D71272448D200993B5E /* sendoTests.swift */,
+			);
+			path = sendoTests;
+			sourceTree = "<group>";
+		};
+		20858D7A272448D200993B5E /* sendoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				20858D7B272448D200993B5E /* sendoUITests.swift */,
+				20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */,
+			);
+			path = sendoUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20858D53272448B200993B5E /* sendo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D81272448D300993B5E /* Build configuration list for PBXNativeTarget "sendo" */;
+			buildPhases = (
+				20858D50272448B200993B5E /* Sources */,
+				20858D51272448B200993B5E /* Frameworks */,
+				20858D52272448B200993B5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = sendo;
+			productName = sendo;
+			productReference = 20858D54272448B200993B5E /* sendo.app */;
+			productType = "com.apple.product-type.application";
+		};
+		20858D6C272448D200993B5E /* sendoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D84272448D300993B5E /* Build configuration list for PBXNativeTarget "sendoTests" */;
+			buildPhases = (
+				20858D69272448D200993B5E /* Sources */,
+				20858D6A272448D200993B5E /* Frameworks */,
+				20858D6B272448D200993B5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20858D6F272448D200993B5E /* PBXTargetDependency */,
+			);
+			name = sendoTests;
+			productName = sendoTests;
+			productReference = 20858D6D272448D200993B5E /* sendoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		20858D76272448D200993B5E /* sendoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D87272448D300993B5E /* Build configuration list for PBXNativeTarget "sendoUITests" */;
+			buildPhases = (
+				20858D73272448D200993B5E /* Sources */,
+				20858D74272448D200993B5E /* Frameworks */,
+				20858D75272448D200993B5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20858D79272448D200993B5E /* PBXTargetDependency */,
+			);
+			name = sendoUITests;
+			productName = sendoUITests;
+			productReference = 20858D77272448D200993B5E /* sendoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20858D4C272448B200993B5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					20858D53272448B200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					20858D6C272448D200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 20858D53272448B200993B5E;
+					};
+					20858D76272448D200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 20858D53272448B200993B5E;
+					};
+				};
+			};
+			buildConfigurationList = 20858D4F272448B200993B5E /* Build configuration list for PBXProject "sendo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 20858D4B272448B200993B5E;
+			productRefGroup = 20858D55272448B200993B5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				20858D53272448B200993B5E /* sendo */,
+				20858D6C272448D200993B5E /* sendoTests */,
+				20858D76272448D200993B5E /* sendoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20858D52272448B200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
+				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
+				20858D5F272448B200993B5E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D6B272448D200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D75272448D200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20858D50272448B200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D5C272448B200993B5E /* ViewController.swift in Sources */,
+				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
+				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
+				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D69272448D200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D72272448D200993B5E /* sendoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D73272448D200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */,
+				20858D7C272448D200993B5E /* sendoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20858D6F272448D200993B5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20858D53272448B200993B5E /* sendo */;
+			targetProxy = 20858D6E272448D200993B5E /* PBXContainerItemProxy */;
+		};
+		20858D79272448D200993B5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20858D53272448B200993B5E /* sendo */;
+			targetProxy = 20858D78272448D200993B5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		20858D5D272448B200993B5E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20858D5E272448B200993B5E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		20858D65272448D000993B5E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20858D66272448D000993B5E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		20858D7F272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		20858D80272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		20858D82272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20858D83272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		20858D85272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sendo.app/sendo";
+			};
+			name = Debug;
+		};
+		20858D86272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/sendo.app/sendo";
+			};
+			name = Release;
+		};
+		20858D88272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = sendo;
+			};
+			name = Debug;
+		};
+		20858D89272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = sendo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20858D4F272448B200993B5E /* Build configuration list for PBXProject "sendo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D7F272448D300993B5E /* Debug */,
+				20858D80272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D81272448D300993B5E /* Build configuration list for PBXNativeTarget "sendo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D82272448D300993B5E /* Debug */,
+				20858D83272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D84272448D300993B5E /* Build configuration list for PBXNativeTarget "sendoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D85272448D300993B5E /* Debug */,
+				20858D86272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D87272448D300993B5E /* Build configuration list for PBXNativeTarget "sendoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D88272448D300993B5E /* Debug */,
+				20858D89272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		20858D60272448B200993B5E /* sendo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				20858D61272448B200993B5E /* sendo.xcdatamodel */,
+			);
+			currentVersion = 20858D61272448B200993B5E /* sendo.xcdatamodel */;
+			path = sendo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 20858D4C272448B200993B5E /* Project object */;
+}
