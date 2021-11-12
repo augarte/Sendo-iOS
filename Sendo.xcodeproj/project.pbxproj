@@ -1,0 +1,848 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		20858D58272448B200993B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D57272448B200993B5E /* AppDelegate.swift */; };
+		20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D59272448B200993B5E /* SceneDelegate.swift */; };
+		20858D5F272448B200993B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D5D272448B200993B5E /* Main.storyboard */; };
+		20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20858D60272448B200993B5E /* sendo.xcdatamodeld */; };
+		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
+		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
+		20858D72272448D200993B5E /* sendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D71272448D200993B5E /* sendoTests.swift */; };
+		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
+		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
+		20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB7272472FB000B9C1D /* Measurement.swift */; };
+		20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */; };
+		20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBB272474B6000B9C1D /* ProgressViewController.swift */; };
+		20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */; };
+		20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */; };
+		20B96EC4272484D6000B9C1D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC3272484D6000B9C1D /* BaseViewController.swift */; };
+		20C524692724D43A00741057 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524682724D43A00741057 /* Utils.swift */; };
+		20C5246B2724DBE800741057 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5246A2724DBE800741057 /* RestManager.swift */; };
+		20C524712724E7AC00741057 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524702724E7AC00741057 /* FirebaseAnalytics */; };
+		20C524732724E7AC00741057 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524722724E7AC00741057 /* FirebaseAuth */; };
+		20C524752724E7AC00741057 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524742724E7AC00741057 /* FirebaseCrashlytics */; };
+		20C524772724E7AC00741057 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524762724E7AC00741057 /* FirebaseDatabase */; };
+		20C524792724E7AC00741057 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524782724E7AC00741057 /* FirebaseMessaging */; };
+		20C5247B2724E7AC00741057 /* FirebasePerformance in Frameworks */ = {isa = PBXBuildFile; productRef = 20C5247A2724E7AC00741057 /* FirebasePerformance */; };
+		20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C5246E2724E58E00741057 /* GoogleService-Info.plist */; };
+		20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */; };
+		20C524812724EF1C00741057 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524802724EF1C00741057 /* Exercise.swift */; };
+		20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524822724F00600741057 /* ExerciseViewModel.swift */; };
+		20C5248627258FAE00741057 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5248527258FAE00741057 /* Subscription.swift */; };
+		20C524882725906A00741057 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524872725906A00741057 /* Publisher.swift */; };
+		20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */; };
+		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		20858D6E272448D200993B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20858D4C272448B200993B5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20858D53272448B200993B5E;
+			remoteInfo = sendo;
+		};
+		20858D78272448D200993B5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 20858D4C272448B200993B5E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 20858D53272448B200993B5E;
+			remoteInfo = sendo;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		20858D54272448B200993B5E /* Sendo Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sendo Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D57272448B200993B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
+		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		20858D66272448D000993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		20858D68272448D000993B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		20858D6D272448D200993B5E /* SendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D71272448D200993B5E /* sendoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoTests.swift; sourceTree = "<group>"; };
+		20858D77272448D200993B5E /* SendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
+		20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		20B96EB7272472FB000B9C1D /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
+		20B96EBB272474B6000B9C1D /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
+		20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
+		20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
+		20B96EC3272484D6000B9C1D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		20C524682724D43A00741057 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		20C5246A2724DBE800741057 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
+		20C5246E2724E58E00741057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
+		20C524802724EF1C00741057 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
+		20C524822724F00600741057 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		20C5248527258FAE00741057 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
+		20C524872725906A00741057 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
+		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		20858D51272448B200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20C524752724E7AC00741057 /* FirebaseCrashlytics in Frameworks */,
+				20C524712724E7AC00741057 /* FirebaseAnalytics in Frameworks */,
+				20C5247B2724E7AC00741057 /* FirebasePerformance in Frameworks */,
+				20C524792724E7AC00741057 /* FirebaseMessaging in Frameworks */,
+				20C524772724E7AC00741057 /* FirebaseDatabase in Frameworks */,
+				20C524732724E7AC00741057 /* FirebaseAuth in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D6A272448D200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D74272448D200993B5E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		20858D4B272448B200993B5E = {
+			isa = PBXGroup;
+			children = (
+				20858D56272448B200993B5E /* Sendo */,
+				20858D70272448D200993B5E /* SendoTests */,
+				20858D7A272448D200993B5E /* SendoUITests */,
+				20858D55272448B200993B5E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		20858D55272448B200993B5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				20858D54272448B200993B5E /* Sendo Dev.app */,
+				20858D6D272448D200993B5E /* SendoTests.xctest */,
+				20858D77272448D200993B5E /* SendoUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		20858D56272448B200993B5E /* Sendo */ = {
+			isa = PBXGroup;
+			children = (
+				20858D65272448D000993B5E /* LaunchScreen.storyboard */,
+				20858D5D272448B200993B5E /* Main.storyboard */,
+				20858D63272448D000993B5E /* Assets.xcassets */,
+				20858D57272448B200993B5E /* AppDelegate.swift */,
+				20858D59272448B200993B5E /* SceneDelegate.swift */,
+				20B96EBD272474BD000B9C1D /* ViewController */,
+				20B96EBE272474D2000B9C1D /* View */,
+				20C5248427258F9900741057 /* Protocol */,
+				20B96EB6272472D0000B9C1D /* ViewModel */,
+				20B96EB5272472CA000B9C1D /* Model */,
+				20858D68272448D000993B5E /* Info.plist */,
+				20C5246E2724E58E00741057 /* GoogleService-Info.plist */,
+				20858D60272448B200993B5E /* sendo.xcdatamodeld */,
+				20C524682724D43A00741057 /* Utils.swift */,
+			);
+			path = Sendo;
+			sourceTree = "<group>";
+		};
+		20858D70272448D200993B5E /* SendoTests */ = {
+			isa = PBXGroup;
+			children = (
+				20858D71272448D200993B5E /* sendoTests.swift */,
+			);
+			path = SendoTests;
+			sourceTree = "<group>";
+		};
+		20858D7A272448D200993B5E /* SendoUITests */ = {
+			isa = PBXGroup;
+			children = (
+				20858D7B272448D200993B5E /* sendoUITests.swift */,
+				20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */,
+			);
+			path = SendoUITests;
+			sourceTree = "<group>";
+		};
+		20B96EB5272472CA000B9C1D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EB7272472FB000B9C1D /* Measurement.swift */,
+				20C524802724EF1C00741057 /* Exercise.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		20B96EB6272472D0000B9C1D /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				20C5246A2724DBE800741057 /* RestManager.swift */,
+				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
+				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
+				20C524822724F00600741057 /* ExerciseViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		20B96EBD272474BD000B9C1D /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EC3272484D6000B9C1D /* BaseViewController.swift */,
+				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
+				20DDAC64273F2F2D0072BB76 /* HomeTabs */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		20B96EBE272474D2000B9C1D /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		20C5248427258F9900741057 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				20C5248527258FAE00741057 /* Subscription.swift */,
+				20C524872725906A00741057 /* Publisher.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		20DDAC64273F2F2D0072BB76 /* HomeTabs */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
+				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
+				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
+				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
+			);
+			path = HomeTabs;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		20858D53272448B200993B5E /* Sendo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D81272448D300993B5E /* Build configuration list for PBXNativeTarget "Sendo" */;
+			buildPhases = (
+				20858D50272448B200993B5E /* Sources */,
+				20858D51272448B200993B5E /* Frameworks */,
+				20858D52272448B200993B5E /* Resources */,
+				20C5247C2724E92D00741057 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Sendo;
+			packageProductDependencies = (
+				20C524702724E7AC00741057 /* FirebaseAnalytics */,
+				20C524722724E7AC00741057 /* FirebaseAuth */,
+				20C524742724E7AC00741057 /* FirebaseCrashlytics */,
+				20C524762724E7AC00741057 /* FirebaseDatabase */,
+				20C524782724E7AC00741057 /* FirebaseMessaging */,
+				20C5247A2724E7AC00741057 /* FirebasePerformance */,
+			);
+			productName = sendo;
+			productReference = 20858D54272448B200993B5E /* Sendo Dev.app */;
+			productType = "com.apple.product-type.application";
+		};
+		20858D6C272448D200993B5E /* SendoTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D84272448D300993B5E /* Build configuration list for PBXNativeTarget "SendoTests" */;
+			buildPhases = (
+				20858D69272448D200993B5E /* Sources */,
+				20858D6A272448D200993B5E /* Frameworks */,
+				20858D6B272448D200993B5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20858D6F272448D200993B5E /* PBXTargetDependency */,
+			);
+			name = SendoTests;
+			productName = sendoTests;
+			productReference = 20858D6D272448D200993B5E /* SendoTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		20858D76272448D200993B5E /* SendoUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 20858D87272448D300993B5E /* Build configuration list for PBXNativeTarget "SendoUITests" */;
+			buildPhases = (
+				20858D73272448D200993B5E /* Sources */,
+				20858D74272448D200993B5E /* Frameworks */,
+				20858D75272448D200993B5E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				20858D79272448D200993B5E /* PBXTargetDependency */,
+			);
+			name = SendoUITests;
+			productName = sendoUITests;
+			productReference = 20858D77272448D200993B5E /* SendoUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		20858D4C272448B200993B5E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1300;
+				LastUpgradeCheck = 1300;
+				TargetAttributes = {
+					20858D53272448B200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+					};
+					20858D6C272448D200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 20858D53272448B200993B5E;
+					};
+					20858D76272448D200993B5E = {
+						CreatedOnToolsVersion = 13.0;
+						TestTargetID = 20858D53272448B200993B5E;
+					};
+				};
+			};
+			buildConfigurationList = 20858D4F272448B200993B5E /* Build configuration list for PBXProject "Sendo" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 20858D4B272448B200993B5E;
+			packageReferences = (
+				20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
+			productRefGroup = 20858D55272448B200993B5E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				20858D53272448B200993B5E /* Sendo */,
+				20858D6C272448D200993B5E /* SendoTests */,
+				20858D76272448D200993B5E /* SendoUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20858D52272448B200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
+				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
+				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
+				20858D5F272448B200993B5E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D6B272448D200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D75272448D200993B5E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		20C5247C2724E92D00741057 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		20858D50272448B200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */,
+				20C5246B2724DBE800741057 /* RestManager.swift in Sources */,
+				20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */,
+				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
+				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
+				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
+				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
+				20C524692724D43A00741057 /* Utils.swift in Sources */,
+				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
+				20B96EC4272484D6000B9C1D /* BaseViewController.swift in Sources */,
+				20C524882725906A00741057 /* Publisher.swift in Sources */,
+				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,
+				20C5248627258FAE00741057 /* Subscription.swift in Sources */,
+				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
+				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
+				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
+				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
+				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D69272448D200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D72272448D200993B5E /* sendoTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		20858D73272448D200993B5E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */,
+				20858D7C272448D200993B5E /* sendoUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		20858D6F272448D200993B5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20858D53272448B200993B5E /* Sendo */;
+			targetProxy = 20858D6E272448D200993B5E /* PBXContainerItemProxy */;
+		};
+		20858D79272448D200993B5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 20858D53272448B200993B5E /* Sendo */;
+			targetProxy = 20858D78272448D200993B5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		20858D5D272448B200993B5E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20858D5E272448B200993B5E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		20858D65272448D000993B5E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				20858D66272448D000993B5E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		20858D7F272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		20858D80272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		20858D82272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon AppStore";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = app.augarte.sendo;
+				PRODUCT_NAME = "$(TARGET_NAME) Dev";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		20858D83272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon AppStore";
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_BUNDLE_IDENTIFIER = app.augarte.sendo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		20858D85272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sendo.app/Sendo";
+			};
+			name = Debug;
+		};
+		20858D86272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sendo.app/Sendo";
+			};
+			name = Release;
+		};
+		20858D88272448D300993B5E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = sendo;
+			};
+			name = Debug;
+		};
+		20858D89272448D300993B5E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 384JVVGP7X;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.augarte.sendoUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = sendo;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		20858D4F272448B200993B5E /* Build configuration list for PBXProject "Sendo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D7F272448D300993B5E /* Debug */,
+				20858D80272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D81272448D300993B5E /* Build configuration list for PBXNativeTarget "Sendo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D82272448D300993B5E /* Debug */,
+				20858D83272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D84272448D300993B5E /* Build configuration list for PBXNativeTarget "SendoTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D85272448D300993B5E /* Debug */,
+				20858D86272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		20858D87272448D300993B5E /* Build configuration list for PBXNativeTarget "SendoUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				20858D88272448D300993B5E /* Debug */,
+				20858D89272448D300993B5E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		20C524702724E7AC00741057 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		20C524722724E7AC00741057 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		20C524742724E7AC00741057 /* FirebaseCrashlytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCrashlytics;
+		};
+		20C524762724E7AC00741057 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		20C524782724E7AC00741057 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		20C5247A2724E7AC00741057 /* FirebasePerformance */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebasePerformance;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		20858D60272448B200993B5E /* sendo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				20858D61272448B200993B5E /* sendo.xcdatamodel */,
+			);
+			currentVersion = 20858D61272448B200993B5E /* sendo.xcdatamodel */;
+			path = sendo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 20858D4C272448B200993B5E /* Project object */;
+}
