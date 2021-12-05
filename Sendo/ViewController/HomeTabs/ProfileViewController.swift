@@ -5,7 +5,8 @@
 //  Created by Aimar Ugarte on 13/11/21.
 //
 
-import Foundation
+import UIKit
+import Combine
 
 class ProfileViewController: BaseViewController {
     

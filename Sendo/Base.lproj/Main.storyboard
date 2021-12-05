@@ -12,7 +12,7 @@
         <!--Home Tab Bar View Controller-->
         <scene sceneID="QbD-Pb-0wu">
             <objects>
-                <tabBarController storyboardIdentifier="HomeTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fID-IT-7ds" customClass="HomeTabBarViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fID-IT-7ds" customClass="HomeTabBarViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFx-RN-roP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -27,7 +27,7 @@
         <!--Workout-->
         <scene sceneID="qLe-ee-VVX">
             <objects>
-                <viewController storyboardIdentifier="WorkoutViewController" title="Workout" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eZ6-Le-95t" customClass="WorkoutViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutViewController" title="Workout" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eZ6-Le-95t" customClass="WorkoutViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z1C-gY-gjb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,13 +58,28 @@
         <!--Exercises-->
         <scene sceneID="9KW-vE-NnR">
             <objects>
-                <viewController storyboardIdentifier="ExerciseListViewController" title="Exercises" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dTX-RQ-StY" customClass="ExerciseListViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExerciseListViewController" title="Exercises" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dTX-RQ-StY" customClass="ExerciseListViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ET6-Kp-PCX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-KP-SEA">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="nZk-4V-OKI"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="nZk-4V-OKI" firstAttribute="bottom" secondItem="cdJ-KP-SEA" secondAttribute="bottom" id="Ved-7V-mIi"/>
+                            <constraint firstItem="cdJ-KP-SEA" firstAttribute="top" secondItem="nZk-4V-OKI" secondAttribute="top" id="dm7-OV-1ov"/>
+                            <constraint firstItem="nZk-4V-OKI" firstAttribute="trailing" secondItem="cdJ-KP-SEA" secondAttribute="trailing" id="m1c-YJ-VpD"/>
+                            <constraint firstItem="cdJ-KP-SEA" firstAttribute="leading" secondItem="nZk-4V-OKI" secondAttribute="leading" id="xLF-g8-fuR"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="exercisesTableView" destination="cdJ-KP-SEA" id="syS-j9-6Yb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="E1p-JQ-dvC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -73,7 +88,7 @@
         <!--Progress-->
         <scene sceneID="ZsY-4q-FDq">
             <objects>
-                <viewController storyboardIdentifier="ProgressViewController" title="Progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fX-4h-lIV" customClass="ProgressViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgressViewController" title="Progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fX-4h-lIV" customClass="ProgressViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a4U-DL-FCX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -112,7 +127,7 @@
         <!--Profile-->
         <scene sceneID="zmP-pT-otx">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cyb-pb-DwU" customClass="ProfileViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cyb-pb-DwU" customClass="ProfileViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DiD-OV-ycW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
