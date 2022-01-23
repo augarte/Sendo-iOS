@@ -19,7 +19,7 @@ class ExerciseViewModel: ObservableObject {
     }
     
     func fetchExercises() {
-        FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises").sink { completion in
+        FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title").sink { completion in
             switch completion {
             case .failure(let error): print("Error: \(error.localizedDescription)")
             case .finished: break

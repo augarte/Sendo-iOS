@@ -20,13 +20,17 @@ final class FirebaseDatabaseManager: ObservableObject {
     
     private init() {}
 
-    func fetchDatabase(child: String) -> AnyPublisher<DataSnapshot, Error> {
+    func fetchDatabase(child: String, orderedBy: String?) -> AnyPublisher<DataSnapshot, Error> {
         Future { future in
-            self.db.child(child).getData { error, snapshot in
-                guard error == nil else {
-                    return future(.failure(error!))
-                }
+            let childRef = self.db.child(child)
+            var queryRef = childRef.queryOrderedByKey()
+            if let orderValue = orderedBy, !orderValue.isEmpty {
+                queryRef = childRef.queryOrdered(byChild: orderValue)
+            }
+            queryRef.observeSingleEvent(of: .value, with: { snapshot in
                 return future(.success(snapshot))
+            }) { (error) in
+                return future(.failure(error))
             }
         }.eraseToAnyPublisher()
     }
