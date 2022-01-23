@@ -12,7 +12,7 @@
         <!--Home Tab Bar View Controller-->
         <scene sceneID="QbD-Pb-0wu">
             <objects>
-                <tabBarController storyboardIdentifier="HomeTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fID-IT-7ds" customClass="HomeTabBarViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="HomeTabBarViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fID-IT-7ds" customClass="HomeTabBarViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fFx-RN-roP">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -27,7 +27,7 @@
         <!--Workout-->
         <scene sceneID="qLe-ee-VVX">
             <objects>
-                <viewController storyboardIdentifier="WorkoutViewController" title="Workout" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eZ6-Le-95t" customClass="WorkoutViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WorkoutViewController" title="Workout" useStoryboardIdentifierAsRestorationIdentifier="YES" id="eZ6-Le-95t" customClass="WorkoutViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="z1C-gY-gjb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -58,14 +58,14 @@
         <!--Exercises-->
         <scene sceneID="9KW-vE-NnR">
             <objects>
-                <viewController storyboardIdentifier="ExerciseListViewController" title="Exercises" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dTX-RQ-StY" customClass="ExerciseListViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ExerciseListViewController" title="Exercises" useStoryboardIdentifierAsRestorationIdentifier="YES" id="dTX-RQ-StY" customClass="ExerciseListViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ET6-Kp-PCX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="cdJ-KP-SEA">
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </tableView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="nZk-4V-OKI"/>
@@ -88,7 +88,7 @@
         <!--Progress-->
         <scene sceneID="ZsY-4q-FDq">
             <objects>
-                <viewController storyboardIdentifier="ProgressViewController" title="Progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fX-4h-lIV" customClass="ProgressViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProgressViewController" title="Progress" useStoryboardIdentifierAsRestorationIdentifier="YES" id="0fX-4h-lIV" customClass="ProgressViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="a4U-DL-FCX">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -127,13 +127,37 @@
         <!--Profile-->
         <scene sceneID="zmP-pT-otx">
             <objects>
-                <viewController storyboardIdentifier="ProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cyb-pb-DwU" customClass="ProfileViewController" customModule="sendo" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileViewController" title="Profile" useStoryboardIdentifierAsRestorationIdentifier="YES" id="cyb-pb-DwU" customClass="ProfileViewController" customModule="Sendo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DiD-OV-ycW">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ryz-4r-vR7">
+                                <rect key="frame" x="32" y="128" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="32" id="hbM-yE-c7y"/>
+                                    <constraint firstAttribute="width" secondItem="ryz-4r-vR7" secondAttribute="height" multiplier="1:1" id="iRi-Th-iL6"/>
+                                </constraints>
+                            </imageView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="X2v-mE-H4y">
+                                <rect key="frame" x="80" y="128.5" width="51" height="31"/>
+                                <connections>
+                                    <action selector="darkModeSwitchAction:" destination="cyb-pb-DwU" eventType="valueChanged" id="I57-bn-e0m"/>
+                                </connections>
+                            </switch>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="31c-Zm-6Jc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="ryz-4r-vR7" firstAttribute="leading" secondItem="31c-Zm-6Jc" secondAttribute="leading" constant="32" id="Abk-1l-Anb"/>
+                            <constraint firstItem="X2v-mE-H4y" firstAttribute="leading" secondItem="ryz-4r-vR7" secondAttribute="trailing" constant="16" id="TcZ-a2-h0b"/>
+                            <constraint firstItem="X2v-mE-H4y" firstAttribute="centerY" secondItem="ryz-4r-vR7" secondAttribute="centerY" id="XG4-Nv-E2P"/>
+                            <constraint firstItem="ryz-4r-vR7" firstAttribute="top" secondItem="DiD-OV-ycW" secondAttribute="top" constant="128" id="ZsQ-4c-A5J"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="darkModeSwitch" destination="X2v-mE-H4y" id="uGE-w6-UXd"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jHq-lf-OZM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -142,7 +166,7 @@
     </scenes>
     <resources>
         <namedColor name="PrimaryColor">
-            <color red="0.32156862745098042" green="0.36862745098039218" blue="0.32941176470588235" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

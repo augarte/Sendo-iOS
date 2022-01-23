@@ -38,6 +38,9 @@
 		20C524882725906A00741057 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524872725906A00741057 /* Publisher.swift */; };
 		20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */; };
 		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
+		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
+		20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */; };
+		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,8 @@
 		20C524872725906A00741057 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
+		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
+		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +102,7 @@
 				20C524752724E7AC00741057 /* FirebaseCrashlytics in Frameworks */,
 				20C524712724E7AC00741057 /* FirebaseAnalytics in Frameworks */,
 				20C5247B2724E7AC00741057 /* FirebasePerformance in Frameworks */,
+				20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */,
 				20C524792724E7AC00741057 /* FirebaseMessaging in Frameworks */,
 				20C524772724E7AC00741057 /* FirebaseDatabase in Frameworks */,
 				20C524732724E7AC00741057 /* FirebaseAuth in Frameworks */,
@@ -211,6 +217,8 @@
 		20B96EBE272474D2000B9C1D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
+				20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -259,6 +267,7 @@
 				20C524762724E7AC00741057 /* FirebaseDatabase */,
 				20C524782724E7AC00741057 /* FirebaseMessaging */,
 				20C5247A2724E7AC00741057 /* FirebasePerformance */,
+				20F2D425275CECF200A56B83 /* SDWebImage */,
 			);
 			productName = sendo;
 			productReference = 20858D54272448B200993B5E /* Sendo Dev.app */;
@@ -334,6 +343,7 @@
 			mainGroup = 20858D4B272448B200993B5E;
 			packageReferences = (
 				20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 			);
 			productRefGroup = 20858D55272448B200993B5E /* Products */;
 			projectDirPath = "";
@@ -353,6 +363,7 @@
 			files = (
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
+				20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
 				20858D5F272448B200993B5E /* Main.storyboard in Resources */,
 			);
@@ -411,6 +422,7 @@
 				20B96EC4272484D6000B9C1D /* BaseViewController.swift in Sources */,
 				20C524882725906A00741057 /* Publisher.swift in Sources */,
 				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,
+				20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */,
 				20C5248627258FAE00741057 /* Subscription.swift in Sources */,
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
@@ -796,6 +808,14 @@
 				minimumVersion = 8.0.0;
 			};
 		};
+		20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SDWebImage/SDWebImage";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -828,6 +848,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebasePerformance;
+		};
+		20F2D425275CECF200A56B83 /* SDWebImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */;
+			productName = SDWebImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

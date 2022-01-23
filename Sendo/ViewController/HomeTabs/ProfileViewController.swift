@@ -10,14 +10,32 @@ import Combine
 
 class ProfileViewController: BaseViewController {
     
+    @IBOutlet weak var darkModeSwitch: UISwitch!
+    var darkMode = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "Profile"
+        
+        let preferences = UserDefaults.standard
+        if preferences.object(forKey: "darkMode") == nil {
+            //  Doesn't exist
+        } else {
+            darkMode = preferences.bool(forKey: "darkMode")
+            darkModeSwitch.setOn(darkMode, animated: false)
+            
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
 
+    @IBAction func darkModeSwitchAction(_ sender: Any) {
+        let preferences = UserDefaults.standard
+        preferences.set(!darkMode, forKey: "darkMode")
+        preferences.synchronize()
+    }
+    
 }

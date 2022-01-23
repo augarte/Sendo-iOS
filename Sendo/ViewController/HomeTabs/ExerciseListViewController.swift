@@ -26,11 +26,28 @@ class ExerciseListViewController: BaseViewController {
         
         exercisesTableView?.delegate = self
         exercisesTableView?.dataSource = self
+        exercisesTableView.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseTableViewCell")
 
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        exerciseViewModel.fetchExercises()
     }
 
 }
+
+extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return exerciseViewModel.exercises.value.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let exercise = exerciseViewModel.exercises.value[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableViewCell")! as! ExerciseTableViewCell
+        cell.configureCell(exercise: exercise)
+        return cell;
+    }
+    
+}
+

@@ -11,8 +11,16 @@ class HomeTabBarViewController: UITabBarController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupTabBarItems()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        let preferences = UserDefaults.standard
+        var darkMode = false
+        if preferences.object(forKey: "darkMode") != nil {
+            darkMode = preferences.bool(forKey: "darkMode")
+        }
+        overrideUserInterfaceStyle = darkMode ? .dark : .light
     }
     
     override func viewDidAppear(_ animated: Bool) {
