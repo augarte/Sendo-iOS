@@ -1,0 +1,23 @@
+{
+  "images" : [
+    {
+      "filename" : "sendomesa_de_trabajo_1svg (1).png",
+      "idiom" : "universal",
+      "scale" : "1x"
+    },
+    {
+      "filename" : "sendomesa_de_trabajo_1svg (1)@2x.png",
+      "idiom" : "universal",
+      "scale" : "2x"
+    },
+    {
+      "filename" : "sendomesa_de_trabajo_1svg (1)@3x.png",
+      "idiom" : "universal",
+      "scale" : "3x"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}
