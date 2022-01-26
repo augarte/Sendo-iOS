@@ -9,6 +9,10 @@ import UIKit
 
 class HomeTabBarViewController: UITabBarController {
     
+    var addButtonSelected: Bool = false
+    var addWorkout: UIButton?
+    var addProgress: UIButton?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBarItems()
@@ -58,6 +62,10 @@ class HomeTabBarViewController: UITabBarController {
         
         view.addSubview(addButton)
         view.layoutIfNeeded()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.dissmissAddButton(sender:)))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     func createTabBarItem(tabImage: String, viewController: UIViewController) -> UINavigationController {
@@ -70,9 +78,40 @@ class HomeTabBarViewController: UITabBarController {
 
     // MARK: - Actions
     @objc private func tappAddButton(sender: UIButton) {
-        
+        addButtonSelected = !addButtonSelected
+        if addButtonSelected {
+            //Workout adding button
+            addWorkout = UIButton(frame: CGRect(x: sender.frame.origin.x - 40,
+                                                y: sender.frame.origin.y - 64,
+                                                width: sender.frame.size.width,
+                                                height: sender.frame.size.height))
+            guard let addWorkout = addWorkout else { return }
+            addWorkout.layer.cornerRadius = sender.frame.size.width / 2
+            addWorkout.setBackgroundImage(#imageLiteral(resourceName: "WorkoutWhite"), for: .normal)
+            addWorkout.backgroundColor = UIColor.init(named: "PrimaryColor")
+            view.addSubview(addWorkout)
+            view.layoutIfNeeded()
+            
+            //Measurement adding button
+            addProgress = UIButton(frame: CGRect(x: sender.frame.origin.x + 40,
+                                                 y: sender.frame.origin.y - 64,
+                                                 width: sender.frame.size.width,
+                                                 height: sender.frame.size.height))
+            guard let addProgress = addProgress else { return }
+            addProgress.layer.cornerRadius = sender.frame.size.width / 2
+            addProgress.setBackgroundImage(#imageLiteral(resourceName: "MeasurementWhite"), for: .normal)
+            addProgress.backgroundColor = UIColor.init(named: "PrimaryColor")
+            view.addSubview(addProgress)
+            view.layoutIfNeeded()
+        } else {
+            self.dissmissAddButton(sender: sender)
+        }
     }
     
+    @objc private func dissmissAddButton(sender: UIButton?) {
+        addWorkout?.removeFromSuperview()
+        addProgress?.removeFromSuperview()
+    }
 }
 
 extension HomeTabBarViewController: UITabBarControllerDelegate {
