@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		20858D58272448B200993B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D57272448B200993B5E /* AppDelegate.swift */; };
 		20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D59272448B200993B5E /* SceneDelegate.swift */; };
-		20858D5F272448B200993B5E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D5D272448B200993B5E /* Main.storyboard */; };
+		20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */; };
 		20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20858D60272448B200993B5E /* sendo.xcdatamodeld */; };
 		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
 		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
@@ -21,9 +21,8 @@
 		20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBB272474B6000B9C1D /* ProgressViewController.swift */; };
 		20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */; };
 		20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */; };
-		20B96EC4272484D6000B9C1D /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC3272484D6000B9C1D /* BaseViewController.swift */; };
+		20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC3272484D6000B9C1D /* SendoViewController.swift */; };
 		20C524692724D43A00741057 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524682724D43A00741057 /* Utils.swift */; };
-		20C5246B2724DBE800741057 /* RestManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5246A2724DBE800741057 /* RestManager.swift */; };
 		20C524712724E7AC00741057 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524702724E7AC00741057 /* FirebaseAnalytics */; };
 		20C524732724E7AC00741057 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524722724E7AC00741057 /* FirebaseAuth */; };
 		20C524752724E7AC00741057 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = 20C524742724E7AC00741057 /* FirebaseCrashlytics */; };
@@ -34,13 +33,24 @@
 		20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */; };
 		20C524812724EF1C00741057 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524802724EF1C00741057 /* Exercise.swift */; };
 		20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524822724F00600741057 /* ExerciseViewModel.swift */; };
-		20C5248627258FAE00741057 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5248527258FAE00741057 /* Subscription.swift */; };
-		20C524882725906A00741057 /* Publisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524872725906A00741057 /* Publisher.swift */; };
 		20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */; };
 		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
 		20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */; };
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
+		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
+		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
+		EA3D14202826E67800387419 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141F2826E67800387419 /* Endpoint.swift */; };
+		EA3D14222826E68000387419 /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14212826E68000387419 /* NetworkServiceManager.swift */; };
+		EA3D14252826E6B500387419 /* FirebaseDatabaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14242826E6B500387419 /* FirebaseDatabaseService.swift */; };
+		EA3D14272826E6C700387419 /* NetworkServicesEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */; };
+		EA3D142A2826E7D200387419 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14292826E7D200387419 /* Alamofire */; };
+		EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D142C2826E81500387419 /* AlamofireImage */; };
+		EA3D143528270B1300387419 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D143428270B1300387419 /* NetworkServices.swift */; };
+		EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143A28270D5800387419 /* WorkoutViewController.xib */; };
+		EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143C28270D9400387419 /* ExerciseListViewController.xib */; };
+		EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143E28270DE400387419 /* ProgressViewController.xib */; };
+		EA3D144128270E2900387419 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D144028270E2900387419 /* ProfileViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,7 +74,7 @@
 		20858D54272448B200993B5E /* Sendo Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sendo Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D57272448B200993B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HomeTabBarViewController.storyboard; sourceTree = "<group>"; };
 		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
 		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		20858D66272448D000993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -79,19 +89,27 @@
 		20B96EBB272474B6000B9C1D /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
-		20B96EC3272484D6000B9C1D /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		20B96EC3272484D6000B9C1D /* SendoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendoViewController.swift; sourceTree = "<group>"; };
 		20C524682724D43A00741057 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
-		20C5246A2724DBE800741057 /* RestManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestManager.swift; sourceTree = "<group>"; };
 		20C5246E2724E58E00741057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
 		20C524802724EF1C00741057 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		20C524822724F00600741057 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
-		20C5248527258FAE00741057 /* Subscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subscription.swift; sourceTree = "<group>"; };
-		20C524872725906A00741057 /* Publisher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Publisher.swift; sourceTree = "<group>"; };
 		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
+		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		EA3D141F2826E67800387419 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		EA3D14212826E68000387419 /* NetworkServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceManager.swift; sourceTree = "<group>"; };
+		EA3D14242826E6B500387419 /* FirebaseDatabaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseService.swift; sourceTree = "<group>"; };
+		EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesEndpoints.swift; sourceTree = "<group>"; };
+		EA3D143428270B1300387419 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
+		EA3D143A28270D5800387419 /* WorkoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutViewController.xib; sourceTree = "<group>"; };
+		EA3D143C28270D9400387419 /* ExerciseListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseListViewController.xib; sourceTree = "<group>"; };
+		EA3D143E28270DE400387419 /* ProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
+		EA3D144028270E2900387419 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,6 +118,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				20C524752724E7AC00741057 /* FirebaseCrashlytics in Frameworks */,
+				EA3D142A2826E7D200387419 /* Alamofire in Frameworks */,
+				EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */,
 				20C524712724E7AC00741057 /* FirebaseAnalytics in Frameworks */,
 				20C5247B2724E7AC00741057 /* FirebasePerformance in Frameworks */,
 				20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */,
@@ -149,13 +169,12 @@
 		20858D56272448B200993B5E /* Sendo */ = {
 			isa = PBXGroup;
 			children = (
-				20858D5D272448B200993B5E /* Main.storyboard */,
 				EA3D14132826DC8700387419 /* App */,
 				EA3D14142826DC9800387419 /* Common */,
-				20C5248427258F9900741057 /* Protocol */,
-				20B96EB6272472D0000B9C1D /* ViewModel */,
+				EA3D141E2826E66900387419 /* Network */,
+				20B96EB5272472CA000B9C1D /* Model */,
 				20B96EBE272474D2000B9C1D /* View */,
-				20B96EBD272474BD000B9C1D /* ViewController */,
+				20B96EB6272472D0000B9C1D /* ViewModel */,
 				EA3D14122826DC4B00387419 /* Resources */,
 			);
 			path = Sendo;
@@ -190,52 +209,29 @@
 		20B96EB6272472D0000B9C1D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				20C5246A2724DBE800741057 /* RestManager.swift */,
-				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
 				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
 				20C524822724F00600741057 /* ExerciseViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		20B96EBD272474BD000B9C1D /* ViewController */ = {
-			isa = PBXGroup;
-			children = (
-				20B96EC3272484D6000B9C1D /* BaseViewController.swift */,
-				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
-				20DDAC64273F2F2D0072BB76 /* HomeTabs */,
-			);
-			path = ViewController;
-			sourceTree = "<group>";
-		};
 		20B96EBE272474D2000B9C1D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
-				20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */,
+				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
+				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		20C5248427258F9900741057 /* Protocol */ = {
+		20DDAC64273F2F2D0072BB76 /* HomeTabBar */ = {
 			isa = PBXGroup;
 			children = (
-				20B96EB5272472CA000B9C1D /* Model */,
-				20C5248527258FAE00741057 /* Subscription.swift */,
-				20C524872725906A00741057 /* Publisher.swift */,
+				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
+				20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */,
+				EA3D14172826E2D200387419 /* Tabs */,
 			);
-			path = Protocol;
-			sourceTree = "<group>";
-		};
-		20DDAC64273F2F2D0072BB76 /* HomeTabs */ = {
-			isa = PBXGroup;
-			children = (
-				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
-				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
-				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
-				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
-			);
-			path = HomeTabs;
+			path = HomeTabBar;
 			sourceTree = "<group>";
 		};
 		EA3D14122826DC4B00387419 /* Resources */ = {
@@ -262,9 +258,97 @@
 		EA3D14142826DC9800387419 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
+				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		EA3D14152826E29C00387419 /* ExerciseTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
+				20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */,
+			);
+			path = ExerciseTableCell;
+			sourceTree = "<group>";
+		};
+		EA3D14172826E2D200387419 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D143628270C8E00387419 /* WorkoutView */,
+				EA3D143728270C9800387419 /* ExerciseListView */,
+				EA3D143828270CA900387419 /* ProgressView */,
+				EA3D143928270CB300387419 /* ProfileView */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		EA3D141E2826E66900387419 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D143328270AD600387419 /* FirebaseDatabase */,
+				EA3D14232826E68400387419 /* NetworkApi */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		EA3D14232826E68400387419 /* NetworkApi */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D14212826E68000387419 /* NetworkServiceManager.swift */,
+				EA3D143428270B1300387419 /* NetworkServices.swift */,
+				EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */,
+				EA3D141F2826E67800387419 /* Endpoint.swift */,
+			);
+			path = NetworkApi;
+			sourceTree = "<group>";
+		};
+		EA3D143328270AD600387419 /* FirebaseDatabase */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D14242826E6B500387419 /* FirebaseDatabaseService.swift */,
+				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
+			);
+			path = FirebaseDatabase;
+			sourceTree = "<group>";
+		};
+		EA3D143628270C8E00387419 /* WorkoutView */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
+				EA3D143A28270D5800387419 /* WorkoutViewController.xib */,
+			);
+			path = WorkoutView;
+			sourceTree = "<group>";
+		};
+		EA3D143728270C9800387419 /* ExerciseListView */ = {
+			isa = PBXGroup;
+			children = (
+				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
+				EA3D143C28270D9400387419 /* ExerciseListViewController.xib */,
+				EA3D14152826E29C00387419 /* ExerciseTableCell */,
+			);
+			path = ExerciseListView;
+			sourceTree = "<group>";
+		};
+		EA3D143828270CA900387419 /* ProgressView */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
+				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
+			);
+			path = ProgressView;
+			sourceTree = "<group>";
+		};
+		EA3D143928270CB300387419 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
+				EA3D144028270E2900387419 /* ProfileViewController.xib */,
+			);
+			path = ProfileView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -292,6 +376,8 @@
 				20C524782724E7AC00741057 /* FirebaseMessaging */,
 				20C5247A2724E7AC00741057 /* FirebasePerformance */,
 				20F2D425275CECF200A56B83 /* SDWebImage */,
+				EA3D14292826E7D200387419 /* Alamofire */,
+				EA3D142C2826E81500387419 /* AlamofireImage */,
 			);
 			productName = sendo;
 			productReference = 20858D54272448B200993B5E /* Sendo Dev.app */;
@@ -368,6 +454,8 @@
 			packageReferences = (
 				20C5246F2724E7AC00741057 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */,
+				EA3D14282826E7D200387419 /* XCRemoteSwiftPackageReference "Alamofire" */,
+				EA3D142B2826E81500387419 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
 			);
 			productRefGroup = 20858D55272448B200993B5E /* Products */;
 			projectDirPath = "";
@@ -385,11 +473,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA3D144128270E2900387419 /* ProfileViewController.xib in Resources */,
+				EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */,
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
 				20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */,
+				EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
-				20858D5F272448B200993B5E /* Main.storyboard in Resources */,
+				20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */,
+				EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -435,23 +527,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */,
-				20C5246B2724DBE800741057 /* RestManager.swift in Sources */,
+				EA3D14222826E68000387419 /* NetworkServiceManager.swift in Sources */,
+				EA3D14272826E6C700387419 /* NetworkServicesEndpoints.swift in Sources */,
+				EA3D14252826E6B500387419 /* FirebaseDatabaseService.swift in Sources */,
 				20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */,
+				EA3D143528270B1300387419 /* NetworkServices.swift in Sources */,
 				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
 				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
 				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
-				20B96EC4272484D6000B9C1D /* BaseViewController.swift in Sources */,
-				20C524882725906A00741057 /* Publisher.swift in Sources */,
+				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
 				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,
+				EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */,
 				20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */,
-				20C5248627258FAE00741057 /* Subscription.swift in Sources */,
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
+				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
+				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -489,12 +585,12 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		20858D5D272448B200993B5E /* Main.storyboard */ = {
+		20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				20858D5E272448B200993B5E /* Base */,
 			);
-			name = Main.storyboard;
+			name = HomeTabBarViewController.storyboard;
 			sourceTree = "<group>";
 		};
 		20858D65272448D000993B5E /* LaunchScreen.storyboard */ = {
@@ -638,7 +734,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = HomeTabBarViewController;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -670,7 +766,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = HomeTabBarViewController;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -842,6 +938,22 @@
 				minimumVersion = 5.0.0;
 			};
 		};
+		EA3D14282826E7D200387419 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.0;
+			};
+		};
+		EA3D142B2826E81500387419 /* XCRemoteSwiftPackageReference "AlamofireImage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/AlamofireImage.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -879,6 +991,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		EA3D14292826E7D200387419 /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA3D14282826E7D200387419 /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
+		};
+		EA3D142C2826E81500387419 /* AlamofireImage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = EA3D142B2826E81500387419 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
+			productName = AlamofireImage;
 		};
 /* End XCSwiftPackageProductDependency section */
 

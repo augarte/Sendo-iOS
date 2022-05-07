@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class SendoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +23,15 @@ class BaseViewController: UIViewController {
         }
         overrideUserInterfaceStyle = darkMode ? .dark : .light
         
+    }
+    
+    func navigateToViewController(viewController: UIViewController) {
+        navigationController?.pushViewController(viewController, animated: true)
+    }
+    
+    func showModalView(viewController: UIViewController) {
+        viewController.modalPresentationStyle = .automatic
+        present(viewController, animated: true)
     }
 
 }

@@ -32,11 +32,10 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     func setupTabBarItems() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let workoutViewController = storyboard.instantiateViewController(withIdentifier: "WorkoutViewController")
-        let exerciseListViewController = storyboard.instantiateViewController(withIdentifier: "ExerciseListViewController")
-        let progressViewController = storyboard.instantiateViewController(withIdentifier: "ProgressViewController")
-        let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController")
+        let workoutViewController = WorkoutViewController.create()
+        let exerciseListViewController = ExerciseListViewController.create()
+        let progressViewController = ProgressViewController.create()
+        let profileViewController = ProfileViewController.create()
         
         self.viewControllers = [
             createTabBarItem(tabImage: "WorkoutWhite", viewController: workoutViewController),

@@ -8,12 +8,16 @@
 import UIKit
 import Combine
 
-class ExerciseListViewController: BaseViewController {
+class ExerciseListViewController: SendoViewController {
     
     @IBOutlet weak var exercisesTableView: UITableView!
     
     let exerciseViewModel = ExerciseViewModel()
     var cancellBag = Set<AnyCancellable>()
+    
+    static func create() -> ExerciseListViewController {
+        return ExerciseListViewController(nibName: ExerciseListViewController.typeName, bundle: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

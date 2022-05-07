@@ -8,11 +8,15 @@
 import UIKit
 import Combine
 
-class ProgressViewController: BaseViewController {
+class ProgressViewController: SendoViewController {
 
     @IBOutlet weak var progressTableView: UITableView?
     
     let progressViewModel = MeasurementViewModel()
+    
+    static func create() -> ProgressViewController {
+        return ProgressViewController(nibName: ProgressViewController.typeName, bundle: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

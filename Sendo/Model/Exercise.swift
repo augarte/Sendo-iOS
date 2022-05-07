@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseDatabase
 
-struct Exercise: Codable {
+public struct Exercise: Codable {
     
     let id: String
     let name: String

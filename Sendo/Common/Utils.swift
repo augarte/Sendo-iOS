@@ -8,9 +8,4 @@
 import UIKit
 
 class Utils {
-
-    static func test() {
-        
-    }
-
 }

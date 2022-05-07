@@ -8,10 +8,14 @@
 import UIKit
 import Combine
 
-class ProfileViewController: BaseViewController {
+class ProfileViewController: SendoViewController {
     
     @IBOutlet weak var darkModeSwitch: UISwitch!
     var darkMode = false
+    
+    static func create() -> ProfileViewController {
+        return ProfileViewController(nibName: ProfileViewController.typeName, bundle: nil)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
