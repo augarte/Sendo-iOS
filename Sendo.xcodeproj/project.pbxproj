@@ -66,7 +66,7 @@
 		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
-		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Assets.xcassets; sourceTree = SOURCE_ROOT; };
+		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		20858D66272448D000993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		20858D68272448D000993B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20858D6D272448D200993B5E /* SendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,20 +149,14 @@
 		20858D56272448B200993B5E /* Sendo */ = {
 			isa = PBXGroup;
 			children = (
-				20858D65272448D000993B5E /* LaunchScreen.storyboard */,
 				20858D5D272448B200993B5E /* Main.storyboard */,
-				20858D63272448D000993B5E /* Assets.xcassets */,
-				20858D57272448B200993B5E /* AppDelegate.swift */,
-				20858D59272448B200993B5E /* SceneDelegate.swift */,
-				20B96EBD272474BD000B9C1D /* ViewController */,
-				20B96EBE272474D2000B9C1D /* View */,
+				EA3D14132826DC8700387419 /* App */,
+				EA3D14142826DC9800387419 /* Common */,
 				20C5248427258F9900741057 /* Protocol */,
 				20B96EB6272472D0000B9C1D /* ViewModel */,
-				20B96EB5272472CA000B9C1D /* Model */,
-				20858D68272448D000993B5E /* Info.plist */,
-				20C5246E2724E58E00741057 /* GoogleService-Info.plist */,
-				20858D60272448B200993B5E /* sendo.xcdatamodeld */,
-				20C524682724D43A00741057 /* Utils.swift */,
+				20B96EBE272474D2000B9C1D /* View */,
+				20B96EBD272474BD000B9C1D /* ViewController */,
+				EA3D14122826DC4B00387419 /* Resources */,
 			);
 			path = Sendo;
 			sourceTree = "<group>";
@@ -226,6 +220,7 @@
 		20C5248427258F9900741057 /* Protocol */ = {
 			isa = PBXGroup;
 			children = (
+				20B96EB5272472CA000B9C1D /* Model */,
 				20C5248527258FAE00741057 /* Subscription.swift */,
 				20C524872725906A00741057 /* Publisher.swift */,
 			);
@@ -241,6 +236,35 @@
 				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
 			);
 			path = HomeTabs;
+			sourceTree = "<group>";
+		};
+		EA3D14122826DC4B00387419 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				20858D65272448D000993B5E /* LaunchScreen.storyboard */,
+				20858D63272448D000993B5E /* Assets.xcassets */,
+				20858D68272448D000993B5E /* Info.plist */,
+				20C5246E2724E58E00741057 /* GoogleService-Info.plist */,
+				20858D60272448B200993B5E /* sendo.xcdatamodeld */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		EA3D14132826DC8700387419 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				20858D57272448B200993B5E /* AppDelegate.swift */,
+				20858D59272448B200993B5E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		EA3D14142826DC9800387419 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				20C524682724D43A00741057 /* Utils.swift */,
+			);
+			path = Common;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -610,11 +634,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_FILE = sendo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -641,11 +666,12 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = sendo/Info.plist;
+				INFOPLIST_FILE = sendo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -805,7 +831,7 @@
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 8.0.0;
+				minimumVersion = 9.0.0;
 			};
 		};
 		20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */ = {
