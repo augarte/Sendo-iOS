@@ -7,12 +7,14 @@
 
 import UIKit
 import Combine
+import FirebaseAuth
 
 class ProgressViewController: SendoViewController {
 
     @IBOutlet weak var progressTableView: UITableView?
     
     let progressViewModel = MeasurementViewModel()
+    var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ProgressViewController {
         return ProgressViewController(nibName: ProgressViewController.typeName, bundle: nil)
@@ -23,14 +25,24 @@ class ProgressViewController: SendoViewController {
         
         title = "Progress"
         
+        progressViewModel.measurements.sink { [unowned self] (_) in
+            self.progressTableView?.reloadData()
+        }.store(in: &cancellBag)
+        
         progressTableView?.delegate = self
         progressTableView?.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        
+        progressViewModel.fetchWeight()
     }
 
+}
+
+extension ProgressViewController {
+    
+    func setupChart() {
+    }
 }
 
 extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {

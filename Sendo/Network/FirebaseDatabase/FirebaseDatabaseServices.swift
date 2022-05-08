@@ -6,32 +6,31 @@
 //
 
 import Foundation
-import FirebaseDatabase
 import Combine
+import FirebaseDatabase
 
-public protocol SendoFirestoreServiceProtocol {
+public protocol FirebaseDatabaseServicesProtocol {
     typealias CompletionStream = (CurrentValueSubject<[Exercise], Never>)
     
     func fetchExerciseList(completion: CompletionStream) -> Void
 }
 
-class SendoFirestoreService: SendoFirestoreServiceProtocol {
+class FirebaseDatabaseServices: FirebaseDatabaseServicesProtocol {
     
-    private static var sendoFirestoreService: SendoFirestoreService = {
-        let sendoFirestoreService = SendoFirestoreService()
-        return sendoFirestoreService
+    private static var firebaseDatabaseService: FirebaseDatabaseServices = {
+        return FirebaseDatabaseServices()
     }()
     private var cancellBag = Set<AnyCancellable>()
     
     private init() {
     }
     
-    class func shared() -> SendoFirestoreService {
-        return sendoFirestoreService
+    class func shared() -> FirebaseDatabaseServices {
+        return firebaseDatabaseService
     }
 }
 
-extension SendoFirestoreService {
+extension FirebaseDatabaseServices {
     
     public func fetchExerciseList(completion: CompletionStream) {
         FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title").sink { completion in

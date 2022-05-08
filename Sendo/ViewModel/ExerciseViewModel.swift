@@ -21,6 +21,6 @@ class ExerciseViewModel: ObservableObject {
 extension ExerciseViewModel {
     
     func fetchExercises() {
-        SendoFirestoreService.shared().fetchExerciseList(completion: self.exercises)
+        FirebaseDatabaseServices.shared().fetchExerciseList(completion: self.exercises)
     }
 }

@@ -10,10 +10,17 @@ import Combine
 
 class MeasurementViewModel: ObservableObject {
     
-    @Published public var measurements = [Measurement]()
+    var measurements = CurrentValueSubject<[Measurement], Never>([Measurement]())
     
     init() {
-        
+        fetchWeight()
     }
     
+}
+
+extension MeasurementViewModel {
+    
+    func fetchWeight() {
+        FirebaseFirestoreServices.shared().fetchMeasurement(completion: self.measurements)
+    }
 }

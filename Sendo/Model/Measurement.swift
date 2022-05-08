@@ -6,12 +6,27 @@
 //
 
 import Foundation
+import FirebaseFirestore
 
-struct Measurement: Codable {
+public struct Measurement: Codable {
     
     let value: Double
-    let date: Int
-    let dateCreated: Int
-    let dateModified: Int
     
+    init?(snapshot: QueryDocumentSnapshot) {
+        guard let dic = snapshot.data() as? [String:Any] else {
+            return nil
+        }
+        
+//        guard let id = dic["id"] as? String else {
+//            return nil
+//        }
+//        self.id = id
+        
+        if let value = dic["value"] as? Double {
+            self.value = value
+        } else {
+            self.value = 0.0
+        }
+        
+    }
 }
