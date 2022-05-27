@@ -8,7 +8,9 @@
 import UIKit
 import CoreData
 import Firebase
+import FirebaseCore
 import FirebaseAuth
+import GoogleSignIn
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             guard let user = authResult?.user else { return }
             UserDefaults.standard.set(user.uid, forKey: "firebaseUID")
         }
+        
         return true
     }
 
@@ -80,6 +83,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    @available(iOS 9.0, *)
+    func application(_ application: UIApplication, open url: URL,
+                     options: [UIApplication.OpenURLOptionsKey: Any])
+      -> Bool {
+      return GIDSignIn.sharedInstance.handle(url)
     }
 
 }

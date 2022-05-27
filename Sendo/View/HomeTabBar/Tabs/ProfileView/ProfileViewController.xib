@@ -11,6 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="Sendo" customModuleProvider="target">
             <connections>
                 <outlet property="darkModeSwitch" destination="7Z7-cN-aVR" id="U9M-p1-Mce"/>
+                <outlet property="googleSignin" destination="Gat-uj-VJQ" id="twD-VY-Xtb"/>
                 <outlet property="view" destination="enh-ug-v0M" id="tPx-Uy-Jvw"/>
             </connections>
         </placeholder>
@@ -29,6 +30,16 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Z7-cN-aVR">
                     <rect key="frame" x="80" y="128.5" width="51" height="31"/>
                 </switch>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-ie-j5a">
+                    <rect key="frame" x="87" y="374" width="240" height="128"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gat-uj-VJQ" customClass="GIDSignInButton">
+                    <rect key="frame" x="87" y="652" width="240" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Sg0-qQ-XDf"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -38,7 +49,7 @@
                 <constraint firstItem="7Z7-cN-aVR" firstAttribute="leading" secondItem="GWG-rp-cwW" secondAttribute="trailing" constant="16" id="Ka3-eo-pij"/>
                 <constraint firstItem="7Z7-cN-aVR" firstAttribute="centerY" secondItem="GWG-rp-cwW" secondAttribute="centerY" id="pIj-xG-QgE"/>
             </constraints>
-            <point key="canvasLocation" x="830" y="71"/>
+            <point key="canvasLocation" x="828.98550724637687" y="70.982142857142847"/>
         </view>
     </objects>
     <resources>
