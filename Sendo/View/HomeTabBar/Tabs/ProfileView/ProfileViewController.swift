@@ -9,13 +9,15 @@ import UIKit
 import Combine
 import Firebase
 import GoogleSignIn
+import AuthenticationServices
 
 class ProfileViewController: SendoViewController {
     
     @IBOutlet weak var googleSignin: GIDSignInButton!
     @IBOutlet weak var darkModeSwitch: UISwitch!
     
-    var darkMode = false
+    private var currentNonce: String?
+    private var darkMode = false
     
     static func create() -> ProfileViewController {
         return ProfileViewController(nibName: ProfileViewController.typeName, bundle: nil)
@@ -50,6 +52,22 @@ class ProfileViewController: SendoViewController {
         preferences.synchronize()
     }
     
+
+    // MARK: Authentications
+    @IBAction func appleSigninPress(_ sender: Any) {
+        currentNonce = Utils.randomNonceString()
+        
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email, .fullName]
+        request.nonce = Utils.sha256(currentNonce!)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
+    
     @objc func googleSigninPress(_ sender:UITapGestureRecognizer){
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
@@ -67,13 +85,10 @@ class ProfileViewController: SendoViewController {
             
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
             self.firebaseLoad(credential: credential)
-       } 
+       }
     }
     
-    @objc func appleSigninPress(_ sender:UITapGestureRecognizer){
-    }
-    
-    @objc func mailSigninPress(_ sender:UITapGestureRecognizer){
+    @objc func mailSigninPress(_ sender: Any) {
     }
     
     func firebaseLoad(credential: AuthCredential){
@@ -91,6 +106,30 @@ class ProfileViewController: SendoViewController {
         } catch let signOutError as NSError {
             print("Error signing out: %@", signOutError)
         }
+    }
+    
+}
+
+extension ProfileViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        
+        if let nonce = currentNonce,
+           let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
+           let appleIDToken = appleIDCredential.identityToken,
+           let appleIDTokenString = String(data: appleIDToken, encoding: .utf8){
+            
+            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: appleIDTokenString, rawNonce: nonce)
+            firebaseLoad(credential: credential)
+        }
+        
+    }
+    
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+    }
+    
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return view.window!
     }
     
 }

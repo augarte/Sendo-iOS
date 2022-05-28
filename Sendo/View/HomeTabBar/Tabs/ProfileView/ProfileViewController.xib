@@ -30,28 +30,48 @@
                 <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7Z7-cN-aVR">
                     <rect key="frame" x="80" y="128.5" width="51" height="31"/>
                 </switch>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bXl-ie-j5a">
-                    <rect key="frame" x="87" y="374" width="240" height="128"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gat-uj-VJQ" customClass="GIDSignInButton">
+                    <rect key="frame" x="32" y="422" width="350" height="62"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="62" id="9pG-ly-1qG"/>
+                    </constraints>
                 </view>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gat-uj-VJQ" customClass="GIDSignInButton">
-                    <rect key="frame" x="87" y="652" width="240" height="62"/>
-                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agg-KZ-zNo" customClass="AppleAuthorizationButton" customModule="Sendo" customModuleProvider="target">
+                    <rect key="frame" x="32" y="328" width="350" height="62"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain"/>
+                    <connections>
+                        <action selector="appleSigninPress:" destination="-1" eventType="touchUpInside" id="Bcn-q8-b9o"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="Sg0-qQ-XDf"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="Gat-uj-VJQ" firstAttribute="leading" secondItem="Sg0-qQ-XDf" secondAttribute="leading" constant="32" id="190-h9-UK3"/>
+                <constraint firstItem="agg-KZ-zNo" firstAttribute="width" secondItem="Gat-uj-VJQ" secondAttribute="width" id="1Ch-gl-QDl"/>
+                <constraint firstItem="agg-KZ-zNo" firstAttribute="trailing" secondItem="Gat-uj-VJQ" secondAttribute="trailing" id="2Yd-6Y-oqI"/>
+                <constraint firstItem="Sg0-qQ-XDf" firstAttribute="trailing" secondItem="Gat-uj-VJQ" secondAttribute="trailing" constant="32" id="5oN-3E-eKS"/>
                 <constraint firstItem="GWG-rp-cwW" firstAttribute="top" secondItem="enh-ug-v0M" secondAttribute="top" constant="128" id="AcS-BA-uSX"/>
                 <constraint firstItem="GWG-rp-cwW" firstAttribute="leading" secondItem="Sg0-qQ-XDf" secondAttribute="leading" constant="32" id="IT5-sh-6MZ"/>
                 <constraint firstItem="7Z7-cN-aVR" firstAttribute="leading" secondItem="GWG-rp-cwW" secondAttribute="trailing" constant="16" id="Ka3-eo-pij"/>
+                <constraint firstItem="agg-KZ-zNo" firstAttribute="leading" secondItem="Gat-uj-VJQ" secondAttribute="leading" id="MZL-7U-GNL"/>
+                <constraint firstItem="Gat-uj-VJQ" firstAttribute="top" secondItem="agg-KZ-zNo" secondAttribute="bottom" constant="32" id="OKW-5N-u1b"/>
+                <constraint firstItem="Gat-uj-VJQ" firstAttribute="centerY" secondItem="Sg0-qQ-XDf" secondAttribute="centerY" id="ctO-5P-HOG"/>
+                <constraint firstItem="agg-KZ-zNo" firstAttribute="height" secondItem="Gat-uj-VJQ" secondAttribute="height" id="gFp-mr-nWa"/>
+                <constraint firstItem="agg-KZ-zNo" firstAttribute="centerX" secondItem="Sg0-qQ-XDf" secondAttribute="centerX" id="hVe-ka-uLi"/>
                 <constraint firstItem="7Z7-cN-aVR" firstAttribute="centerY" secondItem="GWG-rp-cwW" secondAttribute="centerY" id="pIj-xG-QgE"/>
+                <constraint firstItem="Gat-uj-VJQ" firstAttribute="centerX" secondItem="Sg0-qQ-XDf" secondAttribute="centerX" id="qTb-OR-e6D"/>
             </constraints>
             <point key="canvasLocation" x="828.98550724637687" y="70.982142857142847"/>
         </view>
     </objects>
+    <designables>
+        <designable name="agg-KZ-zNo">
+            <size key="intrinsicContentSize" width="24" height="14"/>
+        </designable>
+    </designables>
     <resources>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -56,6 +56,7 @@
 		EA3D14672828367500387419 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14662828367500387419 /* FirebaseAuth */; };
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
+		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -119,6 +120,7 @@
 		EA3D14452827F02800387419 /* ExerciseDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseDetailView.xib; sourceTree = "<group>"; };
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
+		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -360,6 +362,7 @@
 			children = (
 				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
 				EA3D144028270E2900387419 /* ProfileViewController.xib */,
+				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -387,6 +390,14 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {
+			isa = PBXGroup;
+			children = (
+				EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */,
+			);
+			path = AppleAuthorizationButton;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +601,7 @@
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
 				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
+				EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */,
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
