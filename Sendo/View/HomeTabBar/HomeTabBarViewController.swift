@@ -38,11 +38,11 @@ class HomeTabBarViewController: UITabBarController {
         let profileViewController = ProfileViewController.create()
         
         self.viewControllers = [
-            createTabBarItem(tabImage: "WorkoutWhite", viewController: workoutViewController),
-            createTabBarItem(tabImage: "ListWhite", viewController: exerciseListViewController),
+            createTabBarItem(title: "Workout", tabImage: "WorkoutWhite", viewController: workoutViewController),
+            createTabBarItem(title: "Exercises", tabImage: "ListWhite", viewController: exerciseListViewController),
             UIViewController(),
-            createTabBarItem(tabImage: "MeasurementWhite", viewController: progressViewController),
-            createTabBarItem(tabImage: "ProfileWhite", viewController: profileViewController)
+            createTabBarItem(title: "Progress", tabImage: "MeasurementWhite", viewController: progressViewController),
+            createTabBarItem(title: "Profile", tabImage: "ProfileWhite", viewController: profileViewController)
         ]
         
         self.delegate = self
@@ -67,9 +67,10 @@ class HomeTabBarViewController: UITabBarController {
         view.addGestureRecognizer(tap)
     }
     
-    func createTabBarItem(tabImage: String, viewController: UIViewController) -> UINavigationController {
+    func createTabBarItem(title: String, tabImage: String, viewController: UIViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: viewController)
         let tabItem = UITabBarItem(title: viewController.title, image: UIImage(named: tabImage), selectedImage: UIImage(named: tabImage))
+        tabItem.title = title
         viewController.tabBarItem = tabItem
         
         return navigationController
