@@ -44,6 +44,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         let exercise = exerciseViewModel.exercises.value[indexPath.row]
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         cell.largeContentTitle = exercise.title
+        cell.backgroundColor = .clear
         return cell;
     }
     

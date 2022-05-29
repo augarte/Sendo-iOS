@@ -12,6 +12,7 @@ import FirebaseAuth
 class ProgressViewController: SendoViewController {
 
     @IBOutlet weak var progressTableView: UITableView?
+    @IBOutlet weak var lineChart: SimpleLineChart!
     
     let progressViewModel = MeasurementViewModel()
     var cancellBag = Set<AnyCancellable>()
@@ -25,6 +26,9 @@ class ProgressViewController: SendoViewController {
         
         title = "Progress"
         
+        lineChart.setPoints(points: [3, 4, 9, 11, 13, 15])
+        //lineChart.backgroundColor = .red
+
         progressViewModel.measurements.sink { [unowned self] (_) in
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
@@ -57,6 +61,7 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
         
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         cell.largeContentTitle = String(format: "%.2f","1")// measurement.value)
+        cell.backgroundColor = .clear
         return cell;
     }
     

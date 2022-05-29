@@ -57,6 +57,7 @@
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
+		EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD708E62842DF9A002365ED /* SimpleLineChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -121,6 +122,7 @@
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
+		EAD708E62842DF9A002365ED /* SimpleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLineChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +277,7 @@
 				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
 				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
+				EAD708E62842DF9A002365ED /* SimpleLineChart.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
+				EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

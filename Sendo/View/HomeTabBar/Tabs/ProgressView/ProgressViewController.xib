@@ -5,12 +5,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProgressViewController" customModule="Sendo" customModuleProvider="target">
             <connections>
+                <outlet property="lineChart" destination="DW5-9g-Ile" id="EEj-um-sWO"/>
                 <outlet property="progressTableView" destination="VY8-Od-E2m" id="egP-dp-pQC"/>
                 <outlet property="view" destination="ZCL-tK-Nl8" id="rzH-Xs-wIA"/>
             </connections>
@@ -20,26 +20,26 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DW5-9g-Ile">
-                    <rect key="frame" x="0.0" y="44" width="414" height="409"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DW5-9g-Ile" customClass="SimpleLineChart" customModule="Sendo" customModuleProvider="target">
+                    <rect key="frame" x="16" y="60" width="382" height="409"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VY8-Od-E2m">
-                    <rect key="frame" x="0.0" y="453" width="414" height="409"/>
+                    <rect key="frame" x="16" y="485" width="382" height="377"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="wb6-0c-sOu"/>
             <color key="backgroundColor" name="PrimaryColor"/>
             <constraints>
-                <constraint firstItem="VY8-Od-E2m" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" id="B98-Pr-GxB"/>
+                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="DW5-9g-Ile" secondAttribute="trailing" constant="16" id="98i-aa-8JJ"/>
                 <constraint firstItem="wb6-0c-sOu" firstAttribute="bottom" secondItem="VY8-Od-E2m" secondAttribute="bottom" id="CjM-Cc-OoU"/>
                 <constraint firstItem="DW5-9g-Ile" firstAttribute="height" secondItem="wb6-0c-sOu" secondAttribute="height" multiplier="0.5" id="DCd-B6-boD"/>
-                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="DW5-9g-Ile" secondAttribute="trailing" id="W78-ut-IOs"/>
-                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="VY8-Od-E2m" secondAttribute="trailing" id="WHP-3b-I4C"/>
-                <constraint firstItem="DW5-9g-Ile" firstAttribute="top" secondItem="wb6-0c-sOu" secondAttribute="top" id="bCl-A1-Naf"/>
-                <constraint firstItem="DW5-9g-Ile" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" id="kEa-Lc-avZ"/>
-                <constraint firstItem="VY8-Od-E2m" firstAttribute="top" secondItem="DW5-9g-Ile" secondAttribute="bottom" id="lgv-W7-RXn"/>
+                <constraint firstItem="DW5-9g-Ile" firstAttribute="top" secondItem="wb6-0c-sOu" secondAttribute="top" constant="16" id="DJr-L8-6je"/>
+                <constraint firstItem="DW5-9g-Ile" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" constant="16" id="ID9-9v-hVh"/>
+                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="VY8-Od-E2m" secondAttribute="trailing" constant="16" id="L6P-SR-Fgb"/>
+                <constraint firstItem="VY8-Od-E2m" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" constant="16" id="LBo-hl-s4M"/>
+                <constraint firstItem="VY8-Od-E2m" firstAttribute="top" secondItem="DW5-9g-Ile" secondAttribute="bottom" constant="16" id="lgv-W7-RXn"/>
             </constraints>
             <point key="canvasLocation" x="830" y="71"/>
         </view>
@@ -48,8 +48,5 @@
         <namedColor name="PrimaryColor">
             <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>
