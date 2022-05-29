@@ -9,8 +9,8 @@ import UIKit
 import Combine
 import FirebaseAuth
 
-class ProgressViewController: SendoViewController {
-
+class ProgressViewController: BaseTabViewController {
+    
     @IBOutlet weak var progressTableView: UITableView?
     @IBOutlet weak var lineChart: SimpleLineChart!
     
@@ -18,14 +18,12 @@ class ProgressViewController: SendoViewController {
     var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ProgressViewController {
-        return ProgressViewController(nibName: ProgressViewController.typeName, bundle: nil)
+        return ProgressViewController(title: "Progress", image: "MeasurementWhite", nibName: ProgressViewController.typeName)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Progress"
-        
+                
         lineChart.setPoints(points: [3, 4, 9, 11, 13, 15])
         //lineChart.backgroundColor = .red
 

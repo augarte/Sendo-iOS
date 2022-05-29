@@ -32,17 +32,17 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     func setupTabBarItems() {
-        let workoutViewController = WorkoutViewController.create()
-        let exerciseListViewController = ExerciseListViewController.create()
-        let progressViewController = ProgressViewController.create()
-        let profileViewController = ProfileViewController.create()
+        let workoutVC = WorkoutViewController.create()
+        let exerciseListVC = ExerciseListViewController.create()
+        let progressVC = ProgressViewController.create()
+        let profileVC = ProfileViewController.create()
         
         self.viewControllers = [
-            createTabBarItem(title: "Workout", tabImage: "WorkoutWhite", viewController: workoutViewController),
-            createTabBarItem(title: "Exercises", tabImage: "ListWhite", viewController: exerciseListViewController),
+            createTabBarItem(title: workoutVC.titleName, tabImage: workoutVC.tabImage, viewController: workoutVC),
+            createTabBarItem(title: exerciseListVC.titleName, tabImage: exerciseListVC.tabImage, viewController: exerciseListVC),
             UIViewController(),
-            createTabBarItem(title: "Progress", tabImage: "MeasurementWhite", viewController: progressViewController),
-            createTabBarItem(title: "Profile", tabImage: "ProfileWhite", viewController: profileViewController)
+            createTabBarItem(title: progressVC.titleName, tabImage: progressVC.tabImage, viewController: progressVC),
+            createTabBarItem(title: profileVC.titleName, tabImage: profileVC.tabImage, viewController: profileVC)
         ]
         
         self.delegate = self
@@ -67,7 +67,7 @@ class HomeTabBarViewController: UITabBarController {
         view.addGestureRecognizer(tap)
     }
     
-    func createTabBarItem(title: String, tabImage: String, viewController: UIViewController) -> UINavigationController {
+    func createTabBarItem(title: String, tabImage: String, viewController: SendoViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: viewController)
         let tabItem = UITabBarItem(title: viewController.title, image: UIImage(named: tabImage), selectedImage: UIImage(named: tabImage))
         tabItem.title = title

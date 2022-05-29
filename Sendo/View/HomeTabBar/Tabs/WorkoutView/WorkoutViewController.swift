@@ -8,22 +8,20 @@
 import UIKit
 import Combine
 
-class WorkoutViewController: SendoViewController {
-
+class WorkoutViewController: BaseTabViewController {
+    
     @IBOutlet weak var workoutTableView: UITableView!
 
     let exerciseViewModel = ExerciseViewModel()
     var cancellBag = Set<AnyCancellable>()
     
     static func create() -> WorkoutViewController {
-        return WorkoutViewController(nibName: WorkoutViewController.typeName, bundle: nil)
+        return WorkoutViewController(title: "Workout", image: "WorkoutWhite", nibName: WorkoutViewController.typeName)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Workout"
-        
+                
         exerciseViewModel.exercises.sink { [unowned self] (_) in
             self.workoutTableView.reloadData()
         }.store(in: &cancellBag)

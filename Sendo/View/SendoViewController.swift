@@ -7,14 +7,26 @@
 
 import UIKit
 
-class SendoViewController: UIViewController {
+open class SendoViewController: UIViewController {
     
-    override func viewDidLoad() {
+    final let titleName: String
+        
+    init(title: String, nibName: String) {
+        titleName = title
+        super.init(nibName: nibName, bundle: nil)
+    }
+    
+    required public init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    open override func viewDidLoad() {
         super.viewDidLoad()
+        title = titleName
         view.backgroundColor = UIColor.init(named:"PrimaryColor")
     }
     
-    override func viewWillAppear(_ animated: Bool) {
+    open override func viewWillAppear(_ animated: Bool) {
         
         let preferences = UserDefaults.standard
         var darkMode = false

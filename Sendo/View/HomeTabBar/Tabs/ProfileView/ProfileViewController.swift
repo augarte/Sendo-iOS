@@ -11,7 +11,7 @@ import Firebase
 import GoogleSignIn
 import AuthenticationServices
 
-class ProfileViewController: SendoViewController {
+class ProfileViewController: BaseTabViewController {
     
     @IBOutlet weak var googleSignin: GIDSignInButton!
     @IBOutlet weak var darkModeSwitch: UISwitch!
@@ -20,13 +20,11 @@ class ProfileViewController: SendoViewController {
     private var darkMode = false
     
     static func create() -> ProfileViewController {
-        return ProfileViewController(nibName: ProfileViewController.typeName, bundle: nil)
+        return ProfileViewController(title: "Profile", image: "ProfileWhite", nibName: ProfileViewController.typeName)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Profile"
         
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.googleSigninPress (_:)))
         self.googleSignin.addGestureRecognizer(gesture)

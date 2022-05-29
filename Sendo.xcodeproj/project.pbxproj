@@ -32,6 +32,7 @@
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
 		20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */; };
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
+		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
 		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
 		EA3D14202826E67800387419 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141F2826E67800387419 /* Endpoint.swift */; };
@@ -106,6 +107,7 @@
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
+		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
 		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		EA3D141F2826E67800387419 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -243,11 +245,20 @@
 		20DDAC64273F2F2D0072BB76 /* HomeTabBar */ = {
 			isa = PBXGroup;
 			children = (
+				EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */,
 				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
 				20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */,
 				EA3D14172826E2D200387419 /* Tabs */,
 			);
 			path = HomeTabBar;
+			sourceTree = "<group>";
+		};
+		EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */ = {
+			isa = PBXGroup;
+			children = (
+				EAD708E62842DF9A002365ED /* SimpleLineChart.swift */,
+			);
+			path = SimpleLineChart;
 			sourceTree = "<group>";
 		};
 		EA3D14122826DC4B00387419 /* Resources */ = {
@@ -277,7 +288,6 @@
 				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
 				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
-				EAD708E62842DF9A002365ED /* SimpleLineChart.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -356,6 +366,7 @@
 			children = (
 				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
 				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
+				EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */,
 			);
 			path = ProgressView;
 			sourceTree = "<group>";
@@ -596,6 +607,7 @@
 				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
+				EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
 				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
 				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,

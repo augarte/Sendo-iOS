@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ExerciseListViewController: SendoViewController {
+class ExerciseListViewController: BaseTabViewController {
     
     @IBOutlet weak var exercisesTableView: UITableView!
     
@@ -16,13 +16,11 @@ class ExerciseListViewController: SendoViewController {
     var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ExerciseListViewController {
-        return ExerciseListViewController(nibName: ExerciseListViewController.typeName, bundle: nil)
+        return ExerciseListViewController(title: "Exercises", image: "ListWhite", nibName: ExerciseListViewController.typeName)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        title = "Exercises"
         
         exerciseViewModel.exercises.sink { [unowned self] (_) in
             self.exercisesTableView.reloadData()
