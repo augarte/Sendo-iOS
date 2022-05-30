@@ -51,5 +51,11 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
         return cell;
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let exercise = exerciseViewModel.exercises.value[indexPath.row]
+        let exerciseDetailVC = ExerciseDetailView.create(exercise: exercise)
+        navigateToViewController(viewController: exerciseDetailVC)
+    }
+    
 }
 

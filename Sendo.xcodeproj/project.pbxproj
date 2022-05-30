@@ -32,6 +32,8 @@
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
 		20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */; };
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
+		EA07CE1D2845495F0053B768 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA07CE1C2845495F0053B768 /* SettingsView.swift */; };
+		EA07CE1F2845496B0053B768 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA07CE1E2845496B0053B768 /* SettingsView.xib */; };
 		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
 		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
@@ -107,6 +109,8 @@
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
 		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
+		EA07CE1C2845495F0053B768 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		EA07CE1E2845496B0053B768 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
 		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
 		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
@@ -238,6 +242,7 @@
 				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
 				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
 				EA3D14422827F00400387419 /* ExerciseDetailView */,
+				EA07CE1B2845494B0053B768 /* SettingsView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -251,6 +256,15 @@
 				EA3D14172826E2D200387419 /* Tabs */,
 			);
 			path = HomeTabBar;
+			sourceTree = "<group>";
+		};
+		EA07CE1B2845494B0053B768 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				EA07CE1C2845495F0053B768 /* SettingsView.swift */,
+				EA07CE1E2845496B0053B768 /* SettingsView.xib */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */ = {
@@ -546,6 +560,7 @@
 				20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */,
 				EA3D14462827F02800387419 /* ExerciseDetailView.xib in Resources */,
 				EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */,
+				EA07CE1F2845496B0053B768 /* SettingsView.xib in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
 				20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */,
 				EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */,
@@ -621,6 +636,7 @@
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */,
+				EA07CE1D2845495F0053B768 /* SettingsView.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -14,10 +14,8 @@ import AuthenticationServices
 class ProfileViewController: BaseTabViewController {
     
     @IBOutlet weak var googleSignin: GIDSignInButton!
-    @IBOutlet weak var darkModeSwitch: UISwitch!
     
     private var currentNonce: String?
-    private var darkMode = false
     
     static func create() -> ProfileViewController {
         return ProfileViewController(title: "Profile", image: "ProfileWhite", nibName: ProfileViewController.typeName)
@@ -26,30 +24,25 @@ class ProfileViewController: BaseTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        addToolbarItem()
+        
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.googleSigninPress (_:)))
         self.googleSignin.addGestureRecognizer(gesture)
-
-                
-        let preferences = UserDefaults.standard
-        if preferences.object(forKey: "darkMode") == nil {
-            //  Doesn't exist
-        } else {
-            darkMode = preferences.bool(forKey: "darkMode")
-            darkModeSwitch.setOn(darkMode, animated: false)
-            
-        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
-
-    @IBAction func darkModeSwitchAction(_ sender: Any) {
-        let preferences = UserDefaults.standard
-        preferences.set(!darkMode, forKey: "darkMode")
-        preferences.synchronize()
+    
+    // MARK: Toolbar
+    func addToolbarItem(){
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.bookmarks, target: self, action: #selector(self.openSettings(sender:)))
     }
     
+    @objc func openSettings(sender: UIBarButtonItem) {
+        let settingsVC = SettingsView.create()
+        navigateToViewController(viewController: settingsVC)
+    }
 
     // MARK: Authentications
     @IBAction func appleSigninPress(_ sender: Any) {
