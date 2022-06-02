@@ -86,7 +86,6 @@ class ProfileViewController: BaseTabViewController {
         Auth.auth().signIn(with: credential) { authResult, error in
             if let error = error {
             }
-            
         }
     }
     

@@ -29,7 +29,7 @@ class SimpleLineChart: UIView {
     @IBInspectable var gradientStartColor: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
     @IBInspectable var gradientEndColor: UIColor = UIColor.hexStringToUIColor(hex: "FD4345")
     
-    var graphPoints: Array<Int> = []
+    var graphPoints: Array<Double> = []
 
     override func draw(_ rect: CGRect) {
         let width = rect.width
@@ -85,7 +85,7 @@ class SimpleLineChart: UIView {
         guard let maxValue = graphPoints.max() else {
             return
         }
-        let columnYPoint = { (graphPoint: Int) -> CGFloat in
+        let columnYPoint = { (graphPoint: Double) -> CGFloat in
             let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
             return graphHeight + topBorder - yPoint // Flip the graph
         }
@@ -134,7 +134,7 @@ class SimpleLineChart: UIView {
         graphPath.stroke()
     }
     
-    open func setPoints(points: Array<Int>) {
+    open func setPoints(points: Array<Double>) {
         graphPoints = points
     }
 }

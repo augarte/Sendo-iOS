@@ -26,8 +26,8 @@ class ExerciseListViewController: BaseTabViewController {
             self.exercisesTableView.reloadData()
         }.store(in: &cancellBag)
         
-        exercisesTableView?.delegate = self
-        exercisesTableView?.dataSource = self
+        exercisesTableView.delegate = self
+        exercisesTableView.dataSource = self
         exercisesTableView.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseTableViewCell")
 
     }
@@ -48,7 +48,7 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
         let exercise = exerciseViewModel.exercises.value[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableViewCell")! as! ExerciseTableViewCell
         cell.configureCell(exercise: exercise)
-        return cell;
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

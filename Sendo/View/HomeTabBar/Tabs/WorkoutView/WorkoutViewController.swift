@@ -43,7 +43,7 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
         cell.largeContentTitle = exercise.title
         cell.backgroundColor = .clear
-        return cell;
+        return cell
     }
     
 }

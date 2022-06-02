@@ -11,7 +11,7 @@ import FirebaseAuth
 
 class ProgressViewController: BaseTabViewController {
     
-    @IBOutlet weak var progressTableView: UITableView?
+    @IBOutlet weak var progressTableView: UITableView!
     @IBOutlet weak var lineChart: SimpleLineChart!
     
     let progressViewModel = MeasurementViewModel()
@@ -23,20 +23,35 @@ class ProgressViewController: BaseTabViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        addToolbarItem()
                 
-        lineChart.setPoints(points: [3, 4, 9, 11, 13, 15])
+        //lineChart.setPoints(points: [3, 4, 9, 11, 13, 15])
         //lineChart.backgroundColor = .red
 
         progressViewModel.measurements.sink { [unowned self] (_) in
+            lineChart.setPoints(points: progressViewModel.measurements.value.map { measurement in
+                measurement.value
+            })
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
         
         progressTableView?.delegate = self
         progressTableView?.dataSource = self
+        progressTableView?.register(UINib(nibName: "ProgressTableCell", bundle: nil), forCellReuseIdentifier: "ProgressTableCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         progressViewModel.fetchWeight()
+    }
+    
+    // MARK: Toolbar
+    func addToolbarItem(){
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
+    }
+    
+    @objc func addProgressEntry(sender: UIBarButtonItem) {
+        showModalView(viewController: NewEntryDialog.create())
     }
 
 }
@@ -50,17 +65,16 @@ extension ProgressViewController {
 extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return progressViewModel.measurements.value.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        //let measurement =  measurementViewModel.measurements.value[indexPath.row]
+        let measurement = progressViewModel.measurements.value[indexPath.row]
         
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
-        cell.largeContentTitle = String(format: "%.2f","1")// measurement.value)
-        cell.backgroundColor = .clear
-        return cell;
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableCell")! as! ProgressTableCell
+        cell.configureCell(entry: measurement)
+        return cell
     }
     
 }

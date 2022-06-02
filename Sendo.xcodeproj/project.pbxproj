@@ -34,6 +34,10 @@
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
 		EA07CE1D2845495F0053B768 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA07CE1C2845495F0053B768 /* SettingsView.swift */; };
 		EA07CE1F2845496B0053B768 /* SettingsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA07CE1E2845496B0053B768 /* SettingsView.xib */; };
+		EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */; };
+		EA0C1A2028496B4D009223D8 /* ProgressTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */; };
+		EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */; };
+		EA0C1A2528496E76009223D8 /* NewEntryDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */; };
 		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
 		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
@@ -111,6 +115,10 @@
 		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		EA07CE1C2845495F0053B768 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		EA07CE1E2845496B0053B768 /* SettingsView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SettingsView.xib; sourceTree = "<group>"; };
+		EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableCell.swift; sourceTree = "<group>"; };
+		EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressTableCell.xib; sourceTree = "<group>"; };
+		EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryDialog.swift; sourceTree = "<group>"; };
+		EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEntryDialog.xib; sourceTree = "<group>"; };
 		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
 		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
@@ -267,6 +275,24 @@
 			path = SettingsView;
 			sourceTree = "<group>";
 		};
+		EA0C1A1E28496B37009223D8 /* ProgressTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */,
+				EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */,
+			);
+			path = ProgressTableCell;
+			sourceTree = "<group>";
+		};
+		EA0C1A2128496E53009223D8 /* NewEntryDialog */ = {
+			isa = PBXGroup;
+			children = (
+				EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */,
+				EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */,
+			);
+			path = NewEntryDialog;
+			sourceTree = "<group>";
+		};
 		EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */ = {
 			isa = PBXGroup;
 			children = (
@@ -380,6 +406,8 @@
 			children = (
 				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
 				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
+				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
+				EA0C1A2128496E53009223D8 /* NewEntryDialog */,
 				EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */,
 			);
 			path = ProgressView;
@@ -560,10 +588,12 @@
 				20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */,
 				EA3D14462827F02800387419 /* ExerciseDetailView.xib in Resources */,
 				EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */,
+				EA0C1A2028496B4D009223D8 /* ProgressTableCell.xib in Resources */,
 				EA07CE1F2845496B0053B768 /* SettingsView.xib in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
 				20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */,
 				EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */,
+				EA0C1A2528496E76009223D8 /* NewEntryDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -622,11 +652,13 @@
 				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
+				EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */,
 				EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
 				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
 				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,
 				EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */,
+				EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */,
 				20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */,
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
 				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
