@@ -23,4 +23,9 @@ extension MeasurementViewModel {
     func fetchWeight() {
         FirebaseFirestoreServices.shared().fetchMeasurement(completion: self.measurements)
     }
+    
+    func addEntry(entry: Measurement) {
+        measurements.value.append(entry)
+        FirebaseFirestoreServices.shared().addMeasurementEntry(entry: entry, completion: self.measurements)
+    }
 }

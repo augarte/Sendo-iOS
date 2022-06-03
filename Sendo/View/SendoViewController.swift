@@ -37,7 +37,7 @@ open class SendoViewController: UIViewController {
         
     }
     
-    // MARK: Navigation
+    // MARK: - Navigation
     func navigateToViewController(viewController: UIViewController) {
         navigationController?.pushViewController(viewController, animated: true)
     }

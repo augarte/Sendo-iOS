@@ -41,6 +41,24 @@ final class FirebaseFirestoreManager: ObservableObject {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func addToDatabase(data: [String : Any], collection: String) -> AnyPublisher<QuerySnapshot, Error> {
+        Future { future in
+            guard let uid = self.uid else {
+                return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
+            }
+            
+            let timestamp = String(Int(NSDate().timeIntervalSince1970))
+                
+            self.db.collection("users").document(uid).collection(collection).document(timestamp).setData(data) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 
 }
 

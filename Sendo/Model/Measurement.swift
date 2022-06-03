@@ -10,6 +10,7 @@ import FirebaseFirestore
 
 public struct Measurement: Codable {
     
+    let date: String
     let value: Double
     
     init?(snapshot: QueryDocumentSnapshot) {
@@ -21,6 +22,7 @@ public struct Measurement: Codable {
 //            return nil
 //        }
 //        self.id = id
+        self.date = ""
         
         if let value = dic["value"] as? Double {
             self.value = value
@@ -28,5 +30,10 @@ public struct Measurement: Codable {
             self.value = 0.0
         }
         
+    }
+    
+    init(date: String, value: Double) {
+        self.date = date
+        self.value = value
     }
 }

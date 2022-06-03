@@ -34,7 +34,7 @@ class ProfileViewController: BaseTabViewController {
         
     }
     
-    // MARK: Toolbar
+    // MARK: - Toolbar
     func addToolbarItem(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.bookmarks, target: self, action: #selector(self.openSettings(sender:)))
     }
@@ -44,7 +44,7 @@ class ProfileViewController: BaseTabViewController {
         navigateToViewController(viewController: settingsVC)
     }
 
-    // MARK: Authentications
+    // MARK: - Authentications
     @IBAction func appleSigninPress(_ sender: Any) {
         currentNonce = Utils.randomNonceString()
         

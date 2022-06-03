@@ -10,9 +10,12 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewEntryDialog" customModule="Sendo" customModuleProvider="target">
             <connections>
+                <outlet property="addBtn" destination="YuV-M7-7Nl" id="u55-uE-2JX"/>
+                <outlet property="cancelBtn" destination="h6c-JB-fbH" id="38X-1D-Z7d"/>
                 <outlet property="labelDate" destination="fqB-Kv-Fx8" id="K6s-0h-gGb"/>
                 <outlet property="labelValue" destination="fD6-1v-XCu" id="yTr-bW-MR1"/>
                 <outlet property="labelsView" destination="17U-wd-Lsy" id="T2R-iS-ZMf"/>
+                <outlet property="navigationTitle" destination="bxS-wX-TUR" id="GSt-0B-V7U"/>
                 <outlet property="view" destination="iN0-l3-epB" id="rYh-wM-Jdv"/>
             </connections>
         </placeholder>
@@ -21,17 +24,34 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vic-YZ-akX">
+                    <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <color key="barTintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <textAttributes key="titleTextAttributes">
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </textAttributes>
+                    <textAttributes key="largeTitleTextAttributes">
+                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </textAttributes>
+                    <items>
+                        <navigationItem title="Title" id="bxS-wX-TUR">
+                            <barButtonItem key="leftBarButtonItem" title="Item" id="h6c-JB-fbH"/>
+                            <barButtonItem key="rightBarButtonItem" title="Item" id="YuV-M7-7Nl"/>
+                        </navigationItem>
+                    </items>
+                </navigationBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="17U-wd-Lsy">
-                    <rect key="frame" x="16" y="108" width="382" height="90"/>
+                    <rect key="frame" x="16" y="120" width="382" height="66"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqB-Kv-Fx8">
-                            <rect key="frame" x="16" y="16" width="350" height="21"/>
+                            <rect key="frame" x="16" y="8" width="350" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD6-1v-XCu">
-                            <rect key="frame" x="16" y="53" width="350" height="21"/>
+                            <rect key="frame" x="16" y="37" width="350" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -41,11 +61,11 @@
                     <constraints>
                         <constraint firstItem="fD6-1v-XCu" firstAttribute="leading" secondItem="17U-wd-Lsy" secondAttribute="leading" constant="16" id="1CB-zn-r21"/>
                         <constraint firstAttribute="trailing" secondItem="fD6-1v-XCu" secondAttribute="trailing" constant="16" id="EKU-vk-yyf"/>
-                        <constraint firstAttribute="bottom" secondItem="fD6-1v-XCu" secondAttribute="bottom" constant="16" id="Nev-JD-Ooe"/>
+                        <constraint firstAttribute="bottom" secondItem="fD6-1v-XCu" secondAttribute="bottom" constant="8" id="Nev-JD-Ooe"/>
                         <constraint firstItem="fqB-Kv-Fx8" firstAttribute="leading" secondItem="17U-wd-Lsy" secondAttribute="leading" constant="16" id="rUU-yb-Kpl"/>
                         <constraint firstAttribute="trailing" secondItem="fqB-Kv-Fx8" secondAttribute="trailing" constant="16" id="t7b-q5-0G6"/>
-                        <constraint firstItem="fD6-1v-XCu" firstAttribute="top" secondItem="fqB-Kv-Fx8" secondAttribute="bottom" constant="16" id="tzC-f2-aUv"/>
-                        <constraint firstItem="fqB-Kv-Fx8" firstAttribute="top" secondItem="17U-wd-Lsy" secondAttribute="top" constant="16" id="yQ5-tu-C0E"/>
+                        <constraint firstItem="fD6-1v-XCu" firstAttribute="top" secondItem="fqB-Kv-Fx8" secondAttribute="bottom" constant="8" id="tzC-f2-aUv"/>
+                        <constraint firstItem="fqB-Kv-Fx8" firstAttribute="top" secondItem="17U-wd-Lsy" secondAttribute="top" constant="8" id="yQ5-tu-C0E"/>
                     </constraints>
                 </view>
             </subviews>
@@ -53,9 +73,12 @@
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="17U-wd-Lsy" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="CTO-4s-07T"/>
-                <constraint firstItem="17U-wd-Lsy" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="64" id="PJC-CR-WIh"/>
+                <constraint firstItem="vic-YZ-akX" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="Cbr-N1-izz"/>
+                <constraint firstItem="vic-YZ-akX" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Mo3-LC-rgY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="17U-wd-Lsy" secondAttribute="trailing" constant="16" id="gD6-aF-hbz"/>
                 <constraint firstItem="17U-wd-Lsy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="16" id="i2S-rE-svm"/>
+                <constraint firstItem="17U-wd-Lsy" firstAttribute="top" secondItem="vic-YZ-akX" secondAttribute="bottom" constant="32" id="ur7-bC-vV4"/>
+                <constraint firstAttribute="trailing" secondItem="vic-YZ-akX" secondAttribute="trailing" id="zBS-uf-SvY"/>
             </constraints>
             <point key="canvasLocation" x="132" y="61"/>
         </view>

@@ -9,6 +9,10 @@ import UIKit
 import Combine
 import FirebaseAuth
 
+protocol ProgressViewControllerDelegate: AnyObject {
+    func didAddNewEntry(newEntry: Measurement)
+}
+
 class ProgressViewController: BaseTabViewController {
     
     @IBOutlet weak var progressTableView: UITableView!
@@ -45,13 +49,15 @@ class ProgressViewController: BaseTabViewController {
         progressViewModel.fetchWeight()
     }
     
-    // MARK: Toolbar
+    // MARK: - Toolbar
     func addToolbarItem(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
     }
     
     @objc func addProgressEntry(sender: UIBarButtonItem) {
-        showModalView(viewController: NewEntryDialog.create())
+        let newEntryVC = NewEntryDialog.create()
+        newEntryVC.delegate = self
+        showModalView(viewController: newEntryVC)
     }
 
 }
@@ -77,4 +83,12 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+}
+
+extension ProgressViewController: ProgressViewControllerDelegate {
+   
+    func didAddNewEntry(newEntry: Measurement) {
+        progressViewModel.addEntry(entry: newEntry)
+    }
+
 }
