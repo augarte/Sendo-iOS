@@ -29,7 +29,7 @@ class SimpleLineChart: UIView {
     @IBInspectable var gradientStartColor: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
     @IBInspectable var gradientEndColor: UIColor = UIColor.hexStringToUIColor(hex: "FD4345")
     
-    var graphPoints: Array<Double> = []
+    var graphPoints: Array<(Int, Double)> = []
 
     override func draw(_ rect: CGRect) {
         let width = rect.width
@@ -73,20 +73,23 @@ class SimpleLineChart: UIView {
         // Margins
         let margin = Constants.margin
         let graphWidth = width - margin * 2 - 4
+        let xValues = graphPoints.map({ point in return point.0 })
+        guard let minXValue = xValues.min() else { return }
+        guard let maxXValue = xValues.max() else { return }
         let columnXPoint = { (column: Int) -> CGFloat in
             // Calculate the gap between points
-            let spacing = graphWidth / CGFloat(self.graphPoints.count - 1)
-            return CGFloat(column) * spacing + margin + 2
+            let xPoint = CGFloat(column-minXValue) / CGFloat(maxXValue-minXValue) * graphWidth
+            return CGFloat(xPoint) + margin + 2
         }
         
         let topBorder = Constants.topBorder
         let bottomBorder = Constants.bottomBorder
         let graphHeight = height - topBorder - bottomBorder
-        guard let maxValue = graphPoints.max() else {
-            return
-        }
+        let yValues = graphPoints.map({ point in return point.1 })
+        guard let minYValue = yValues.min() else { return }
+        guard let maxYValue = yValues.max() else { return }
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
-            let yPoint = CGFloat(graphPoint) / CGFloat(maxValue) * graphHeight
+            let yPoint = CGFloat(graphPoint-minYValue) / CGFloat(maxYValue-minYValue) * graphHeight
             return graphHeight + topBorder - yPoint // Flip the graph
         }
         
@@ -96,12 +99,12 @@ class SimpleLineChart: UIView {
         UIColor.white.setStroke()
             
         let graphPath = UIBezierPath()
-        graphPath.move(to: CGPoint(x: columnXPoint(0), y: columnYPoint(graphPoints[0])))
+        graphPath.move(to: CGPoint(x: columnXPoint(graphPoints[0].0), y: columnYPoint(graphPoints[0].1)))
             
         // Add points for each item in the graphPoints array
         // at the correct (x, y) for the point
         for i in 1..<graphPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(i), y: columnYPoint(graphPoints[i]))
+            let nextPoint = CGPoint(x: columnXPoint(graphPoints[i].0), y: columnYPoint(graphPoints[i].1))
             graphPath.addLine(to: nextPoint)
         }
         
@@ -113,13 +116,13 @@ class SimpleLineChart: UIView {
             }
             
             clippingPath.addLine(to: CGPoint(
-                x: columnXPoint(graphPoints.count - 1),
+                x: columnXPoint(graphPoints[graphPoints.count - 1].0),
                 y: height))
-            clippingPath.addLine(to: CGPoint(x: columnXPoint(0), y: height))
+            clippingPath.addLine(to: CGPoint(x: columnXPoint(graphPoints[0].0), y: height))
             clippingPath.close()
             clippingPath.addClip()
                 
-            let highestYPoint = columnYPoint(maxValue)
+            let highestYPoint = columnYPoint(maxYValue)
             let graphStartPoint = CGPoint(x: margin, y: highestYPoint)
             let graphEndPoint = CGPoint(x: margin, y: bounds.height)
                     
@@ -134,7 +137,8 @@ class SimpleLineChart: UIView {
         graphPath.stroke()
     }
     
-    open func setPoints(points: Array<Double>) {
+    open func setPoints(points: Array<(Int, Double)>) {
         graphPoints = points
+        self.setNeedsDisplay()
     }
 }

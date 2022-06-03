@@ -18,11 +18,7 @@ public struct Measurement: Codable {
             return nil
         }
         
-//        guard let id = dic["id"] as? String else {
-//            return nil
-//        }
-//        self.id = id
-        self.date = ""
+        self.date = snapshot.documentID
         
         if let value = dic["value"] as? Double {
             self.value = value

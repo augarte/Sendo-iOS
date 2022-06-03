@@ -29,14 +29,12 @@ class ProgressViewController: BaseTabViewController {
         super.viewDidLoad()
         
         addToolbarItem()
-                
-        //lineChart.setPoints(points: [3, 4, 9, 11, 13, 15])
-        //lineChart.backgroundColor = .red
-
+        
         progressViewModel.measurements.sink { [unowned self] (_) in
-            lineChart.setPoints(points: progressViewModel.measurements.value.map { measurement in
-                measurement.value
-            })
+            lineChart.setPoints(points: progressViewModel.measurements.value.compactMap({ measurement in
+                guard let timestamp = Int(measurement.date) else { return nil }
+                return (timestamp, measurement.value)
+            }))
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
         

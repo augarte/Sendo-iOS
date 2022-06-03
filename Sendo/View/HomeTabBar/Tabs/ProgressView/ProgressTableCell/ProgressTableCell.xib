@@ -16,13 +16,13 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZo-MC-2TX">
-                        <rect key="frame" x="32" y="16" width="42" height="12"/>
+                        <rect key="frame" x="16" y="16" width="42" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dA-Bz-Crb">
-                        <rect key="frame" x="340" y="16" width="42" height="12"/>
+                        <rect key="frame" x="356" y="16" width="42" height="12"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
@@ -32,18 +32,18 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="wZo-MC-2TX" secondAttribute="bottom" constant="16" id="57B-aU-DNf"/>
                     <constraint firstItem="0dA-Bz-Crb" firstAttribute="top" secondItem="YT0-Vv-q0Q" secondAttribute="top" constant="16" id="7H2-f2-xKz"/>
-                    <constraint firstItem="0dA-Bz-Crb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wZo-MC-2TX" secondAttribute="trailing" constant="32" id="B7m-pE-q83"/>
+                    <constraint firstItem="0dA-Bz-Crb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="wZo-MC-2TX" secondAttribute="trailing" constant="16" id="B7m-pE-q83"/>
                     <constraint firstItem="wZo-MC-2TX" firstAttribute="centerY" secondItem="YT0-Vv-q0Q" secondAttribute="centerY" id="IW9-Gn-CAf"/>
                     <constraint firstAttribute="bottom" secondItem="0dA-Bz-Crb" secondAttribute="bottom" constant="16" id="OQc-yU-kCM"/>
-                    <constraint firstItem="wZo-MC-2TX" firstAttribute="leading" secondItem="YT0-Vv-q0Q" secondAttribute="leading" constant="32" id="RVy-cT-yLq"/>
-                    <constraint firstAttribute="trailing" secondItem="0dA-Bz-Crb" secondAttribute="trailing" constant="32" id="a3G-cT-9lx"/>
+                    <constraint firstItem="wZo-MC-2TX" firstAttribute="leading" secondItem="YT0-Vv-q0Q" secondAttribute="leading" constant="16" id="RVy-cT-yLq"/>
+                    <constraint firstAttribute="trailing" secondItem="0dA-Bz-Crb" secondAttribute="trailing" constant="16" id="a3G-cT-9lx"/>
                     <constraint firstItem="wZo-MC-2TX" firstAttribute="top" secondItem="YT0-Vv-q0Q" secondAttribute="top" constant="16" id="q0K-rg-ieg"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <connections>
-                <outlet property="date" destination="0dA-Bz-Crb" id="2NK-MN-x7W"/>
-                <outlet property="value" destination="wZo-MC-2TX" id="3hF-IN-0bu"/>
+                <outlet property="dateLbl" destination="0dA-Bz-Crb" id="pRI-G8-fE6"/>
+                <outlet property="valueLbl" destination="wZo-MC-2TX" id="hcK-SX-iSZ"/>
                 <outlet property="view" destination="YT0-Vv-q0Q" id="oHA-42-dvi"/>
             </connections>
             <point key="canvasLocation" x="649" y="23"/>

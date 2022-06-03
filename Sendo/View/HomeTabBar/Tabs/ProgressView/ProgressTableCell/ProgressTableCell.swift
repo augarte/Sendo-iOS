@@ -9,8 +9,8 @@ import UIKit
 
 class ProgressTableCell: UITableViewCell {
     
-    @IBOutlet weak var value: UILabel!
-    @IBOutlet weak var date: UILabel!
+    @IBOutlet weak var valueLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var view: UIView!
     
     override func awakeFromNib() {
@@ -28,7 +28,17 @@ class ProgressTableCell: UITableViewCell {
     }
     
     func configureCell(entry: Measurement) {
-        value.text = String(format: "%.2f", entry.value)
+        valueLbl.text = String(format: "%.2f", entry.value)
+        
+        if let timestamp = Double(entry.date) {
+            let date = Date(timeIntervalSince1970:timestamp)
+            let formatter = DateFormatter()
+            formatter.dateFormat = "EEEE, dd MMMM yyyy"
+            let dateString = formatter.string(from: date)
+            dateLbl.text = dateString
+        } else {
+            dateLbl.text = ""
+        }
     }
     
 }
