@@ -62,5 +62,18 @@ extension FirebaseFirestoreServices {
             })
         }.store(in: &cancellBag)
     }
+    
+    public func removeMeasurementEntry(entry: Measurement, completion: CompletionStream) {
+        FirebaseFirestoreManager.shared.removeFromDatabase(document: entry.date, collection: "measurements").sink { completion in
+            switch completion {
+            case .failure(let error): print("Error: \(error.localizedDescription)")
+            case .finished: break
+            }
+        } receiveValue: { snapshot in
+            completion.send(snapshot.documents.compactMap{
+                Measurement(snapshot: $0)
+            })
+        }.store(in: &cancellBag)
+    }
 
 }

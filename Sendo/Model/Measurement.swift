@@ -8,7 +8,7 @@
 import Foundation
 import FirebaseFirestore
 
-public struct Measurement: Codable {
+public struct Measurement: Codable, Equatable {
     
     let date: String
     let value: Double

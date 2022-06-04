@@ -28,4 +28,11 @@ extension MeasurementViewModel {
         measurements.value.append(entry)
         FirebaseFirestoreServices.shared().addMeasurementEntry(entry: entry, completion: self.measurements)
     }
+    
+    func removeEntry(entry: Measurement) {
+        if let index = measurements.value.firstIndex(of: entry) {
+            measurements.value.remove(at: index)
+            FirebaseFirestoreServices.shared().removeMeasurementEntry(entry: entry, completion: self.measurements)
+        }
+    }
 }

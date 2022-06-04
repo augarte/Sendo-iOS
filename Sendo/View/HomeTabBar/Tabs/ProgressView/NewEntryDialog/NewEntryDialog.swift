@@ -37,12 +37,13 @@ class NewEntryDialog: SendoViewController {
         navigationTitle.title = dataType
         cancelBtn.title = "Cancel"
         addBtn.title = "Add"
-        
-        cancelBtn.action = #selector(dismiss)
-        addBtn.action =  #selector(addEntry)
     }
     
-    @objc func addEntry(sender: UIBarButtonItem) {
+    @IBAction func cancel(_ sender: Any) {
+        dismiss(animated: true)
+    }
+    
+    @IBAction func addEntry(_ sender: Any) {
         if let delegate = delegate {
             let timestamp = String(Int(NSDate().timeIntervalSince1970))
             let newEntry = Measurement(date: timestamp, value: 93.0)

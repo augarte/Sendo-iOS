@@ -59,6 +59,22 @@ final class FirebaseFirestoreManager: ObservableObject {
             }
         }.eraseToAnyPublisher()
     }
+    
+    func removeFromDatabase(document: String, collection: String) -> AnyPublisher<QuerySnapshot, Error> {
+        Future { future in
+            guard let uid = self.uid else {
+                return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
+            }
+                            
+            self.db.collection("users").document(uid).collection(collection).document(document).delete() { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                } else {
+                    print("Document successfully written!")
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 
 }
 

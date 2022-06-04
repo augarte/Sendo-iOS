@@ -11,7 +11,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewEntryDialog" customModule="Sendo" customModuleProvider="target">
             <connections>
                 <outlet property="addBtn" destination="YuV-M7-7Nl" id="u55-uE-2JX"/>
-                <outlet property="cancelBtn" destination="h6c-JB-fbH" id="38X-1D-Z7d"/>
+                <outlet property="cancelBtn" destination="h6c-JB-fbH" id="Stc-g7-l6i"/>
                 <outlet property="labelDate" destination="fqB-Kv-Fx8" id="K6s-0h-gGb"/>
                 <outlet property="labelValue" destination="fD6-1v-XCu" id="yTr-bW-MR1"/>
                 <outlet property="labelsView" destination="17U-wd-Lsy" id="T2R-iS-ZMf"/>
@@ -36,36 +36,44 @@
                     </textAttributes>
                     <items>
                         <navigationItem title="Title" id="bxS-wX-TUR">
-                            <barButtonItem key="leftBarButtonItem" title="Item" id="h6c-JB-fbH"/>
-                            <barButtonItem key="rightBarButtonItem" title="Item" id="YuV-M7-7Nl"/>
+                            <barButtonItem key="leftBarButtonItem" title="Item" id="h6c-JB-fbH">
+                                <connections>
+                                    <action selector="cancel:" destination="-1" id="wWG-17-e0p"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem key="rightBarButtonItem" title="Item" id="YuV-M7-7Nl">
+                                <connections>
+                                    <action selector="addEntry:" destination="-1" id="Z6F-Eb-lvb"/>
+                                </connections>
+                            </barButtonItem>
                         </navigationItem>
                     </items>
                 </navigationBar>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="17U-wd-Lsy">
-                    <rect key="frame" x="16" y="120" width="382" height="66"/>
+                    <rect key="frame" x="16" y="120" width="382" height="74"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fqB-Kv-Fx8">
-                            <rect key="frame" x="16" y="8" width="350" height="21"/>
+                            <rect key="frame" x="16" y="12" width="350" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fD6-1v-XCu">
-                            <rect key="frame" x="16" y="37" width="350" height="21"/>
+                            <rect key="frame" x="16" y="45" width="350" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="fD6-1v-XCu" firstAttribute="leading" secondItem="17U-wd-Lsy" secondAttribute="leading" constant="16" id="1CB-zn-r21"/>
                         <constraint firstAttribute="trailing" secondItem="fD6-1v-XCu" secondAttribute="trailing" constant="16" id="EKU-vk-yyf"/>
                         <constraint firstAttribute="bottom" secondItem="fD6-1v-XCu" secondAttribute="bottom" constant="8" id="Nev-JD-Ooe"/>
                         <constraint firstItem="fqB-Kv-Fx8" firstAttribute="leading" secondItem="17U-wd-Lsy" secondAttribute="leading" constant="16" id="rUU-yb-Kpl"/>
                         <constraint firstAttribute="trailing" secondItem="fqB-Kv-Fx8" secondAttribute="trailing" constant="16" id="t7b-q5-0G6"/>
-                        <constraint firstItem="fD6-1v-XCu" firstAttribute="top" secondItem="fqB-Kv-Fx8" secondAttribute="bottom" constant="8" id="tzC-f2-aUv"/>
-                        <constraint firstItem="fqB-Kv-Fx8" firstAttribute="top" secondItem="17U-wd-Lsy" secondAttribute="top" constant="8" id="yQ5-tu-C0E"/>
+                        <constraint firstItem="fD6-1v-XCu" firstAttribute="top" secondItem="fqB-Kv-Fx8" secondAttribute="bottom" constant="12" id="tzC-f2-aUv"/>
+                        <constraint firstItem="fqB-Kv-Fx8" firstAttribute="top" secondItem="17U-wd-Lsy" secondAttribute="top" constant="12" id="yQ5-tu-C0E"/>
                     </constraints>
                 </view>
             </subviews>
