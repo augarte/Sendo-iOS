@@ -10,9 +10,13 @@ import Combine
 import FirebaseFirestore
 
 public protocol FirebaseFirestoreServicesProtocol {
-    typealias CompletionStream = (CurrentValueSubject<[Measurement], Never>)
+    typealias UserCompletionStream = (CurrentValueSubject<AuthUser?, Never>)
+    func createUser(authUser: AuthUser, completion: @escaping (Bool) -> ()) -> Void
     
-    func fetchMeasurement(completion: CompletionStream) -> Void
+    typealias MeasurementCompletionStream = (CurrentValueSubject<[Measurement], Never>)
+    func fetchMeasurement(completion: MeasurementCompletionStream) -> Void
+    func addMeasurementEntry(entry: Measurement, completion: @escaping (Bool) -> ()) -> Void
+    func removeMeasurementEntry(entry: Measurement, completion: @escaping (Bool) -> ()) -> Void
 }
 
 class FirebaseFirestoreServices: FirebaseFirestoreServicesProtocol {
@@ -32,8 +36,26 @@ class FirebaseFirestoreServices: FirebaseFirestoreServicesProtocol {
 
 extension FirebaseFirestoreServices {
     
+    // MARK: - Auth
+    public func createUser(authUser: AuthUser, completion: @escaping (Bool) -> ()) {
+        let collection = Firestore.firestore().collection("users")
+        let userData: [String: Any] = [
+            "name": authUser.name,
+        ]
+        
+        FirebaseFirestoreManager.shared.addDocumentDatabase(documentId: authUser.uid, data: userData, collection: collection).sink { completion in
+            switch completion {
+            case .failure(let error): print("Error: \(error.localizedDescription)")
+            case .finished: break
+            }
+        } receiveValue: { success in
+            completion(success)
+        }.store(in: &cancellBag)
+    }
+    
+    
     // MARK: - Measurements
-    public func fetchMeasurement(completion: CompletionStream) {
+    public func fetchMeasurement(completion: MeasurementCompletionStream) {
         FirebaseFirestoreManager.shared.fetchDatabase(collection: "measurements").sink { completion in
             switch completion {
             case .failure(let error): print("Error: \(error.localizedDescription)")
@@ -46,7 +68,7 @@ extension FirebaseFirestoreServices {
         }.store(in: &cancellBag)
     }
     
-    public func addMeasurementEntry(entry: Measurement, completion: CompletionStream) {
+    public func addMeasurementEntry(entry: Measurement, completion: @escaping (Bool) -> ()) {
         let dataEntry: [String: Any] = [
             "value": entry.value,
         ]
@@ -56,23 +78,19 @@ extension FirebaseFirestoreServices {
             case .failure(let error): print("Error: \(error.localizedDescription)")
             case .finished: break
             }
-        } receiveValue: { snapshot in
-            completion.send(snapshot.documents.compactMap{
-                Measurement(snapshot: $0)
-            })
+        } receiveValue: { success in
+            completion(success)
         }.store(in: &cancellBag)
     }
     
-    public func removeMeasurementEntry(entry: Measurement, completion: CompletionStream) {
+    public func removeMeasurementEntry(entry: Measurement, completion: @escaping (Bool) -> ()) {
         FirebaseFirestoreManager.shared.removeFromDatabase(document: entry.date, collection: "measurements").sink { completion in
             switch completion {
             case .failure(let error): print("Error: \(error.localizedDescription)")
             case .finished: break
             }
-        } receiveValue: { snapshot in
-            completion.send(snapshot.documents.compactMap{
-                Measurement(snapshot: $0)
-            })
+        } receiveValue: { success in
+            completion(success)
         }.store(in: &cancellBag)
     }
 

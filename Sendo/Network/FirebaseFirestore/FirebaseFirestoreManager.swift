@@ -21,6 +21,18 @@ final class FirebaseFirestoreManager: ObservableObject {
     private init() {
         uid = UserDefaults.standard.string(forKey: "firebaseUID") ?? nil
     }
+    
+    func addDocumentDatabase(documentId: String, data: [String : Any], collection: CollectionReference) -> AnyPublisher<Bool, Error> {
+        Future { future in
+            collection.document(documentId).setData(data) { err in
+                if let err = err {
+                    return future(.failure(err))
+                } else {
+                    return future(.success(true))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
 
     func fetchDatabase(collection: String) -> AnyPublisher<QuerySnapshot, Error> {
         Future { future in
@@ -33,8 +45,6 @@ final class FirebaseFirestoreManager: ObservableObject {
                     return future(.failure(err))
                 } else if let querySnapshot = querySnapshot {
                     return future(.success(querySnapshot))
-    //                    for document in querySnapshot!.documents {
-    //                    }
                 } else {
                     return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
                 }
@@ -42,7 +52,7 @@ final class FirebaseFirestoreManager: ObservableObject {
         }.eraseToAnyPublisher()
     }
     
-    func addToDatabase(data: [String : Any], collection: String) -> AnyPublisher<QuerySnapshot, Error> {
+    func addToDatabase(data: [String : Any], collection: String) -> AnyPublisher<Bool, Error> {
         Future { future in
             guard let uid = self.uid else {
                 return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
@@ -52,15 +62,15 @@ final class FirebaseFirestoreManager: ObservableObject {
                 
             self.db.collection("users").document(uid).collection(collection).document(timestamp).setData(data) { err in
                 if let err = err {
-                    print("Error writing document: \(err)")
+                    return future(.failure(err))
                 } else {
-                    print("Document successfully written!")
+                    return future(.success(true))
                 }
             }
         }.eraseToAnyPublisher()
     }
     
-    func removeFromDatabase(document: String, collection: String) -> AnyPublisher<QuerySnapshot, Error> {
+    func removeFromDatabase(document: String, collection: String) -> AnyPublisher<Bool, Error> {
         Future { future in
             guard let uid = self.uid else {
                 return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
@@ -68,9 +78,9 @@ final class FirebaseFirestoreManager: ObservableObject {
                             
             self.db.collection("users").document(uid).collection(collection).document(document).delete() { err in
                 if let err = err {
-                    print("Error writing document: \(err)")
+                    return future(.failure(err))
                 } else {
-                    print("Document successfully written!")
+                    return future(.success(true))
                 }
             }
         }.eraseToAnyPublisher()

@@ -14,12 +14,9 @@ public struct Measurement: Codable, Equatable {
     let value: Double
     
     init?(snapshot: QueryDocumentSnapshot) {
-        guard let dic = snapshot.data() as? [String:Any] else {
-            return nil
-        }
-        
         self.date = snapshot.documentID
         
+        let dic = snapshot.data()
         if let value = dic["value"] as? Double {
             self.value = value
         } else {

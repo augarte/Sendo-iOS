@@ -38,6 +38,8 @@
 		EA0C1A2028496B4D009223D8 /* ProgressTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */; };
 		EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */; };
 		EA0C1A2528496E76009223D8 /* NewEntryDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */; };
+		EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF044284BF0A50047B447 /* AuthViewModel.swift */; };
+		EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF046284BF0EE0047B447 /* AuthUser.swift */; };
 		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
 		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
@@ -119,6 +121,8 @@
 		EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressTableCell.xib; sourceTree = "<group>"; };
 		EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryDialog.swift; sourceTree = "<group>"; };
 		EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEntryDialog.xib; sourceTree = "<group>"; };
+		EA0FF044284BF0A50047B447 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		EA0FF046284BF0EE0047B447 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
 		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
@@ -229,6 +233,7 @@
 		20B96EB5272472CA000B9C1D /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				EA0FF046284BF0EE0047B447 /* AuthUser.swift */,
 				20B96EB7272472FB000B9C1D /* Measurement.swift */,
 				20C524802724EF1C00741057 /* Exercise.swift */,
 			);
@@ -238,6 +243,7 @@
 		20B96EB6272472D0000B9C1D /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
 				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
 				20C524822724F00600741057 /* ExerciseViewModel.swift */,
 			);
@@ -644,6 +650,7 @@
 				EA3D14272826E6C700387419 /* NetworkServicesEndpoints.swift in Sources */,
 				EA3D14252826E6B500387419 /* FirebaseDatabaseServices.swift in Sources */,
 				20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */,
+				EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */,
 				EA3D143528270B1300387419 /* NetworkServices.swift in Sources */,
 				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
 				EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */,
@@ -667,6 +674,7 @@
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
+				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
 				EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsView.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,

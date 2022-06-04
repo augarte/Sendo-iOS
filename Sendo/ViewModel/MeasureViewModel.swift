@@ -25,14 +25,17 @@ extension MeasurementViewModel {
     }
     
     func addEntry(entry: Measurement) {
-        measurements.value.append(entry)
-        FirebaseFirestoreServices.shared().addMeasurementEntry(entry: entry, completion: self.measurements)
+        FirebaseFirestoreServices.shared().addMeasurementEntry(entry: entry) { success in
+            guard success else { return }
+            self.measurements.value.append(entry)
+        }
     }
     
     func removeEntry(entry: Measurement) {
-        if let index = measurements.value.firstIndex(of: entry) {
-            measurements.value.remove(at: index)
-            FirebaseFirestoreServices.shared().removeMeasurementEntry(entry: entry, completion: self.measurements)
+        FirebaseFirestoreServices.shared().removeMeasurementEntry(entry: entry) { success in
+            guard success else { return }
+            guard let index = self.measurements.value.firstIndex(of: entry) else { return }
+            self.measurements.value.remove(at: index)
         }
     }
 }

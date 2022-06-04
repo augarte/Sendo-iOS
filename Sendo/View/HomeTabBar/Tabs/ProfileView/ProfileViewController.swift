@@ -15,6 +15,9 @@ class ProfileViewController: BaseTabViewController {
     
     @IBOutlet weak var googleSignin: GIDSignInButton!
     
+    let authViewModel = AuthViewModel()
+    var cancellBag = Set<AnyCancellable>()
+    
     private var currentNonce: String?
     
     static func create() -> ProfileViewController {
@@ -25,6 +28,11 @@ class ProfileViewController: BaseTabViewController {
         super.viewDidLoad()
         
         addToolbarItem()
+        
+        authViewModel.authUser.sink { [unowned self] (_) in
+            guard let authUser = authViewModel.authUser.value else { return }
+            // TODO: Do something with loged user
+        }.store(in: &cancellBag)
         
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.googleSigninPress (_:)))
         self.googleSignin.addGestureRecognizer(gesture)
@@ -84,8 +92,11 @@ class ProfileViewController: BaseTabViewController {
     
     func firebaseLoad(credential: AuthCredential){
         Auth.auth().signIn(with: credential) { authResult, error in
-            if let error = error {
-            }
+            guard error == nil else { return }
+            guard let uid = authResult?.user.uid else { return }
+            
+            let newUser = AuthUser(uid: uid, name: authResult?.user.displayName)
+            self.authViewModel.createUser(user: newUser)
         }
     }
     
