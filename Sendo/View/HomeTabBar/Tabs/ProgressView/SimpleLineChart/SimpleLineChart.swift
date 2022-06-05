@@ -8,12 +8,12 @@
 import UIKit
 
 private enum Constants {
-  static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
-  static let margin: CGFloat = 20.0
-  static let topBorder: CGFloat = 60
-  static let bottomBorder: CGFloat = 50
-  static let colorAlpha: CGFloat = 0.3
-  static let circleDiameter: CGFloat = 5.0
+    static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
+    static let margin: CGFloat = 20.0
+    static let topBorder: CGFloat = 60
+    static let bottomBorder: CGFloat = 50
+    static let colorAlpha: CGFloat = 0.3
+    static let circleDiameter: CGFloat = 5.0
 }
 
 @IBDesignable
@@ -78,6 +78,9 @@ class SimpleLineChart: UIView {
         guard let maxXValue = xValues.max() else { return }
         let columnXPoint = { (column: Int) -> CGFloat in
             // Calculate the gap between points
+            guard self.graphPoints.count > 1 else {
+                return CGFloat(graphWidth/2) + margin + 2
+            }
             let xPoint = CGFloat(column-minXValue) / CGFloat(maxXValue-minXValue) * graphWidth
             return CGFloat(xPoint) + margin + 2
         }
@@ -89,6 +92,9 @@ class SimpleLineChart: UIView {
         guard let minYValue = yValues.min() else { return }
         guard let maxYValue = yValues.max() else { return }
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
+            guard self.graphPoints.count > 1 else {
+                return graphHeight + topBorder - (graphHeight/2)
+            }
             let yPoint = CGFloat(graphPoint-minYValue) / CGFloat(maxYValue-minYValue) * graphHeight
             return graphHeight + topBorder - yPoint // Flip the graph
         }
@@ -107,6 +113,8 @@ class SimpleLineChart: UIView {
             let nextPoint = CGPoint(x: columnXPoint(graphPoints[i].0), y: columnYPoint(graphPoints[i].1))
             graphPath.addLine(to: nextPoint)
         }
+        
+        context.saveGState()
         
         // -------------------
         // Line shadow gradient
@@ -132,9 +140,28 @@ class SimpleLineChart: UIView {
                 end: graphEndPoint,
                 options: [])
         }
+        context.restoreGState()
         
         graphPath.lineWidth = lineStroke
         graphPath.stroke()
+        
+        // -------------------
+        // Data points
+        for i in 0..<graphPoints.count {
+            var point = CGPoint(x: columnXPoint(graphPoints[i].0), y: columnYPoint(graphPoints[i].1))
+            point.x -= Constants.circleDiameter / 2
+            point.y -= Constants.circleDiameter / 2
+              
+            let circle = UIBezierPath(
+                ovalIn: CGRect(
+                    origin: point,
+                    size: CGSize(
+                        width: Constants.circleDiameter,
+                        height: Constants.circleDiameter)
+                )
+            )
+            circle.fill()
+        }
     }
     
     open func setPoints(points: Array<(Int, Double)>) {
