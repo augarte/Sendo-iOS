@@ -28,7 +28,7 @@ class NewEntryDialog: SendoViewController {
         labelDate.text = "Date"
         labelValue.text = "Value"
         labelsView.backgroundColor = .white.withAlphaComponent(0.2)
-        labelsView.layer.cornerRadius = 5
+        labelsView.layer.cornerRadius = 8
         addToolbar()
     }
     

@@ -25,7 +25,7 @@
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" bouncesZoom="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="VY8-Od-E2m">
-                    <rect key="frame" x="16" y="485" width="382" height="377"/>
+                    <rect key="frame" x="0.0" y="485" width="414" height="377"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </tableView>
             </subviews>
@@ -37,8 +37,8 @@
                 <constraint firstItem="DW5-9g-Ile" firstAttribute="height" secondItem="wb6-0c-sOu" secondAttribute="height" multiplier="0.5" id="DCd-B6-boD"/>
                 <constraint firstItem="DW5-9g-Ile" firstAttribute="top" secondItem="wb6-0c-sOu" secondAttribute="top" constant="16" id="DJr-L8-6je"/>
                 <constraint firstItem="DW5-9g-Ile" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" constant="16" id="ID9-9v-hVh"/>
-                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="VY8-Od-E2m" secondAttribute="trailing" constant="16" id="L6P-SR-Fgb"/>
-                <constraint firstItem="VY8-Od-E2m" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" constant="16" id="LBo-hl-s4M"/>
+                <constraint firstItem="wb6-0c-sOu" firstAttribute="trailing" secondItem="VY8-Od-E2m" secondAttribute="trailing" id="L6P-SR-Fgb"/>
+                <constraint firstItem="VY8-Od-E2m" firstAttribute="leading" secondItem="wb6-0c-sOu" secondAttribute="leading" id="LBo-hl-s4M"/>
                 <constraint firstItem="VY8-Od-E2m" firstAttribute="top" secondItem="DW5-9g-Ile" secondAttribute="bottom" constant="16" id="lgv-W7-RXn"/>
             </constraints>
             <point key="canvasLocation" x="830" y="71"/>

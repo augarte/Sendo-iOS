@@ -74,10 +74,17 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
+        
         let measurement = progressViewModel.measurements.value[indexPath.row]
+        var change = 0.0
+        if indexPath.row > 0 {
+            let prevValue = progressViewModel.measurements.value[indexPath.row - 1].value
+            change = (100 * (measurement.value - prevValue) / prevValue).round(to: 1)
+        }
+        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableCell")! as! ProgressTableCell
-        cell.configureCell(entry: measurement)
+        cell.configureCell(entry: measurement, change: change)
         return cell
     }
     
