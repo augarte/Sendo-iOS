@@ -63,6 +63,8 @@
 		EA3D145C282826DA00387419 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145B282826DA00387419 /* FirebaseDatabase */; };
 		EA3D1460282826DA00387419 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145F282826DA00387419 /* FirebaseFirestore */; };
 		EA3D14672828367500387419 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14662828367500387419 /* FirebaseAuth */; };
+		EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */; };
+		EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAEF28E9BA90007681C9 /* Constants.swift */; };
 		EA9C6FD228553A5E00B1F219 /* PeriodSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */; };
 		EA9C6FD428553A6600B1F219 /* PeriodSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */; };
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
@@ -141,6 +143,8 @@
 		EA3D14452827F02800387419 /* ExerciseDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseDetailView.xib; sourceTree = "<group>"; };
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
+		EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginView.swift; sourceTree = "<group>"; };
+		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodSelectorCell.swift; sourceTree = "<group>"; };
 		EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeriodSelectorCell.xib; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
@@ -428,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
+				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
 				EA3D144028270E2900387419 /* ProfileViewController.xib */,
 				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
 			);
@@ -669,6 +674,7 @@
 				EA3D143528270B1300387419 /* NetworkServices.swift in Sources */,
 				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
 				EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */,
+				EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */,
 				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
 				EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */,
 				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
@@ -693,6 +699,7 @@
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
 				EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsView.swift in Sources */,
+				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

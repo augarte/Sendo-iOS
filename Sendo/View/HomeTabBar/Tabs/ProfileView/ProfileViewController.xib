@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="21225" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfileViewController" customModule="Sendo" customModuleProvider="target">
             <connections>
-                <outlet property="googleSignin" destination="Gat-uj-VJQ" id="twD-VY-Xtb"/>
                 <outlet property="view" destination="enh-ug-v0M" id="tPx-Uy-Jvw"/>
             </connections>
         </placeholder>
@@ -18,48 +18,14 @@
         <view contentMode="scaleToFill" id="enh-ug-v0M">
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gat-uj-VJQ" customClass="GIDSignInButton">
-                    <rect key="frame" x="32" y="422" width="350" height="62"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="62" id="9pG-ly-1qG"/>
-                    </constraints>
-                </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="agg-KZ-zNo" customClass="AppleAuthorizationButton" customModule="Sendo" customModuleProvider="target">
-                    <rect key="frame" x="32" y="328" width="350" height="62"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain"/>
-                    <connections>
-                        <action selector="appleSigninPress:" destination="-1" eventType="touchUpInside" id="Bcn-q8-b9o"/>
-                    </connections>
-                </button>
-            </subviews>
             <viewLayoutGuide key="safeArea" id="Sg0-qQ-XDf"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-            <constraints>
-                <constraint firstItem="Gat-uj-VJQ" firstAttribute="leading" secondItem="Sg0-qQ-XDf" secondAttribute="leading" constant="32" id="190-h9-UK3"/>
-                <constraint firstItem="agg-KZ-zNo" firstAttribute="width" secondItem="Gat-uj-VJQ" secondAttribute="width" id="1Ch-gl-QDl"/>
-                <constraint firstItem="agg-KZ-zNo" firstAttribute="trailing" secondItem="Gat-uj-VJQ" secondAttribute="trailing" id="2Yd-6Y-oqI"/>
-                <constraint firstItem="Sg0-qQ-XDf" firstAttribute="trailing" secondItem="Gat-uj-VJQ" secondAttribute="trailing" constant="32" id="5oN-3E-eKS"/>
-                <constraint firstItem="agg-KZ-zNo" firstAttribute="leading" secondItem="Gat-uj-VJQ" secondAttribute="leading" id="MZL-7U-GNL"/>
-                <constraint firstItem="Gat-uj-VJQ" firstAttribute="top" secondItem="agg-KZ-zNo" secondAttribute="bottom" constant="32" id="OKW-5N-u1b"/>
-                <constraint firstItem="Gat-uj-VJQ" firstAttribute="centerY" secondItem="Sg0-qQ-XDf" secondAttribute="centerY" id="ctO-5P-HOG"/>
-                <constraint firstItem="agg-KZ-zNo" firstAttribute="height" secondItem="Gat-uj-VJQ" secondAttribute="height" id="gFp-mr-nWa"/>
-                <constraint firstItem="agg-KZ-zNo" firstAttribute="centerX" secondItem="Sg0-qQ-XDf" secondAttribute="centerX" id="hVe-ka-uLi"/>
-                <constraint firstItem="Gat-uj-VJQ" firstAttribute="centerX" secondItem="Sg0-qQ-XDf" secondAttribute="centerX" id="qTb-OR-e6D"/>
-            </constraints>
+            <color key="backgroundColor" name="PrimaryColor"/>
             <point key="canvasLocation" x="828.98550724637687" y="70.982142857142847"/>
         </view>
     </objects>
-    <designables>
-        <designable name="agg-KZ-zNo">
-            <size key="intrinsicContentSize" width="24" height="14"/>
-        </designable>
-    </designables>
     <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
+        <namedColor name="PrimaryColor">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
 </document>

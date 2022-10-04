@@ -7,21 +7,49 @@
 
 import UIKit
 import Combine
+import AuthenticationServices
 import Firebase
 import GoogleSignIn
-import AuthenticationServices
 
 class ProfileViewController: BaseTabViewController {
     
-    @IBOutlet weak var googleSignin: GIDSignInButton!
+    
+    private enum Constants {
+        static let margin: CGFloat = Spacer.size05
+    }
     
     let authViewModel = AuthViewModel()
-    var cancellBag = Set<AnyCancellable>()
     
     private var currentNonce: String?
+    private var cancellBag = Set<AnyCancellable>()
+    
+    private lazy var loginView: ProfileLoginView = {
+        let view = ProfileLoginView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.buttonPressedSubject.sink { type in
+            switch type {
+            case .google: self.signInGoogle()
+            case .apple: self.signInApple()
+            }
+        }
+        .store(in: &cancellBag)
+        return view
+    }()
     
     static func create() -> ProfileViewController {
         return ProfileViewController(title: "Profile", image: "ProfileWhite", nibName: ProfileViewController.typeName)
+    }
+    
+    override func loadView() {
+        super.loadView()
+        view.addSubview(loginView)
+        NSLayoutConstraint.activate([
+            loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            loginView.leftAnchor.constraint(equalTo: view.leftAnchor),
+            loginView.rightAnchor.constraint(equalTo: view.rightAnchor)
+        ])
+        loginView.setupView()
     }
     
     override func viewDidLoad() {
@@ -34,40 +62,30 @@ class ProfileViewController: BaseTabViewController {
             // TODO: Do something with loged user
         }.store(in: &cancellBag)
         
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (self.googleSigninPress (_:)))
-        self.googleSignin.addGestureRecognizer(gesture)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
     }
+}
+
+// MARK: - Toolbar
+private extension ProfileViewController {
     
-    // MARK: - Toolbar
     func addToolbarItem(){
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.bookmarks, target: self, action: #selector(self.openSettings(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(self.openSettings(sender:)))
     }
     
     @objc func openSettings(sender: UIBarButtonItem) {
         let settingsVC = SettingsView.create()
         navigateToViewController(viewController: settingsVC)
     }
+}
 
-    // MARK: - Authentications
-    @IBAction func appleSigninPress(_ sender: Any) {
-        currentNonce = Utils.randomNonceString()
-        
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        let request = appleIDProvider.createRequest()
-        request.requestedScopes = [.email, .fullName]
-        request.nonce = Utils.sha256(currentNonce!)
-        
-        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-        authorizationController.delegate = self
-        authorizationController.presentationContextProvider = self
-        authorizationController.performRequests()
-    }
+// MARK: - Authentications
+private extension ProfileViewController {
     
-    @objc func googleSigninPress(_ sender:UITapGestureRecognizer){
+    private func signInGoogle() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         let config = GIDConfiguration(clientID: clientID)
         
@@ -87,10 +105,21 @@ class ProfileViewController: BaseTabViewController {
        }
     }
     
-    @objc func mailSigninPress(_ sender: Any) {
+    private func signInApple() {
+        currentNonce = Utils.randomNonceString()
+        
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.email, .fullName]
+        request.nonce = Utils.sha256(currentNonce!)
+        
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
     }
     
-    func firebaseLoad(credential: AuthCredential){
+    private func firebaseLoad(credential: AuthCredential){
         Auth.auth().signIn(with: credential) { authResult, error in
             guard error == nil else { return }
             guard let uid = authResult?.user.uid else { return }
@@ -100,7 +129,7 @@ class ProfileViewController: BaseTabViewController {
         }
     }
     
-    func logout(){
+    private func logout(){
         let firebaseAuth = Auth.auth()
         do {
             try firebaseAuth.signOut()
@@ -108,13 +137,12 @@ class ProfileViewController: BaseTabViewController {
             print("Error signing out: %@", signOutError)
         }
     }
-    
 }
 
+// MARK: - ASAuthorizationControllerDelegate
 extension ProfileViewController: ASAuthorizationControllerDelegate, ASAuthorizationControllerPresentationContextProviding {
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        
         if let nonce = currentNonce,
            let appleIDCredential = authorization.credential as? ASAuthorizationAppleIDCredential,
            let appleIDToken = appleIDCredential.identityToken,
@@ -132,5 +160,4 @@ extension ProfileViewController: ASAuthorizationControllerDelegate, ASAuthorizat
     func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
         return view.window!
     }
-    
 }
