@@ -63,6 +63,8 @@
 		EA3D145C282826DA00387419 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145B282826DA00387419 /* FirebaseDatabase */; };
 		EA3D1460282826DA00387419 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145F282826DA00387419 /* FirebaseFirestore */; };
 		EA3D14672828367500387419 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14662828367500387419 /* FirebaseAuth */; };
+		EA9C6FD228553A5E00B1F219 /* PeriodSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */; };
+		EA9C6FD428553A6600B1F219 /* PeriodSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */; };
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
@@ -139,6 +141,8 @@
 		EA3D14452827F02800387419 /* ExerciseDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseDetailView.xib; sourceTree = "<group>"; };
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
+		EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodSelectorCell.swift; sourceTree = "<group>"; };
+		EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeriodSelectorCell.xib; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
 		EAD708E62842DF9A002365ED /* SimpleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLineChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -303,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				EAD708E62842DF9A002365ED /* SimpleLineChart.swift */,
+				EA9C6FD028552D2600B1F219 /* PeriodSelectorCell */,
 			);
 			path = SimpleLineChart;
 			sourceTree = "<group>";
@@ -454,6 +459,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EA9C6FD028552D2600B1F219 /* PeriodSelectorCell */ = {
+			isa = PBXGroup;
+			children = (
+				EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */,
+				EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */,
+			);
+			path = PeriodSelectorCell;
+			sourceTree = "<group>";
+		};
 		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {
 			isa = PBXGroup;
 			children = (
@@ -588,6 +602,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3D144128270E2900387419 /* ProfileViewController.xib in Resources */,
+				EA9C6FD428553A6600B1F219 /* PeriodSelectorCell.xib in Resources */,
 				EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */,
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
@@ -660,6 +675,7 @@
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
 				EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */,
+				EA9C6FD228553A5E00B1F219 /* PeriodSelectorCell.swift in Sources */,
 				EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
 				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
