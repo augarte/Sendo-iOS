@@ -23,7 +23,7 @@ open class SendoViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         title = titleName
-        view.backgroundColor = UIColor.init(named:"PrimaryColor")
+        view.backgroundColor = UIColor(named:"PrimaryColor")
     }
     
     open override func viewWillAppear(_ animated: Bool) {

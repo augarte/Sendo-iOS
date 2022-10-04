@@ -88,7 +88,7 @@ class HomeTabBarViewController: UITabBarController {
             guard let addWorkout = addWorkout else { return }
             addWorkout.layer.cornerRadius = sender.frame.size.width / 2
             addWorkout.setBackgroundImage(#imageLiteral(resourceName: "WorkoutWhite"), for: .normal)
-            addWorkout.backgroundColor = UIColor.init(named: "PrimaryColor")
+            addWorkout.backgroundColor = UIColor(named: "PrimaryColor")
             view.addSubview(addWorkout)
             view.layoutIfNeeded()
             
@@ -100,7 +100,7 @@ class HomeTabBarViewController: UITabBarController {
             guard let addProgress = addProgress else { return }
             addProgress.layer.cornerRadius = sender.frame.size.width / 2
             addProgress.setBackgroundImage(#imageLiteral(resourceName: "MeasurementWhite"), for: .normal)
-            addProgress.backgroundColor = UIColor.init(named: "PrimaryColor")
+            addProgress.backgroundColor = UIColor(named: "PrimaryColor")
             view.addSubview(addProgress)
             view.layoutIfNeeded()
         } else {

@@ -49,7 +49,7 @@ class ProgressViewController: BaseTabViewController {
     
     // MARK: - Toolbar
     func addToolbarItem(){
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem.init(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
     }
     
     @objc func addProgressEntry(sender: UIBarButtonItem) {

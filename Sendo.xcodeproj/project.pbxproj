@@ -56,7 +56,6 @@
 		EA3D144128270E2900387419 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D144028270E2900387419 /* ProfileViewController.xib */; };
 		EA3D14442827F01D00387419 /* ExerciseDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14432827F01D00387419 /* ExerciseDetailView.swift */; };
 		EA3D14462827F02800387419 /* ExerciseDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D14452827F02800387419 /* ExerciseDetailView.xib */; };
-		EA3D144B2827FD6800387419 /* Charts in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D144A2827FD6800387419 /* Charts */; };
 		EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */; };
 		EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */; };
 		EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D1459282826DA00387419 /* FirebaseCrashlytics */; };
@@ -162,7 +161,6 @@
 				EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */,
 				EA3D1460282826DA00387419 /* FirebaseFirestore in Frameworks */,
 				EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */,
-				EA3D144B2827FD6800387419 /* Charts in Frameworks */,
 				20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */,
 				EA3D14672828367500387419 /* FirebaseAuth in Frameworks */,
 				EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */,
@@ -343,6 +341,7 @@
 				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
 				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
+				EA3FFAEC28E9B16B007681C9 /* DesignSystem */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -464,6 +463,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		EA3FFAEC28E9B16B007681C9 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				EA3FFAEF28E9BA90007681C9 /* Constants.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
 		EA9C6FD028552D2600B1F219 /* PeriodSelectorCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,7 +509,6 @@
 				20F2D425275CECF200A56B83 /* SDWebImage */,
 				EA3D14292826E7D200387419 /* Alamofire */,
 				EA3D142C2826E81500387419 /* AlamofireImage */,
-				EA3D144A2827FD6800387419 /* Charts */,
 				EA3D1459282826DA00387419 /* FirebaseCrashlytics */,
 				EA3D145B282826DA00387419 /* FirebaseDatabase */,
 				EA3D145F282826DA00387419 /* FirebaseFirestore */,
@@ -586,7 +592,6 @@
 				20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */,
 				EA3D14282826E7D200387419 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				EA3D142B2826E81500387419 /* XCRemoteSwiftPackageReference "AlamofireImage" */,
-				EA3D14492827FD6800387419 /* XCRemoteSwiftPackageReference "Charts" */,
 				EA3D1458282826DA00387419 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				EAC9AECC2841608A00608A32 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 			);
@@ -1098,14 +1103,6 @@
 				minimumVersion = 4.0.0;
 			};
 		};
-		EA3D14492827FD6800387419 /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 3.0.0;
-			};
-		};
 		EA3D1458282826DA00387419 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
@@ -1139,11 +1136,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EA3D142B2826E81500387419 /* XCRemoteSwiftPackageReference "AlamofireImage" */;
 			productName = AlamofireImage;
-		};
-		EA3D144A2827FD6800387419 /* Charts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = EA3D14492827FD6800387419 /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = Charts;
 		};
 		EA3D1459282826DA00387419 /* FirebaseCrashlytics */ = {
 			isa = XCSwiftPackageProductDependency;
