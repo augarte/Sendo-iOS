@@ -11,9 +11,14 @@ open class SendoViewController: UIViewController {
     
     final let titleName: String
         
+    init(title: String) {
+        titleName = title
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     init(title: String, nibName: String) {
         titleName = title
-        super.init(nibName: nibName, bundle: nil)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required public init?(coder: NSCoder) {

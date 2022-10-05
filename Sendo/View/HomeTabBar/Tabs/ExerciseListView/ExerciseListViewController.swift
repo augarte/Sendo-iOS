@@ -53,7 +53,7 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let exerciseDetailVC = ExerciseDetailView.create(exercise: exercise)
+        let exerciseDetailVC = ExerciseDetailViewController.create(exercise: exercise)
         navigateToViewController(viewController: exerciseDetailVC)
     }
     

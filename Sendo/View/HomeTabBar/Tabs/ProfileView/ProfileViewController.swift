@@ -13,7 +13,6 @@ import GoogleSignIn
 
 class ProfileViewController: BaseTabViewController {
     
-    
     private enum Constants {
         static let margin: CGFloat = Spacer.size05
     }
@@ -37,7 +36,7 @@ class ProfileViewController: BaseTabViewController {
     }()
     
     static func create() -> ProfileViewController {
-        return ProfileViewController(title: "Profile", image: "ProfileWhite", nibName: ProfileViewController.typeName)
+        return ProfileViewController(title: "Profile", image: "ProfileWhite")
     }
     
     override func loadView() {
@@ -46,8 +45,8 @@ class ProfileViewController: BaseTabViewController {
         NSLayoutConstraint.activate([
             loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            loginView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            loginView.rightAnchor.constraint(equalTo: view.rightAnchor)
+            loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         loginView.setupView()
     }
@@ -77,7 +76,7 @@ private extension ProfileViewController {
     }
     
     @objc func openSettings(sender: UIBarButtonItem) {
-        let settingsVC = SettingsView.create()
+        let settingsVC = SettingsViewController.create()
         navigateToViewController(viewController: settingsVC)
     }
 }

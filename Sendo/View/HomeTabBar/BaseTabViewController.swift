@@ -10,7 +10,12 @@ import UIKit
 open class BaseTabViewController: SendoViewController {
     
     final let tabImage: String
-        
+    
+    init(title: String, image: String) {
+        tabImage = image
+        super.init(title: title)
+    }
+    
     init(title: String, image: String, nibName: String) {
         tabImage = image
         super.init(title: title, nibName: nibName)
@@ -19,5 +24,4 @@ open class BaseTabViewController: SendoViewController {
     required public init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
