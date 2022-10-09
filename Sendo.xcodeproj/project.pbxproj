@@ -208,7 +208,6 @@
 				EA3D14142826DC9800387419 /* Common */,
 				EA3D141E2826E66900387419 /* Network */,
 				20B96EBE272474D2000B9C1D /* View */,
-				20B96EB6272472D0000B9C1D /* ViewModel */,
 				20B96EB5272472CA000B9C1D /* Model */,
 				EA3D14122826DC4B00387419 /* Resources */,
 			);
@@ -242,23 +241,17 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		20B96EB6272472D0000B9C1D /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
-				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
-				20C524822724F00600741057 /* ExerciseViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		20B96EBE272474D2000B9C1D /* View */ = {
 			isa = PBXGroup;
 			children = (
 				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
-				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
 				EA3D14422827F00400387419 /* ExerciseDetailView */,
+				EA3D143728270C9800387419 /* ExerciseListView */,
+				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
+				EA3D143928270CB300387419 /* ProfileView */,
+				EA3D143828270CA900387419 /* ProgressView */,
 				EA07CE1B2845494B0053B768 /* SettingsView */,
+				EA3D143628270C8E00387419 /* WorkoutView */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,7 +262,6 @@
 				EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */,
 				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
 				20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */,
-				EA3D14172826E2D200387419 /* Tabs */,
 			);
 			path = HomeTabBar;
 			sourceTree = "<group>";
@@ -350,17 +342,6 @@
 			path = ExerciseTableCell;
 			sourceTree = "<group>";
 		};
-		EA3D14172826E2D200387419 /* Tabs */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D143628270C8E00387419 /* WorkoutView */,
-				EA3D143728270C9800387419 /* ExerciseListView */,
-				EA3D143828270CA900387419 /* ProgressView */,
-				EA3D143928270CB300387419 /* ProfileView */,
-			);
-			path = Tabs;
-			sourceTree = "<group>";
-		};
 		EA3D141E2826E66900387419 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -403,6 +384,7 @@
 		EA3D143728270C9800387419 /* ExerciseListView */ = {
 			isa = PBXGroup;
 			children = (
+				20C524822724F00600741057 /* ExerciseViewModel.swift */,
 				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
 				EA3D143C28270D9400387419 /* ExerciseListViewController.xib */,
 				EA3D14152826E29C00387419 /* ExerciseTableCell */,
@@ -413,6 +395,7 @@
 		EA3D143828270CA900387419 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
+				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
 				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
 				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
 				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
@@ -426,8 +409,7 @@
 			isa = PBXGroup;
 			children = (
 				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
-				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
-				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
+				EAA81F1528F24B2900EAB259 /* Login */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -472,6 +454,16 @@
 				EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */,
 			);
 			path = PeriodSelectorCell;
+			sourceTree = "<group>";
+		};
+		EAA81F1528F24B2900EAB259 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
+				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
+				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {

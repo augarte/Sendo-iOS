@@ -29,6 +29,14 @@ class SimpleLineChart: UIView {
     @IBInspectable var gradientStartColor: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
     @IBInspectable var gradientEndColor: UIColor = UIColor.hexStringToUIColor(hex: "FD4345")
     
+    lazy var stackView: UIStackView = {
+        let stackview = UIStackView()
+        stackview.translatesAutoresizingMaskIntoConstraints = false
+        stackview.axis = .horizontal
+        stackview.distribution = .fillEqually
+        return stackview
+    }()
+    
     var periodSelectors: Array<(String, Int)> = [("1 Month", 2629800), ("3 Month", 7889400), ("1 Year", 31557600), ("All Time", 3155760000)]
     var selectedPeriod: (String, Int)?
     var graphPoints: Array<(Int, Double)> = []
@@ -168,9 +176,17 @@ class SimpleLineChart: UIView {
         
         // -------------------
         // Date selectors
-        addCollectionView(width: width, height: height)
+        //addCollectionView(width: width, height: height)
 //        selectedPeriod = periodSelectors[0]
-//        addPeriodSelectors(width: width, height: height)
+        addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                           constant: -Constants.margin),
+            stackView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
+        ])
+        addPeriodSelectors(width: width, height: height)
+        
     }
     
     func addCollectionView(width: Double, height: Double) {
@@ -196,6 +212,7 @@ class SimpleLineChart: UIView {
     }
     
     func addPeriodSelectors(width: Double, height: Double) {
+        stackView.removeAllArrangedSubviews()
         //guard let periods = periodSelectors else { return }
         let periods = periodSelectors
         
@@ -218,10 +235,10 @@ class SimpleLineChart: UIView {
             button.backgroundColor =  isSelected ? gradientStartColor.withAlphaComponent(0.1) : .white.withAlphaComponent(0.1)
             button.layer.borderWidth = 1
             button.layer.borderColor = isSelected ? gradientStartColor.cgColor : UIColor.white.cgColor
-            button.layer.cornerRadius = buttonHeight / 2
+            button.layer.cornerRadius = stackView.frame.height / 2
             button.titleLabel?.font = button.titleLabel?.font.withSize(12)
             button.addTarget(self, action: #selector(changeDateRange), for: .touchUpInside)
-            addSubview(button)
+            stackView.addArrangedSubview(button)
         }
     }
     
