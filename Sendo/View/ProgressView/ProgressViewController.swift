@@ -8,6 +8,7 @@
 import UIKit
 import Combine
 import FirebaseAuth
+import SimpleLineChart
 
 protocol ProgressViewControllerDelegate: AnyObject {
     func didAddNewEntry(newEntry: Measurement)

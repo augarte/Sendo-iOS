@@ -17,17 +17,17 @@ private enum Constants {
 }
 
 @IBDesignable
-class SimpleLineChart: UIView {
+public class SimpleLineChart: UIView {
     
     @IBInspectable var lineStroke: Double = 3.0
     
     @IBInspectable var lineShadowGradient: Bool = true
-    @IBInspectable var lineShadowgradientStart: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
-    @IBInspectable var lineShadowgradientEnd: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
+    @IBInspectable var lineShadowgradientStart: UIColor = .gray //UIColor.hexStringToUIColor(hex: "FEB775")
+    @IBInspectable var lineShadowgradientEnd: UIColor = .lightGray //UIColor.hexStringToUIColor(hex: "FEB775")
   
     @IBInspectable var backgroundGradient: Bool = true
-    @IBInspectable var gradientStartColor: UIColor = UIColor.hexStringToUIColor(hex: "FEB775")
-    @IBInspectable var gradientEndColor: UIColor = UIColor.hexStringToUIColor(hex: "FD4345")
+    @IBInspectable var gradientStartColor: UIColor = .green //UIColor.hexStringToUIColor(hex: "FEB775")
+    @IBInspectable var gradientEndColor: UIColor = .orange //UIColor.hexStringToUIColor(hex: "FD4345")
     
     lazy var stackView: UIStackView = {
         let stackview = UIStackView()
@@ -42,7 +42,7 @@ class SimpleLineChart: UIView {
     var graphPoints: Array<(Int, Double)> = []
     var filteredGraphPoints: Array<(Int, Double)> = []
 
-    override func draw(_ rect: CGRect) {
+    public override func draw(_ rect: CGRect) {
         let width = rect.width
         let height = rect.height
         
@@ -176,8 +176,11 @@ class SimpleLineChart: UIView {
         
         // -------------------
         // Date selectors
-        //addCollectionView(width: width, height: height)
-//        selectedPeriod = periodSelectors[0]
+        addStackView(width: width, height: height)
+        selectedPeriod = periodSelectors[0]
+    }
+    
+    func addStackView(width: Double, height: Double) {
         addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.bottomAnchor.constraint(equalTo: bottomAnchor,
@@ -186,42 +189,17 @@ class SimpleLineChart: UIView {
             stackView.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
         addPeriodSelectors(width: width, height: height)
-        
-    }
-    
-    func addCollectionView(width: Double, height: Double) {
-        let margin = Constants.margin
-        let collectionWidth = width - (margin * 2)
-        let collectionHeight = Constants.bottomBorder - (margin * 2)
-        
-        let collectionView = UICollectionView(frame: CGRect(
-            origin: CGPoint(x: margin,
-                            y: height - collectionHeight - margin),
-            size: CGSize(width: collectionWidth,
-                         height: collectionHeight)
-        ), collectionViewLayout: .init())
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        collectionView.setCollectionViewLayout(layout, animated: true)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        //collectionView.register(UINib(nibName: "PeriodSelectorCell", bundle: nil), forCellWithReuseIdentifier: "PeriodSelectorCell")
-        collectionView.register(UINib(nibName: "PeriodSelectorCell", bundle: nil), forCellWithReuseIdentifier:"PeriodSelectorCell")
-
-        addSubview(collectionView)
     }
     
     func addPeriodSelectors(width: Double, height: Double) {
-        stackView.removeAllArrangedSubviews()
-        //guard let periods = periodSelectors else { return }
-        let periods = periodSelectors
+        //stackView.removeAllArrangedSubviews()
         
         let margin = Constants.margin
-        let buttonWidth = ((width - (margin * Double(periods.count+1))) / Double(periods.count))
+        let buttonWidth = ((width - (margin * Double(periodSelectors.count+1))) / Double(periodSelectors.count))
         let buttonHeight = Constants.bottomBorder - margin
         
-        for i in 0..<periods.count {
-            let isSelected = (selectedPeriod != nil) && selectedPeriod! == periods[i]
+        for (i, period) in periodSelectors.enumerated() {
+            let isSelected = (selectedPeriod != nil) && selectedPeriod! == period
             let separation = i != 0 ? margin : 0
             let button = UIButton(frame: CGRect(
                 origin: CGPoint(x: margin + ((separation + buttonWidth) * Double(i)),
@@ -230,7 +208,7 @@ class SimpleLineChart: UIView {
                              height: buttonHeight)
             ))
             button.tag = i
-            button.setTitle(periods[i].0, for: .normal)
+            button.setTitle(period.0, for: .normal)
             button.titleLabel?.textAlignment = .center
             button.backgroundColor =  isSelected ? gradientStartColor.withAlphaComponent(0.1) : .white.withAlphaComponent(0.1)
             button.layer.borderWidth = 1
@@ -255,20 +233,5 @@ class SimpleLineChart: UIView {
         graphPoints = points
         filteredGraphPoints = graphPoints
         self.setNeedsDisplay()
-    }
-}
-
-extension SimpleLineChart: UICollectionViewDelegate, UICollectionViewDataSource {
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return periodSelectors.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let periodSelector = periodSelectors[indexPath.row]
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "PeriodSelectorCell", for: indexPath) as! PeriodSelectorCell
-        cell.configureCell(period: periodSelector)
-        return cell
     }
 }

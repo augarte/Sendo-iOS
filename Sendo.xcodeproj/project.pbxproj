@@ -62,12 +62,10 @@
 		EA3D14672828367500387419 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14662828367500387419 /* FirebaseAuth */; };
 		EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */; };
 		EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAEF28E9BA90007681C9 /* Constants.swift */; };
-		EA9C6FD228553A5E00B1F219 /* PeriodSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */; };
-		EA9C6FD428553A6600B1F219 /* PeriodSelectorCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */; };
+		EAB1088528F2EC2900774763 /* SimpleLineChart in Frameworks */ = {isa = PBXBuildFile; productRef = EAB1088428F2EC2900774763 /* SimpleLineChart */; };
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
-		EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD708E62842DF9A002365ED /* SimpleLineChart.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,10 +138,8 @@
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginView.swift; sourceTree = "<group>"; };
 		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeriodSelectorCell.swift; sourceTree = "<group>"; };
-		EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeriodSelectorCell.xib; sourceTree = "<group>"; };
+		EAB1088328F2EB8700774763 /* SimpleLineChart */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleLineChart; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
-		EAD708E62842DF9A002365ED /* SimpleLineChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleLineChart.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +148,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA3D145C282826DA00387419 /* FirebaseDatabase in Frameworks */,
+				EAB1088528F2EC2900774763 /* SimpleLineChart in Frameworks */,
 				EA3D142A2826E7D200387419 /* Alamofire in Frameworks */,
 				EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */,
 				EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */,
@@ -187,7 +184,7 @@
 				20858D70272448D200993B5E /* SendoTests */,
 				20858D7A272448D200993B5E /* SendoUITests */,
 				20858D55272448B200993B5E /* Products */,
-				EA3D146528282B3500387419 /* Frameworks */,
+				EAA81F1D28F2E47700EAB259 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -292,15 +289,6 @@
 			path = NewEntryDialog;
 			sourceTree = "<group>";
 		};
-		EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */ = {
-			isa = PBXGroup;
-			children = (
-				EAD708E62842DF9A002365ED /* SimpleLineChart.swift */,
-				EA9C6FD028552D2600B1F219 /* PeriodSelectorCell */,
-			);
-			path = SimpleLineChart;
-			sourceTree = "<group>";
-		};
 		EA3D14122826DC4B00387419 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -400,7 +388,6 @@
 				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
 				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
 				EA0C1A2128496E53009223D8 /* NewEntryDialog */,
-				EA1412CB28441DEE00E2B3E6 /* SimpleLineChart */,
 			);
 			path = ProgressView;
 			sourceTree = "<group>";
@@ -432,28 +419,12 @@
 			path = FirebaseFirestore;
 			sourceTree = "<group>";
 		};
-		EA3D146528282B3500387419 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		EA3FFAEC28E9B16B007681C9 /* DesignSystem */ = {
 			isa = PBXGroup;
 			children = (
 				EA3FFAEF28E9BA90007681C9 /* Constants.swift */,
 			);
 			path = DesignSystem;
-			sourceTree = "<group>";
-		};
-		EA9C6FD028552D2600B1F219 /* PeriodSelectorCell */ = {
-			isa = PBXGroup;
-			children = (
-				EA9C6FD128553A5E00B1F219 /* PeriodSelectorCell.swift */,
-				EA9C6FD328553A6600B1F219 /* PeriodSelectorCell.xib */,
-			);
-			path = PeriodSelectorCell;
 			sourceTree = "<group>";
 		};
 		EAA81F1528F24B2900EAB259 /* Login */ = {
@@ -464,6 +435,14 @@
 				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		EAA81F1D28F2E47700EAB259 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				EAB1088328F2EB8700774763 /* SimpleLineChart */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {
@@ -501,6 +480,7 @@
 				EA3D14662828367500387419 /* FirebaseAuth */,
 				EAC9AECD2841608A00608A32 /* GoogleSignIn */,
 				EAC9AECF2841608A00608A32 /* GoogleSignInSwift */,
+				EAB1088428F2EC2900774763 /* SimpleLineChart */,
 			);
 			productName = sendo;
 			productReference = 20858D54272448B200993B5E /* Sendo Dev.app */;
@@ -597,7 +577,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA9C6FD428553A6600B1F219 /* PeriodSelectorCell.xib in Resources */,
 				EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */,
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
@@ -670,7 +649,6 @@
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
 				EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */,
-				EA9C6FD228553A5E00B1F219 /* PeriodSelectorCell.swift in Sources */,
 				EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
 				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
@@ -686,7 +664,6 @@
 				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
-				EAD708E72842DF9A002365ED /* SimpleLineChart.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */,
 				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
@@ -1140,6 +1117,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = EA3D1458282826DA00387419 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseAuth;
+		};
+		EAB1088428F2EC2900774763 /* SimpleLineChart */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SimpleLineChart;
 		};
 		EAC9AECD2841608A00608A32 /* GoogleSignIn */ = {
 			isa = XCSwiftPackageProductDependency;
