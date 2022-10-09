@@ -28,8 +28,8 @@ class ProgressViewController: BaseTabViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         addToolbarItem()
+        setupTable()
         
         progressViewModel.measurements.sink { [unowned self] (_) in
             lineChart.setPoints(points: progressViewModel.measurements.value.compactMap({ measurement in
@@ -38,35 +38,35 @@ class ProgressViewController: BaseTabViewController {
             }))
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
-        
-        progressTableView?.delegate = self
-        progressTableView?.dataSource = self
-        progressTableView?.register(UINib(nibName: "ProgressTableCell", bundle: nil), forCellReuseIdentifier: "ProgressTableCell")
     }
     
     override func viewWillAppear(_ animated: Bool) {
         progressViewModel.fetchWeight()
     }
     
-    // MARK: - Toolbar
+    private func setupTable() {
+        progressTableView?.delegate = self
+        progressTableView?.dataSource = self
+        progressTableView?.register(UINib(nibName: "ProgressTableCell", bundle: nil), forCellReuseIdentifier: "ProgressTableCell")
+    }
+}
+
+// MARK: - Toolbar
+extension ProgressViewController {
+    
     func addToolbarItem(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
     }
     
-    @objc func addProgressEntry(sender: UIBarButtonItem) {
-        let newEntryVC = NewEntryDialog.create()
-        newEntryVC.delegate = self
+    @objc func addProgressEntry(sender: UIBarButtonItem?) {
+        let newEntryVC = NewEntryDialog.create { measurement in
+            self.progressViewModel.addEntry(entry: measurement)
+        }
         showModalView(viewController: newEntryVC)
     }
-
 }
 
-extension ProgressViewController {
-    
-    func setupChart() {
-    }
-}
-
+// MARK: - UITableViewDelegate, UITableViewDataSource
 extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -74,15 +74,12 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        
         let measurement = progressViewModel.measurements.value[indexPath.row]
         var change = 0.0
         if indexPath.row > 0 {
             let prevValue = progressViewModel.measurements.value[indexPath.row - 1].value
             change = (100 * (measurement.value - prevValue) / prevValue).round(to: 1)
         }
-        
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableCell")! as! ProgressTableCell
         cell.configureCell(entry: measurement, change: change)
@@ -92,21 +89,43 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if (editingStyle == .delete) {
-            let measurement = progressViewModel.measurements.value[indexPath.row]
-            progressViewModel.removeEntry(entry: measurement)
-            
+    
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let modifyItem = UIContextualAction(style: .normal, title: "Modify") {  (contextualAction, view, boolValue) in
+            let measurement = self.progressViewModel.measurements.value[indexPath.row]
+            self.modifyMeasurement(measurement: measurement)
         }
+        modifyItem.backgroundColor = .systemBlue
+        return UISwipeActionsConfiguration(actions: [modifyItem])
     }
     
-}
-
-extension ProgressViewController: ProgressViewControllerDelegate {
-   
-    func didAddNewEntry(newEntry: Measurement) {
-        progressViewModel.addEntry(entry: newEntry)
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let deleteItem = UIContextualAction(style: .destructive, title: "Delete") {  (contextualAction, view, boolValue) in
+            let measurement = self.progressViewModel.measurements.value[indexPath.row]
+            self.progressViewModel.removeEntry(entry: measurement)
+        }
+        return UISwipeActionsConfiguration(actions: [deleteItem])
     }
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let measurement = self.progressViewModel.measurements.value[indexPath.row]
+        modifyMeasurement(measurement: measurement)
+    }
+}
+    
+// MARK: - Private functions
+extension ProgressViewController {
+    
+    func modifyMeasurement(measurement: Measurement) {
+        let newEntryVC = NewEntryDialog.create { newMeasurement in
+            if (measurement.date == newMeasurement.date) {
+                self.progressViewModel.modifyEntry(entry: newMeasurement)
+            } else {
+                self.progressViewModel.removeEntry(entry: measurement)
+                self.progressViewModel.addEntry(entry: newMeasurement)
+            }
+            self.progressTableView.reloadData()
+        }
+        self.showModalView(viewController: newEntryVC)
+    }
 }

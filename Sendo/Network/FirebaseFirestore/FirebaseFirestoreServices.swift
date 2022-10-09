@@ -83,6 +83,17 @@ extension FirebaseFirestoreServices {
         }.store(in: &cancellBag)
     }
     
+    public func modifyMeasurementEntry(entry: Measurement, hash: String, newValue: Any, completion: @escaping (Bool) -> ()) {
+        FirebaseFirestoreManager.shared.modifyFromDatabase(document: entry.date, collection: "measurements", hash: hash, newValue: newValue).sink { completion in
+            switch completion {
+            case .failure(let error): print("Error: \(error.localizedDescription)")
+            case .finished: break
+            }
+        } receiveValue: { success in
+            completion(success)
+        }.store(in: &cancellBag)
+    }
+    
     public func removeMeasurementEntry(entry: Measurement, completion: @escaping (Bool) -> ()) {
         FirebaseFirestoreManager.shared.removeFromDatabase(document: entry.date, collection: "measurements").sink { completion in
             switch completion {
@@ -93,5 +104,4 @@ extension FirebaseFirestoreServices {
             completion(success)
         }.store(in: &cancellBag)
     }
-
 }

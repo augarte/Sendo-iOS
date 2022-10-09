@@ -11,7 +11,7 @@ import FirebaseFirestore
 public struct Measurement: Codable, Equatable {
     
     let date: String
-    let value: Double
+    var value: Double
     
     init?(snapshot: QueryDocumentSnapshot) {
         self.date = snapshot.documentID
@@ -22,7 +22,6 @@ public struct Measurement: Codable, Equatable {
         } else {
             self.value = 0.0
         }
-        
     }
     
     init(date: String, value: Double) {

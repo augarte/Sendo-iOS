@@ -70,6 +70,22 @@ final class FirebaseFirestoreManager: ObservableObject {
         }.eraseToAnyPublisher()
     }
     
+    func modifyFromDatabase(document: String, collection: String, hash: String, newValue: Any) -> AnyPublisher<Bool, Error> {
+        Future { future in
+            guard let uid = self.uid else {
+                return future(.failure(NSError(domain:"", code:440, userInfo:nil)))
+            }
+                            
+            self.db.collection("users").document(uid).collection(collection).document(document).updateData([hash: newValue]) { err in
+                if let err = err {
+                    return future(.failure(err))
+                } else {
+                    return future(.success(true))
+                }
+            }
+        }.eraseToAnyPublisher()
+    }
+    
     func removeFromDatabase(document: String, collection: String) -> AnyPublisher<Bool, Error> {
         Future { future in
             guard let uid = self.uid else {
@@ -85,7 +101,6 @@ final class FirebaseFirestoreManager: ObservableObject {
             }
         }.eraseToAnyPublisher()
     }
-
 }
 
 extension FirebaseFirestoreManager: NSCopying {

@@ -12,16 +12,26 @@ class NewEntryDialog: SendoViewController {
     @IBOutlet weak var navigationTitle: UINavigationItem!
     @IBOutlet weak var cancelBtn: UIBarButtonItem!
     @IBOutlet weak var addBtn: UIBarButtonItem!
-        
+    
     @IBOutlet weak var labelsView: UIView!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelValue: UILabel!
     
-    weak var delegate: ProgressViewControllerDelegate?
+    var measurement: Measurement?
+    var completion: ((Measurement) -> ())?
     let dataType = "Weight"
     
-    static func create() -> NewEntryDialog {
-        return NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
+    static func create(measurement:Measurement, completion: @escaping (Measurement) -> ()) -> NewEntryDialog {
+        let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
+        newEntryDialog.measurement = measurement
+        newEntryDialog.completion = completion
+        return newEntryDialog
+    }
+    
+    static func create(completion: @escaping (Measurement) -> ()) -> NewEntryDialog {
+        let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
+        newEntryDialog.completion = completion
+        return newEntryDialog
     }
     
     override func viewDidLoad(){
@@ -31,9 +41,12 @@ class NewEntryDialog: SendoViewController {
         labelsView.layer.cornerRadius = 8
         addToolbar()
     }
-    
-    // MARK: - Toolbar
-    func addToolbar(){
+}
+
+// MARK: - Toolbar
+extension NewEntryDialog {
+
+    private func addToolbar(){
         navigationTitle.title = dataType
         cancelBtn.title = "Cancel"
         addBtn.title = "Add"
@@ -44,12 +57,11 @@ class NewEntryDialog: SendoViewController {
     }
     
     @IBAction func addEntry(_ sender: Any) {
-        if let delegate = delegate {
+        if let completion = completion {
             let timestamp = String(Int(NSDate().timeIntervalSince1970))
             let newEntry = Measurement(date: timestamp, value: 93.0)
-            delegate.didAddNewEntry(newEntry: newEntry)
+            completion(newEntry)
         }
         dismiss(animated: true)
     }
-
 }

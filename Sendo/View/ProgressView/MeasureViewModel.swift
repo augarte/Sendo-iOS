@@ -31,6 +31,14 @@ extension MeasurementViewModel {
         }
     }
     
+    func modifyEntry(entry: Measurement) {
+        FirebaseFirestoreServices.shared().modifyMeasurementEntry(entry: entry, hash: "value", newValue: entry.value) { success in
+            guard success else { return }
+            guard let index = self.measurements.value.firstIndex(of: entry) else { return }
+            self.measurements.value.remove(at: index)
+        }
+    }
+    
     func removeEntry(entry: Measurement) {
         FirebaseFirestoreServices.shared().removeMeasurementEntry(entry: entry) { success in
             guard success else { return }
