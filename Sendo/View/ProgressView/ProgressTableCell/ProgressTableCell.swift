@@ -42,8 +42,8 @@ class ProgressTableCell: UITableViewCell {
             dateLbl.text = ""
         }
         
-        changeLbl.text = change == 0 ? "" : change.clean
-        changeLbl.textColor = change > 0 ? .green : .red
+        changeLbl.text = change == 0 ? "" : "\(change.clean)%"
+        changeLbl.textColor = change > 0 ? .systemGreen : .systemRed
         
         applyStyle()
     }
