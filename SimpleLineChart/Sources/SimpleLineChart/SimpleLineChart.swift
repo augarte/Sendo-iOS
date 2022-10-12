@@ -226,6 +226,7 @@ public class SimpleLineChart: UIView {
 }
 
 // MARK: Datapoints
+@available(iOS 13.0, *)
 extension SimpleLineChart {
     
     private func changeDateRange(period: (String, Int)) {
@@ -244,6 +245,7 @@ extension SimpleLineChart {
 }
 
 // MARK: Period buttons
+@available(iOS 13.0, *)
 extension SimpleLineChart {
     
     func addStackView(width: Double, height: Double) {

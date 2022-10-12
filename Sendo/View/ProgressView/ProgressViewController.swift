@@ -40,10 +40,6 @@ class ProgressViewController: BaseTabViewController {
         }.store(in: &cancellBag)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        progressViewModel.fetchWeight()
-    }
-    
     private func setupTable() {
         progressTableView?.delegate = self
         progressTableView?.dataSource = self

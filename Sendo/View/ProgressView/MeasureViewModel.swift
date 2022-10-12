@@ -12,6 +12,9 @@ class MeasurementViewModel: ObservableObject {
     
     var measurements = CurrentValueSubject<[Measurement], Never>([Measurement]())
 
+    init() {
+        fetchWeight()
+    }
 }
 
 extension MeasurementViewModel {
