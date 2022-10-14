@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import FirebaseAuth
 import SimpleLineChart
+import SlidingBanner
 
 protocol ProgressViewControllerDelegate: AnyObject {
     func didAddNewEntry(newEntry: Measurement)
@@ -38,6 +39,14 @@ class ProgressViewController: BaseTabViewController {
             }))
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
+        
+        // Sliding view test
+        let subview = UIView()
+        subview.backgroundColor = .green
+        
+        let slidingBanner = SlidingBanner(height: 175)
+        slidingBanner.view = subview
+        slidingBanner.showBanner()
     }
     
     private func setupTable() {

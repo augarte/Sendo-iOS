@@ -40,6 +40,7 @@
 		EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF044284BF0A50047B447 /* AuthViewModel.swift */; };
 		EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF046284BF0EE0047B447 /* AuthUser.swift */; };
 		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
+		EA208E4128FA287600D8DFD1 /* SlidingBanner in Frameworks */ = {isa = PBXBuildFile; productRef = EA208E4028FA287600D8DFD1 /* SlidingBanner */; };
 		EA3D14192826E61E00387419 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14182826E61E00387419 /* Extensions.swift */; };
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
 		EA3D14202826E67800387419 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141F2826E67800387419 /* Endpoint.swift */; };
@@ -122,6 +123,7 @@
 		EA0FF044284BF0A50047B447 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EA0FF046284BF0EE0047B447 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
+		EA208E3F28FA285400D8DFD1 /* SlidingBanner */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SlidingBanner; sourceTree = "<group>"; };
 		EA3D14182826E61E00387419 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		EA3D141F2826E67800387419 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 				EAB1088528F2EC2900774763 /* SimpleLineChart in Frameworks */,
 				EA3D142A2826E7D200387419 /* Alamofire in Frameworks */,
 				EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */,
+				EA208E4128FA287600D8DFD1 /* SlidingBanner in Frameworks */,
 				EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */,
 				EA3D1460282826DA00387419 /* FirebaseFirestore in Frameworks */,
 				EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */,
@@ -440,6 +443,7 @@
 		EAA81F1D28F2E47700EAB259 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				EA208E3F28FA285400D8DFD1 /* SlidingBanner */,
 				EAB1088328F2EB8700774763 /* SimpleLineChart */,
 			);
 			name = Frameworks;
@@ -481,6 +485,7 @@
 				EAC9AECD2841608A00608A32 /* GoogleSignIn */,
 				EAC9AECF2841608A00608A32 /* GoogleSignInSwift */,
 				EAB1088428F2EC2900774763 /* SimpleLineChart */,
+				EA208E4028FA287600D8DFD1 /* SlidingBanner */,
 			);
 			productName = sendo;
 			productReference = 20858D54272448B200993B5E /* Sendo Dev.app */;
@@ -1107,6 +1112,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 20F2D424275CECF100A56B83 /* XCRemoteSwiftPackageReference "SDWebImage" */;
 			productName = SDWebImage;
+		};
+		EA208E4028FA287600D8DFD1 /* SlidingBanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SlidingBanner;
 		};
 		EA3D14292826E7D200387419 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
