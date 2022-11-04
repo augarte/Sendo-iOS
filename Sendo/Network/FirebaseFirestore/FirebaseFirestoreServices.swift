@@ -64,7 +64,7 @@ extension FirebaseFirestoreServices {
         } receiveValue: { snapshot in
             completion.send(snapshot.documents.compactMap{
                 Measurement(snapshot: $0)
-            })
+            }.sorted(by: { $0.date > $1.date }))
         }.store(in: &cancellBag)
     }
     

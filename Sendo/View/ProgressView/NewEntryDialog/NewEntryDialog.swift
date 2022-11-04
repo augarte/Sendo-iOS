@@ -9,37 +9,80 @@ import UIKit
 
 class NewEntryDialog: SendoViewController {
     
-    @IBOutlet weak var navigationTitle: UINavigationItem!
-    @IBOutlet weak var cancelBtn: UIBarButtonItem!
-    @IBOutlet weak var addBtn: UIBarButtonItem!
+    private enum Constants {
+        static let margin: CGFloat = Spacer.size05
+    }
     
-    @IBOutlet weak var labelsView: UIView!
-    @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var labelValue: UILabel!
+    private lazy var cancelBtn: UIBarButtonItem = {
+        cancelBtn = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
+        return cancelBtn
+    }()
+    
+    private lazy var addBtn: UIBarButtonItem = {
+        addBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(addEntry))
+        return addBtn
+    }()
+    
+    private lazy var stackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.translatesAutoresizingMaskIntoConstraints = false
+        stack.addArrangedSubview(entryDate)
+        stack.addArrangedSubview(entryValue)
+        return stack
+    }()
+    
+    private lazy var entryDate: NewEntryLine = {
+        let label = NewEntryLine()
+        label.setup(title: "Date")
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    private lazy var entryValue: NewEntryLine = {
+        let field = NewEntryLine()
+        field.setup(title: "Value")
+        field.translatesAutoresizingMaskIntoConstraints = false
+        return field
+    }()
     
     var measurement: Measurement?
     var completion: ((Measurement) -> ())?
     let dataType = "Weight"
     
-    static func create(measurement:Measurement, completion: @escaping (Measurement) -> ()) -> NewEntryDialog {
+    static func create(measurement: Measurement, completion: @escaping (Measurement) -> ()) -> UINavigationController {
         let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
         newEntryDialog.measurement = measurement
         newEntryDialog.completion = completion
-        return newEntryDialog
+        let navigationController = UINavigationController(rootViewController: newEntryDialog)
+        return navigationController
     }
     
-    static func create(completion: @escaping (Measurement) -> ()) -> NewEntryDialog {
+    static func create(completion: @escaping (Measurement) -> ()) -> UINavigationController {
         let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
         newEntryDialog.completion = completion
-        return newEntryDialog
+        let navigationController = UINavigationController(rootViewController: newEntryDialog)
+        return navigationController
     }
     
     override func viewDidLoad(){
-        labelDate.text = "Date"
-        labelValue.text = "Value"
-        labelsView.backgroundColor = .white.withAlphaComponent(0.2)
-        labelsView.layer.cornerRadius = 8
         addToolbar()
+        applyStyle()
+    }
+    
+    private func applyStyle() {
+        stackView.backgroundColor = .white.withAlphaComponent(0.2)
+        stackView.layer.cornerRadius = 8
+        setConstraints()
+    }
+    
+    private func setConstraints() {
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.margin),
+            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: Constants.margin),
+        ])
     }
 }
 
@@ -47,9 +90,9 @@ class NewEntryDialog: SendoViewController {
 extension NewEntryDialog {
 
     private func addToolbar(){
-        navigationTitle.title = dataType
-        cancelBtn.title = "Cancel"
-        addBtn.title = "Add"
+        self.navigationItem.title = dataType
+        self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+        self.navigationItem.setRightBarButton(addBtn, animated: false)
     }
     
     @IBAction func cancel(_ sender: Any) {
@@ -59,7 +102,8 @@ extension NewEntryDialog {
     @IBAction func addEntry(_ sender: Any) {
         if let completion = completion {
             let timestamp = String(Int(NSDate().timeIntervalSince1970))
-            let newEntry = Measurement(date: timestamp, value: 93.0)
+            let value = Double(entryValue.entryField.text ?? "0.0") ?? 0.0
+            let newEntry = Measurement(date: timestamp, value: value)
             completion(newEntry)
         }
         dismiss(animated: true)

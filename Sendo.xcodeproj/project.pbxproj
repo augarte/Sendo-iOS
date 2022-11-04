@@ -67,6 +67,7 @@
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
+		EAD2E8FF2915B02D00CA9BE2 /* NewEntryLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +143,7 @@
 		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EAB1088328F2EB8700774763 /* SimpleLineChart */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleLineChart; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
+		EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +290,7 @@
 			children = (
 				EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */,
 				EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */,
+				EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */,
 			);
 			path = NewEntryDialog;
 			sourceTree = "<group>";
@@ -662,6 +665,7 @@
 				EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */,
 				20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */,
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
+				EAD2E8FF2915B02D00CA9BE2 /* NewEntryLine.swift in Sources */,
 				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
 				EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */,

@@ -27,6 +27,7 @@ extension MeasurementViewModel {
         FirebaseFirestoreServices.shared().addMeasurementEntry(entry: entry) { success in
             guard success else { return }
             self.measurements.value.append(entry)
+            self.measurements.value = self.measurements.value.sorted(by: { $0.date > $1.date })
         }
     }
     
@@ -35,6 +36,7 @@ extension MeasurementViewModel {
             guard success else { return }
             guard let index = self.measurements.value.firstIndex(of: entry) else { return }
             self.measurements.value.remove(at: index)
+            self.measurements.value = self.measurements.value.sorted(by: { $0.date > $1.date })
         }
     }
     
@@ -43,6 +45,7 @@ extension MeasurementViewModel {
             guard success else { return }
             guard let index = self.measurements.value.firstIndex(of: entry) else { return }
             self.measurements.value.remove(at: index)
+            self.measurements.value = self.measurements.value.sorted(by: { $0.date > $1.date })
         }
     }
 }
