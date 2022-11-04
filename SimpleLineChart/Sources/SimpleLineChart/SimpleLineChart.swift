@@ -8,37 +8,53 @@
 import Combine
 import UIKit
 
-private enum Constants {
-    static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
+// MARK: Chart data
+public struct SimpleLineChartData {
+    var x: Int
+    var y: Double
     
-    static let margin: CGFloat = 20.0
-    static let topBorder: CGFloat = 20.0
-    static let bottomBorder: CGFloat = Constants.periodStackHeight + Constants.periodBottomSpace + Constants.margin
-    
-    static let periodSpacing: CGFloat = 5.0
-    static let periodBottomSpace: CGFloat = 10.0
-    static let periodStackHeight: CGFloat = 30.0
+    public init(x: Int, y: Double) {
+        self.x = x
+        self.y = y
+    }
 }
 
+// MARK: - UIView
 @available(iOS 13.0, *)
 @IBDesignable
-public class SimpleLineChart: UIView {
+public final class SimpleLineChart: UIView {
     
-    @IBInspectable var lineStroke: CGFloat = 3.0
-    @IBInspectable var lineColor: UIColor = .white
-    @IBInspectable var circleDiameter: CGFloat = 5.0
+    // Constants
+    private enum Constants {
+        static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
+        
+        static let margin: CGFloat = 20.0
+        
+        static let periodSpacing: CGFloat = 5.0
+        static let periodTopSpace: CGFloat = Constants.margin
+        static let periodBottomSpace: CGFloat = 10.0
+        static let periodStackHeight: CGFloat = 30.0
+    }
     
-    @IBInspectable var solidBackgroundColor: UIColor = .hexStringToUIColor(hex: "FD4345")
+    // Inspectables
+    @IBInspectable public var lineStroke: CGFloat = 3.0
+    @IBInspectable public var lineColor: UIColor = .white
+    @IBInspectable public var circleDiameter: CGFloat = 5.0
     
-    @IBInspectable var backgroundGradient: Bool = true
-    @IBInspectable var gradientStartColor: UIColor = .hexStringToUIColor(hex: "FEB775")
-    @IBInspectable var gradientEndColor: UIColor = .hexStringToUIColor(hex: "FD4345")
+    @IBInspectable public var solidBackgroundColor: UIColor = .hexStringToUIColor(hex: "FD4345")
     
-    @IBInspectable var lineShadow: Bool = true
-    @IBInspectable var lineShadowgradientStart: UIColor = .hexStringToUIColor(hex: "FEB775")
-    @IBInspectable var lineShadowgradientEnd: UIColor = .hexStringToUIColor(hex: "FEB775")
+    @IBInspectable public var backgroundGradient: Bool = true
+    @IBInspectable public var gradientStartColor: UIColor = .hexStringToUIColor(hex: "FEB775")
+    @IBInspectable public var gradientEndColor: UIColor = .hexStringToUIColor(hex: "FD4345")
     
-    lazy var stackView: UIStackView = {
+    @IBInspectable public var lineShadow: Bool = true
+    @IBInspectable public var lineShadowgradientStart: UIColor = .hexStringToUIColor(hex: "FEB775")
+    @IBInspectable public var lineShadowgradientEnd: UIColor = .hexStringToUIColor(hex: "FEB775")
+    
+    @IBInspectable public var addPeriodButtons: Bool = true
+    
+    // UI variables
+    lazy var periodStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
         stackview.axis = .horizontal
@@ -47,10 +63,20 @@ public class SimpleLineChart: UIView {
         return stackview
     }()
     
+    // Private variables
     var periodSelectors: Array<(String, Int)> = [("1 Month", 2629800), ("3 Month", 7889400), ("1 Year", 31557600), ("All Time", 3155760000)]
     var selectedPeriod = CurrentValueSubject<(String, Int)?, Never>((String, Int)?(nil))
-    var graphPoints: Array<(Int, Double)> = []
-    var filteredGraphPoints: Array<(Int, Double)> = []
+    var graphPoints: [SimpleLineChartData] = []
+    var filteredGraphPoints: [SimpleLineChartData] = []
+    
+    
+    public override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
     
     public override func draw(_ rect: CGRect) {
         // -------------------
@@ -109,7 +135,7 @@ public class SimpleLineChart: UIView {
         // Margins
         let margin = Constants.margin
         let graphWidth = width - margin * 2 - 4
-        let xValues = filteredGraphPoints.map({ point in return point.0 })
+        let xValues = filteredGraphPoints.map({ point in return point.x })
         guard let minXValue = xValues.min() else { return }
         guard let maxXValue = xValues.max() else { return }
         let columnXPoint = { (column: Int) -> CGFloat in
@@ -121,10 +147,10 @@ public class SimpleLineChart: UIView {
             return CGFloat(xPoint) + margin + 2
         }
         
-        let topBorder = Constants.topBorder
-        let bottomBorder = Constants.bottomBorder
+        let topBorder = Constants.margin
+        let bottomBorder = addPeriodButtons ? Constants.periodStackHeight + Constants.periodTopSpace + Constants.periodBottomSpace : Constants.margin
         let graphHeight = height - topBorder - bottomBorder
-        let yValues = filteredGraphPoints.map({ point in return point.1 })
+        let yValues = filteredGraphPoints.map({ point in return point.y })
         guard let minYValue = yValues.min() else { return }
         guard let maxYValue = yValues.max() else { return }
         let columnYPoint = { (graphPoint: Double) -> CGFloat in
@@ -145,12 +171,12 @@ public class SimpleLineChart: UIView {
         
 
         let graphPath = UIBezierPath()
-        graphPath.move(to: CGPoint(x: columnXPoint(filteredGraphPoints[0].0), y: columnYPoint(filteredGraphPoints[0].1)))
+        graphPath.move(to: CGPoint(x: columnXPoint(filteredGraphPoints[0].x), y: columnYPoint(filteredGraphPoints[0].y)))
         
         // Add points for each item in the filteredGraphPoints array
         // at the correct (x, y) for the point
         for i in 1..<filteredGraphPoints.count {
-            let nextPoint = CGPoint(x: columnXPoint(filteredGraphPoints[i].0), y: columnYPoint(filteredGraphPoints[i].1))
+            let nextPoint = CGPoint(x: columnXPoint(filteredGraphPoints[i].x), y: columnYPoint(filteredGraphPoints[i].y))
             graphPath.addLine(to: nextPoint)
         }
         
@@ -179,16 +205,16 @@ public class SimpleLineChart: UIView {
             }
             
             clippingPath.addLine(to: CGPoint(
-                x: columnXPoint(filteredGraphPoints[filteredGraphPoints.count - 1].0),
+                x: columnXPoint(filteredGraphPoints[filteredGraphPoints.count - 1].x),
                 y: height))
-            clippingPath.addLine(to: CGPoint(x: columnXPoint(filteredGraphPoints[0].0), y: height))
+            clippingPath.addLine(to: CGPoint(x: columnXPoint(filteredGraphPoints[0].x), y: height))
             clippingPath.close()
             clippingPath.addClip()
             
             let highestYPoint = columnYPoint(maxYValue)
             let graphStartPoint = CGPoint(x: margin, y: highestYPoint)
             let graphEndPoint = CGPoint(x: margin,
-                                        y: bounds.height - (backgroundGradient ? 0 : Constants.bottomBorder))
+                                        y: bounds.height - (backgroundGradient ? 0 : bottomBorder))
             
             context.drawLinearGradient(
                 shadowGradient,
@@ -204,7 +230,7 @@ public class SimpleLineChart: UIView {
         // -------------------
         // Data points
         for i in 0..<filteredGraphPoints.count {
-            var point = CGPoint(x: columnXPoint(filteredGraphPoints[i].0), y: columnYPoint(filteredGraphPoints[i].1))
+            var point = CGPoint(x: columnXPoint(filteredGraphPoints[i].x), y: columnYPoint(filteredGraphPoints[i].y))
             point.x -= circleDiameter / 2
             point.y -= circleDiameter / 2
             
@@ -221,7 +247,53 @@ public class SimpleLineChart: UIView {
         
         // -------------------
         // Date selectors
-        addStackView(width: width, height: height)
+        if addPeriodButtons {
+            addPeriodStackView(width: width, height: height)
+        }
+    }
+}
+
+// MARK: Period buttons
+@available(iOS 13.0, *)
+extension SimpleLineChart {
+    
+    private func addPeriodStackView(width: Double, height: Double) {
+        guard !periodStackView.isDescendant(of: self) else { return }
+        
+        addSubview(periodStackView)
+        NSLayoutConstraint.activate([
+            periodStackView.heightAnchor.constraint(equalToConstant: Constants.periodStackHeight),
+            periodStackView.leadingAnchor.constraint(equalTo: leadingAnchor,
+                                               constant: Constants.margin),
+            periodStackView.trailingAnchor.constraint(equalTo: trailingAnchor,
+                                                constant: -Constants.margin),
+            periodStackView.bottomAnchor.constraint(equalTo: bottomAnchor,
+                                              constant: -Constants.periodBottomSpace)
+        ])
+        addPeriodSelectors(width: width, height: height)
+    }
+    
+    private func addPeriodSelectors(width: Double, height: Double) {
+        periodStackView.removeAllArrangedSubviews()
+        let buttonWidth = ((width - (Constants.margin * Double(periodSelectors.count+1))) / Double(periodSelectors.count))
+        
+        for (i, period) in periodSelectors.enumerated() {
+            let separation = i != 0 ? Constants.margin : 0
+            let frame = CGRect(x: Constants.margin + (separation + buttonWidth) * Double(i),
+                               y: 0,
+                               width: buttonWidth,
+                               height: Constants.periodStackHeight)
+            let button = PeriodButton(period: period, color:gradientStartColor, selectedPeriod: selectedPeriod, frame: frame)
+            button.addTarget(self, action: #selector(dateButtonPress), for: .touchUpInside)
+            periodStackView.addArrangedSubview(button)
+        }
+    }
+    
+    @objc private func dateButtonPress(sender: PeriodButton) {
+        guard let period = sender.period else { return }
+        selectedPeriod.send(period)
+        changeDateRange(period: period)
+        self.setNeedsDisplay()
     }
 }
 
@@ -233,57 +305,13 @@ extension SimpleLineChart {
         let timestamp = Int(NSDate().timeIntervalSince1970)
         selectedPeriod.value = period
         filteredGraphPoints = graphPoints.filter({ value in
-            return value.0 > timestamp - (selectedPeriod.value?.1 ?? timestamp)
+            return value.x > timestamp - (selectedPeriod.value?.1 ?? timestamp)
         })
     }
     
-    public func setPoints(points: Array<(Int, Double)>) {
-        graphPoints = points
+    public func setPoints(points: Array<SimpleLineChartData?>) {
+        graphPoints = points.compactMap{ $0 }
         filteredGraphPoints = graphPoints
-        self.setNeedsDisplay()
-    }
-}
-
-// MARK: Period buttons
-@available(iOS 13.0, *)
-extension SimpleLineChart {
-    
-    func addStackView(width: Double, height: Double) {
-        guard !stackView.isDescendant(of: self) else { return }
-        
-        addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.heightAnchor.constraint(equalToConstant: Constants.periodStackHeight),
-            stackView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                               constant: Constants.margin),
-            stackView.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                constant: -Constants.margin),
-            stackView.bottomAnchor.constraint(equalTo: bottomAnchor,
-                                              constant: -Constants.periodBottomSpace)
-        ])
-        addPeriodSelectors(width: width, height: height)
-    }
-    
-    func addPeriodSelectors(width: Double, height: Double) {
-        stackView.removeAllArrangedSubviews()
-        let buttonWidth = ((width - (Constants.margin * Double(periodSelectors.count+1))) / Double(periodSelectors.count))
-        
-        for (i, period) in periodSelectors.enumerated() {
-            let separation = i != 0 ? Constants.margin : 0
-            let frame = CGRect(x: Constants.margin + (separation + buttonWidth) * Double(i),
-                               y: 0,
-                               width: buttonWidth,
-                               height: Constants.periodStackHeight)
-            let button = PeriodButton(period: period, color:gradientStartColor, selectedPeriod: selectedPeriod, frame: frame)
-            button.addTarget(self, action: #selector(dateButtonPress), for: .touchUpInside)
-            stackView.addArrangedSubview(button)
-        }
-    }
-    
-    @objc func dateButtonPress(sender: PeriodButton) {
-        guard let period = sender.period else { return }
-        selectedPeriod.send(period)
-        changeDateRange(period: period)
         self.setNeedsDisplay()
     }
 }

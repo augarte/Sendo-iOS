@@ -31,22 +31,18 @@ class ProgressViewController: BaseTabViewController {
         super.viewDidLoad()
         addToolbarItem()
         setupTable()
-        
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        progressViewModel.fetchWeight()
         progressViewModel.measurements.sink { [unowned self] (_) in
             lineChart.setPoints(points: progressViewModel.measurements.value.compactMap({ measurement in
-                guard let timestamp = Int(measurement.date) else { return nil }
-                return (timestamp, measurement.value)
+                // TODO: fix timestamp case
+                let timestamp = Int(measurement.date) ?? 0
+                return SimpleLineChartData(x: timestamp, y: measurement.value)
             }))
             self.progressTableView?.reloadData()
         }.store(in: &cancellBag)
-        
-        // Sliding view test
-        let subview = UIView()
-        subview.backgroundColor = .green
-        
-        let slidingBanner = SlidingBanner(height: 175)
-        slidingBanner.view = subview
-        slidingBanner.showBanner()
     }
     
     private func setupTable() {
