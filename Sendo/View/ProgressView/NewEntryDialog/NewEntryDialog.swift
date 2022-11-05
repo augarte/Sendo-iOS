@@ -13,16 +13,6 @@ class NewEntryDialog: SendoViewController {
         static let margin: CGFloat = Spacer.size05
     }
     
-    private lazy var cancelBtn: UIBarButtonItem = {
-        cancelBtn = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
-        return cancelBtn
-    }()
-    
-    private lazy var addBtn: UIBarButtonItem = {
-        addBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(addEntry))
-        return addBtn
-    }()
-    
     private lazy var stackView: UIStackView = {
         let stack = UIStackView()
         stack.axis = .vertical
@@ -34,14 +24,18 @@ class NewEntryDialog: SendoViewController {
     
     private lazy var entryDate: NewEntryLine = {
         let label = NewEntryLine()
-        label.setup(title: "Date")
+        label.setup(title: "Date", type: .date)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     private lazy var entryValue: NewEntryLine = {
         let field = NewEntryLine()
-        field.setup(title: "Value")
+        if let measurement = measurement {
+            field.setup(title: "Value", type: .double, value: String(measurement.value))
+        } else {
+            field.setup(title: "Value", type: .double, placeHolder: "90.0")
+        }
         field.translatesAutoresizingMaskIntoConstraints = false
         return field
     }()
@@ -91,7 +85,9 @@ extension NewEntryDialog {
 
     private func addToolbar(){
         self.navigationItem.title = dataType
+        let cancelBtn = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(cancel))
         self.navigationItem.setLeftBarButton(cancelBtn, animated: false)
+        let addBtn = UIBarButtonItem(title: "Add", style: .done, target: self, action: #selector(addEntry))
         self.navigationItem.setRightBarButton(addBtn, animated: false)
     }
     

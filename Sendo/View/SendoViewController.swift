@@ -32,14 +32,12 @@ open class SendoViewController: UIViewController {
     }
     
     open override func viewWillAppear(_ animated: Bool) {
-        
         let preferences = UserDefaults.standard
         var darkMode = false
         if preferences.object(forKey: "darkMode") != nil {
             darkMode = preferences.bool(forKey: "darkMode")
         }
         overrideUserInterfaceStyle = darkMode ? .dark : .light
-        
     }
     
     // MARK: - Navigation
@@ -51,5 +49,4 @@ open class SendoViewController: UIViewController {
         viewController.modalPresentationStyle = .automatic
         present(viewController, animated: true)
     }
-
 }

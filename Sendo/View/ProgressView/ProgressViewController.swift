@@ -118,7 +118,7 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
 extension ProgressViewController {
     
     func modifyMeasurement(measurement: Measurement) {
-        let newEntryVC = NewEntryDialog.create { newMeasurement in
+        let newEntryVC = NewEntryDialog.create(measurement: measurement) { newMeasurement in
             if (measurement.date == newMeasurement.date) {
                 self.progressViewModel.modifyEntry(entry: newMeasurement)
             } else {
