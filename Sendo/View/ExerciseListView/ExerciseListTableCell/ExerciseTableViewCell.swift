@@ -1,5 +1,5 @@
 //
-//  ExerciseTableViewCell.swift
+//  ExerciseListTableViewCell.swift
 //  Sendo
 //
 //  Created by Aimar Ugarte on 14/11/21.
@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ExerciseTableViewCell: UITableViewCell {
+class ExerciseListTableViewCell: UITableViewCell {
     
     private enum Constants {
         static let margin: CGFloat = Spacer.size03
@@ -65,7 +65,7 @@ class ExerciseTableViewCell: UITableViewCell {
     }
 }
 
-extension ExerciseTableViewCell {
+extension ExerciseListTableViewCell {
     
     func configureCell(exercise: Exercise) {
         name.text = exercise.title

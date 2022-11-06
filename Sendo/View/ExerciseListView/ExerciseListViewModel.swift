@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class ExerciseViewModel: ObservableObject {
+class ExerciseListViewModel: ObservableObject {
     
     var exercises = CurrentValueSubject<[Exercise], Never>([Exercise]())
     
@@ -18,7 +18,7 @@ class ExerciseViewModel: ObservableObject {
 
 }
 
-extension ExerciseViewModel {
+extension ExerciseListViewModel {
     
     func fetchExercises() {
         FirebaseDatabaseServices.shared().fetchExerciseList(completion: self.exercises)

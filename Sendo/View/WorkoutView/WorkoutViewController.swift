@@ -17,7 +17,7 @@ class WorkoutViewController: BaseTabViewController {
         return table
     }()
     
-    let exerciseViewModel = ExerciseViewModel()
+    let exerciseViewModel = ExerciseListViewModel()
     var cancellBag = Set<AnyCancellable>()
     
     static func create() -> WorkoutViewController {

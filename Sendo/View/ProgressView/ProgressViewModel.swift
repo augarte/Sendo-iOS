@@ -1,5 +1,5 @@
 //
-//  MeasureViewModel.swift
+//  ProgressViewModel.swift
 //  Sendo
 //
 //  Created by Aimar Ugarte on 23/10/21.
@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MeasurementViewModel: ObservableObject {
+class ProgressViewModel: ObservableObject {
     
     var measurements = CurrentValueSubject<[Measurement], Never>([Measurement]())
 
@@ -17,7 +17,7 @@ class MeasurementViewModel: ObservableObject {
     }
 }
 
-extension MeasurementViewModel {
+extension ProgressViewModel {
     
     func fetchWeight() {
         FirebaseFirestoreServices.shared().fetchMeasurement(completion: self.measurements)

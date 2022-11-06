@@ -34,7 +34,7 @@ class ProgressViewController: BaseTabViewController {
         return chart
     }()
     
-    private let progressViewModel = MeasurementViewModel()
+    private let progressViewModel = ProgressViewModel()
     private var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ProgressViewController {

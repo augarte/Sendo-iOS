@@ -41,9 +41,9 @@ class ProfileViewController: BaseTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        authViewModel.authUser.sink { [unowned self] (_) in
-            guard let authUser = authViewModel.authUser.value else { return }
-            // TODO: Do something with loged user
+        authViewModel.authUser.sink { [weak self] (_) in
+            guard let authUser = self?.authViewModel.authUser.value else { return }
+            self?.title = authUser.name
         }.store(in: &cancellBag)
     }
     

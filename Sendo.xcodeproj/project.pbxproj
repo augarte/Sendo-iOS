@@ -16,7 +16,7 @@
 		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
 		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
 		20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB7272472FB000B9C1D /* Measurement.swift */; };
-		20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */; };
+		20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */; };
 		20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBB272474B6000B9C1D /* ProgressViewController.swift */; };
 		20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */; };
 		20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */; };
@@ -25,7 +25,7 @@
 		20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C5246E2724E58E00741057 /* GoogleService-Info.plist */; };
 		20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */; };
 		20C524812724EF1C00741057 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524802724EF1C00741057 /* Exercise.swift */; };
-		20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524822724F00600741057 /* ExerciseViewModel.swift */; };
+		20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524822724F00600741057 /* ExerciseListViewModel.swift */; };
 		20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */; };
 		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
@@ -93,7 +93,7 @@
 		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
 		20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		20B96EB7272472FB000B9C1D /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
-		20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureViewModel.swift; sourceTree = "<group>"; };
+		20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		20B96EBB272474B6000B9C1D /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
 		20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
@@ -102,7 +102,7 @@
 		20C5246E2724E58E00741057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
 		20C524802724EF1C00741057 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
-		20C524822724F00600741057 /* ExerciseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseViewModel.swift; sourceTree = "<group>"; };
+		20C524822724F00600741057 /* ExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewModel.swift; sourceTree = "<group>"; };
 		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
@@ -173,7 +173,7 @@
 				20858D70272448D200993B5E /* SendoTests */,
 				20858D7A272448D200993B5E /* SendoUITests */,
 				20858D55272448B200993B5E /* Products */,
-				EAA81F1D28F2E47700EAB259 /* Frameworks */,
+				EAA81F1D28F2E47700EAB259 /* Packages */,
 			);
 			sourceTree = "<group>";
 		};
@@ -221,8 +221,8 @@
 			isa = PBXGroup;
 			children = (
 				EA0FF046284BF0EE0047B447 /* AuthUser.swift */,
-				20B96EB7272472FB000B9C1D /* Measurement.swift */,
 				20C524802724EF1C00741057 /* Exercise.swift */,
+				20B96EB7272472FB000B9C1D /* Measurement.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -299,28 +299,28 @@
 		EA3D14142826DC9800387419 /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				EAD2E90029181D9B00CA9BE2 /* View */,
 				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
+				EA3FFAEC28E9B16B007681C9 /* DesignSystem */,
 				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
-				EA3FFAEC28E9B16B007681C9 /* DesignSystem */,
+				EAD2E90029181D9B00CA9BE2 /* View */,
 			);
 			path = Common;
 			sourceTree = "<group>";
 		};
-		EA3D14152826E29C00387419 /* ExerciseTableCell */ = {
+		EA3D14152826E29C00387419 /* ExerciseListTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
 			);
-			path = ExerciseTableCell;
+			path = ExerciseListTableCell;
 			sourceTree = "<group>";
 		};
 		EA3D141E2826E66900387419 /* Network */ = {
 			isa = PBXGroup;
 			children = (
-				EA3D144C282821EC00387419 /* FirebaseFirestore */,
 				EA3D143328270AD600387419 /* FirebaseDatabase */,
+				EA3D144C282821EC00387419 /* FirebaseFirestore */,
 				EA3D14232826E68400387419 /* NetworkApi */,
 			);
 			path = Network;
@@ -329,10 +329,10 @@
 		EA3D14232826E68400387419 /* NetworkApi */ = {
 			isa = PBXGroup;
 			children = (
+				EA3D141F2826E67800387419 /* Endpoint.swift */,
 				EA3D14212826E68000387419 /* NetworkServiceManager.swift */,
 				EA3D143428270B1300387419 /* NetworkServices.swift */,
 				EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */,
-				EA3D141F2826E67800387419 /* Endpoint.swift */,
 			);
 			path = NetworkApi;
 			sourceTree = "<group>";
@@ -340,8 +340,8 @@
 		EA3D143328270AD600387419 /* FirebaseDatabase */ = {
 			isa = PBXGroup;
 			children = (
-				EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */,
 				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
+				EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */,
 			);
 			path = FirebaseDatabase;
 			sourceTree = "<group>";
@@ -357,9 +357,9 @@
 		EA3D143728270C9800387419 /* ExerciseListView */ = {
 			isa = PBXGroup;
 			children = (
-				20C524822724F00600741057 /* ExerciseViewModel.swift */,
+				EA3D14152826E29C00387419 /* ExerciseListTableCell */,
 				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
-				EA3D14152826E29C00387419 /* ExerciseTableCell */,
+				20C524822724F00600741057 /* ExerciseListViewModel.swift */,
 			);
 			path = ExerciseListView;
 			sourceTree = "<group>";
@@ -367,10 +367,10 @@
 		EA3D143828270CA900387419 /* ProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
-				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
-				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
 				EA0C1A2128496E53009223D8 /* NewEntryDialog */,
+				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
+				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
+				20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */,
 			);
 			path = ProgressView;
 			sourceTree = "<group>";
@@ -378,8 +378,8 @@
 		EA3D143928270CB300387419 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
 				EAA81F1528F24B2900EAB259 /* Login */,
+				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -395,8 +395,8 @@
 		EA3D144C282821EC00387419 /* FirebaseFirestore */ = {
 			isa = PBXGroup;
 			children = (
-				EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */,
 				EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */,
+				EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */,
 			);
 			path = FirebaseFirestore;
 			sourceTree = "<group>";
@@ -412,20 +412,20 @@
 		EAA81F1528F24B2900EAB259 /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
 				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
 				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
-				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
 			);
 			path = Login;
 			sourceTree = "<group>";
 		};
-		EAA81F1D28F2E47700EAB259 /* Frameworks */ = {
+		EAA81F1D28F2E47700EAB259 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
 				EA208E3F28FA285400D8DFD1 /* SlidingBanner */,
 				EAB1088328F2EB8700774763 /* SimpleLineChart */,
 			);
-			name = Frameworks;
+			name = Packages;
 			sourceTree = "<group>";
 		};
 		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {
@@ -646,12 +646,12 @@
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
 				EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */,
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
-				20C524832724F00600741057 /* ExerciseViewModel.swift in Sources */,
+				20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */,
 				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
-				20B96EBA272473D0000B9C1D /* MeasureViewModel.swift in Sources */,
+				20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

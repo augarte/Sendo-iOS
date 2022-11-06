@@ -17,7 +17,7 @@ class ExerciseListViewController: BaseTabViewController {
         return table
     }()
     
-    private let exerciseViewModel = ExerciseViewModel()
+    private let exerciseViewModel = ExerciseListViewModel()
     private var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ExerciseListViewController {
@@ -52,7 +52,7 @@ class ExerciseListViewController: BaseTabViewController {
         ])
         exercisesTableView.delegate = self
         exercisesTableView.dataSource = self
-        exercisesTableView.register(ExerciseTableViewCell.self, forCellReuseIdentifier: ExerciseTableViewCell.typeName)
+        exercisesTableView.register(ExerciseListTableViewCell.self, forCellReuseIdentifier: ExerciseListTableViewCell.typeName)
     }
 }
 
@@ -64,7 +64,7 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.typeName)! as! ExerciseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.typeName)! as! ExerciseListTableViewCell
         cell.configureCell(exercise: exercise)
         return cell
     }
