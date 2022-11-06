@@ -13,6 +13,10 @@ class HomeTabBarViewController: UITabBarController {
     private var addWorkout: UIButton?
     private var addProgress: UIButton?
     
+    static func create() -> HomeTabBarViewController {
+        return HomeTabBarViewController(nibName: nil, bundle: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTabBarItems()
@@ -30,6 +34,14 @@ class HomeTabBarViewController: UITabBarController {
     
     override func viewDidAppear(_ animated: Bool) {
         setupCenterButton()
+        applyStyle()
+    }
+    
+    private func applyStyle() {
+        tabBar.backgroundColor = UIColor(named:"PrimaryColor")
+        tabBar.barTintColor = UIColor(named:"PrimaryColor")
+        view.backgroundColor = UIColor(named:"PrimaryColor")
+        tabBar.barStyle = .black
     }
 }
 

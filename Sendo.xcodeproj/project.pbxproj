@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		20858D58272448B200993B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D57272448B200993B5E /* AppDelegate.swift */; };
 		20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D59272448B200993B5E /* SceneDelegate.swift */; };
-		20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */; };
 		20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20858D60272448B200993B5E /* sendo.xcdatamodeld */; };
 		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
 		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
@@ -84,7 +83,6 @@
 		20858D54272448B200993B5E /* Sendo Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sendo Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D57272448B200993B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		20858D5E272448B200993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/HomeTabBarViewController.storyboard; sourceTree = "<group>"; };
 		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
 		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
 		20858D66272448D000993B5E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -248,7 +246,6 @@
 			children = (
 				EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */,
 				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
-				20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */,
 			);
 			path = HomeTabBar;
 			sourceTree = "<group>";
@@ -575,7 +572,6 @@
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
-				20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,14 +688,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		20858D5D272448B200993B5E /* HomeTabBarViewController.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				20858D5E272448B200993B5E /* Base */,
-			);
-			name = HomeTabBarViewController.storyboard;
-			sourceTree = "<group>";
-		};
 		20858D65272448D000993B5E /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -835,16 +823,17 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = sendo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = HomeTabBarViewController;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -871,16 +860,17 @@
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = sendo/Resources/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Sendo;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = HomeTabBarViewController;
+				INFOPLIST_KEY_UIRequiresFullScreen = NO;
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleLightContent;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
