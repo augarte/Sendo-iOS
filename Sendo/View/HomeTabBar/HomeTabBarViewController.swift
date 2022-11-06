@@ -9,9 +9,9 @@ import UIKit
 
 class HomeTabBarViewController: UITabBarController {
     
-    var addButtonSelected: Bool = false
-    var addWorkout: UIButton?
-    var addProgress: UIButton?
+    private var addButtonSelected: Bool = false
+    private var addWorkout: UIButton?
+    private var addProgress: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +19,7 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let preferences = UserDefaults.standard
         var darkMode = false
         if preferences.object(forKey: "darkMode") != nil {
@@ -30,6 +31,9 @@ class HomeTabBarViewController: UITabBarController {
     override func viewDidAppear(_ animated: Bool) {
         setupCenterButton()
     }
+}
+
+private extension HomeTabBarViewController {
     
     func setupTabBarItems() {
         let workoutVC = WorkoutViewController.create()
@@ -44,9 +48,20 @@ class HomeTabBarViewController: UITabBarController {
             createTabBarItem(title: progressVC.titleName, tabImage: progressVC.tabImage, viewController: progressVC),
             createTabBarItem(title: profileVC.titleName, tabImage: profileVC.tabImage, viewController: profileVC)
         ]
-        
         self.delegate = self
     }
+    
+    func createTabBarItem(title: String, tabImage: String, viewController: SendoViewController) -> UINavigationController {
+        let navigationController = UINavigationController(rootViewController: viewController)
+        let tabItem = UITabBarItem(title: viewController.title, image: UIImage(named: tabImage), selectedImage: UIImage(named: tabImage))
+        tabItem.title = title
+        viewController.tabBarItem = tabItem
+        
+        return navigationController
+    }
+}
+
+private extension HomeTabBarViewController {
     
     func setupCenterButton() {
         let bottomSafeArea = self.view.window?.safeAreaInsets.bottom ?? 0
@@ -67,16 +82,6 @@ class HomeTabBarViewController: UITabBarController {
         view.addGestureRecognizer(tap)
     }
     
-    func createTabBarItem(title: String, tabImage: String, viewController: SendoViewController) -> UINavigationController {
-        let navigationController = UINavigationController(rootViewController: viewController)
-        let tabItem = UITabBarItem(title: viewController.title, image: UIImage(named: tabImage), selectedImage: UIImage(named: tabImage))
-        tabItem.title = title
-        viewController.tabBarItem = tabItem
-        
-        return navigationController
-    }
-
-    // MARK: - Actions
     @objc private func tappAddButton(sender: UIButton) {
         addButtonSelected = !addButtonSelected
         if addButtonSelected {
@@ -123,7 +128,5 @@ extension HomeTabBarViewController: UITabBarControllerDelegate {
             return false;
         }
         return true;
-        
     }
-    
 }

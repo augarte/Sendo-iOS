@@ -15,10 +15,6 @@ class SettingsViewController: SendoViewController {
         static let optionStackHeight: CGFloat = 30
     }
     
-    var myCancellable: AnyCancellable?
-    
-    private var darkMode = false
-    
     lazy var stackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
@@ -47,24 +43,11 @@ class SettingsViewController: SendoViewController {
         return dmSwitch
     }()
     
+    private var myCancellable: AnyCancellable?
+    private var darkMode = false
+    
     static func create() -> SettingsViewController {
         return SettingsViewController(title: "Settings")
-    }
-    
-    override func loadView() {
-        super.loadView()
-        stackView.addArrangedSubview(darkModeStackView)
-        view.addSubview(stackView)
-        NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
-                                           constant: Constants.margin),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            darkModeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor,
-                                                       constant: Constants.margin),
-            darkModeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor,
-                                                        constant: -Constants.margin)
-        ])
     }
     
     override func viewDidLoad() {
@@ -78,7 +61,30 @@ class SettingsViewController: SendoViewController {
         }
         darkModeSwitch.setOn(darkMode, animated: false)
     }
+    
+    override func loadView() {
+        super.loadView()
+        setupStackView()
+    }
+    
+    private func setupStackView() {
+        stackView.addArrangedSubview(darkModeStackView)
+        view.addSubview(stackView)
+        NSLayoutConstraint.activate([
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
+                                           constant: Constants.margin),
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            darkModeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor,
+                                                       constant: Constants.margin),
+            darkModeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor,
+                                                        constant: -Constants.margin)
+        ])
+    }
+}
 
+extension SettingsViewController {
+    
     @IBAction func darkModeSwitchAction(_ sender: Any) {
         let preferences = UserDefaults.standard
         preferences.set(!darkMode, forKey: "darkMode")

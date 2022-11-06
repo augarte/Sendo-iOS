@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 
 extension NSObject {
-    
     class var typeName: String {
         let name = String(describing: self)
         return name
@@ -33,7 +32,6 @@ extension Float {
 }
 
 extension UIColor {
-
     static func hexStringToUIColor(hex:String) -> UIColor {
         var cString:String = hex.trimmingCharacters(in: .whitespacesAndNewlines).uppercased()
 
@@ -59,7 +57,6 @@ extension UIColor {
     static let punkCellBackground = UIColor.hexStringToUIColor(hex:"#F5F5F5")
     static let punkPrimaryText = UIColor.hexStringToUIColor(hex: "#777777")
     static let punkSecondaryText = UIColor.hexStringToUIColor(hex: "#777777")
-
 }
 
 extension UIStackView {

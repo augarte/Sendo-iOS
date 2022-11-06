@@ -9,14 +9,19 @@ import UIKit
 import Combine
 
 class WorkoutViewController: BaseTabViewController {
+        
+    lazy var workoutTableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .clear
+        return table
+    }()
     
-    @IBOutlet weak var workoutTableView: UITableView!
-
     let exerciseViewModel = ExerciseViewModel()
     var cancellBag = Set<AnyCancellable>()
     
     static func create() -> WorkoutViewController {
-        return WorkoutViewController(title: "Workout", image: "WorkoutWhite", nibName: WorkoutViewController.typeName)
+        return WorkoutViewController(title: "Workout", image: "WorkoutWhite")
     }
     
     override func viewDidLoad() {
@@ -25,11 +30,24 @@ class WorkoutViewController: BaseTabViewController {
         exerciseViewModel.exercises.sink { [unowned self] (_) in
             self.workoutTableView.reloadData()
         }.store(in: &cancellBag)
-        
-        workoutTableView?.delegate = self
-        workoutTableView?.dataSource = self
     }
-
+    
+    override func loadView() {
+        super.loadView()
+        setupTableView()
+    }
+    
+    private func setupTableView() {
+        view.addSubview(workoutTableView)
+        NSLayoutConstraint.activate([
+            workoutTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            workoutTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            workoutTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            workoutTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        workoutTableView.delegate = self
+        workoutTableView.dataSource = self
+    }
 }
 
 extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
@@ -45,5 +63,4 @@ extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
         cell.backgroundColor = .clear
         return cell
     }
-    
 }

@@ -17,11 +17,6 @@ class ProfileViewController: BaseTabViewController {
         static let margin: CGFloat = Spacer.size05
     }
     
-    let authViewModel = AuthViewModel()
-    
-    private var currentNonce: String?
-    private var cancellBag = Set<AnyCancellable>()
-    
     private lazy var loginView: ProfileLoginView = {
         let view = ProfileLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -35,12 +30,30 @@ class ProfileViewController: BaseTabViewController {
         return view
     }()
     
+    private var currentNonce: String?
+    private var cancellBag = Set<AnyCancellable>()
+    private let authViewModel = AuthViewModel()
+    
     static func create() -> ProfileViewController {
         return ProfileViewController(title: "Profile", image: "ProfileWhite")
     }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        authViewModel.authUser.sink { [unowned self] (_) in
+            guard let authUser = authViewModel.authUser.value else { return }
+            // TODO: Do something with loged user
+        }.store(in: &cancellBag)
+    }
+    
     override func loadView() {
         super.loadView()
+        addToolbarItem()
+        setupLoginView()
+    }
+    
+    private func setupLoginView() {
         view.addSubview(loginView)
         NSLayoutConstraint.activate([
             loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
@@ -49,22 +62,6 @@ class ProfileViewController: BaseTabViewController {
             loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
         loginView.setupView()
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        addToolbarItem()
-        
-        authViewModel.authUser.sink { [unowned self] (_) in
-            guard let authUser = authViewModel.authUser.value else { return }
-            // TODO: Do something with loged user
-        }.store(in: &cancellBag)
-        
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        
     }
 }
 

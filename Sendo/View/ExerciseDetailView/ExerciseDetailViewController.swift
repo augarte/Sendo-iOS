@@ -10,7 +10,7 @@ import UIKit
 class ExerciseDetailViewController: SendoViewController {
     
     static func create(exercise: Exercise) -> ExerciseDetailViewController {
-        return ExerciseDetailViewController(title: exercise.title, nibName: ExerciseDetailViewController.typeName)
+        return ExerciseDetailViewController(title: exercise.title)
     }
     
     override func viewDidLoad() {

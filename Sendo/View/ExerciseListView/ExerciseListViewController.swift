@@ -9,14 +9,19 @@ import UIKit
 import Combine
 
 class ExerciseListViewController: BaseTabViewController {
+        
+    lazy var exercisesTableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        table.backgroundColor = .clear
+        return table
+    }()
     
-    @IBOutlet weak var exercisesTableView: UITableView!
-    
-    let exerciseViewModel = ExerciseViewModel()
-    var cancellBag = Set<AnyCancellable>()
+    private let exerciseViewModel = ExerciseViewModel()
+    private var cancellBag = Set<AnyCancellable>()
     
     static func create() -> ExerciseListViewController {
-        return ExerciseListViewController(title: "Exercises", image: "ListWhite", nibName: ExerciseListViewController.typeName)
+        return ExerciseListViewController(title: "Exercises", image: "ListWhite")
     }
     
     override func viewDidLoad() {
@@ -25,17 +30,30 @@ class ExerciseListViewController: BaseTabViewController {
         exerciseViewModel.exercises.sink { [unowned self] (_) in
             self.exercisesTableView.reloadData()
         }.store(in: &cancellBag)
-        
-        exercisesTableView.delegate = self
-        exercisesTableView.dataSource = self
-        exercisesTableView.register(UINib(nibName: "ExerciseTableViewCell", bundle: nil), forCellReuseIdentifier: "ExerciseTableViewCell")
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         exerciseViewModel.fetchExercises()
     }
-
+    
+    override func loadView() {
+        super.loadView()
+        setupTable()
+    }
+    
+    private func setupTable() {
+        view.addSubview(exercisesTableView)
+        NSLayoutConstraint.activate([
+            exercisesTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            exercisesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            exercisesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            exercisesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+        ])
+        exercisesTableView.delegate = self
+        exercisesTableView.dataSource = self
+        exercisesTableView.register(ExerciseTableViewCell.self, forCellReuseIdentifier: ExerciseTableViewCell.typeName)
+    }
 }
 
 extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -46,7 +64,7 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ExerciseTableViewCell")! as! ExerciseTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseTableViewCell.typeName)! as! ExerciseTableViewCell
         cell.configureCell(exercise: exercise)
         return cell
     }
@@ -56,6 +74,4 @@ extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource
         let exerciseDetailVC = ExerciseDetailViewController.create(exercise: exercise)
         navigateToViewController(viewController: exerciseDetailVC)
     }
-    
 }
-

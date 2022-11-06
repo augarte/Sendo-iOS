@@ -9,25 +9,67 @@ import UIKit
 
 class ProgressTableCell: UITableViewCell {
     
-    @IBOutlet weak var valueLbl: UILabel!
-    @IBOutlet weak var dateLbl: UILabel!
-    @IBOutlet weak var changeLbl: UILabel!
-    @IBOutlet weak var view: UIView!
+    private enum Constants {
+        static let margin: CGFloat = Spacer.size04
+        static let topMargin: CGFloat = Spacer.size02
+    }
+
+    private lazy var valueLbl: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    private lazy var changeLbl: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    private lazy var dateLbl: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        loadView()
         applyStyle()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
-    
+
+    private func loadView() {
+        addSubview(valueLbl)
+        addSubview(changeLbl)
+        addSubview(dateLbl)
+        NSLayoutConstraint.activate([
+            valueLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.margin),
+            valueLbl.topAnchor.constraint(equalTo: topAnchor, constant: Constants.margin),
+            changeLbl.topAnchor.constraint(equalTo: valueLbl.bottomAnchor, constant: Constants.topMargin),
+            dateLbl.leadingAnchor.constraint(greaterThanOrEqualTo: valueLbl.trailingAnchor, constant: Constants.margin),
+            
+            changeLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.margin),
+            bottomAnchor.constraint(equalTo: changeLbl.bottomAnchor, constant: Constants.margin),
+            dateLbl.leadingAnchor.constraint(greaterThanOrEqualTo: changeLbl.trailingAnchor, constant: Constants.margin),
+            
+            trailingAnchor.constraint(equalTo: dateLbl.trailingAnchor, constant: Constants.margin),
+            dateLbl.centerYAnchor.constraint(equalTo: centerYAnchor)
+        ])
+    }
+
     func applyStyle() {
+        backgroundColor = .clear
         selectionStyle = .none
         valueLbl.textColor = .white
         dateLbl.textColor = .white
     }
+}
+
+extension ProgressTableCell {
     
     func configureCell(entry: Measurement, change: Double) {
         valueLbl.text = entry.value.clean
@@ -47,5 +89,4 @@ class ProgressTableCell: UITableViewCell {
         
         applyStyle()
     }
-    
 }

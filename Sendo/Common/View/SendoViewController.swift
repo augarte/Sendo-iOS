@@ -10,7 +10,7 @@ import UIKit
 open class SendoViewController: UIViewController {
     
     final let titleName: String
-        
+    
     init(title: String) {
         titleName = title
         super.init(nibName: nil, bundle: nil)
@@ -32,6 +32,7 @@ open class SendoViewController: UIViewController {
     }
     
     open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         let preferences = UserDefaults.standard
         var darkMode = false
         if preferences.object(forKey: "darkMode") != nil {
@@ -39,8 +40,11 @@ open class SendoViewController: UIViewController {
         }
         overrideUserInterfaceStyle = darkMode ? .dark : .light
     }
+}
+
+// MARK: - Navigation
+extension SendoViewController {
     
-    // MARK: - Navigation
     func navigateToViewController(viewController: UIViewController) {
         navigationController?.pushViewController(viewController, animated: true)
     }

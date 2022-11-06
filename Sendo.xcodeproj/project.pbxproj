@@ -30,13 +30,10 @@
 		20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */; };
 		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
-		20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */; };
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
 		EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA07CE1C2845495F0053B768 /* SettingsViewController.swift */; };
 		EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */; };
-		EA0C1A2028496B4D009223D8 /* ProgressTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */; };
 		EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */; };
-		EA0C1A2528496E76009223D8 /* NewEntryDialog.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */; };
 		EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF044284BF0A50047B447 /* AuthViewModel.swift */; };
 		EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF046284BF0EE0047B447 /* AuthUser.swift */; };
 		EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */; };
@@ -50,11 +47,7 @@
 		EA3D142A2826E7D200387419 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14292826E7D200387419 /* Alamofire */; };
 		EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D142C2826E81500387419 /* AlamofireImage */; };
 		EA3D143528270B1300387419 /* NetworkServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D143428270B1300387419 /* NetworkServices.swift */; };
-		EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143A28270D5800387419 /* WorkoutViewController.xib */; };
-		EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143C28270D9400387419 /* ExerciseListViewController.xib */; };
-		EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D143E28270DE400387419 /* ProgressViewController.xib */; };
 		EA3D14442827F01D00387419 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */; };
-		EA3D14462827F02800387419 /* ExerciseDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = EA3D14452827F02800387419 /* ExerciseDetailViewController.xib */; };
 		EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */; };
 		EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */; };
 		EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D1459282826DA00387419 /* FirebaseCrashlytics */; };
@@ -115,12 +108,9 @@
 		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
-		20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseTableViewCell.xib; sourceTree = "<group>"; };
 		EA07CE1C2845495F0053B768 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableCell.swift; sourceTree = "<group>"; };
-		EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressTableCell.xib; sourceTree = "<group>"; };
 		EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryDialog.swift; sourceTree = "<group>"; };
-		EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewEntryDialog.xib; sourceTree = "<group>"; };
 		EA0FF044284BF0A50047B447 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		EA0FF046284BF0EE0047B447 /* AuthUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthUser.swift; sourceTree = "<group>"; };
 		EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTabViewController.swift; sourceTree = "<group>"; };
@@ -132,11 +122,7 @@
 		EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseServices.swift; sourceTree = "<group>"; };
 		EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesEndpoints.swift; sourceTree = "<group>"; };
 		EA3D143428270B1300387419 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
-		EA3D143A28270D5800387419 /* WorkoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = WorkoutViewController.xib; sourceTree = "<group>"; };
-		EA3D143C28270D9400387419 /* ExerciseListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseListViewController.xib; sourceTree = "<group>"; };
-		EA3D143E28270DE400387419 /* ProgressViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProgressViewController.xib; sourceTree = "<group>"; };
 		EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
-		EA3D14452827F02800387419 /* ExerciseDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ExerciseDetailViewController.xib; sourceTree = "<group>"; };
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginView.swift; sourceTree = "<group>"; };
@@ -246,7 +232,6 @@
 		20B96EBE272474D2000B9C1D /* View */ = {
 			isa = PBXGroup;
 			children = (
-				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
 				EA3D14422827F00400387419 /* ExerciseDetailView */,
 				EA3D143728270C9800387419 /* ExerciseListView */,
 				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
@@ -280,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */,
-				EA0C1A1F28496B4D009223D8 /* ProgressTableCell.xib */,
 			);
 			path = ProgressTableCell;
 			sourceTree = "<group>";
@@ -289,7 +273,6 @@
 			isa = PBXGroup;
 			children = (
 				EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */,
-				EA0C1A2428496E76009223D8 /* NewEntryDialog.xib */,
 				EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */,
 			);
 			path = NewEntryDialog;
@@ -319,6 +302,7 @@
 		EA3D14142826DC9800387419 /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2E90029181D9B00CA9BE2 /* View */,
 				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
 				EA3D14182826E61E00387419 /* Extensions.swift */,
 				20C524682724D43A00741057 /* Utils.swift */,
@@ -331,7 +315,6 @@
 			isa = PBXGroup;
 			children = (
 				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
-				20DDAC6A27412A690072BB76 /* ExerciseTableViewCell.xib */,
 			);
 			path = ExerciseTableCell;
 			sourceTree = "<group>";
@@ -370,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
-				EA3D143A28270D5800387419 /* WorkoutViewController.xib */,
 			);
 			path = WorkoutView;
 			sourceTree = "<group>";
@@ -380,7 +362,6 @@
 			children = (
 				20C524822724F00600741057 /* ExerciseViewModel.swift */,
 				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
-				EA3D143C28270D9400387419 /* ExerciseListViewController.xib */,
 				EA3D14152826E29C00387419 /* ExerciseTableCell */,
 			);
 			path = ExerciseListView;
@@ -391,7 +372,6 @@
 			children = (
 				20B96EB9272473D0000B9C1D /* MeasureViewModel.swift */,
 				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
-				EA3D143E28270DE400387419 /* ProgressViewController.xib */,
 				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
 				EA0C1A2128496E53009223D8 /* NewEntryDialog */,
 			);
@@ -411,7 +391,6 @@
 			isa = PBXGroup;
 			children = (
 				EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */,
-				EA3D14452827F02800387419 /* ExerciseDetailViewController.xib */,
 			);
 			path = ExerciseDetailView;
 			sourceTree = "<group>";
@@ -458,6 +437,14 @@
 				EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */,
 			);
 			path = AppleAuthorizationButton;
+			sourceTree = "<group>";
+		};
+		EAD2E90029181D9B00CA9BE2 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -585,17 +572,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA3D143B28270D5800387419 /* WorkoutViewController.xib in Resources */,
 				20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */,
 				20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */,
-				20DDAC6C27412A690072BB76 /* ExerciseTableViewCell.xib in Resources */,
-				EA3D14462827F02800387419 /* ExerciseDetailViewController.xib in Resources */,
-				EA3D143D28270D9400387419 /* ExerciseListViewController.xib in Resources */,
-				EA0C1A2028496B4D009223D8 /* ProgressTableCell.xib in Resources */,
 				20858D64272448D000993B5E /* Assets.xcassets in Resources */,
 				20858D5F272448B200993B5E /* HomeTabBarViewController.storyboard in Resources */,
-				EA3D143F28270DE400387419 /* ProgressViewController.xib in Resources */,
-				EA0C1A2528496E76009223D8 /* NewEntryDialog.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

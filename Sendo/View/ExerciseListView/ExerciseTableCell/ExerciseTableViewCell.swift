@@ -10,24 +10,62 @@ import SDWebImage
 
 class ExerciseTableViewCell: UITableViewCell {
     
-    @IBOutlet weak var picture: UIImageView!
-    @IBOutlet weak var name: UILabel!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    private enum Constants {
+        static let margin: CGFloat = Spacer.size03
+        static let imageHeight: CGFloat = 56
+        static let aspectRatio: CGFloat = 1.5
+    }
+
+    private lazy var picture: UIImageView = {
+        let imageView = UIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.image = UIImage(named: "Placeholder")
+        imageView.contentMode = .scaleAspectFit
+        imageView.backgroundColor = .white
+        return imageView
+    }()
+
+    private lazy var name: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 2
+        return label
+    }()
+
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        loadView()
         applyStyle()
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
     }
     
-    func applyStyle() {
-        picture.backgroundColor = UIColor.white
-        picture.layer.cornerRadius = picture.frame.height / 2
+    private func loadView() {
+        addSubview(picture)
+        addSubview(name)
+        NSLayoutConstraint.activate([
+            picture.heightAnchor.constraint(equalToConstant: Constants.imageHeight),
+            picture.widthAnchor.constraint(equalTo: picture.heightAnchor, multiplier: Constants.aspectRatio),
+            picture.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.margin),
+            picture.topAnchor.constraint(equalTo: topAnchor, constant: Constants.margin),
+            bottomAnchor.constraint(equalTo: picture.bottomAnchor, constant: Constants.margin),
+            name.leadingAnchor.constraint(equalTo: picture.trailingAnchor, constant: Constants.margin),
+            name.topAnchor.constraint(equalTo: topAnchor, constant: Constants.margin),
+            bottomAnchor.constraint(equalTo: name.bottomAnchor, constant: Constants.margin),
+            trailingAnchor.constraint(equalTo: name.trailingAnchor, constant: Constants.margin),
+        ])
+    }
+    
+    private func applyStyle() {
+        backgroundColor = .clear
+        picture.layer.cornerRadius = Constants.imageHeight / 2
         picture.clipsToBounds = true
     }
+}
+
+extension ExerciseTableViewCell {
     
     func configureCell(exercise: Exercise) {
         name.text = exercise.title
@@ -40,5 +78,4 @@ class ExerciseTableViewCell: UITableViewCell {
             picture.sd_setImage(with: URL(string: exercise.images[1]), placeholderImage: UIImage(named: "Placeholder"))
         }
     }
-    
 }

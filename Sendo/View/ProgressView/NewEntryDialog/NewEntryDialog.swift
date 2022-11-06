@@ -11,6 +11,8 @@ class NewEntryDialog: SendoViewController {
     
     private enum Constants {
         static let margin: CGFloat = Spacer.size05
+        static let stackBackground: UIColor = .white.withAlphaComponent(0.2)
+        static let stackConrners: CGFloat = 8
     }
     
     private lazy var stackView: UIStackView = {
@@ -40,43 +42,32 @@ class NewEntryDialog: SendoViewController {
         return field
     }()
     
-    var measurement: Measurement?
-    var completion: ((Measurement) -> ())?
-    let dataType = "Weight"
+    private var measurement: Measurement?
+    private var completion: ((Measurement) -> ())?
+    private let dataType = "Weight"
     
-    static func create(measurement: Measurement, completion: @escaping (Measurement) -> ()) -> UINavigationController {
-        let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
+    static func create(measurement: Measurement? = nil, completion: @escaping (Measurement) -> ()) -> NewEntryDialog {
+        let newEntryDialog = NewEntryDialog(title: "New Entry")
         newEntryDialog.measurement = measurement
         newEntryDialog.completion = completion
-        let navigationController = UINavigationController(rootViewController: newEntryDialog)
-        return navigationController
+        return newEntryDialog
     }
     
-    static func create(completion: @escaping (Measurement) -> ()) -> UINavigationController {
-        let newEntryDialog = NewEntryDialog(title: "New Entry", nibName: NewEntryDialog.typeName)
-        newEntryDialog.completion = completion
-        let navigationController = UINavigationController(rootViewController: newEntryDialog)
-        return navigationController
-    }
-    
-    override func viewDidLoad(){
+    override func loadView() {
+        super.loadView()
         addToolbar()
-        applyStyle()
+        setupStackView()
     }
     
-    private func applyStyle() {
-        stackView.backgroundColor = .white.withAlphaComponent(0.2)
-        stackView.layer.cornerRadius = 8
-        setConstraints()
-    }
-    
-    private func setConstraints() {
+    private func setupStackView() {
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.margin),
             view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: Constants.margin),
         ])
+        stackView.backgroundColor = Constants.stackBackground
+        stackView.layer.cornerRadius = Constants.stackConrners
     }
 }
 

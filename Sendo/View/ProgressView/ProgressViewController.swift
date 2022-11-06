@@ -17,23 +17,32 @@ protocol ProgressViewControllerDelegate: AnyObject {
 
 class ProgressViewController: BaseTabViewController {
     
-    @IBOutlet weak var progressTableView: UITableView!
-    @IBOutlet weak var lineChart: SimpleLineChart!
-    
-    let progressViewModel = MeasurementViewModel()
-    var cancellBag = Set<AnyCancellable>()
-    
-    static func create() -> ProgressViewController {
-        return ProgressViewController(title: "Progress", image: "MeasurementWhite", nibName: ProgressViewController.typeName)
+    private enum Constants {
+        static let margin: CGFloat = Spacer.size04
+        static let chartHeightMultiplier: CGFloat = 0.5
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        addToolbarItem()
-        setupTable()
+    lazy var progressTableView: UITableView = {
+        let table = UITableView()
+        table.translatesAutoresizingMaskIntoConstraints = false
+        return table
+    }()
+    
+    lazy var lineChart: SimpleLineChart = {
+        let chart = SimpleLineChart()
+        chart.translatesAutoresizingMaskIntoConstraints = false
+        return chart
+    }()
+    
+    private let progressViewModel = MeasurementViewModel()
+    private var cancellBag = Set<AnyCancellable>()
+    
+    static func create() -> ProgressViewController {
+        return ProgressViewController(title: "Progress", image: "MeasurementWhite")
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         progressViewModel.fetchWeight()
         progressViewModel.measurements.sink { [unowned self] (_) in
             lineChart.setPoints(points: progressViewModel.measurements.value.compactMap({ measurement in
@@ -41,19 +50,46 @@ class ProgressViewController: BaseTabViewController {
                 let timestamp = Int(measurement.date) ?? 0
                 return SimpleLineChartData(x: timestamp, y: measurement.value)
             }))
-            self.progressTableView?.reloadData()
+            self.progressTableView.reloadData()
         }.store(in: &cancellBag)
     }
     
+    override func loadView() {
+        super.loadView()
+        addToolbarItem()
+        setupChart()
+        setupTable()
+    }
+    
+    private func setupChart() {
+        view.addSubview(lineChart)
+        NSLayoutConstraint.activate([
+            lineChart.heightAnchor.constraint(equalTo: view.safeAreaLayoutGuide.heightAnchor, multiplier: Constants.chartHeightMultiplier),
+            lineChart.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.margin),
+            lineChart.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.margin),
+            view.trailingAnchor.constraint(equalTo: lineChart.trailingAnchor, constant: Constants.margin),
+            view.bottomAnchor.constraint(equalTo: lineChart.safeAreaLayoutGuide.bottomAnchor, constant: Constants.margin)
+        ])
+        lineChart.backgroundColor = .clear
+    }
+    
     private func setupTable() {
-        progressTableView?.delegate = self
-        progressTableView?.dataSource = self
-        progressTableView?.register(UINib(nibName: "ProgressTableCell", bundle: nil), forCellReuseIdentifier: "ProgressTableCell")
+        view.addSubview(progressTableView)
+        NSLayoutConstraint.activate([
+            progressTableView.topAnchor.constraint(equalTo: lineChart.bottomAnchor, constant: Constants.margin),
+            progressTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            progressTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            progressTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+        progressTableView.backgroundColor = .clear
+        progressTableView.delegate = self
+        progressTableView.dataSource = self
+        progressTableView.register(ProgressTableCell.self, forCellReuseIdentifier: ProgressTableCell.typeName)
     }
 }
 
 // MARK: - Toolbar
-extension ProgressViewController {
+private extension ProgressViewController {
     
     func addToolbarItem(){
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
@@ -82,7 +118,7 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
             change = (100 * (measurement.value - prevValue) / prevValue).round(to: 1)
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ProgressTableCell")! as! ProgressTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: ProgressTableCell.typeName)! as! ProgressTableCell
         cell.configureCell(entry: measurement, change: change)
         return cell
     }
