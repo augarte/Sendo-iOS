@@ -51,6 +51,7 @@ extension SendoViewController {
     
     func showModalView(viewController: UIViewController) {
         viewController.modalPresentationStyle = .automatic
-        present(viewController, animated: true)
+        let nvc = UINavigationController(rootViewController: viewController)
+        present(nvc, animated: true)
     }
 }
