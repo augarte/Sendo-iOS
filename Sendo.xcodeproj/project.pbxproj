@@ -59,6 +59,9 @@
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
+		EAD2D11A29199366003A975D /* NewWorkoutDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2D11929199366003A975D /* NewWorkoutDialog.swift */; };
+		EAD2D11C29199771003A975D /* SessionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2D11B29199771003A975D /* SessionTableViewCell.swift */; };
+		EAD2D11F29199E91003A975D /* SessionEditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2D11E29199E91003A975D /* SessionEditorViewController.swift */; };
 		EAD2E8FF2915B02D00CA9BE2 /* NewEntryLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */; };
 /* End PBXBuildFile section */
 
@@ -127,6 +130,9 @@
 		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EAB1088328F2EB8700774763 /* SimpleLineChart */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = SimpleLineChart; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
+		EAD2D11929199366003A975D /* NewWorkoutDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutDialog.swift; sourceTree = "<group>"; };
+		EAD2D11B29199771003A975D /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
+		EAD2D11E29199E91003A975D /* SessionEditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionEditorViewController.swift; sourceTree = "<group>"; };
 		EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryLine.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -349,6 +355,7 @@
 		EA3D143628270C8E00387419 /* WorkoutView */ = {
 			isa = PBXGroup;
 			children = (
+				EAD2D11829199352003A975D /* NewWorkoutDialog */,
 				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
 			);
 			path = WorkoutView;
@@ -434,6 +441,24 @@
 				EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */,
 			);
 			path = AppleAuthorizationButton;
+			sourceTree = "<group>";
+		};
+		EAD2D11829199352003A975D /* NewWorkoutDialog */ = {
+			isa = PBXGroup;
+			children = (
+				EAD2D11929199366003A975D /* NewWorkoutDialog.swift */,
+				EAD2D11D29199780003A975D /* SessionTableViewCell */,
+				EAD2D11E29199E91003A975D /* SessionEditorViewController.swift */,
+			);
+			path = NewWorkoutDialog;
+			sourceTree = "<group>";
+		};
+		EAD2D11D29199780003A975D /* SessionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAD2D11B29199771003A975D /* SessionTableViewCell.swift */,
+			);
+			path = SessionTableViewCell;
 			sourceTree = "<group>";
 		};
 		EAD2E90029181D9B00CA9BE2 /* View */ = {
@@ -642,9 +667,12 @@
 				20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */,
 				20C524812724EF1C00741057 /* Exercise.swift in Sources */,
 				EAD2E8FF2915B02D00CA9BE2 /* NewEntryLine.swift in Sources */,
+				EAD2D11F29199E91003A975D /* SessionEditorViewController.swift in Sources */,
 				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
+				EAD2D11A29199366003A975D /* NewWorkoutDialog.swift in Sources */,
 				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
 				EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */,
+				EAD2D11C29199771003A975D /* SessionTableViewCell.swift in Sources */,
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,

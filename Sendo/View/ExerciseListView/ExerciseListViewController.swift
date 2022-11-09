@@ -9,7 +9,7 @@ import UIKit
 import Combine
 
 class ExerciseListViewController: BaseTabViewController {
-        
+    
     lazy var exercisesTableView: UITableView = {
         let table = UITableView()
         table.translatesAutoresizingMaskIntoConstraints = false

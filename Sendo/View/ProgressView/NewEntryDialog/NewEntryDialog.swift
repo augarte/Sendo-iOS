@@ -62,7 +62,7 @@ class NewEntryDialog: SendoViewController {
     private func setupStackView() {
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
-            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.margin),
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.margin),
             view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor, constant: Constants.margin),
         ])

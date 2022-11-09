@@ -33,7 +33,7 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupCenterButton()
+        //setupCenterButton()
         applyStyle()
     }
     
@@ -56,11 +56,11 @@ private extension HomeTabBarViewController {
         self.viewControllers = [
             createTabBarItem(title: workoutVC.titleName, tabImage: workoutVC.tabImage, viewController: workoutVC),
             createTabBarItem(title: exerciseListVC.titleName, tabImage: exerciseListVC.tabImage, viewController: exerciseListVC),
-            UIViewController(),
+            //UIViewController(),
             createTabBarItem(title: progressVC.titleName, tabImage: progressVC.tabImage, viewController: progressVC),
             createTabBarItem(title: profileVC.titleName, tabImage: profileVC.tabImage, viewController: profileVC)
         ]
-        self.delegate = self
+        //self.delegate = self
     }
     
     func createTabBarItem(title: String, tabImage: String, viewController: SendoViewController) -> UINavigationController {
@@ -131,14 +131,13 @@ private extension HomeTabBarViewController {
     }
 }
 
-extension HomeTabBarViewController: UITabBarControllerDelegate {
-   
-    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
-        
-        if (tabBarController.viewControllers != nil &&
-            tabBarController.viewControllers!.count / 2 == tabBarController.viewControllers!.firstIndex(of: viewController)) {
-            return false;
-        }
-        return true;
-    }
-}
+//extension HomeTabBarViewController: UITabBarControllerDelegate {
+//
+//    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
+//        if (tabBarController.viewControllers != nil &&
+//            tabBarController.viewControllers!.count / 2 == tabBarController.viewControllers!.firstIndex(of: viewController)) {
+//            return false;
+//        }
+//        return true;
+//    }
+//}

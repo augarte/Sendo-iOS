@@ -34,6 +34,7 @@ class WorkoutViewController: BaseTabViewController {
     
     override func loadView() {
         super.loadView()
+        addToolbarItem()
         setupTableView()
     }
     
@@ -47,6 +48,20 @@ class WorkoutViewController: BaseTabViewController {
         ])
         workoutTableView.delegate = self
         workoutTableView.dataSource = self
+    }
+}
+
+extension WorkoutViewController {
+    
+    func addToolbarItem(){
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
+    }
+    
+    @objc func addProgressEntry(sender: UIBarButtonItem?) {
+        let newWorkoutVC = NewWorkoutDialog.create {
+
+        }
+        showModalView(viewController: newWorkoutVC)
     }
 }
 

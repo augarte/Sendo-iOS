@@ -18,6 +18,7 @@ class SettingsViewController: SendoViewController {
     lazy var stackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
+        stackview.addArrangedSubview(darkModeStackView)
         return stackview
     }()
     
@@ -26,20 +27,17 @@ class SettingsViewController: SendoViewController {
         stackview.axis = .horizontal
         stackview.addArrangedSubview(darkModeLabel)
         stackview.addArrangedSubview(darkModeSwitch)
-        stackview.translatesAutoresizingMaskIntoConstraints = false
         return stackview
     }()
     
     lazy var darkModeLabel: UILabel = {
         let dmLabel = UILabel()
         dmLabel.text = "Dark mode"
-        dmLabel.translatesAutoresizingMaskIntoConstraints = false
         return dmLabel
     }()
     
     lazy var darkModeSwitch: UISwitch = {
         let dmSwitch = UISwitch()
-        dmSwitch.translatesAutoresizingMaskIntoConstraints = false
         return dmSwitch
     }()
     
@@ -68,17 +66,14 @@ class SettingsViewController: SendoViewController {
     }
     
     private func setupStackView() {
-        stackView.addArrangedSubview(darkModeStackView)
         view.addSubview(stackView)
         NSLayoutConstraint.activate([
             stackView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor,
                                            constant: Constants.margin),
-            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            darkModeStackView.leadingAnchor.constraint(equalTo: stackView.leadingAnchor,
-                                                       constant: Constants.margin),
-            darkModeStackView.trailingAnchor.constraint(equalTo: stackView.trailingAnchor,
-                                                        constant: -Constants.margin)
+            stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor,
+                                               constant: Constants.margin),
+            view.trailingAnchor.constraint(equalTo: stackView.trailingAnchor,
+                                                constant: Constants.margin),
         ])
     }
 }
