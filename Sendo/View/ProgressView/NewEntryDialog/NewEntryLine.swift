@@ -65,8 +65,7 @@ class NewEntryLine: UIView {
     }
     
     private func setConstraints() {
-        addSubview(entryTitle)
-        addSubview(entryField)
+        addSubviews([entryTitle, entryField])
         NSLayoutConstraint.activate([
             heightAnchor.constraint(equalToConstant: Constants.viewHeight),
             entryTitle.topAnchor.constraint(equalTo: topAnchor),

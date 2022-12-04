@@ -9,16 +9,27 @@ import UIKit
 import Combine
 
 class WorkoutViewController: BaseTabViewController {
-        
-    lazy var workoutTableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .clear
-        return table
-    }()
     
-    let exerciseViewModel = ExerciseListViewModel()
-    var cancellBag = Set<AnyCancellable>()
+    private enum Constants {
+        static let buttonSize: CGFloat = 50
+        static let buttonSpacing: CGFloat = Spacer.size02
+    }
+    
+    private lazy var startWorkoutButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "AccentColor")
+        button.titleLabel?.textColor = .white
+        button.heightAnchor.constraint(equalToConstant: Constants.buttonSize).isActive = true
+        button.layer.cornerRadius = Constants.buttonSize / 4
+        button.addTarget(self, action: #selector(workoutButtonPressed), for: .touchUpInside)
+        return button
+    }()
+    private lazy var emptyState = WorkoutEmptyState()
+    //private lazy var workoutView = WorkoutView()
+    
+    private let workoutViewModel = WorkoutViewModel()
+    private var cancellBag = Set<AnyCancellable>()
     
     static func create() -> WorkoutViewController {
         return WorkoutViewController(title: "Workout", image: "WorkoutWhite")
@@ -26,56 +37,66 @@ class WorkoutViewController: BaseTabViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        exerciseViewModel.exercises.sink { [unowned self] (_) in
-            self.workoutTableView.reloadData()
-        }.store(in: &cancellBag)
+        
     }
     
     override func loadView() {
         super.loadView()
         addToolbarItem()
-        setupTableView()
+        setupButons()
+        setupConstraints()
+    }
+}
+    
+private extension WorkoutViewController {
+    
+    func setupButons() {
+        if workoutViewModel.workout.value != nil {
+            startWorkoutButton.setTitle("Start Workout", for: .normal)
+            setupWorkoutView()
+        } else {
+            startWorkoutButton.setTitle("Create Workout", for: .normal)
+            setupEmptyState()
+        }
     }
     
-    private func setupTableView() {
-        view.addSubview(workoutTableView)
+    func setupWorkoutView() {
+    }
+    
+    func setupEmptyState() {
+    }
+    
+    func setupConstraints() {
+        view.addSubviews([startWorkoutButton, emptyState])
         NSLayoutConstraint.activate([
-            workoutTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            workoutTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            workoutTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            workoutTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: startWorkoutButton.bottomAnchor, constant: Constants.buttonSpacing),
+            startWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.buttonSpacing),
+            view.trailingAnchor.constraint(equalTo: startWorkoutButton.trailingAnchor, constant: Constants.buttonSpacing),
+            
+            emptyState.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            emptyState.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            emptyState.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            startWorkoutButton.topAnchor.constraint(equalTo: emptyState.bottomAnchor, constant: Constants.buttonSpacing)
         ])
-        workoutTableView.delegate = self
-        workoutTableView.dataSource = self
+        emptyState.setupView()
     }
 }
 
-extension WorkoutViewController {
+private extension WorkoutViewController {
     
     func addToolbarItem(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.addProgressEntry(sender:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.newWorkoutPressed(sender:)))
     }
     
-    @objc func addProgressEntry(sender: UIBarButtonItem?) {
+    @objc func newWorkoutPressed(sender: UIBarButtonItem?) {
         let newWorkoutVC = NewWorkoutDialog.create {
-
+            //TODO: Completion handling
         }
         showModalView(viewController: newWorkoutVC)
     }
-}
-
-extension WorkoutViewController: UITableViewDelegate, UITableViewDataSource {
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exerciseViewModel.exercises.value.count
-    }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: nil)
-        cell.largeContentTitle = exercise.title
-        cell.backgroundColor = .clear
-        return cell
+    @objc func workoutButtonPressed(sender: UIButton?) {
+        //TODO: workout button press action
     }
 }

@@ -43,8 +43,7 @@ class ExerciseListTableViewCell: UITableViewCell {
     }
     
     private func loadView() {
-        addSubview(picture)
-        addSubview(name)
+        addSubviews([picture,name])
         NSLayoutConstraint.activate([
             picture.heightAnchor.constraint(equalToConstant: Constants.imageHeight),
             picture.widthAnchor.constraint(equalTo: picture.heightAnchor, multiplier: Constants.aspectRatio),

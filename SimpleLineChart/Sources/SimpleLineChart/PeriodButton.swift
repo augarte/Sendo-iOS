@@ -13,8 +13,8 @@ import UIKit
 public class PeriodButton: UIButton {
     
     private var color: UIColor?
+    private var cancellBag = Set<AnyCancellable>()
     var period: (String, Int)?
-    var cancellBag = Set<AnyCancellable>()
     
     init(period: (String, Int), color: UIColor, selectedPeriod: CurrentValueSubject<(String, Int)?,Never>, frame: CGRect) {
         super.init(frame: frame)

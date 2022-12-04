@@ -43,9 +43,7 @@ class ProgressTableCell: UITableViewCell {
     }
 
     private func loadView() {
-        addSubview(valueLbl)
-        addSubview(changeLbl)
-        addSubview(dateLbl)
+        addSubviews([valueLbl, changeLbl, dateLbl])
         NSLayoutConstraint.activate([
             valueLbl.leadingAnchor.constraint(equalTo: leadingAnchor, constant: Constants.margin),
             valueLbl.topAnchor.constraint(equalTo: topAnchor, constant: Constants.margin),

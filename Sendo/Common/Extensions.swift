@@ -68,3 +68,17 @@ extension UIStackView {
         }
     }
 }
+
+extension UIView {
+    func addSubviews(_ subviews:[UIView]) {
+        subviews.forEach  { self.customAddSubview($0) }
+    }
+
+    private func customAddSubview(_ view: UIView) {
+        if let stack = self as? UIStackView {
+            stack.addArrangedSubview(view)
+        } else {
+            self.addSubview(view)
+        }
+    }
+}

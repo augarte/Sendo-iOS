@@ -24,7 +24,7 @@ class ProfileLoginView: UIView {
     
     var buttonPressedSubject = PassthroughSubject<LoginType, Never>()
     
-    lazy var appleLogginButton: AppleAuthorizationButton = {
+    lazy var appleLoginButton: AppleAuthorizationButton = {
         let button = AppleAuthorizationButton.init()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (signinApplePress))
         button.addGestureRecognizer(gesture)
@@ -32,7 +32,7 @@ class ProfileLoginView: UIView {
         return button
     }()
     
-    lazy var googleLogginButton: GIDSignInButton = {
+    lazy var googleLoginButton: GIDSignInButton = {
         let button = GIDSignInButton()
         let gesture = UITapGestureRecognizer(target: self, action:  #selector (signinGooglePress))
         button.addGestureRecognizer(gesture)
@@ -49,27 +49,25 @@ class ProfileLoginView: UIView {
     }()
     
     func setupView() {
-        addSubview(appleLogginButton)
-        addSubview(googleLogginButton)
-        addSubview(loginTitle)
+        addSubviews([appleLoginButton, googleLoginButton, loginTitle])
         NSLayoutConstraint.activate([
-            loginTitle.bottomAnchor.constraint(equalTo: appleLogginButton.topAnchor,
+            loginTitle.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor,
                                                constant: -Constants.margin),
-            loginTitle.leadingAnchor.constraint(equalTo: appleLogginButton.leadingAnchor),
-            appleLogginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+            loginTitle.leadingAnchor.constraint(equalTo: appleLoginButton.leadingAnchor),
+            appleLoginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                     constant: Constants.margin),
-            appleLogginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+            appleLoginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                      constant: -Constants.margin),
-            appleLogginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            appleLogginButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            googleLogginButton.topAnchor.constraint(equalTo: appleLogginButton.bottomAnchor,
+            appleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            appleLoginButton.centerYAnchor.constraint(equalTo: centerYAnchor),
+            googleLoginButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor,
                                                     constant: Constants.margin),
-            googleLogginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
+            googleLoginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                      constant: Constants.margin),
-            googleLogginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
+            googleLoginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
                                                       constant: -Constants.margin),
-            googleLogginButton.heightAnchor.constraint(equalTo: appleLogginButton.heightAnchor),
-            googleLogginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            googleLoginButton.heightAnchor.constraint(equalTo: appleLoginButton.heightAnchor),
+            googleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
         ])
     }
     
