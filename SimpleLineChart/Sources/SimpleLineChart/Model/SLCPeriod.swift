@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class Period {
+public class SLCPeriod {
     var name: String
     var value: Int
     

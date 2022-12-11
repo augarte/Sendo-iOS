@@ -18,7 +18,7 @@ public class SLCDataSet {
         self.lineColor = lineColor
     }
     
-    public func filterGraphPints(period: Period) {
+    public func filterGraphPints(period: SLCPeriod) {
         let timestamp = Int(NSDate().timeIntervalSince1970)
         filteredGraphPoints = graphPoints.filter({ value in
             return value.x > timestamp - (period.value)

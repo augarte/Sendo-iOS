@@ -10,13 +10,13 @@ import UIKit
 
 @available(iOS 13.0, *)
 @IBDesignable
-public class PeriodButton: UIButton {
+public class SLCPeriodButton: UIButton {
     
     private var color: UIColor?
     private var cancellBag = Set<AnyCancellable>()
-    var period: Period?
+    var period: SLCPeriod?
     
-    init(period: Period, color: UIColor, selectedPeriod: CurrentValueSubject<(Period)?,Never>, frame: CGRect) {
+    init(period: SLCPeriod, color: UIColor, selectedPeriod: CurrentValueSubject<SLCPeriod?,Never>, frame: CGRect) {
         super.init(frame: frame)
         self.period = period
         self.color = color
