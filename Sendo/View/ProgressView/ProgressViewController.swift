@@ -45,11 +45,13 @@ class ProgressViewController: BaseTabViewController {
         super.viewWillAppear(animated)
         progressViewModel.fetchWeight()
         progressViewModel.measurements.sink { [unowned self] (_) in
-            lineChart.setPoints(points: progressViewModel.measurements.value.compactMap({ measurement in
+            let points = progressViewModel.measurements.value.compactMap({ measurement in
                 // TODO: fix timestamp case
                 let timestamp = Int(measurement.date) ?? 0
-                return SimpleLineChartData(x: timestamp, y: measurement.value)
-            }))
+                return SLCData(x: timestamp, y: measurement.value)
+            })
+            let dataSet = SLCDataSet(graphPoints: points, lineColor: .white)
+            lineChart.loadPoints(dataSet: dataSet)
             self.progressTableView.reloadData()
         }.store(in: &cancellBag)
     }

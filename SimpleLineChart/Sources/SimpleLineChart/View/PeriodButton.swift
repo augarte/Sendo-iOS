@@ -14,13 +14,13 @@ public class PeriodButton: UIButton {
     
     private var color: UIColor?
     private var cancellBag = Set<AnyCancellable>()
-    var period: (String, Int)?
+    var period: Period?
     
-    init(period: (String, Int), color: UIColor, selectedPeriod: CurrentValueSubject<(String, Int)?,Never>, frame: CGRect) {
+    init(period: Period, color: UIColor, selectedPeriod: CurrentValueSubject<(Period)?,Never>, frame: CGRect) {
         super.init(frame: frame)
         self.period = period
         self.color = color
-        setTitle(period.0, for: .normal)
+        setTitle(period.name, for: .normal)
         titleLabel?.textAlignment = .center
         backgroundColor =  .white.withAlphaComponent(0.1)
         layer.borderWidth = 1
@@ -30,7 +30,7 @@ public class PeriodButton: UIButton {
         selectedPeriod.sink{ selectedPeriod in
             guard let period = self.period, let selectedPeriod = selectedPeriod else { return }
             
-            let selected = period == selectedPeriod
+            let selected = period.name == selectedPeriod.name
             self.backgroundColor = selected ? self.color?.withAlphaComponent(0.1) : .white.withAlphaComponent(0.1)
             self.layer.borderColor = selected ? self.color?.cgColor : UIColor.white.cgColor
         }.store(in: &cancellBag)
