@@ -8,12 +8,11 @@
 import Combine
 import UIKit
 
-// MARK: - UIView
 @available(iOS 13.0, *)
 @IBDesignable
 public final class SimpleLineChart: UIView {
     
-    // Constants
+    // MARK: Constants
     private enum Constants {
         static let cornerRadiusSize = CGSize(width: 8.0, height: 8.0)
         static let margin: CGFloat = 20.0
@@ -23,7 +22,7 @@ public final class SimpleLineChart: UIView {
         static let periodStackHeight: CGFloat = 30.0
     }
     
-    // Inspectables
+    // MARK: Inspectables
     @IBInspectable public var lineStroke: CGFloat = 3.0
     @IBInspectable public var lineColor: UIColor = .white
     @IBInspectable public var circleDiameter: CGFloat = 5.0
@@ -40,7 +39,7 @@ public final class SimpleLineChart: UIView {
     
     @IBInspectable public var addPeriodButtons: Bool = true
     
-    // UI variables
+    // MARK: UI variables
     private lazy var periodStackView: UIStackView = {
         let stackview = UIStackView()
         stackview.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +49,7 @@ public final class SimpleLineChart: UIView {
         return stackview
     }()
     
-    // Private variables
+    // MARK: Private variables
     private var dataSets: [SLCDataSet] = []
     private var selectedPeriod = CurrentValueSubject<SLCPeriod?, Never>(SLCPeriod?(nil))
     private var periodSelectors: Array<SLCPeriod> = [SLCPeriod("1 Month", 2629800),
@@ -67,18 +66,15 @@ public final class SimpleLineChart: UIView {
     }
     
     public override func draw(_ rect: CGRect) {
-        // -------------------
-        // Background
+        // MARK: Background
         setupGraph(rect, data: dataSets.first!)
         
-        // -------------------
-        // Lines
+        // MARK: Lines
         for data in dataSets {
             drawLine(rect, data: data)
         }
         
-        // -------------------
-        // Date selectors
+        // MARK: Date selectors
         if addPeriodButtons {
             addPeriodStackView(width: rect.width, height: rect.height)
         }
@@ -143,11 +139,11 @@ private extension SimpleLineChart {
     private func drawLine(_ rect: CGRect, data: SLCDataSet) {
         guard let context = UIGraphicsGetCurrentContext() else { return }
         
-        // -------------------
-        // Margins
         let width = rect.width
         let height = rect.height
         let margin = Constants.margin
+        
+        // MARK: X Point
         let graphWidth = width - margin * 2 - 4
         let xValues = data.filteredGraphPoints.map({ point in return point.x })
         guard let minXValue = xValues.min() else { return }
@@ -161,6 +157,7 @@ private extension SimpleLineChart {
             return CGFloat(xPoint) + margin + 2
         }
         
+        // MARK: Y Point
         let topBorder = Constants.margin
         let bottomBorder = addPeriodButtons ? Constants.periodStackHeight + Constants.periodTopSpace + Constants.periodBottomSpace : Constants.margin
         let graphHeight = height - topBorder - bottomBorder
@@ -178,23 +175,22 @@ private extension SimpleLineChart {
             return graphHeight + topBorder - yPoint // Flip the graph
         }
         
-        // -------------------
-        // Stroke
-        data.lineColor.set()
+        // MARK: Stroke
         let graphPath = UIBezierPath()
         graphPath.move(to: CGPoint(x: columnXPoint(data.filteredGraphPoints[0].x), y: columnYPoint(data.filteredGraphPoints[0].y)))
-        
-        // Add points for each item in the data.filteredGraphPoints array
-        // at the correct (x, y) for the point
         for i in 1..<data.filteredGraphPoints.count {
             let nextPoint = CGPoint(x: columnXPoint(data.filteredGraphPoints[i].x), y: columnYPoint(data.filteredGraphPoints[i].y))
             graphPath.addLine(to: nextPoint)
         }
-        context.saveGState()
         
-        // -------------------
-        // Line shadow
+        // MARK: Line Style
+        data.lineColor.setStroke()
+        graphPath.lineWidth = lineStroke
+        graphPath.stroke()
+        
+        // MARK: Line shadow
         if (lineShadow && dataSets.count == 1) {
+            context.saveGState()
             // Line shadow gradient setup
             let startColor = gradientStartColor.cgColor
             let endColor = backgroundGradient ? gradientEndColor.cgColor : solidBackgroundColor.cgColor
@@ -231,17 +227,15 @@ private extension SimpleLineChart {
                 start: graphStartPoint,
                 end: graphEndPoint,
                 options: [])
+            context.restoreGState()
         }
-        context.restoreGState()
-        graphPath.lineWidth = lineStroke
-        graphPath.stroke()
         
-        // -------------------
-        // Data points
+        // MARK: Data points
+        data.lineColor.setFill()
         for i in 0..<data.filteredGraphPoints.count {
             var point = CGPoint(x: columnXPoint(data.filteredGraphPoints[i].x), y: columnYPoint(data.filteredGraphPoints[i].y))
             point.x -= circleDiameter / 2
-            point.y -= circleDiameter / 2
+            point.y -= circleDiameter / 1.5
 
             let circle = UIBezierPath(
                 ovalIn: CGRect(

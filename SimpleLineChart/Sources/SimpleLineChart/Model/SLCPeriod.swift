@@ -8,8 +8,8 @@
 import Foundation
 
 public class SLCPeriod {
-    var name: String
-    var value: Int
+    var name: String // Name of the period
+    var value: Int // Time range in unix time
     
     public init(_ name: String, _ value: Int) {
         self.name = name
