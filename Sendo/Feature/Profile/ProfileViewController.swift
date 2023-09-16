@@ -20,7 +20,7 @@ class ProfileViewController: BaseTabViewController {
     private lazy var loginView: ProfileLoginView = {
         let view = ProfileLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.buttonPressedSubject.sink { type in
+        view.tapLogginButtonSubject.sink { type in
             switch type {
             case .google: self.signInGoogle()
             case .apple: self.signInApple()

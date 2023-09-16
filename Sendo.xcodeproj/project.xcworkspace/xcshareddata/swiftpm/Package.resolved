@@ -154,6 +154,15 @@
       }
     },
     {
+      "identity" : "simplelinechart",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/augarte/SimpleLineChart.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e6593347b1759c59f14bf4c8159007b20ced49cf"
+      }
+    },
+    {
       "identity" : "swift-protobuf",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/apple/swift-protobuf.git",

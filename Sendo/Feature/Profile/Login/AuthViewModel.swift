@@ -12,10 +12,7 @@ class AuthViewModel: ObservableObject {
     
     var authUser = CurrentValueSubject<AuthUser?, Never>(nil)
     
-    init() {
-        
-    }
-    
+    init() { }
 }
 
 extension AuthViewModel {
@@ -25,5 +22,4 @@ extension AuthViewModel {
             self.authUser.value = user
         }
     }
-
 }

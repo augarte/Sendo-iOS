@@ -22,7 +22,7 @@ class ProfileLoginView: UIView {
         case apple
     }
     
-    var buttonPressedSubject = PassthroughSubject<LoginType, Never>()
+    var tapLogginButtonSubject = PassthroughSubject<LoginType, Never>()
     
     lazy var appleLoginButton: AppleAuthorizationButton = {
         let button = AppleAuthorizationButton.init()
@@ -72,10 +72,10 @@ class ProfileLoginView: UIView {
     }
     
     @objc private func signinGooglePress(){
-        buttonPressedSubject.send(.google)
+        tapLogginButtonSubject.send(.google)
     }
     
     @objc private func signinApplePress(){
-        buttonPressedSubject.send(.apple)
+        tapLogginButtonSubject.send(.apple)
     }
 }

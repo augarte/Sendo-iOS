@@ -44,14 +44,22 @@ class ProgressViewController: BaseTabViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         progressViewModel.fetchWeight()
-        progressViewModel.measurements.sink { [unowned self] (_) in
-            let points = progressViewModel.measurements.value.compactMap({ measurement in
-                // TODO: fix timestamp case
-                let timestamp = Int(measurement.date) ?? 0
+        progressViewModel.measurements.sink { [weak self] _ in
+            guard let self else { return }
+            
+            var points: [SLCData] = self.progressViewModel.measurements.value.compactMap({ measurement in
+                guard let timestamp = Int(measurement.date) else { return nil }
                 return SLCData(x: timestamp, y: measurement.value)
             })
+            
+            // Add last value as current weight
+            if let lastValue = self.progressViewModel.measurements.value.first?.value {
+                let timestamp = Int(NSDate().timeIntervalSince1970)
+                points.insert(SLCData(x: timestamp, y: lastValue), at: 0)
+            }
+            
             let dataSet = SLCDataSet(graphPoints: points, lineColor: .white)
-            lineChart.loadPoints(dataSet: dataSet)
+            self.lineChart.loadPoints(dataSet: dataSet)
             self.progressTableView.reloadData()
         }.store(in: &cancellBag)
     }
