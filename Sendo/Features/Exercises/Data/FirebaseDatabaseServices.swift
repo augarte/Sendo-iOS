@@ -9,41 +9,22 @@ import Foundation
 import Combine
 import FirebaseDatabase
 
-public protocol FirebaseDatabaseServicesProtocol {
-    typealias CompletionStream = (CurrentValueSubject<[Exercise], Never>)
-    
-    func fetchExerciseList(completion: CompletionStream) -> Void
-}
+final class FirebaseDatabaseServices: ExerciseCatalog {
+    private static let instance = FirebaseDatabaseServices()
 
-class FirebaseDatabaseServices: FirebaseDatabaseServicesProtocol {
-    
-    private static var firebaseDatabaseService: FirebaseDatabaseServices = {
-        return FirebaseDatabaseServices()
-    }()
-    private var cancellBag = Set<AnyCancellable>()
-    
-    private init() {
-    }
-    
-    class func shared() -> FirebaseDatabaseServices {
-        return firebaseDatabaseService
-    }
-}
+    private init() {}
 
-extension FirebaseDatabaseServices {
-    
-    public func fetchExerciseList(completion: CompletionStream) {
-        FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title").sink { completion in
-            switch completion {
-            case .failure(let error): print("Error: \(error.localizedDescription)")
-            case .finished: break
+    static func shared() -> FirebaseDatabaseServices { instance }
+
+    func fetchExerciseList() -> AnyPublisher<[Exercise], Error> {
+        FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title")
+            .map { snapshot in
+                snapshot.children.compactMap { child in
+                    guard let child = child as? DataSnapshot else { return nil }
+                    return ExerciseRecord.decode(child.value)
+                }
             }
-        } receiveValue: { snapshot in
-            completion.send(snapshot.children.compactMap { child in
-                guard let child = child as? DataSnapshot else { return nil }
-                return ExerciseRecord.decode(child.value)
-            })
-        }.store(in: &cancellBag)
+            .eraseToAnyPublisher()
     }
 }
 

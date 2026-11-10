@@ -1,123 +1,106 @@
-//
-//  ViewController.swift
-//  sendo
-//
-//  Created by Aimar Ugarte on 23/10/21.
-//
-
 import UIKit
-import Combine
 
-class WorkoutViewController: BaseTabViewController {
-    
-    private enum Constants {
-        static let buttonSize: CGFloat = 50
-        static let buttonSpacing: CGFloat = Spacer.size02
+final class WorkoutViewController: BaseTabViewController, UITableViewDataSource {
+    private let viewModel: WorkoutViewModel
+    private let catalog: any ExerciseCatalog
+    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private var loadError: Error?
+
+    init(viewModel: WorkoutViewModel, catalog: any ExerciseCatalog) {
+        self.viewModel = viewModel
+        self.catalog = catalog
+        super.init(title: "Workout", image: "WorkoutWhite")
     }
-    
-    private lazy var startWorkoutButton: UIButton = {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor(named: "AccentColor")
-        button.titleLabel?.textColor = .white
-        button.heightAnchor.constraint(equalToConstant: Constants.buttonSize).isActive = true
-        button.layer.cornerRadius = Constants.buttonSize / 4
-        button.addTarget(self, action: #selector(tapWorkoutButton), for: .touchUpInside)
-        return button
-    }()
-    private lazy var emptyState: WorkoutEmptyState = {
-        let view = WorkoutEmptyState()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private lazy var currentWorkout: CurrentWorkoutView = {
-        let view = CurrentWorkoutView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    private var currentView: UIView = {
-        let view = UIView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
-    private let workoutViewModel = WorkoutViewModel()
-    private var cancellBag = Set<AnyCancellable>()
-    
-    static func create() -> WorkoutViewController {
-        return WorkoutViewController(title: "Workout", image: "WorkoutWhite")
-    }
-    
+
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func loadView() {
-        super.loadView()
-        addToolbarItem()
-        setupButons()
-        setupConstraints()
-    }
-}
-    
-private extension WorkoutViewController {
-    
-    func setupButons() {
-        if let _ = workoutViewModel.workout.value {
-            startWorkoutButton.setTitle("Start todays workout", for: .normal)
-            setupCurrentView(subView: currentWorkout)
-            currentWorkout.setupView()
-        } else {
-            startWorkoutButton.setTitle("Plan your workout", for: .normal)
-            setupCurrentView(subView: emptyState)
-            emptyState.setupView()
-        }
-    }
-    
-    func setupCurrentView(subView: UIView) {
-        currentView.addSubview(subView)
+        tableView.dataSource = self
+        tableView.allowsSelection = false
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(tableView)
         NSLayoutConstraint.activate([
-            subView.topAnchor.constraint(equalTo: currentView.topAnchor),
-            subView.leadingAnchor.constraint(equalTo: currentView.leadingAnchor),
-            subView.trailingAnchor.constraint(equalTo: currentView.trailingAnchor),
-            subView.bottomAnchor.constraint(equalTo: currentView.bottomAnchor)
+            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        loadWorkout()
     }
-    
-    func setupConstraints() {
-        view.addSubviews([startWorkoutButton, currentView])
-        NSLayoutConstraint.activate([
-            view.safeAreaLayoutGuide.bottomAnchor.constraint(equalTo: startWorkoutButton.bottomAnchor, constant: Constants.buttonSpacing),
-            startWorkoutButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.buttonSpacing),
-            view.trailingAnchor.constraint(equalTo: startWorkoutButton.trailingAnchor, constant: Constants.buttonSpacing),
-            
-            currentView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            currentView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            currentView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            startWorkoutButton.topAnchor.constraint(equalTo: currentView.bottomAnchor, constant: Constants.buttonSpacing)
-        ])
-    }
-}
 
-private extension WorkoutViewController {
-    
-    func addToolbarItem(){
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonItem.SystemItem.add, target: self, action: #selector(self.tapNewWorkout(sender:)))
-    }
-    
-    @objc func tapNewWorkout(sender: UIView?) {
-        let newWorkoutVC = NewWorkoutDialog.create {
-            //TODO: Completion handling
+    private func loadWorkout() {
+        do {
+            try viewModel.load()
+            loadError = nil
+        } catch {
+            loadError = error
         }
-        showModalView(viewController: newWorkoutVC)
+        render()
     }
-    
-    @objc func tapWorkoutButton(sender: UIButton?) {
-        if let _ = workoutViewModel.workout.value {
-            
-        } else {
-            tapNewWorkout(sender: sender)
+
+    private func render() {
+        let plan = viewModel.state?.plan
+        let showsPlan = plan != nil && loadError == nil
+        tableView.isHidden = !showsPlan
+        navigationItem.rightBarButtonItem = showsPlan
+            ? UIBarButtonItem(title: "Edit plan", style: .plain, target: self, action: #selector(editPlan))
+            : nil
+
+        if showsPlan {
+            contentUnavailableConfiguration = nil
+            tableView.reloadData()
+            return
         }
+
+        var configuration = UIContentUnavailableConfiguration.empty()
+        configuration.image = UIImage(systemName: loadError == nil ? "list.bullet.rectangle" : "exclamationmark.circle")
+        configuration.text = loadError == nil ? "No workout plan yet" : "Couldn’t load your workout plan"
+        configuration.secondaryText = loadError == nil
+            ? "Build a plan from the exercise library. Your sessions repeat in order as you train."
+            : "Try opening your saved workout plan again."
+        configuration.button = .filled()
+        configuration.button.title = loadError == nil ? "Create a plan" : "Retry"
+        configuration.buttonProperties.primaryAction = UIAction { [weak self] _ in
+            guard let self else { return }
+            if self.loadError == nil { self.editPlan() } else { self.loadWorkout() }
+        }
+        contentUnavailableConfiguration = configuration
+    }
+
+    @objc private func editPlan() {
+        guard let state = viewModel.state, loadError == nil else { return }
+        let draft = state.plan ?? WorkoutPlan(name: "My workout plan", sessions: [])
+        let editor = WorkoutPlanEditorViewController(plan: draft, catalog: catalog) { [weak self] plan in
+            guard let self else { return }
+            try self.viewModel.save(plan)
+            self.render()
+        }
+        present(UINavigationController(rootViewController: editor), animated: true)
+    }
+
+    func numberOfSections(in tableView: UITableView) -> Int { 2 }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        section == 0 ? 1 : viewModel.state?.plan?.sessions.count ?? 0
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        section == 0 ? "Next session" : "Session rotation"
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let state = viewModel.state, let plan = state.plan else { return UITableViewCell() }
+        if indexPath.section == 0 {
+            let nextSession = state.nextSession
+            let position = plan.sessions.firstIndex { $0.id == nextSession?.id }.map { $0 + 1 } ?? 1
+            var details = [plan.name, "Session \(position) of \(plan.sessions.count)"]
+            if let days = state.weeklyTrainingDays { details.append("\(days) training days per week") }
+            return WorkoutEditorRows.detail(nextSession?.name ?? plan.name, detail: details.joined(separator: " · "))
+        }
+        let session = plan.sessions[indexPath.row]
+        return WorkoutEditorRows.detail(
+            "\(indexPath.row + 1). \(session.name)", detail: WorkoutEditorRows.exerciseCount(session.exercises.count)
+        )
     }
 }

@@ -14,17 +14,63 @@ final class SendoUITests: XCTestCase {
         continueAfterFailure = false
     }
 
-    func testWorkoutOpensPlannerAndSession() {
-        let app = launchApp()
+    func testGuestCreatesReopensAndEditsWorkoutPlan() {
+        let app = XCUIApplication()
+        app.launchArguments.append("--sendo-fixtures")
+        app.launchEnvironment["SENDO_WORKOUT_STORE_ID"] = UUID().uuidString
+        app.launch()
         app.tabBars.buttons["Workout"].tap()
-        app.buttons["Plan your workout"].tap()
 
-        XCTAssertTrue(app.navigationBars["New Workout"].exists)
-        let session = app.tables.cells.firstMatch
-        XCTAssertTrue(session.exists)
-        session.tap()
+        let createPlan = app.buttons["Create a plan"]
+        XCTAssertTrue(createPlan.waitForExistence(timeout: 5))
+        createPlan.tap()
+        app.tables.staticTexts["Add session"].tap()
+        app.tables.staticTexts["Add exercise"].tap()
 
-        XCTAssertTrue(app.navigationBars["Session"].exists)
+        let search = app.searchFields["Search exercises"]
+        XCTAssertTrue(search.waitForExistence(timeout: 5))
+        search.tap()
+        search.typeText("squat")
+        let squat = app.tables.staticTexts["Bodyweight Squat"]
+        XCTAssertTrue(squat.waitForExistence(timeout: 5))
+        squat.tap()
+
+        let saveExercise = app.navigationBars.buttons["workout.saveExercise"]
+        XCTAssertTrue(saveExercise.waitForExistence(timeout: 5))
+        saveExercise.tap()
+        XCTAssertTrue(squat.waitForExistence(timeout: 5))
+        app.navigationBars.buttons["workout.saveSession"].tap()
+        app.navigationBars.buttons["Save"].tap()
+        XCTAssertTrue(app.staticTexts["My workout plan · Session 1 of 1"].waitForExistence(timeout: 5))
+
+        app.terminate()
+        app.launch()
+        app.tabBars.buttons["Workout"].tap()
+        let editPlan = app.navigationBars.buttons["Edit plan"]
+        XCTAssertTrue(editPlan.waitForExistence(timeout: 5))
+        editPlan.tap()
+        app.tables.cells["workout.planEditor.session"].tap()
+        squat.tap()
+        app.tables.staticTexts["Swap exercise"].tap()
+
+        let lunge = app.tables.staticTexts["Reverse Lunge"]
+        XCTAssertTrue(lunge.waitForExistence(timeout: 5))
+        lunge.tap()
+        XCTAssertTrue(saveExercise.waitForExistence(timeout: 5))
+        let load = app.textFields["workout.startingLoad"]
+        if !load.isHittable { app.tables.firstMatch.swipeUp() }
+        load.tap()
+        load.typeText("20")
+        saveExercise.tap()
+        XCTAssertTrue(lunge.waitForExistence(timeout: 5))
+        app.navigationBars.buttons["workout.saveSession"].tap()
+        app.navigationBars.buttons["Save"].tap()
+
+        XCTAssertTrue(editPlan.waitForExistence(timeout: 5))
+        editPlan.tap()
+        app.tables.cells["workout.planEditor.session"].tap()
+        XCTAssertTrue(lunge.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.tables.staticTexts["3 × 8–12 reps · 20 kg"].exists)
     }
 
     func testExercisesTabOpens() {

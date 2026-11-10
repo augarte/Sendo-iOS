@@ -42,7 +42,25 @@ enum AppEnvironment {
         return viewModel
     }
 
-    static func exercises() -> any FirebaseDatabaseServicesProtocol {
+    static func workouts() -> any WorkoutRepository {
+        #if DEBUG
+        if usesFixtures {
+            if let value = ProcessInfo.processInfo.environment["SENDO_WORKOUT_STORE_ID"],
+               let id = UUID(uuidString: value) {
+                return LocalWorkoutRepository(fileURL: URL.temporaryDirectory
+                    .appendingPathComponent("SendoWorkoutTests")
+                    .appendingPathComponent(id.uuidString)
+                    .appendingPathExtension("json"))
+            }
+            return FixtureWorkouts()
+        }
+        #endif
+        return LocalWorkoutRepository(fileURL: URL.applicationSupportDirectory
+            .appendingPathComponent("Sendo")
+            .appendingPathComponent("Workouts.json"))
+    }
+
+    static func exercises() -> any ExerciseCatalog {
         #if DEBUG
         if usesFixtures { return FixtureExercises() }
         #endif
@@ -64,15 +82,27 @@ private final class FixtureMeasurements: MeasurementRepository {
     func delete(id: MeasurementID) async throws { records[id] = nil }
 }
 
-private struct FixtureExercises: FirebaseDatabaseServicesProtocol {
-    func fetchExerciseList(completion: CompletionStream) {
-        completion.send([
+private final class FixtureWorkouts: WorkoutRepository {
+    private var state = WorkoutTrainingState()
+
+    func load() throws -> WorkoutTrainingState { state }
+    func save(_ state: WorkoutTrainingState) throws { self.state = state }
+}
+
+private struct FixtureExercises: ExerciseCatalog {
+    func fetchExerciseList() -> AnyPublisher<[Exercise], Error> {
+        Just([
             Exercise(
                 id: "fixture-squat", name: "squat", title: "Bodyweight Squat", type: "strength",
                 description: "Bend at the hips and knees.", steps: [], tips: [],
                 primary: ["Quadriceps"], secondary: [], equipment: [], images: []
+            ),
+            Exercise(
+                id: "fixture-lunge", name: "lunge", title: "Reverse Lunge", type: "strength",
+                description: "Step back and bend both knees.", steps: [], tips: [],
+                primary: ["Quadriceps"], secondary: [], equipment: [], images: []
             )
-        ])
+        ]).setFailureType(to: Error.self).eraseToAnyPublisher()
     }
 }
 #endif

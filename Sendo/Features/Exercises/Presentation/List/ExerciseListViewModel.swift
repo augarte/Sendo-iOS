@@ -8,22 +8,22 @@
 import Foundation
 import Combine
 
-class ExerciseListViewModel: ObservableObject {
-    
-    var exercises = CurrentValueSubject<[Exercise], Never>([Exercise]())
-    
-    private let service: any FirebaseDatabaseServicesProtocol
+final class ExerciseListViewModel: ObservableObject {
+    let exercises = CurrentValueSubject<[Exercise], Never>([])
+    private let service: any ExerciseCatalog
+    private var request: AnyCancellable?
 
-    init(service: any FirebaseDatabaseServicesProtocol) {
+    init(service: any ExerciseCatalog) {
         self.service = service
-        fetchExercises()
     }
 
-}
-
-extension ExerciseListViewModel {
-    
     func fetchExercises() {
-        service.fetchExerciseList(completion: self.exercises)
+        request = service.fetchExerciseList()
+            .receive(on: DispatchQueue.main)
+            .sink { completion in
+                if case .failure(let error) = completion { print("Error: \(error.localizedDescription)") }
+            } receiveValue: { [weak self] exercises in
+                self?.exercises.send(exercises)
+            }
     }
 }

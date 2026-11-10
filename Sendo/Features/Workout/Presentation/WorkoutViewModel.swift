@@ -1,26 +1,20 @@
-//
-//  WorkoutViewModel.swift
-//  Sendo
-//
-//  Created by Aimar Ugarte on 3/12/22.
-//
+@MainActor
+final class WorkoutViewModel {
+    private let repository: any WorkoutRepository
+    private(set) var state: WorkoutTrainingState?
 
-import Foundation
-import Combine
-
-class WorkoutViewModel: ObservableObject {
-    
-    var workout = CurrentValueSubject<WorkoutPlan?, Never>(nil)
-    
-    init() {
-        fetchWorkout()
+    init(repository: any WorkoutRepository) {
+        self.repository = repository
     }
 
-}
+    func load() throws {
+        state = try repository.load()
+    }
 
-extension WorkoutViewModel {
-    
-    func fetchWorkout() {
-        //FirebaseDatabaseServices.shared().fetchExerciseList(completion: self.exercises)
+    func save(_ plan: WorkoutPlan) throws {
+        var updated = try state ?? repository.load()
+        try updated.savePlan(plan)
+        try repository.save(updated)
+        state = updated
     }
 }
