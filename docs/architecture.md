@@ -16,8 +16,8 @@ Progress is the reference implementation. The app injects a measurement reposito
 |---|---|
 | Exercise | The catalog's existing string ID. Keep instructions, muscle groups, equipment, and media with the catalog record. Planned exercises reference this ID. |
 | BodyMeasurement | A stable ID with a separate measured date, kind, value, and optional unit. Weight is the current kind. Preserve missing units without assuming kilograms or pounds. |
-| Workout plan (planned) | A plan has a stable ID and ordered sessions. Each planned session has its own ID and an ordered list of exercise prescriptions. A prescription references the catalog and defines sets, reps, and optional load. |
-| Workout log (planned) | A performed session has its own ID and records dates, exercises, and actual sets. Keep the catalog reference and display information needed to read history after the plan or catalog changes. |
+| Workout plan | A plan has a stable ID and ordered sessions. Each planned session has its own ID and an ordered list of exercise prescriptions. A prescription references the catalog and defines sets, reps, and optional load. |
+| Workout log | A performed session has its own ID and records dates, exercises, and actual sets. Keep the catalog reference and display information needed to read history after the plan or catalog changes. |
 | Profile and preferences | Profile data belongs to the user. Device preferences such as appearance belong to the local installation. The session store observes Firebase Auth and switches Progress to a repository scoped to the active user. |
 
 ## Measurement storage compatibility
@@ -33,3 +33,9 @@ Before distributing this schema to users, verify that deployed Firestore rules a
 Firebase Auth supplies the active user ID. Progress clears its screen state when the account changes. Requests are scoped to the user who started them, and an editor opened under one account cannot write under another.
 
 When a guest signs in with a new provider account, Firebase links the credential to the existing guest UID. If the credential already belongs to an account, Sendo reads the guest history before switching accounts and stages valid measurements on the device until they can be imported. A transfer is scoped to the chosen provider identity. It uses a stable import ID per source record and creates missing records without overwriting the destination history. The original guest records remain available under their original UID. The local transfer is retried on launch or foregrounding and cleared after completion.
+
+## Workout rotation and storage
+
+Weekly training frequency is a preference independent of the ordered sessions in a plan. The rotation tracks the next session by ID, so completing four sessions of a five-session plan leaves session five next, even after a new week or a relaunch.
+
+Workout storage is on this device. One atomic record saves the plan, rotation position, active workout, and completed logs together. Active workouts and logs retain a session snapshot so later plan edits preserve the recorded exercises. A finished workout with at least one logged set advances the rotation. Ending an empty workout leaves the current position intact.

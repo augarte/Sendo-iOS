@@ -14,6 +14,7 @@
 		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
 		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
 		20858D72272448D200993B5E /* sendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D71272448D200993B5E /* sendoTests.swift */; };
+		93166C386F163800988DA9D2 /* WorkoutTrainingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BA9D8E7B1334273252FEED30 /* WorkoutTrainingTests.swift */; };
 		C88E82C08CE9710A0622CD9D /* FirebaseIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */; };
 		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
 		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
@@ -65,6 +66,7 @@
 		EAB64091293C06DE0001949D /* CurrentWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */; };
 		EAB64093293C07220001949D /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64092293C07220001949D /* WorkoutViewModel.swift */; };
 		EAB64096293C074C0001949D /* Workout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64095293C074C0001949D /* Workout.swift */; };
+		EBB1EB0009E1A3D4BC549E46 /* LocalWorkoutRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F4C278FD8E7C2573D9D9215 /* LocalWorkoutRepository.swift */; };
 		EAC9AECE2841608A00608A32 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECD2841608A00608A32 /* GoogleSignIn */; };
 		EAC9AED02841608A00608A32 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = EAC9AECF2841608A00608A32 /* GoogleSignInSwift */; };
 		EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */; };
@@ -103,6 +105,7 @@
 		20858D68272448D000993B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20858D6D272448D200993B5E /* SendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D71272448D200993B5E /* sendoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoTests.swift; sourceTree = "<group>"; };
+		BA9D8E7B1334273252FEED30 /* WorkoutTrainingTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutTrainingTests.swift; sourceTree = "<group>"; };
 		76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIntegrationTests.swift; sourceTree = "<group>"; };
 		20858D77272448D200993B5E /* SendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
@@ -147,6 +150,7 @@
 		EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutView.swift; sourceTree = "<group>"; };
 		EAB64092293C07220001949D /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
 		EAB64095293C074C0001949D /* Workout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Workout.swift; sourceTree = "<group>"; };
+		0F4C278FD8E7C2573D9D9215 /* LocalWorkoutRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWorkoutRepository.swift; sourceTree = "<group>"; };
 		EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleAuthorizationButton.swift; sourceTree = "<group>"; };
 		EAD2D11929199366003A975D /* NewWorkoutDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewWorkoutDialog.swift; sourceTree = "<group>"; };
 		EAD2D11B29199771003A975D /* SessionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionTableViewCell.swift; sourceTree = "<group>"; };
@@ -217,6 +221,7 @@
 			isa = PBXGroup;
 			children = (
 				20858D71272448D200993B5E /* sendoTests.swift */,
+				BA9D8E7B1334273252FEED30 /* WorkoutTrainingTests.swift */,
 				76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */,
 			);
 			path = SendoTests;
@@ -308,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				E61973D4F9368818D2E82A3B /* Domain */,
+				7E50C2E4517443488E6EA9A4 /* Data */,
 				D6694342D05DAC4D733948A2 /* Presentation */,
 			);
 			path = Workout;
@@ -341,6 +347,14 @@
 				EAD2D11B29199771003A975D /* SessionTableViewCell.swift */,
 			);
 			path = SessionTableViewCell;
+			sourceTree = "<group>";
+		};
+		7E50C2E4517443488E6EA9A4 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				0F4C278FD8E7C2573D9D9215 /* LocalWorkoutRepository.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E61973D4F9368818D2E82A3B /* Domain */ = {
@@ -746,6 +760,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAB64096293C074C0001949D /* Workout.swift in Sources */,
+				EBB1EB0009E1A3D4BC549E46 /* LocalWorkoutRepository.swift in Sources */,
 				20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */,
 				EA3D14442827F01D00387419 /* ExerciseDetailViewController.swift in Sources */,
 				EA3D14222826E68000387419 /* NetworkServiceManager.swift in Sources */,
@@ -800,6 +815,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20858D72272448D200993B5E /* sendoTests.swift in Sources */,
+				93166C386F163800988DA9D2 /* WorkoutTrainingTests.swift in Sources */,
 				C88E82C08CE9710A0622CD9D /* FirebaseIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

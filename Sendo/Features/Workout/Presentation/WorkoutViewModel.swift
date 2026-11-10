@@ -10,7 +10,7 @@ import Combine
 
 class WorkoutViewModel: ObservableObject {
     
-    var workout = CurrentValueSubject<Workout?, Never>(nil)
+    var workout = CurrentValueSubject<WorkoutPlan?, Never>(nil)
     
     init() {
         fetchWorkout()
