@@ -34,7 +34,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        Task { await AppEnvironment.session?.resumePendingMerges() }
+        Task { [weak self] in
+            (self?.window?.rootViewController as? HomeTabBarViewController)?.offerTrainingSetupIfNeeded()
+            await AppEnvironment.session?.resumePendingMerges()
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {

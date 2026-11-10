@@ -2,13 +2,19 @@ import UIKit
 
 final class WorkoutPlanEditorViewController: UITableViewController {
     private let catalog: any ExerciseCatalog
+    private let onboardingPreferences: TrainingPreferences?
+    private let previewSection = 3
     private let onSave: (WorkoutPlan) throws -> Void
     private var draft: WorkoutPlan
     private let nameField = UITextField()
 
-    init(plan: WorkoutPlan, catalog: any ExerciseCatalog, onSave: @escaping (WorkoutPlan) throws -> Void) {
+    init(
+        plan: WorkoutPlan, catalog: any ExerciseCatalog, onboardingPreferences: TrainingPreferences? = nil,
+        onSave: @escaping (WorkoutPlan) throws -> Void
+    ) {
         draft = plan
         self.catalog = catalog
+        self.onboardingPreferences = onboardingPreferences
         self.onSave = onSave
         super.init(style: .insetGrouped)
     }
@@ -17,17 +23,23 @@ final class WorkoutPlanEditorViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = "Workout plan"
+        title = onboardingPreferences == nil ? "Workout plan" : "Review your plan"
+        navigationItem.prompt = onboardingPreferences == nil ? nil : "3 of 3"
         nameField.text = draft.name
         nameField.placeholder = "My workout plan"
         nameField.accessibilityIdentifier = "workout.planName"
         nameField.autocapitalizationType = .words
         tableView.keyboardDismissMode = .onDrag
-        navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-        navigationItem.rightBarButtonItems = [
-            UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save)),
-            editButtonItem
-        ]
+        let saveButton: UIBarButtonItem
+        if onboardingPreferences == nil {
+            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
+            saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
+        } else {
+            saveButton = UIBarButtonItem(title: "Finish", style: .done, target: self, action: #selector(save))
+            saveButton.accessibilityLabel = "Save plan and finish"
+            saveButton.accessibilityIdentifier = "onboarding.finish"
+        }
+        navigationItem.rightBarButtonItems = [saveButton, editButtonItem]
     }
 
     @objc private func cancel() {
@@ -44,14 +56,24 @@ final class WorkoutPlanEditorViewController: UITableViewController {
         }
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int { 3 }
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        onboardingPreferences == nil ? 3 : 4
+    }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 1 ? draft.sessions.count : 1
+        switch section {
+        case 1: draft.sessions.count
+        case previewSection: draft.sessions.isEmpty ? 0 : 2
+        default: 1
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 1 ? "Session rotation" : nil
+        switch section {
+        case 1: "Session rotation"
+        case previewSection where !draft.sessions.isEmpty: "How the rotation fits your week"
+        default: nil
+        }
     }
 
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
@@ -69,6 +91,13 @@ final class WorkoutPlanEditorViewController: UITableViewController {
             )
             cell.accessibilityIdentifier = "workout.planEditor.session"
             return cell
+        case previewSection:
+            guard let preferences = onboardingPreferences, !draft.sessions.isEmpty else { return UITableViewCell() }
+            let offset = indexPath.row * preferences.weeklyDays
+            let names = (offset..<(offset + preferences.weeklyDays)).map { draft.sessions[$0 % draft.sessions.count].name }
+            let cell = WorkoutEditorRows.detail("Week \(indexPath.row + 1)", detail: names.joined(separator: " → "))
+            cell.selectionStyle = .none
+            return cell
         default:
             return WorkoutEditorRows.action("Add session")
         }
@@ -76,7 +105,7 @@ final class WorkoutPlanEditorViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section != 0 else { return }
+        guard indexPath.section == 1 || indexPath.section == 2 else { return }
         let session = indexPath.section == 1 ? draft.sessions[indexPath.row] : PlannedSession(
             name: "Session \(draft.sessions.count + 1)", exercises: []
         )
@@ -87,7 +116,7 @@ final class WorkoutPlanEditorViewController: UITableViewController {
             } else {
                 self.draft.sessions.append(session)
             }
-            self.tableView.reloadSections(IndexSet(integer: 1), with: .automatic)
+            self.tableView.reloadSections(self.rotationSections, with: .automatic)
         }
         navigationController?.pushViewController(editor, animated: true)
     }
@@ -107,11 +136,18 @@ final class WorkoutPlanEditorViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, moveRowAt source: IndexPath, to destination: IndexPath) {
         let session = draft.sessions.remove(at: source.row)
         draft.sessions.insert(session, at: destination.row)
+        if onboardingPreferences != nil {
+            tableView.reloadSections(IndexSet(integer: previewSection), with: .none)
+        }
     }
 
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         guard editingStyle == .delete else { return }
         draft.sessions.remove(at: indexPath.row)
-        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.reloadSections(rotationSections, with: .automatic)
+    }
+
+    private var rotationSections: IndexSet {
+        onboardingPreferences == nil ? IndexSet(integer: 1) : IndexSet([1, previewSection])
     }
 }

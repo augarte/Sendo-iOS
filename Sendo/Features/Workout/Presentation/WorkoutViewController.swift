@@ -5,6 +5,7 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
     private let catalog: any ExerciseCatalog
     private let tableView = UITableView(frame: .zero, style: .insetGrouped)
     private var loadError: Error?
+    private var didOfferSetup = false
 
     init(viewModel: WorkoutViewModel, catalog: any ExerciseCatalog) {
         self.viewModel = viewModel
@@ -29,6 +30,15 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
         loadWorkout()
     }
 
+    func offerSetupIfNeeded() {
+        loadViewIfNeeded()
+        guard presentedViewController == nil, tabBarController?.presentedViewController == nil,
+              !didOfferSetup, loadError == nil,
+              viewModel.state?.shouldOfferSetup == true else { return }
+        didOfferSetup = true
+        showTrainingSetup()
+    }
+
     private func loadWorkout() {
         do {
             try viewModel.load()
@@ -43,6 +53,16 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
         let plan = viewModel.state?.plan
         let showsPlan = plan != nil && loadError == nil
         tableView.isHidden = !showsPlan
+        if loadError == nil {
+            let setup = UIBarButtonItem(
+                image: UIImage(systemName: "slider.horizontal.3"), style: .plain,
+                target: self, action: #selector(showTrainingSetup)
+            )
+            setup.accessibilityLabel = showsPlan ? "Training preferences" : "Set up training"
+            navigationItem.leftBarButtonItem = setup
+        } else {
+            navigationItem.leftBarButtonItem = nil
+        }
         navigationItem.rightBarButtonItem = showsPlan
             ? UIBarButtonItem(title: "Edit plan", style: .plain, target: self, action: #selector(editPlan))
             : nil
@@ -63,9 +83,47 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
         configuration.button.title = loadError == nil ? "Create a plan" : "Retry"
         configuration.buttonProperties.primaryAction = UIAction { [weak self] _ in
             guard let self else { return }
-            if self.loadError == nil { self.editPlan() } else { self.loadWorkout() }
+            if self.loadError == nil {
+                self.editPlan()
+            } else {
+                self.loadWorkout()
+                self.offerSetupIfNeeded()
+            }
         }
         contentUnavailableConfiguration = configuration
+    }
+
+    @objc private func showTrainingSetup() {
+        guard let state = viewModel.state, loadError == nil else { return }
+        let isEditingPreferences = state.plan != nil
+        let preferences = TrainingPreferences(
+            weeklyDays: state.weeklyTrainingDays ?? 4, equipment: state.equipment ?? .gym
+        )
+        let setup = TrainingSetupViewController(
+            preferences: preferences,
+            isEditingPreferences: isEditingPreferences,
+            onDefer: state.shouldOfferSetup ? { [weak self] in
+                try self?.viewModel.deferSetup()
+            } : nil
+        ) { [weak self] preferences, navigation in
+            guard let self else { return }
+            if isEditingPreferences {
+                try self.viewModel.saveTrainingPreferences(preferences)
+                self.render()
+                navigation.dismiss(animated: true)
+            } else {
+                let startingPlan = WorkoutStartingPlanViewController(preferences: preferences, catalog: self.catalog) { [weak self] plan in
+                    guard let self else { return }
+                    try self.viewModel.save(plan, preferences: preferences)
+                    self.render()
+                }
+                navigation.pushViewController(startingPlan, animated: true)
+            }
+        }
+        let navigation = UINavigationController(rootViewController: setup)
+        navigation.isModalInPresentation = state.shouldOfferSetup
+        let presenter: UIViewController = tabBarController ?? self
+        presenter.present(navigation, animated: true)
     }
 
     @objc private func editPlan() {
@@ -95,7 +153,9 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
             let nextSession = state.nextSession
             let position = plan.sessions.firstIndex { $0.id == nextSession?.id }.map { $0 + 1 } ?? 1
             var details = [plan.name, "Session \(position) of \(plan.sessions.count)"]
-            if let days = state.weeklyTrainingDays { details.append("\(days) training days per week") }
+            if let days = state.weeklyTrainingDays {
+                details.append(days == 1 ? "1 training day per week" : "\(days) training days per week")
+            }
             return WorkoutEditorRows.detail(nextSession?.name ?? plan.name, detail: details.joined(separator: " · "))
         }
         let session = plan.sessions[indexPath.row]

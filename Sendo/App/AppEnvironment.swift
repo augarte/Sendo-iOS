@@ -101,6 +101,21 @@ private struct FixtureExercises: ExerciseCatalog {
                 id: "fixture-lunge", name: "lunge", title: "Reverse Lunge", type: "strength",
                 description: "Step back and bend both knees.", steps: [], tips: [],
                 primary: ["Quadriceps"], secondary: [], equipment: [], images: []
+            ),
+            Exercise(
+                id: "fixture-push-up", name: "push-up", title: "Push-Up", type: "strength",
+                description: "Lower your chest and press back up.", steps: [], tips: [],
+                primary: ["Chest"], secondary: [], equipment: [], images: []
+            ),
+            Exercise(
+                id: "fixture-prone-y-raise", name: "prone-y-raise", title: "Prone Y Raise", type: "strength",
+                description: "Lie face down and lift your arms.", steps: [], tips: [],
+                primary: ["Upper Back"], secondary: [], equipment: [], images: []
+            ),
+            Exercise(
+                id: "fixture-glute-bridge", name: "glute-bridge", title: "Glute Bridge", type: "strength",
+                description: "Press through your feet to lift your hips.", steps: [], tips: [],
+                primary: ["Glutes"], secondary: [], equipment: [], images: []
             )
         ]).setFailureType(to: Error.self).eraseToAnyPublisher()
     }

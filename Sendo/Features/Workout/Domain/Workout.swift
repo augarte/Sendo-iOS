@@ -78,12 +78,44 @@ struct WorkoutLog: Codable, Equatable, Identifiable {
     let sets: [WorkoutSet]
 }
 
+enum TrainingEquipment: String, CaseIterable, Codable {
+    case gym, dumbbells, bodyweight
+
+    var title: String {
+        switch self {
+        case .gym: "Full gym"
+        case .dumbbells: "Dumbbells"
+        case .bodyweight: "Bodyweight"
+        }
+    }
+}
+
+struct TrainingPreferences {
+    var weeklyDays: Int
+    var equipment: TrainingEquipment
+}
+
 struct WorkoutTrainingState: Codable, Equatable {
     private(set) var weeklyTrainingDays: Int?
+    private(set) var equipment: TrainingEquipment?
+    private(set) var deferredSetup: Bool?
     private(set) var plan: WorkoutPlan?
     private(set) var nextSessionID: PlannedSession.ID?
     private(set) var activeWorkout: ActiveWorkout?
     private(set) var history: [WorkoutLog] = []
+
+    var shouldOfferSetup: Bool {
+        plan == nil && deferredSetup != true
+    }
+
+    mutating func saveTrainingPreferences(_ preferences: TrainingPreferences) throws {
+        try setWeeklyTrainingDays(preferences.weeklyDays)
+        equipment = preferences.equipment
+    }
+
+    mutating func deferSetup() {
+        deferredSetup = true
+    }
 
     var nextSession: PlannedSession? {
         guard let plan else { return nil }

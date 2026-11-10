@@ -95,6 +95,74 @@ final class WorkoutTrainingTests: XCTestCase {
         XCTAssertThrowsError(try LocalWorkoutRepository(fileURL: fileURL).load())
     }
 
+    func testStarterTemplateUsesCatalogIDsAndDistinctPrescriptions() throws {
+        let catalog = [
+            exercise("push", title: "Push-Up"), exercise("pull", title: "Prone Y Raise"),
+            exercise("squat", title: "Bodyweight Squat"), exercise("hinge", title: "Glute Bridge"),
+            exercise("barbell", title: "Barbell Bench Press")
+        ]
+        let plan = try StarterWorkoutTemplate.makePlan(sessionCount: 5, equipment: .bodyweight, catalog: catalog)
+        let prescriptions = plan.sessions.flatMap(\.exercises)
+        XCTAssertEqual(plan.sessions.map(\.name), ["Upper", "Lower", "Push", "Pull", "Legs"])
+        XCTAssertEqual(Set(prescriptions.map(\.exerciseID)), ["push", "pull", "squat", "hinge"])
+        XCTAssertEqual(Set(prescriptions.map(\.id)).count, prescriptions.count)
+        XCTAssertNoThrow(try plan.validate())
+        XCTAssertEqual(try StarterWorkoutTemplate.makePlan(sessionCount: 7, equipment: .bodyweight, catalog: catalog)
+            .sessions.count, 7)
+        XCTAssertThrowsError(try StarterWorkoutTemplate.makePlan(sessionCount: 5, equipment: .bodyweight, catalog: []))
+    }
+
+    @MainActor
+    func testSetupPersistsPreferencesWithValidPlanOnly() throws {
+        let repository = LocalWorkoutRepository(fileURL: temporaryFile())
+        let viewModel = WorkoutViewModel(repository: repository)
+        try viewModel.load()
+        XCTAssertEqual(viewModel.state?.shouldOfferSetup, true)
+        let preferences = TrainingPreferences(weeklyDays: 4, equipment: .dumbbells)
+        var plan = makePlan()
+        plan.sessions = []
+        XCTAssertThrowsError(try viewModel.save(plan, preferences: preferences))
+        XCTAssertNil(try repository.load().weeklyTrainingDays)
+        XCTAssertNil(viewModel.state?.equipment)
+
+        try viewModel.deferSetup()
+        XCTAssertFalse(try repository.load().shouldOfferSetup)
+        plan = makePlan()
+        try viewModel.save(plan, preferences: preferences)
+        var saved = try repository.load()
+        XCTAssertEqual(saved.weeklyTrainingDays, 4)
+        XCTAssertEqual(saved.equipment, .dumbbells)
+        XCTAssertEqual(saved.plan, plan)
+
+        try completeNextSession(in: &saved)
+        try repository.save(saved)
+        try viewModel.load()
+        try viewModel.saveTrainingPreferences(TrainingPreferences(weeklyDays: 3, equipment: .gym))
+        saved = try repository.load()
+        XCTAssertEqual(saved.weeklyTrainingDays, 3)
+        XCTAssertEqual(saved.equipment, .gym)
+        XCTAssertEqual(saved.nextSession?.id, plan.sessions[1].id)
+    }
+
+    func testExistingWorkoutRecordWithoutSetupFieldsKeepsItsPlan() throws {
+        let file = temporaryFile()
+        let repository = LocalWorkoutRepository(fileURL: file)
+        var state = WorkoutTrainingState()
+        let plan = makePlan()
+        try state.savePlan(plan)
+        try repository.save(state)
+
+        let reopened = try repository.load()
+        XCTAssertEqual(reopened.plan, plan)
+        XCTAssertNil(reopened.equipment)
+        XCTAssertFalse(reopened.shouldOfferSetup)
+    }
+
+    private func exercise(_ id: String, title: String) -> Exercise {
+        Exercise(id: id, name: id, title: title, type: "strength", description: "",
+                 steps: [], tips: [], primary: [], secondary: [], equipment: [], images: [])
+    }
+
     private func completeNextSession(in state: inout WorkoutTrainingState) throws {
         let start = Date()
         try state.startWorkout(at: start)

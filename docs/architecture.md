@@ -39,3 +39,9 @@ When a guest signs in with a new provider account, Firebase links the credential
 Weekly training frequency is a preference independent of the ordered sessions in a plan. The rotation tracks the next session by ID, so completing four sessions of a five-session plan leaves session five next, even after a new week or a relaunch.
 
 Workout storage is on this device. One atomic record saves the plan, rotation position, active workout, and completed logs together. Active workouts and logs retain a session snapshot so later plan edits preserve the recorded exercises. A finished workout with at least one logged set advances the rotation. Ending an empty workout leaves the current position intact.
+
+## First workout setup
+
+On first launch without a saved plan, Workout offers setup for weekly training days and available equipment. The guest can review a starter template or build a plan in the same editor used after setup. Templates resolve exercises from the catalog and retain their IDs. A missing template exercise leaves manual setup available.
+
+Saving the first plan commits the plan and training preferences together. Guests can defer setup and reopen it from the Workout toolbar. Existing plans open normally, and changing training preferences leaves the current rotation position intact.

@@ -14,16 +14,51 @@ final class SendoUITests: XCTestCase {
         continueAfterFailure = false
     }
 
+    func testOnboardingSavesFiveSessionPlanWithFourTrainingDays() {
+        let app = XCUIApplication()
+        app.launchArguments.append("--sendo-fixtures")
+        app.launchEnvironment["SENDO_WORKOUT_STORE_ID"] = UUID().uuidString
+        app.launch()
+
+        let bodyweight = app.tables.staticTexts["Bodyweight"]
+        XCTAssertTrue(bodyweight.waitForExistence(timeout: 5))
+        bodyweight.tap()
+        app.tables.staticTexts["Continue"].tap()
+        let template = app.tables.staticTexts["Use a template"]
+        XCTAssertTrue(template.waitForExistence(timeout: 5))
+        template.tap()
+        let finish = app.navigationBars.buttons["onboarding.finish"]
+        XCTAssertTrue(finish.waitForExistence(timeout: 5))
+        XCTAssertEqual(app.tables.cells.matching(identifier: "workout.planEditor.session").count, 5)
+        finish.tap()
+
+        let saved = app.tables.staticTexts["Upper, Lower, Push, Pull, Legs · Session 1 of 5 · 4 training days per week"]
+        XCTAssertTrue(saved.waitForExistence(timeout: 5))
+        app.terminate()
+        app.launch()
+        XCTAssertTrue(saved.waitForExistence(timeout: 5))
+        XCTAssertFalse(app.navigationBars["Set up your training"].exists)
+
+        app.navigationBars.buttons["Training preferences"].tap()
+        XCTAssertTrue(app.tables.staticTexts["Save preferences"].waitForExistence(timeout: 5))
+        app.segmentedControls["onboarding.trainingDays"].buttons["3"].tap()
+        app.tables.staticTexts["Save preferences"].tap()
+        XCTAssertTrue(app.tables.staticTexts["Upper, Lower, Push, Pull, Legs · Session 1 of 5 · 3 training days per week"]
+            .waitForExistence(timeout: 5))
+    }
+
     func testGuestCreatesReopensAndEditsWorkoutPlan() {
         let app = XCUIApplication()
         app.launchArguments.append("--sendo-fixtures")
         app.launchEnvironment["SENDO_WORKOUT_STORE_ID"] = UUID().uuidString
         app.launch()
+        deferTrainingSetup(in: app)
         app.tabBars.buttons["Workout"].tap()
 
-        let createPlan = app.buttons["Create a plan"]
-        XCTAssertTrue(createPlan.waitForExistence(timeout: 5))
-        createPlan.tap()
+        XCTAssertTrue(app.buttons["Create a plan"].waitForExistence(timeout: 5))
+        app.navigationBars.buttons["Set up training"].tap()
+        app.tables.staticTexts["Continue"].tap()
+        app.tables.staticTexts["Build manually"].tap()
         app.tables.staticTexts["Add session"].tap()
         app.tables.staticTexts["Add exercise"].tap()
 
@@ -40,8 +75,8 @@ final class SendoUITests: XCTestCase {
         saveExercise.tap()
         XCTAssertTrue(squat.waitForExistence(timeout: 5))
         app.navigationBars.buttons["workout.saveSession"].tap()
-        app.navigationBars.buttons["Save"].tap()
-        XCTAssertTrue(app.staticTexts["My workout plan · Session 1 of 1"].waitForExistence(timeout: 5))
+        app.navigationBars.buttons["onboarding.finish"].tap()
+        XCTAssertTrue(app.staticTexts["My workout plan · Session 1 of 1 · 4 training days per week"].waitForExistence(timeout: 5))
 
         app.terminate()
         app.launch()
@@ -109,6 +144,13 @@ final class SendoUITests: XCTestCase {
         let app = XCUIApplication()
         app.launchArguments.append("--sendo-fixtures")
         app.launch()
+        deferTrainingSetup(in: app)
         return app
+    }
+
+    private func deferTrainingSetup(in app: XCUIApplication) {
+        let later = app.tables.staticTexts["Set up later"]
+        XCTAssertTrue(later.waitForExistence(timeout: 5))
+        later.tap()
     }
 }

@@ -33,10 +33,16 @@ class HomeTabBarViewController: UITabBarController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         //setupCenterButton()
         applyStyle()
     }
     
+    func offerTrainingSetupIfNeeded() {
+        let navigation = selectedViewController as? UINavigationController
+        (navigation?.topViewController as? WorkoutViewController)?.offerSetupIfNeeded()
+    }
+
     private func applyStyle() {
         tabBar.backgroundColor = UIColor(named:"PrimaryColor")
         tabBar.barTintColor = UIColor(named:"PrimaryColor")
