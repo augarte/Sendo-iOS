@@ -50,8 +50,7 @@ private extension HomeTabBarViewController {
     func setupTabBarItems() {
         let workoutVC = WorkoutViewController.create()
         let exerciseListVC = ExerciseListViewController(viewModel: ExerciseListViewModel(service: AppEnvironment.exercises()))
-        let measurementRepository = AppEnvironment.measurements()
-        let progressVC = ProgressViewController(viewModel: ProgressViewModel(repository: measurementRepository))
+        let progressVC = ProgressViewController(viewModel: AppEnvironment.progressViewModel())
         let profileVC = ProfileViewController.create()
         
         self.viewControllers = [

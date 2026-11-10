@@ -52,7 +52,7 @@ final class SendoTests: XCTestCase {
             id: original.id, measuredAt: original.measuredAt.addingTimeInterval(-86_400),
             kind: original.kind, value: 74, unit: original.unit
         )
-        try await model.save(edited, isEditing: true)
+        try await model.save(edited, isEditing: true, revision: model.revision)
 
         XCTAssertEqual(repository.updatedIDs, [original.id])
         XCTAssertEqual(repository.measurements, [edited])
@@ -71,7 +71,7 @@ final class SendoTests: XCTestCase {
         repository.failUpdate = true
 
         do {
-            try await model.save(edited, isEditing: true)
+            try await model.save(edited, isEditing: true, revision: model.revision)
             XCTFail("Expected the update to fail")
         } catch InMemoryMeasurementRepository.Failure.rejectedUpdate {
             XCTAssertEqual(repository.measurements, [original])
@@ -79,8 +79,46 @@ final class SendoTests: XCTestCase {
         }
 
         repository.failUpdate = false
-        try await model.save(edited, isEditing: true)
+        try await model.save(edited, isEditing: true, revision: model.revision)
         XCTAssertEqual(model.state.measurements, [edited])
+    }
+
+    @MainActor
+    func testPreviousAccountResponseCannotReplaceNewAccountState() async {
+        let old = InMemoryMeasurementRepository(measurements: [])
+        let model = ProgressViewModel(repository: old)
+        let date = Date()
+        let oldEntry = BodyMeasurement(id: "old", measuredAt: date, kind: .weight, value: 71, unit: nil)
+        let newEntry = BodyMeasurement(id: "new", measuredAt: date, kind: .weight, value: 72, unit: nil)
+        let new = InMemoryMeasurementRepository(measurements: [newEntry])
+
+        let oldLoad: Task<Void, Never> = await withCheckedContinuation { started in
+            old.onFetch = { task in started.resume(returning: task) }
+            old.fetchTask = Task { await model.load() }
+        }
+        model.replaceRepository(new)
+        await model.load()
+        old.finishFetch?([oldEntry])
+        await oldLoad.value
+        XCTAssertEqual(model.state.measurements, [newEntry])
+    }
+
+    @MainActor
+    func testDraftFromPreviousAccountCannotWriteToNewAccount() async {
+        let old = InMemoryMeasurementRepository(measurements: [])
+        let new = InMemoryMeasurementRepository(measurements: [])
+        let model = ProgressViewModel(repository: old)
+        let revision = model.revision
+        let draft = BodyMeasurement(id: "old-draft", measuredAt: Date(), kind: .weight, value: 70, unit: nil)
+
+        model.replaceRepository(new)
+        do {
+            try await model.save(draft, isEditing: false, revision: revision)
+            XCTFail("Expected the old draft to be rejected")
+        } catch {
+            XCTAssertTrue(new.measurements.isEmpty)
+            XCTAssertTrue(model.state.measurements.isEmpty)
+        }
     }
 
     func testMeasurementRejectsInvalidValues() {
@@ -98,8 +136,8 @@ final class SendoTests: XCTestCase {
         let first = BodyMeasurement(id: "first", measuredAt: date, kind: .weight, value: 72, unit: nil)
         let second = BodyMeasurement(id: "second", measuredAt: date, kind: .weight, value: 73, unit: nil)
 
-        try await model.save(first, isEditing: false)
-        try await model.save(second, isEditing: false)
+        try await model.save(first, isEditing: false, revision: model.revision)
+        try await model.save(second, isEditing: false, revision: model.revision)
 
         XCTAssertEqual(repository.measurements, [first, second])
         XCTAssertEqual(model.state.measurements, [first, second])
@@ -115,12 +153,22 @@ private final class InMemoryMeasurementRepository: MeasurementRepository {
     private(set) var measurements: [BodyMeasurement]
     private(set) var updatedIDs: [MeasurementID] = []
     var failUpdate = false
+    var onFetch: ((Task<Void, Never>) -> Void)?
+    var fetchTask: Task<Void, Never>?
+    var finishFetch: (([BodyMeasurement]) -> Void)?
 
     init(measurements: [BodyMeasurement]) {
         self.measurements = measurements
     }
 
-    func fetch() async throws -> [BodyMeasurement] { measurements }
+    func fetch() async throws -> [BodyMeasurement] {
+        guard let onFetch, let fetchTask else { return measurements }
+        let entries: [BodyMeasurement] = await withCheckedContinuation { continuation in
+            finishFetch = { continuation.resume(returning: $0) }
+            onFetch(fetchTask)
+        }
+        return entries
+    }
 
     func create(_ measurement: BodyMeasurement) async throws {
         measurements.append(measurement)

@@ -2,35 +2,56 @@ import Foundation
 import FirebaseFirestore
 
 struct FirestoreMeasurementRepository: MeasurementRepository {
-    private let firestore: FirebaseFirestoreManager
+    let database: Firestore
+    let userID: String
 
-    init(firestore: FirebaseFirestoreManager) {
-        self.firestore = firestore
+    private var collection: CollectionReference {
+        database.collection("users").document(userID).collection("measurements")
     }
 
     func fetch() async throws -> [BodyMeasurement] {
-        let snapshot = try await collection().getDocuments()
+        try await fetch(source: .default)
+    }
+
+    func fetchForTransfer() async throws -> [BodyMeasurement] {
+        try await database.waitForPendingWrites()
+        return try await fetch(source: .server).filter { $0.value > 0 }
+    }
+
+    private func fetch(source: FirestoreSource) async throws -> [BodyMeasurement] {
+        let snapshot = try await collection.getDocuments(source: source)
         return snapshot.documents.compactMap { document in
             MeasurementRecord.decode(id: document.documentID, fields: document.data())
         }
     }
 
+    func importIfMissing(_ measurement: BodyMeasurement, id: MeasurementID) async throws {
+        let document = collection.document(id)
+        let fields = MeasurementRecord.fields(for: measurement)
+        _ = try await database.runTransaction { transaction, errorPointer in
+            do {
+                if try !transaction.getDocument(document).exists {
+                    transaction.setData(fields, forDocument: document)
+                }
+            } catch {
+                errorPointer?.pointee = error as NSError
+            }
+            return nil
+        }
+    }
+
     func create(_ measurement: BodyMeasurement) async throws {
-        try await collection().document(measurement.id)
+        try await collection.document(measurement.id)
             .setData(MeasurementRecord.fields(for: measurement), merge: true)
     }
 
     func update(_ measurement: BodyMeasurement) async throws {
-        try await collection().document(measurement.id)
+        try await collection.document(measurement.id)
             .updateData(MeasurementRecord.fields(for: measurement))
     }
 
     func delete(id: MeasurementID) async throws {
-        try await collection().document(id).delete()
-    }
-
-    private func collection() throws -> CollectionReference {
-        try firestore.userCollection(named: "measurements")
+        try await collection.document(id).delete()
     }
 }
 

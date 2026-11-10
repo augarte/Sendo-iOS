@@ -21,7 +21,8 @@ class ProfileViewController: BaseTabViewController {
     private lazy var loginView: ProfileLoginView = {
         let view = ProfileLoginView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.tapLogginButtonSubject.sink { type in
+        view.tapLogginButtonSubject.sink { [weak self] type in
+            guard let self else { return }
             switch type {
             case .google: self.signInGoogle()
             case .apple: self.signInApple()
@@ -95,11 +96,11 @@ private extension ProfileViewController {
             guard let result = result else { return }
 
             let user = result.user
-            guard let idToken = user.idToken?.tokenString else { return }
+            guard let idToken = user.idToken?.tokenString, let providerUserID = user.userID else { return }
             let accessToken = user.accessToken.tokenString
 
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
-            self.firebaseLoad(credential: credential)
+            self.firebaseLoad(credential: credential, providerUserID: providerUserID)
         }
     }
     
@@ -118,24 +119,18 @@ private extension ProfileViewController {
         authorizationController.performRequests()
     }
     
-    private func firebaseLoad(credential: AuthCredential){
-        Auth.auth().signIn(with: credential) { authResult, error in
-            guard error == nil else { return }
-            guard let uid = authResult?.user.uid else { return }
-            
-            let newUser = AuthUser(uid: uid, name: authResult?.user.displayName)
-            self.authViewModel.createUser(user: newUser)
+    private func firebaseLoad(credential: AuthCredential, providerUserID: String) {
+        guard let session = AppEnvironment.session else { return }
+        Task {
+            do {
+                let account = try await session.signIn(with: credential, providerUserID: providerUserID)
+                authViewModel.createUser(user: AuthUser(uid: account.uid, name: account.name))
+            } catch {
+                NSLog("Sendo couldn’t complete sign-in or a pending measurement transfer.")
+            }
         }
     }
-    
-    private func logout(){
-        let firebaseAuth = Auth.auth()
-        do {
-            try firebaseAuth.signOut()
-        } catch let signOutError as NSError {
-            print("Error signing out: %@", signOutError)
-        }
-    }
+
 }
 
 // MARK: - ASAuthorizationControllerDelegate
@@ -148,7 +143,7 @@ extension ProfileViewController: ASAuthorizationControllerDelegate, ASAuthorizat
            let appleIDTokenString = String(data: appleIDToken, encoding: .utf8){
             
             let credential = OAuthProvider.appleCredential(withIDToken: appleIDTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
-            firebaseLoad(credential: credential)
+            firebaseLoad(credential: credential, providerUserID: appleIDCredential.user)
         }
         
     }

@@ -11,20 +11,15 @@ import FirebaseFirestore
 
 final class FirebaseFirestoreManager: ObservableObject {
 
-    let db = Firestore.firestore()
-    var uid: String? = nil
-
     static var shared: FirebaseFirestoreManager = {
         return FirebaseFirestoreManager()
     }()
 
-    private init() {
-        uid = UserDefaults.standard.string(forKey: "firebaseUID") ?? nil
-    }
+    private init() {}
 
     func addDocumentDatabase(documentId: String, data: [String : Any], collection: CollectionReference) -> AnyPublisher<Bool, Error> {
         Future { future in
-            collection.document(documentId).setData(data) { err in
+            collection.document(documentId).setData(data, merge: true) { err in
                 if let err = err {
                     return future(.failure(err))
                 } else {
@@ -32,11 +27,6 @@ final class FirebaseFirestoreManager: ObservableObject {
                 }
             }
         }.eraseToAnyPublisher()
-    }
-
-    func userCollection(named name: String) throws -> CollectionReference {
-        guard let uid else { throw FirestoreAccessError.missingUser }
-        return db.collection("users").document(uid).collection(name)
     }
 
 }
@@ -47,10 +37,4 @@ extension FirebaseFirestoreManager: NSCopying {
         return self
     }
 
-}
-
-private enum FirestoreAccessError: LocalizedError {
-    case missingUser
-
-    var errorDescription: String? { "Your account is unavailable. Please try again." }
 }

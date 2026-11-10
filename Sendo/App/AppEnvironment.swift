@@ -1,4 +1,6 @@
 import Combine
+import FirebaseAuth
+import FirebaseFirestore
 import Foundation
 
 enum AppEnvironment {
@@ -11,11 +13,33 @@ enum AppEnvironment {
     }
 
     @MainActor
-    static func measurements() -> any MeasurementRepository {
+    static let session: FirebaseSessionStore? = {
+        guard !usesFixtures else { return nil }
+        return FirebaseSessionStore(
+            auth: Auth.auth(),
+            database: Firestore.firestore(),
+            mergeDirectory: URL.applicationSupportDirectory.appendingPathComponent("GuestMeasurementMerges")
+        )
+    }()
+
+    @MainActor
+    static func progressViewModel() -> ProgressViewModel {
         #if DEBUG
-        if usesFixtures { return FixtureMeasurements() }
+        if usesFixtures { return ProgressViewModel(repository: FixtureMeasurements()) }
         #endif
-        return FirestoreMeasurementRepository(firestore: .shared)
+        let viewModel = ProgressViewModel(repository: nil)
+        if let session {
+            viewModel.observeRepositories(
+                session.$account
+                    .map { $0?.uid }
+                    .removeDuplicates()
+                    .map { uid -> (any MeasurementRepository)? in
+                        uid.map { FirestoreMeasurementRepository(database: Firestore.firestore(), userID: $0) }
+                    }
+                    .eraseToAnyPublisher()
+            )
+        }
+        return viewModel
     }
 
     static func exercises() -> any FirebaseDatabaseServicesProtocol {

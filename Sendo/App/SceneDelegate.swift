@@ -23,6 +23,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         window.rootViewController = HomeTabBarViewController.create() // Your initial view controller.
         window.makeKeyAndVisible()
         self.window = window
+        handleAuthenticationURLs(connectionOptions.urlContexts)
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -33,8 +34,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        Task { await AppEnvironment.session?.resumePendingMerges() }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
@@ -57,9 +57,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
-        guard let url = URLContexts.first?.url else { return }
-        GIDSignIn.sharedInstance.handle(url)
+        handleAuthenticationURLs(URLContexts)
     }
 
-
+    private func handleAuthenticationURLs(_ contexts: Set<UIOpenURLContext>) {
+        guard !AppEnvironment.usesFixtures else { return }
+        for context in contexts {
+            if GIDSignIn.sharedInstance.handle(context.url) { return }
+        }
+    }
 }

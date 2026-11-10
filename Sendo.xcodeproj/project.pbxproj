@@ -50,6 +50,7 @@
 		EA3D14442827F01D00387419 /* ExerciseDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */; };
 		EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */; };
 		EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */; };
+		8962EC95C4D815A54EE52F19 /* FirebaseSessionStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 67B51088F034FE5D2FEA4D48 /* FirebaseSessionStore.swift */; };
 		EA3D145A282826DA00387419 /* FirebaseCrashlytics in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D1459282826DA00387419 /* FirebaseCrashlytics */; };
 		EA3D145C282826DA00387419 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145B282826DA00387419 /* FirebaseDatabase */; };
 		EA3D1460282826DA00387419 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D145F282826DA00387419 /* FirebaseFirestore */; };
@@ -58,6 +59,7 @@
 		EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAEF28E9BA90007681C9 /* Constants.swift */; };
 		EA587766296B589800B0007B /* SimpleLineChart in Frameworks */ = {isa = PBXBuildFile; productRef = EA587765296B589800B0007B /* SimpleLineChart */; };
 		EA6D90272AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */; };
+		A49352151AF04930F917F73E /* GuestMeasurementMerges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6FCEEEABE61A89A93D3BD471 /* GuestMeasurementMerges.swift */; };
 		EAB6408F293C06C90001949D /* WorkoutEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */; };
 		EAB64091293C06DE0001949D /* CurrentWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */; };
 		EAB64093293C07220001949D /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64092293C07220001949D /* WorkoutViewModel.swift */; };
@@ -134,9 +136,11 @@
 		EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
 		EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreServices.swift; sourceTree = "<group>"; };
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
+		67B51088F034FE5D2FEA4D48 /* FirebaseSessionStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseSessionStore.swift; sourceTree = "<group>"; };
 		EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginView.swift; sourceTree = "<group>"; };
 		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMeasurementRepository.swift; sourceTree = "<group>"; };
+		6FCEEEABE61A89A93D3BD471 /* GuestMeasurementMerges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GuestMeasurementMerges.swift; sourceTree = "<group>"; };
 		EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutEmptyState.swift; sourceTree = "<group>"; };
 		EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutView.swift; sourceTree = "<group>"; };
 		EAB64092293C07220001949D /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -280,6 +284,7 @@
 			children = (
 				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
 				EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */,
+				67B51088F034FE5D2FEA4D48 /* FirebaseSessionStore.swift */,
 			);
 			path = Firebase;
 			sourceTree = "<group>";
@@ -401,6 +406,7 @@
 			isa = PBXGroup;
 			children = (
 				EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */,
+				6FCEEEABE61A89A93D3BD471 /* GuestMeasurementMerges.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -751,6 +757,7 @@
 				EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */,
 				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
 				EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */,
+				8962EC95C4D815A54EE52F19 /* FirebaseSessionStore.swift in Sources */,
 				EAB6408F293C06C90001949D /* WorkoutEmptyState.swift in Sources */,
 				20B96EB8272472FB000B9C1D /* BodyMeasurement.swift in Sources */,
 				EAB64091293C06DE0001949D /* CurrentWorkoutView.swift in Sources */,
@@ -778,6 +785,7 @@
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
 				EA6D90272AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift in Sources */,
+				A49352151AF04930F917F73E /* GuestMeasurementMerges.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */,
 				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */,

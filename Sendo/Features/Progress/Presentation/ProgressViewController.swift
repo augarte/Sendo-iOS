@@ -168,9 +168,14 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let measurement = measurements[indexPath.row]
+        let revision = viewModel.revision
         let modifyItem = UIContextualAction(style: .normal, title: "Modify") { [weak self] _, _, completion in
-            self?.showEditor(for: measurement)
-            completion(self != nil)
+            guard let self, self.viewModel.revision == revision else {
+                completion(false)
+                return
+            }
+            self.showEditor(for: measurement)
+            completion(true)
         }
         modifyItem.backgroundColor = .systemBlue
         return UISwipeActionsConfiguration(actions: [modifyItem])
@@ -178,6 +183,7 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let id = measurements[indexPath.row].id
+        let revision = viewModel.revision
         let deleteItem = UIContextualAction(style: .destructive, title: "Delete") { [weak self] _, _, completion in
             guard let self else {
                 completion(false)
@@ -185,7 +191,7 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
             }
             Task {
                 do {
-                    try await self.viewModel.delete(id: id)
+                    try await self.viewModel.delete(id: id, revision: revision)
                     completion(true)
                 } catch {
                     completion(false)
@@ -203,8 +209,9 @@ extension ProgressViewController: UITableViewDelegate, UITableViewDataSource {
     }
 
     private func showEditor(for measurement: BodyMeasurement? = nil) {
+        let revision = viewModel.revision
         let editor = NewEntryDialog(measurement: measurement) { [viewModel] draft in
-            try await viewModel.save(draft, isEditing: measurement != nil)
+            try await viewModel.save(draft, isEditing: measurement != nil, revision: revision)
         }
         showModalView(viewController: editor)
     }

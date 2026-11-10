@@ -18,7 +18,7 @@ Progress is the reference implementation. The app injects a measurement reposito
 | BodyMeasurement | A stable ID with a separate measured date, kind, value, and optional unit. Weight is the current kind. Preserve missing units without assuming kilograms or pounds. |
 | Workout plan (planned) | A plan has a stable ID and ordered sessions. Each planned session has its own ID and an ordered list of exercise prescriptions. A prescription references the catalog and defines sets, reps, and optional load. |
 | Workout log (planned) | A performed session has its own ID and records dates, exercises, and actual sets. Keep the catalog reference and display information needed to read history after the plan or catalog changes. |
-| Profile and preferences | Profile data belongs to the user. Device preferences such as appearance belong to the local installation. Define the session lifecycle with the Auth work. |
+| Profile and preferences | Profile data belongs to the user. Device preferences such as appearance belong to the local installation. The session store observes Firebase Auth and switches Progress to a repository scoped to the active user. |
 
 ## Measurement storage compatibility
 
@@ -27,3 +27,9 @@ Progress continues to use `users/{uid}/measurements/{id}`. The reader accepts le
 A new draft gets a UUID that stays fixed across retries. New writes store `measuredAt`, `kind`, and `value`, plus `unit` when known. Editing updates the existing document in one operation. A failed update leaves the draft and displayed record available for retry.
 
 Before distributing this schema to users, verify that deployed Firestore rules accept these fields. Coordinate rollout with any older build that derives dates solely from document IDs.
+
+## Session ownership
+
+Firebase Auth supplies the active user ID. Progress clears its screen state when the account changes. Requests are scoped to the user who started them, and an editor opened under one account cannot write under another.
+
+When a guest signs in with a new provider account, Firebase links the credential to the existing guest UID. If the credential already belongs to an account, Sendo reads the guest history before switching accounts and stages valid measurements on the device until they can be imported. A transfer is scoped to the chosen provider identity. It uses a stable import ID per source record and creates missing records without overwriting the destination history. The original guest records remain available under their original UID. The local transfer is retried on launch or foregrounding and cleared after completion.

@@ -2,12 +2,12 @@ import Foundation
 
 typealias MeasurementID = String
 
-struct BodyMeasurement: Equatable, Identifiable {
-    enum Kind: String {
+struct BodyMeasurement: Codable, Equatable, Identifiable {
+    enum Kind: String, Codable {
         case weight
     }
 
-    enum Unit: String {
+    enum Unit: String, Codable {
         case kilograms = "kg"
         case pounds = "lb"
     }
