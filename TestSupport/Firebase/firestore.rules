@@ -7,7 +7,7 @@ service cloud.firestore {
 
     function validMeasurement() {
       let entry = request.resource.data;
-      return entry.value is number && entry.value > 0 && entry.value <= 1.7976931348623157e308
+      return entry.value is number && entry.value > 0 && (entry.value - entry.value) == 0
         && entry.measuredAt is timestamp
         && entry.kind == 'weight'
         && (!('unit' in entry) || entry.unit in ['kg', 'lb']);

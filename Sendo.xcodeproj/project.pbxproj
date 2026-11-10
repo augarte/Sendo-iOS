@@ -14,6 +14,7 @@
 		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
 		20858D67272448D000993B5E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 20858D65272448D000993B5E /* LaunchScreen.storyboard */; };
 		20858D72272448D200993B5E /* sendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D71272448D200993B5E /* sendoTests.swift */; };
+		C88E82C08CE9710A0622CD9D /* FirebaseIntegrationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */; };
 		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
 		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
 		20B96EB8272472FB000B9C1D /* BodyMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB7272472FB000B9C1D /* BodyMeasurement.swift */; };
@@ -102,6 +103,7 @@
 		20858D68272448D000993B5E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		20858D6D272448D200993B5E /* SendoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D71272448D200993B5E /* sendoTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoTests.swift; sourceTree = "<group>"; };
+		76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseIntegrationTests.swift; sourceTree = "<group>"; };
 		20858D77272448D200993B5E /* SendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
 		20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -215,6 +217,7 @@
 			isa = PBXGroup;
 			children = (
 				20858D71272448D200993B5E /* sendoTests.swift */,
+				76C0A8F0E884138513721146 /* FirebaseIntegrationTests.swift */,
 			);
 			path = SendoTests;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				20858D72272448D200993B5E /* sendoTests.swift in Sources */,
+				C88E82C08CE9710A0622CD9D /* FirebaseIntegrationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
