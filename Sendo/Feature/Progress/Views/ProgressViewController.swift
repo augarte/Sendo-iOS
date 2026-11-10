@@ -58,7 +58,9 @@ class ProgressViewController: BaseTabViewController {
                 points.insert(SLCData(x: timestamp, y: lastValue), at: 0)
             }
             
-            let dataSet = SLCDataSet(graphPoints: points, lineColor: .white)
+            let lineStlye = SLCLineStyle(lineColor: .white)
+            let dataSet = SLCDataSet(graphPoints: points)
+            dataSet.setLineStyle(lineStlye)
             self.lineChart.loadPoints(dataSet: dataSet)
             self.progressTableView.reloadData()
         }.store(in: &cancellBag)

@@ -9,6 +9,7 @@ import UIKit
 import Combine
 import AuthenticationServices
 import Firebase
+import FirebaseAuth
 import GoogleSignIn
 
 class ProfileViewController: BaseTabViewController {
@@ -83,22 +84,19 @@ private extension ProfileViewController {
     
     private func signInGoogle() {
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-        let config = GIDConfiguration(clientID: clientID)
-        
-        GIDSignIn.sharedInstance.signIn(
-            with: config,
-            presenting: self
-        ) { user, error in
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+
+        GIDSignIn.sharedInstance.signIn(withPresenting: self) { result, error in
             guard error == nil else { return }
-            guard let user = user else { return }
-           
-            let authentication = user.authentication
-            let accessToken = authentication.accessToken
-            guard let idToken = authentication.idToken else { return }
-            
+            guard let result = result else { return }
+
+            let user = result.user
+            guard let idToken = user.idToken?.tokenString else { return }
+            let accessToken = user.accessToken.tokenString
+
             let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: accessToken)
             self.firebaseLoad(credential: credential)
-       }
+        }
     }
     
     private func signInApple() {
@@ -144,7 +142,7 @@ extension ProfileViewController: ASAuthorizationControllerDelegate, ASAuthorizat
            let appleIDToken = appleIDCredential.identityToken,
            let appleIDTokenString = String(data: appleIDToken, encoding: .utf8){
             
-            let credential = OAuthProvider.credential(withProviderID: "apple.com", idToken: appleIDTokenString, rawNonce: nonce)
+            let credential = OAuthProvider.appleCredential(withIDToken: appleIDTokenString, rawNonce: nonce, fullName: appleIDCredential.fullName)
             firebaseLoad(credential: credential)
         }
         

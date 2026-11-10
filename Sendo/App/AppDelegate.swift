@@ -18,6 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         FirebaseApp.configure()
+        if let clientID = FirebaseApp.app()?.options.clientID {
+            GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+        }
         if let currentUser = Auth.auth().currentUser {
             UserDefaults.standard.set(currentUser.uid, forKey: "firebaseUID")
         } else {
@@ -105,4 +108,3 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
 }
-
