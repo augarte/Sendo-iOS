@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		20858D58272448B200993B5E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D57272448B200993B5E /* AppDelegate.swift */; };
+		D509EB544770B3FF3C809A4D /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A9E7C336BC8DDA5DC1982A5 /* AppEnvironment.swift */; };
 		20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D59272448B200993B5E /* SceneDelegate.swift */; };
 		20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 20858D60272448B200993B5E /* sendo.xcdatamodeld */; };
 		20858D64272448D000993B5E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 20858D63272448D000993B5E /* Assets.xcassets */; };
@@ -91,6 +92,7 @@
 /* Begin PBXFileReference section */
 		20858D54272448B200993B5E /* Sendo Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Sendo Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D57272448B200993B5E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		0A9E7C336BC8DDA5DC1982A5 /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		20858D59272448B200993B5E /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		20858D61272448B200993B5E /* sendo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = sendo.xcdatamodel; sourceTree = "<group>"; };
 		20858D63272448D000993B5E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = Sendo/Resources/Assets.xcassets; sourceTree = SOURCE_ROOT; };
@@ -515,6 +517,7 @@
 			children = (
 				60E644650437A035024A14B9 /* Navigation */,
 				20858D57272448B200993B5E /* AppDelegate.swift */,
+				0A9E7C336BC8DDA5DC1982A5 /* AppEnvironment.swift */,
 				20858D59272448B200993B5E /* SceneDelegate.swift */,
 			);
 			path = App;
@@ -724,7 +727,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
+			shellScript = "if [ \"$PLATFORM_NAME\" = \"iphonesimulator\" ]; then exit 0; fi\n\"${BUILD_DIR%/Build/*}/SourcePackages/checkouts/firebase-ios-sdk/Crashlytics/run\"\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -743,6 +746,7 @@
 				EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */,
 				EA3D143528270B1300387419 /* NetworkServices.swift in Sources */,
 				20858D58272448B200993B5E /* AppDelegate.swift in Sources */,
+				D509EB544770B3FF3C809A4D /* AppEnvironment.swift in Sources */,
 				EA3D144E2828224E00387419 /* FirebaseFirestoreServices.swift in Sources */,
 				EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */,
 				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,

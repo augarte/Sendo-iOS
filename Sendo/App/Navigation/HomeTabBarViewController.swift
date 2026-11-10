@@ -49,8 +49,8 @@ private extension HomeTabBarViewController {
     
     func setupTabBarItems() {
         let workoutVC = WorkoutViewController.create()
-        let exerciseListVC = ExerciseListViewController.create()
-        let measurementRepository = FirestoreMeasurementRepository(firestore: .shared)
+        let exerciseListVC = ExerciseListViewController(viewModel: ExerciseListViewModel(service: AppEnvironment.exercises()))
+        let measurementRepository = AppEnvironment.measurements()
         let progressVC = ProgressViewController(viewModel: ProgressViewModel(repository: measurementRepository))
         let profileVC = ProfileViewController.create()
         

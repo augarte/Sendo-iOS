@@ -12,7 +12,10 @@ class ExerciseListViewModel: ObservableObject {
     
     var exercises = CurrentValueSubject<[Exercise], Never>([Exercise]())
     
-    init() {
+    private let service: any FirebaseDatabaseServicesProtocol
+
+    init(service: any FirebaseDatabaseServicesProtocol) {
+        self.service = service
         fetchExercises()
     }
 
@@ -21,6 +24,6 @@ class ExerciseListViewModel: ObservableObject {
 extension ExerciseListViewModel {
     
     func fetchExercises() {
-        FirebaseDatabaseServices.shared().fetchExerciseList(completion: self.exercises)
+        service.fetchExerciseList(completion: self.exercises)
     }
 }

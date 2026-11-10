@@ -17,11 +17,16 @@ class ExerciseListViewController: BaseTabViewController {
         return table
     }()
     
-    private let exerciseViewModel = ExerciseListViewModel()
+    private let exerciseViewModel: ExerciseListViewModel
     private var cancellBag = Set<AnyCancellable>()
     
-    static func create() -> ExerciseListViewController {
-        return ExerciseListViewController(title: "Exercises", image: "ListWhite")
+    init(viewModel: ExerciseListViewModel) {
+        self.exerciseViewModel = viewModel
+        super.init(title: "Exercises", image: "ListWhite")
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

@@ -32,7 +32,7 @@ final class SendoUITests: XCTestCase {
         app.tabBars.buttons["Exercises"].tap()
 
         XCTAssertTrue(app.navigationBars["Exercises"].exists)
-        XCTAssertTrue(app.tables.firstMatch.exists)
+        XCTAssertTrue(app.tables.staticTexts["Bodyweight Squat"].waitForExistence(timeout: 5))
     }
 
     func testProgressOpensWeightFormAndCancels() {
@@ -61,6 +61,7 @@ final class SendoUITests: XCTestCase {
 
     private func launchApp() -> XCUIApplication {
         let app = XCUIApplication()
+        app.launchArguments.append("--sendo-fixtures")
         app.launch()
         return app
     }

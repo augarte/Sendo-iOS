@@ -86,6 +86,7 @@ private extension ProfileViewController {
 private extension ProfileViewController {
     
     private func signInGoogle() {
+        guard !AppEnvironment.usesFixtures else { return }
         guard let clientID = FirebaseApp.app()?.options.clientID else { return }
         GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
 
@@ -103,6 +104,7 @@ private extension ProfileViewController {
     }
     
     private func signInApple() {
+        guard !AppEnvironment.usesFixtures else { return }
         currentNonce = Utils.randomNonceString()
         
         let appleIDProvider = ASAuthorizationAppleIDProvider()
