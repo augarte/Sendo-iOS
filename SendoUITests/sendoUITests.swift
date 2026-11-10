@@ -7,36 +7,61 @@
 
 import XCTest
 
-class sendoUITests: XCTestCase {
+final class SendoUITests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-
-        // In UI tests it is usually best to stop immediately when a failure occurs.
+    override func setUp() {
+        super.setUp()
         continueAfterFailure = false
-
-        // In UI tests it’s important to set the initial state - such as interface orientation - required for your tests before they run. The setUp method is a good place to do this.
     }
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    func testWorkoutOpensPlannerAndSession() {
+        let app = launchApp()
+        app.tabBars.buttons["Workout"].tap()
+        app.buttons["Plan your workout"].tap()
+
+        XCTAssertTrue(app.navigationBars["New Workout"].exists)
+        let session = app.tables.cells.firstMatch
+        XCTAssertTrue(session.exists)
+        session.tap()
+
+        XCTAssertTrue(app.navigationBars["Session"].exists)
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testExercisesTabOpens() {
+        let app = launchApp()
+        app.tabBars.buttons["Exercises"].tap()
+
+        XCTAssertTrue(app.navigationBars["Exercises"].exists)
+        XCTAssertTrue(app.tables.firstMatch.exists)
+    }
+
+    func testProgressOpensWeightFormAndCancels() {
+        let app = launchApp()
+        app.tabBars.buttons["Progress"].tap()
+        app.navigationBars["Progress"].buttons["progress.addMeasurement"].tap()
+
+        let cancel = app.navigationBars.buttons["Cancel"]
+        XCTAssertTrue(cancel.waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["Date"].exists)
+        XCTAssertTrue(app.staticTexts["Value"].exists)
+        cancel.tap()
+
+        XCTAssertTrue(app.navigationBars["Progress"].exists)
+    }
+
+    func testProfileOpensSettings() {
+        let app = launchApp()
+        app.tabBars.buttons["Profile"].tap()
+        app.buttons["profile.settings"].tap()
+
+        XCTAssertTrue(app.navigationBars["Settings"].exists)
+        XCTAssertTrue(app.staticTexts["Dark mode"].exists)
+        XCTAssertTrue(app.switches.firstMatch.exists)
+    }
+
+    private func launchApp() -> XCUIApplication {
         let app = XCUIApplication()
         app.launch()
-
-        // Use recording to get started writing UI tests.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+        return app
     }
 }

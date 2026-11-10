@@ -15,7 +15,7 @@
 		20858D72272448D200993B5E /* sendoTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D71272448D200993B5E /* sendoTests.swift */; };
 		20858D7C272448D200993B5E /* sendoUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7B272448D200993B5E /* sendoUITests.swift */; };
 		20858D7E272448D200993B5E /* sendoUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */; };
-		20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB7272472FB000B9C1D /* Measurement.swift */; };
+		20B96EB8272472FB000B9C1D /* BodyMeasurement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB7272472FB000B9C1D /* BodyMeasurement.swift */; };
 		20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */; };
 		20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBB272474B6000B9C1D /* ProgressViewController.swift */; };
 		20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */; };
@@ -56,7 +56,7 @@
 		EA3FFAEE28E9B928007681C9 /* ProfileLoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */; };
 		EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3FFAEF28E9BA90007681C9 /* Constants.swift */; };
 		EA587766296B589800B0007B /* SimpleLineChart in Frameworks */ = {isa = PBXBuildFile; productRef = EA587765296B589800B0007B /* SimpleLineChart */; };
-		EA6D90272AB5CC3500BFB498 /* ProgressProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D90262AB5CC3500BFB498 /* ProgressProvider.swift */; };
+		EA6D90272AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */; };
 		EAB6408F293C06C90001949D /* WorkoutEmptyState.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */; };
 		EAB64091293C06DE0001949D /* CurrentWorkoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */; };
 		EAB64093293C07220001949D /* WorkoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB64092293C07220001949D /* WorkoutViewModel.swift */; };
@@ -101,7 +101,7 @@
 		20858D77272448D200993B5E /* SendoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SendoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		20858D7B272448D200993B5E /* sendoUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITests.swift; sourceTree = "<group>"; };
 		20858D7D272448D200993B5E /* sendoUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sendoUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		20B96EB7272472FB000B9C1D /* Measurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurement.swift; sourceTree = "<group>"; };
+		20B96EB7272472FB000B9C1D /* BodyMeasurement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyMeasurement.swift; sourceTree = "<group>"; };
 		20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewModel.swift; sourceTree = "<group>"; };
 		20B96EBB272474B6000B9C1D /* ProgressViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressViewController.swift; sourceTree = "<group>"; };
 		20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabBarViewController.swift; sourceTree = "<group>"; };
@@ -134,7 +134,7 @@
 		EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseFirestoreManager.swift; sourceTree = "<group>"; };
 		EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileLoginView.swift; sourceTree = "<group>"; };
 		EA3FFAEF28E9BA90007681C9 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		EA6D90262AB5CC3500BFB498 /* ProgressProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressProvider.swift; sourceTree = "<group>"; };
+		EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreMeasurementRepository.swift; sourceTree = "<group>"; };
 		EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutEmptyState.swift; sourceTree = "<group>"; };
 		EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentWorkoutView.swift; sourceTree = "<group>"; };
 		EAB64092293C07220001949D /* WorkoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutViewModel.swift; sourceTree = "<group>"; };
@@ -205,18 +205,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		20858D56272448B200993B5E /* Sendo */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D14132826DC8700387419 /* App */,
-				EA3D14142826DC9800387419 /* Common */,
-				EA6D90232AB5C79400BFB498 /* Feature */,
-				EA3D141E2826E66900387419 /* Network */,
-				EA3D14122826DC4B00387419 /* Resources */,
-			);
-			path = Sendo;
-			sourceTree = "<group>";
-		};
 		20858D70272448D200993B5E /* SendoTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,27 +222,126 @@
 			path = SendoUITests;
 			sourceTree = "<group>";
 		};
-		20B96EB5272472CA000B9C1D /* NetworkModels */ = {
+		20858D56272448B200993B5E /* Sendo */ = {
 			isa = PBXGroup;
 			children = (
-				EA0FF046284BF0EE0047B447 /* AuthUser.swift */,
-				20C524802724EF1C00741057 /* Exercise.swift */,
-				20B96EB7272472FB000B9C1D /* Measurement.swift */,
+				55AB155E94994931DD247B52 /* App */,
+				626A63886372E260E7D39FCC /* Features */,
+				1541D79DFD92D6E94CB28B8B /* Infrastructure */,
+				EA3D14122826DC4B00387419 /* Resources */,
+				B3E872B58F9F389AD8B968DC /* Shared */,
+			);
+			path = Sendo;
+			sourceTree = "<group>";
+		};
+		B3E872B58F9F389AD8B968DC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				6FE8A1A6BBDB979142A0AC39 /* DesignSystem */,
+				EA3D14182826E61E00387419 /* Extensions.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		6FE8A1A6BBDB979142A0AC39 /* DesignSystem */ = {
+			isa = PBXGroup;
+			children = (
+				EA3FFAEF28E9BA90007681C9 /* Constants.swift */,
+				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
+			);
+			path = DesignSystem;
+			sourceTree = "<group>";
+		};
+		1541D79DFD92D6E94CB28B8B /* Infrastructure */ = {
+			isa = PBXGroup;
+			children = (
+				E0991CD08B49783B334F38C7 /* Firebase */,
+				165FB414EB236A50BBF64996 /* HTTP */,
+			);
+			path = Infrastructure;
+			sourceTree = "<group>";
+		};
+		165FB414EB236A50BBF64996 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
+				EA3D141F2826E67800387419 /* Endpoint.swift */,
+				EA3D14212826E68000387419 /* NetworkServiceManager.swift */,
+				EA3D143428270B1300387419 /* NetworkServices.swift */,
+				EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
+		E0991CD08B49783B334F38C7 /* Firebase */ = {
+			isa = PBXGroup;
+			children = (
+				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
+				EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */,
+			);
+			path = Firebase;
+			sourceTree = "<group>";
+		};
+		626A63886372E260E7D39FCC /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				F02FD2D1DEA77776E77D1A04 /* Exercises */,
+				680C5283F08B083E54A3AF7A /* Profile */,
+				013B7A69FEED86A56F0AABD4 /* Progress */,
+				07D2BE2D424B347DC574C62B /* Settings */,
+				86D1D0CC6A0DF5ED91D54F41 /* Workout */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		86D1D0CC6A0DF5ED91D54F41 /* Workout */ = {
+			isa = PBXGroup;
+			children = (
+				E61973D4F9368818D2E82A3B /* Domain */,
+				D6694342D05DAC4D733948A2 /* Presentation */,
+			);
+			path = Workout;
+			sourceTree = "<group>";
+		};
+		D6694342D05DAC4D733948A2 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				50601FAD4D96B2F43EF56EB0 /* NewWorkoutDialog */,
+				EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */,
+				EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */,
+				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
+				EAB64092293C07220001949D /* WorkoutViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		50601FAD4D96B2F43EF56EB0 /* NewWorkoutDialog */ = {
+			isa = PBXGroup;
+			children = (
+				02D8A976C9865F39CACEF22B /* SessionTableViewCell */,
+				EAD2D11929199366003A975D /* NewWorkoutDialog.swift */,
+				EAD2D11E29199E91003A975D /* SessionEditorViewController.swift */,
+			);
+			path = NewWorkoutDialog;
+			sourceTree = "<group>";
+		};
+		02D8A976C9865F39CACEF22B /* SessionTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				EAD2D11B29199771003A975D /* SessionTableViewCell.swift */,
+			);
+			path = SessionTableViewCell;
+			sourceTree = "<group>";
+		};
+		E61973D4F9368818D2E82A3B /* Domain */ = {
+			isa = PBXGroup;
+			children = (
 				EAB64095293C074C0001949D /* Workout.swift */,
 			);
-			path = NetworkModels;
+			path = Domain;
 			sourceTree = "<group>";
 		};
-		20DDAC64273F2F2D0072BB76 /* HomeTabBar */ = {
-			isa = PBXGroup;
-			children = (
-				EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */,
-				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
-			);
-			path = HomeTabBar;
-			sourceTree = "<group>";
-		};
-		EA07CE1B2845494B0053B768 /* Settings */ = {
+		07D2BE2D424B347DC574C62B /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				EA07CE1C2845495F0053B768 /* SettingsViewController.swift */,
@@ -262,7 +349,28 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		EA0C1A1E28496B37009223D8 /* ProgressTableCell */ = {
+		013B7A69FEED86A56F0AABD4 /* Progress */ = {
+			isa = PBXGroup;
+			children = (
+				ED6DD3DDEC98096C7B36CF0B /* Data */,
+				CD820D4538890DF88BCDB665 /* Domain */,
+				1716614FBBD869AA674B6BD7 /* Presentation */,
+			);
+			path = Progress;
+			sourceTree = "<group>";
+		};
+		1716614FBBD869AA674B6BD7 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				2ADC70154C831A013F2756F7 /* NewEntryDialog */,
+				594108F1DEB8C882EFD4414E /* ProgressTableCell */,
+				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
+				20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		594108F1DEB8C882EFD4414E /* ProgressTableCell */ = {
 			isa = PBXGroup;
 			children = (
 				EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */,
@@ -270,13 +378,155 @@
 			path = ProgressTableCell;
 			sourceTree = "<group>";
 		};
-		EA0C1A2128496E53009223D8 /* NewEntryDialog */ = {
+		2ADC70154C831A013F2756F7 /* NewEntryDialog */ = {
 			isa = PBXGroup;
 			children = (
 				EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */,
 				EAD2E8FE2915B02D00CA9BE2 /* NewEntryLine.swift */,
 			);
 			path = NewEntryDialog;
+			sourceTree = "<group>";
+		};
+		CD820D4538890DF88BCDB665 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				20B96EB7272472FB000B9C1D /* BodyMeasurement.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		ED6DD3DDEC98096C7B36CF0B /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EA6D90262AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		680C5283F08B083E54A3AF7A /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9C0FA6BDD42C762AD0F12294 /* Data */,
+				67EF7C3A90872C3823F4CAB6 /* Domain */,
+				EF392563ADB81B7129696F75 /* Login */,
+				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		EF392563ADB81B7129696F75 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				947E6056829F881D470CF6AF /* AppleAuthorizationButton */,
+				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
+				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
+				20C524682724D43A00741057 /* Utils.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		947E6056829F881D470CF6AF /* AppleAuthorizationButton */ = {
+			isa = PBXGroup;
+			children = (
+				EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */,
+			);
+			path = AppleAuthorizationButton;
+			sourceTree = "<group>";
+		};
+		67EF7C3A90872C3823F4CAB6 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				EA0FF046284BF0EE0047B447 /* AuthUser.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		9C0FA6BDD42C762AD0F12294 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		F02FD2D1DEA77776E77D1A04 /* Exercises */ = {
+			isa = PBXGroup;
+			children = (
+				EE967CE73C61FC5AFF86A101 /* Data */,
+				CCCAF13774987B2B5CADD796 /* Domain */,
+				D9889938C0E9706886D11AAE /* Presentation */,
+			);
+			path = Exercises;
+			sourceTree = "<group>";
+		};
+		D9889938C0E9706886D11AAE /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				8FC15E367F019914A0737F78 /* Detail */,
+				11B43C4414DDCBAA110CFB5B /* List */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		11B43C4414DDCBAA110CFB5B /* List */ = {
+			isa = PBXGroup;
+			children = (
+				DEE46FF856C4A46A8DCDDFB7 /* ExerciseListTableCell */,
+				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
+				20C524822724F00600741057 /* ExerciseListViewModel.swift */,
+			);
+			path = List;
+			sourceTree = "<group>";
+		};
+		DEE46FF856C4A46A8DCDDFB7 /* ExerciseListTableCell */ = {
+			isa = PBXGroup;
+			children = (
+				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
+			);
+			path = ExerciseListTableCell;
+			sourceTree = "<group>";
+		};
+		8FC15E367F019914A0737F78 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */,
+			);
+			path = Detail;
+			sourceTree = "<group>";
+		};
+		CCCAF13774987B2B5CADD796 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				20C524802724EF1C00741057 /* Exercise.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		EE967CE73C61FC5AFF86A101 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		55AB155E94994931DD247B52 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				60E644650437A035024A14B9 /* Navigation */,
+				20858D57272448B200993B5E /* AppDelegate.swift */,
+				20858D59272448B200993B5E /* SceneDelegate.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		60E644650437A035024A14B9 /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+				EA1412CC2844281E00E2B3E6 /* BaseTabViewController.swift */,
+				20B96EBF27247526000B9C1D /* HomeTabBarViewController.swift */,
+			);
+			path = Navigation;
 			sourceTree = "<group>";
 		};
 		EA3D14122826DC4B00387419 /* Resources */ = {
@@ -291,214 +541,12 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		EA3D14132826DC8700387419 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				20858D57272448B200993B5E /* AppDelegate.swift */,
-				20858D59272448B200993B5E /* SceneDelegate.swift */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
-		EA3D14142826DC9800387419 /* Common */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D141A2826E62600387419 /* AppConfiguration.swift */,
-				EA3FFAEC28E9B16B007681C9 /* DesignSystem */,
-				EA3D14182826E61E00387419 /* Extensions.swift */,
-				20C524682724D43A00741057 /* Utils.swift */,
-				EAD2E90029181D9B00CA9BE2 /* View */,
-			);
-			path = Common;
-			sourceTree = "<group>";
-		};
-		EA3D14152826E29C00387419 /* ExerciseListTableCell */ = {
-			isa = PBXGroup;
-			children = (
-				20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */,
-			);
-			path = ExerciseListTableCell;
-			sourceTree = "<group>";
-		};
-		EA3D141E2826E66900387419 /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				20B96EB5272472CA000B9C1D /* NetworkModels */,
-				EA6D90242AB5C7B900BFB498 /* Services */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
-		EA3D14232826E68400387419 /* NetworkApi */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D141F2826E67800387419 /* Endpoint.swift */,
-				EA3D14212826E68000387419 /* NetworkServiceManager.swift */,
-				EA3D143428270B1300387419 /* NetworkServices.swift */,
-				EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */,
-			);
-			path = NetworkApi;
-			sourceTree = "<group>";
-		};
-		EA3D143328270AD600387419 /* FirebaseDatabase */ = {
-			isa = PBXGroup;
-			children = (
-				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
-				EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */,
-			);
-			path = FirebaseDatabase;
-			sourceTree = "<group>";
-		};
-		EA3D143628270C8E00387419 /* Workout */ = {
-			isa = PBXGroup;
-			children = (
-				EAB64090293C06DE0001949D /* CurrentWorkoutView.swift */,
-				EAD2D11829199352003A975D /* NewWorkoutDialog */,
-				EAB6408E293C06C90001949D /* WorkoutEmptyState.swift */,
-				20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */,
-				EAB64092293C07220001949D /* WorkoutViewModel.swift */,
-			);
-			path = Workout;
-			sourceTree = "<group>";
-		};
-		EA3D143728270C9800387419 /* ExerciseList */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D14152826E29C00387419 /* ExerciseListTableCell */,
-				20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */,
-				20C524822724F00600741057 /* ExerciseListViewModel.swift */,
-			);
-			path = ExerciseList;
-			sourceTree = "<group>";
-		};
-		EA3D143828270CA900387419 /* Progress */ = {
-			isa = PBXGroup;
-			children = (
-				EA6D90252AB5CC0100BFB498 /* Views */,
-				20B96EB9272473D0000B9C1D /* ProgressViewModel.swift */,
-				EA6D90262AB5CC3500BFB498 /* ProgressProvider.swift */,
-			);
-			path = Progress;
-			sourceTree = "<group>";
-		};
-		EA3D143928270CB300387419 /* Profile */ = {
-			isa = PBXGroup;
-			children = (
-				EAA81F1528F24B2900EAB259 /* Login */,
-				20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */,
-			);
-			path = Profile;
-			sourceTree = "<group>";
-		};
-		EA3D14422827F00400387419 /* ExerciseDetail */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */,
-			);
-			path = ExerciseDetail;
-			sourceTree = "<group>";
-		};
-		EA3D144C282821EC00387419 /* FirebaseFirestore */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */,
-				EA3D144D2828224E00387419 /* FirebaseFirestoreServices.swift */,
-			);
-			path = FirebaseFirestore;
-			sourceTree = "<group>";
-		};
-		EA3FFAEC28E9B16B007681C9 /* DesignSystem */ = {
-			isa = PBXGroup;
-			children = (
-				EA3FFAEF28E9BA90007681C9 /* Constants.swift */,
-			);
-			path = DesignSystem;
-			sourceTree = "<group>";
-		};
-		EA6D90232AB5C79400BFB498 /* Feature */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D14422827F00400387419 /* ExerciseDetail */,
-				EA3D143728270C9800387419 /* ExerciseList */,
-				20DDAC64273F2F2D0072BB76 /* HomeTabBar */,
-				EA3D143928270CB300387419 /* Profile */,
-				EA3D143828270CA900387419 /* Progress */,
-				EA07CE1B2845494B0053B768 /* Settings */,
-				EA3D143628270C8E00387419 /* Workout */,
-			);
-			path = Feature;
-			sourceTree = "<group>";
-		};
-		EA6D90242AB5C7B900BFB498 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				EA3D143328270AD600387419 /* FirebaseDatabase */,
-				EA3D144C282821EC00387419 /* FirebaseFirestore */,
-				EA3D14232826E68400387419 /* NetworkApi */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		EA6D90252AB5CC0100BFB498 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				EA0C1A2128496E53009223D8 /* NewEntryDialog */,
-				EA0C1A1E28496B37009223D8 /* ProgressTableCell */,
-				20B96EBB272474B6000B9C1D /* ProgressViewController.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		EAA81F1528F24B2900EAB259 /* Login */ = {
-			isa = PBXGroup;
-			children = (
-				EAC9AED128423D6600608A32 /* AppleAuthorizationButton */,
-				EA0FF044284BF0A50047B447 /* AuthViewModel.swift */,
-				EA3FFAED28E9B928007681C9 /* ProfileLoginView.swift */,
-			);
-			path = Login;
-			sourceTree = "<group>";
-		};
 		EAA81F1D28F2E47700EAB259 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
 				EA208E3F28FA285400D8DFD1 /* SlidingBanner */,
 			);
 			name = Packages;
-			sourceTree = "<group>";
-		};
-		EAC9AED128423D6600608A32 /* AppleAuthorizationButton */ = {
-			isa = PBXGroup;
-			children = (
-				EAC9AED228423D7F00608A32 /* AppleAuthorizationButton.swift */,
-			);
-			path = AppleAuthorizationButton;
-			sourceTree = "<group>";
-		};
-		EAD2D11829199352003A975D /* NewWorkoutDialog */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2D11929199366003A975D /* NewWorkoutDialog.swift */,
-				EAD2D11E29199E91003A975D /* SessionEditorViewController.swift */,
-				EAD2D11D29199780003A975D /* SessionTableViewCell */,
-			);
-			path = NewWorkoutDialog;
-			sourceTree = "<group>";
-		};
-		EAD2D11D29199780003A975D /* SessionTableViewCell */ = {
-			isa = PBXGroup;
-			children = (
-				EAD2D11B29199771003A975D /* SessionTableViewCell.swift */,
-			);
-			path = SessionTableViewCell;
-			sourceTree = "<group>";
-		};
-		EAD2E90029181D9B00CA9BE2 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		EAE252C129F0A5C000D0F77F /* Frameworks */ = {
@@ -700,7 +748,7 @@
 				20858D5A272448B200993B5E /* SceneDelegate.swift in Sources */,
 				EA3D14502828227C00387419 /* FirebaseFirestoreManager.swift in Sources */,
 				EAB6408F293C06C90001949D /* WorkoutEmptyState.swift in Sources */,
-				20B96EB8272472FB000B9C1D /* Measurement.swift in Sources */,
+				20B96EB8272472FB000B9C1D /* BodyMeasurement.swift in Sources */,
 				EAB64091293C06DE0001949D /* CurrentWorkoutView.swift in Sources */,
 				20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */,
 				20C524692724D43A00741057 /* Utils.swift in Sources */,
@@ -725,7 +773,7 @@
 				20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */,
 				EA3D14202826E67800387419 /* Endpoint.swift in Sources */,
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
-				EA6D90272AB5CC3500BFB498 /* ProgressProvider.swift in Sources */,
+				EA6D90272AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift in Sources */,
 				EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */,
 				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */,
@@ -975,7 +1023,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -990,7 +1038,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sendo.app/Sendo";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Sendo Dev.app/Sendo Dev";
 			};
 			name = Debug;
 		};
@@ -1003,7 +1051,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1030,6 +1078,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1044,7 +1093,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = sendo;
+				TEST_TARGET_NAME = Sendo;
 			};
 			name = Debug;
 		};
@@ -1056,6 +1105,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 384JVVGP7X;
 				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1070,7 +1120,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = sendo;
+				TEST_TARGET_NAME = Sendo;
 			};
 			name = Release;
 		};

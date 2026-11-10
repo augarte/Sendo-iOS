@@ -28,6 +28,26 @@
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "20858D6C272448D200993B5E"
+               BuildableName = "SendoTests.xctest"
+               BlueprintName = "SendoTests"
+               ReferencedContainer = "container:Sendo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "20858D76272448D200993B5E"
+               BuildableName = "SendoUITests.xctest"
+               BlueprintName = "SendoUITests"
+               ReferencedContainer = "container:Sendo.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
