@@ -13,10 +13,6 @@ import Combine
 
 class ProfileLoginView: UIView {
     
-    private enum Constants {
-        static let margin: CGFloat = Spacer.size05
-    }
-    
     enum LoginType {
         case google
         case apple
@@ -40,37 +36,21 @@ class ProfileLoginView: UIView {
         return button
     }()
     
-    lazy var loginTitle: UILabel = {
-        let title = UILabel()
-        title.text = "Welcome"
-        title.font = title.font.withSize(20)
-        title.translatesAutoresizingMaskIntoConstraints = false
-        return title
-    }()
-    
     func setupView() {
-        addSubviews([appleLoginButton, googleLoginButton, loginTitle])
+        let providers = UIStackView(arrangedSubviews: [appleLoginButton, googleLoginButton])
+        providers.axis = .vertical
+        providers.distribution = .fillEqually
+        providers.spacing = 8
+        providers.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(providers)
         NSLayoutConstraint.activate([
-            loginTitle.bottomAnchor.constraint(equalTo: appleLoginButton.topAnchor,
-                                               constant: -Constants.margin),
-            loginTitle.leadingAnchor.constraint(equalTo: appleLoginButton.leadingAnchor),
-            appleLoginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                    constant: Constants.margin),
-            appleLoginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                     constant: -Constants.margin),
-            appleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            appleLoginButton.centerYAnchor.constraint(equalTo: centerYAnchor),
-            googleLoginButton.topAnchor.constraint(equalTo: appleLoginButton.bottomAnchor,
-                                                    constant: Constants.margin),
-            googleLoginButton.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                     constant: Constants.margin),
-            googleLoginButton.trailingAnchor.constraint(equalTo: trailingAnchor,
-                                                      constant: -Constants.margin),
-            googleLoginButton.heightAnchor.constraint(equalTo: appleLoginButton.heightAnchor),
-            googleLoginButton.centerXAnchor.constraint(equalTo: centerXAnchor),
+            providers.topAnchor.constraint(equalTo: topAnchor),
+            providers.bottomAnchor.constraint(equalTo: bottomAnchor),
+            providers.leadingAnchor.constraint(equalTo: leadingAnchor),
+            providers.trailingAnchor.constraint(equalTo: trailingAnchor)
         ])
     }
-    
+
     @objc private func signinGooglePress(){
         tapLogginButtonSubject.send(.google)
     }

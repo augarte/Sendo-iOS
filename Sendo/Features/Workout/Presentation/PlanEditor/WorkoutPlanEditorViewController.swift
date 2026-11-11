@@ -1,153 +1,180 @@
-import UIKit
+import SwiftUI
 
-final class WorkoutPlanEditorViewController: UITableViewController {
+final class WorkoutPlanEditorViewController: SendoHostingController<WorkoutPlanEditorScreen> {
     private let catalog: any ExerciseCatalog
-    private let onboardingPreferences: TrainingPreferences?
-    private let previewSection = 3
     private let onSave: (WorkoutPlan) throws -> Void
-    private var draft: WorkoutPlan
-    private let nameField = UITextField()
+    private let model: WorkoutPlanEditorPresentation
 
     init(
         plan: WorkoutPlan, catalog: any ExerciseCatalog, onboardingPreferences: TrainingPreferences? = nil,
         onSave: @escaping (WorkoutPlan) throws -> Void
     ) {
-        draft = plan
         self.catalog = catalog
-        self.onboardingPreferences = onboardingPreferences
         self.onSave = onSave
-        super.init(style: .insetGrouped)
+        model = WorkoutPlanEditorPresentation(draft: plan)
+        super.init(rootView: WorkoutPlanEditorScreen(model: model, preferences: onboardingPreferences))
+        rootView.onClose = { [weak self] in
+            if onboardingPreferences == nil {
+                self?.dismiss(animated: true)
+            } else {
+                self?.navigationController?.popViewController(animated: true)
+            }
+        }
+        rootView.onOpen = { [weak self] session in self?.openSession(session) }
+        rootView.onSave = { [weak self] in self?.save() }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = onboardingPreferences == nil ? "Workout plan" : "Review your plan"
-        navigationItem.prompt = onboardingPreferences == nil ? nil : "3 of 3"
-        nameField.text = draft.name
-        nameField.placeholder = "My workout plan"
-        nameField.accessibilityIdentifier = "workout.planName"
-        nameField.autocapitalizationType = .words
-        tableView.keyboardDismissMode = .onDrag
-        let saveButton: UIBarButtonItem
-        if onboardingPreferences == nil {
-            navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancel))
-            saveButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(save))
-        } else {
-            saveButton = UIBarButtonItem(title: "Finish", style: .done, target: self, action: #selector(save))
-            saveButton.accessibilityLabel = "Save plan and finish"
-            saveButton.accessibilityIdentifier = "onboarding.finish"
-        }
-        navigationItem.rightBarButtonItems = [saveButton, editButtonItem]
-    }
-
-    @objc private func cancel() {
-        dismiss(animated: true)
-    }
-
-    @objc private func save() {
-        draft.name = nameField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
+    private func save() {
+        var plan = model.draft
+        plan.name = plan.name.trimmingCharacters(in: .whitespacesAndNewlines)
         do {
-            try onSave(draft)
+            try onSave(plan)
             dismiss(animated: true)
         } catch {
-            WorkoutEditorRows.showError(error, on: self)
+            model.error = error.localizedDescription
         }
     }
 
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        onboardingPreferences == nil ? 3 : 4
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        switch section {
-        case 1: draft.sessions.count
-        case previewSection: draft.sessions.isEmpty ? 0 : 2
-        default: 1
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        switch section {
-        case 1: "Session rotation"
-        case previewSection where !draft.sessions.isEmpty: "How the rotation fits your week"
-        default: nil
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        section == 2 ? "Sessions repeat in this order at your own pace." : nil
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        switch indexPath.section {
-        case 0:
-            return WorkoutEditorRows.field("Plan name", nameField)
-        case 1:
-            let session = draft.sessions[indexPath.row]
-            let cell = WorkoutEditorRows.detail(
-                session.name, detail: WorkoutEditorRows.exerciseCount(session.exercises.count), accessory: true
-            )
-            cell.accessibilityIdentifier = "workout.planEditor.session"
-            return cell
-        case previewSection:
-            guard let preferences = onboardingPreferences, !draft.sessions.isEmpty else { return UITableViewCell() }
-            let offset = indexPath.row * preferences.weeklyDays
-            let names = (offset..<(offset + preferences.weeklyDays)).map { draft.sessions[$0 % draft.sessions.count].name }
-            let cell = WorkoutEditorRows.detail("Week \(indexPath.row + 1)", detail: names.joined(separator: " → "))
-            cell.selectionStyle = .none
-            return cell
-        default:
-            return WorkoutEditorRows.action("Add session")
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 1 || indexPath.section == 2 else { return }
-        let session = indexPath.section == 1 ? draft.sessions[indexPath.row] : PlannedSession(
-            name: "Session \(draft.sessions.count + 1)", exercises: []
-        )
+    private func openSession(_ session: PlannedSession?) {
+        let session = session ?? PlannedSession(name: "Session \(model.draft.sessions.count + 1)", exercises: [])
         let editor = SessionEditorViewController(session: session, catalog: catalog) { [weak self] session in
             guard let self else { return }
-            if let index = self.draft.sessions.firstIndex(where: { $0.id == session.id }) {
-                self.draft.sessions[index] = session
+            if let index = self.model.draft.sessions.firstIndex(where: { $0.id == session.id }) {
+                self.model.draft.sessions[index] = session
             } else {
-                self.draft.sessions.append(session)
+                self.model.draft.sessions.append(session)
             }
-            self.tableView.reloadSections(self.rotationSections, with: .automatic)
+            self.model.error = nil
         }
         navigationController?.pushViewController(editor, animated: true)
     }
+}
 
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        indexPath.section == 1
-    }
+@MainActor
+final class WorkoutPlanEditorPresentation: ObservableObject {
+    @Published var draft: WorkoutPlan
+    @Published var error: String?
 
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        indexPath.section == 1
-    }
+    init(draft: WorkoutPlan) { self.draft = draft }
+}
 
-    override func tableView(_ tableView: UITableView, targetIndexPathForMoveFromRowAt source: IndexPath, toProposedIndexPath proposed: IndexPath) -> IndexPath {
-        proposed.section == source.section ? proposed : source
-    }
+struct WorkoutPlanEditorScreen: View {
+    @ObservedObject var model: WorkoutPlanEditorPresentation
+    let preferences: TrainingPreferences?
+    var onClose: () -> Void = {}
+    var onOpen: (PlannedSession?) -> Void = { _ in }
+    var onSave: () -> Void = {}
 
-    override func tableView(_ tableView: UITableView, moveRowAt source: IndexPath, to destination: IndexPath) {
-        let session = draft.sessions.remove(at: source.row)
-        draft.sessions.insert(session, at: destination.row)
-        if onboardingPreferences != nil {
-            tableView.reloadSections(IndexSet(integer: previewSection), with: .none)
+    var body: some View {
+        SendoPage(
+            title: preferences == nil ? "Workout plan" : "Review your plan",
+            context: preferences == nil ? nil : "3 of 3",
+            eyebrow: "Plan draft",
+            subtitle: preferences.map { "\(model.draft.sessions.count) in rotation · \($0.weeklyDays) days per week · \($0.equipment.title)" },
+            back: (preferences == nil ? "Cancel" : "Back", onClose)
+        ) {
+            if let preferences, !model.draft.sessions.isEmpty {
+                DisclosureGroup {
+                    VStack(alignment: .leading, spacing: 10) {
+                        ForEach(0..<2) { week in
+                            let offset = week * preferences.weeklyDays
+                            let sessions = model.draft.sessions
+                            let names = (offset..<(offset + preferences.weeklyDays)).map { sessions[$0 % sessions.count].name }
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text("Week \(week + 1)").font(.footnote.weight(.semibold))
+                                Text(names.joined(separator: " → ")).font(.footnote).foregroundStyle(SendoPalette.subdued)
+                            }
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        }
+                    }
+                    .padding(.top, 10)
+                } label: {
+                    Text("How the rotation fits your week").font(.headline).foregroundStyle(SendoPalette.ink)
+                }
+                .disclosureGroupStyle(RotationPreviewStyle())
+                .modifier(SendoPanel())
+            }
+            SendoField(title: "Plan name") {
+                TextField("My workout plan", text: $model.draft.name)
+                    .textInputAutocapitalization(.words)
+                    .accessibilityLabel("Plan name")
+                    .accessibilityIdentifier("workout.planName")
+            }
+            VStack(spacing: 0) {
+                ForEach(Array(model.draft.sessions.enumerated()), id: \.element.id) { index, session in
+                    HStack {
+                        Button { onOpen(session) } label: {
+                            VStack(alignment: .leading, spacing: 3) {
+                                Text(session.name).font(.headline)
+                                Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
+                                    .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                            }
+                            .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
+                            .contentShape(.rect)
+                        }
+                        .buttonStyle(.plain)
+                        .accessibilityIdentifier("workout.planEditor.session")
+                        Menu {
+                            Button("Move up", systemImage: "arrow.up") {
+                                model.draft.sessions.swapAt(index, index - 1)
+                            }
+                            .disabled(index == 0)
+                            Button("Move down", systemImage: "arrow.down") {
+                                model.draft.sessions.swapAt(index, index + 1)
+                            }
+                            .disabled(index == model.draft.sessions.count - 1)
+                            Button("Remove session", systemImage: "trash", role: .destructive) {
+                                model.draft.sessions.removeAll { $0.id == session.id }
+                            }
+                        } label: {
+                            Image(systemName: "ellipsis").frame(width: 44, height: 44).contentShape(.rect)
+                        }
+                        .accessibilityLabel("Actions for \(session.name)")
+                    }
+                    Divider().overlay(SendoPalette.line)
+                }
+            }
+            Button("Add a session") { onOpen(nil) }.buttonStyle(SendoButtonStyle(.link))
+        }
+        .safeAreaInset(edge: .bottom, spacing: 0) {
+            VStack(alignment: .leading, spacing: 8) {
+                if let error = model.error { Text(error).font(.footnote).foregroundStyle(SendoPalette.error) }
+                Button(preferences == nil ? "Save plan" : "Save plan and finish", action: onSave)
+                    .buttonStyle(SendoButtonStyle(.primary))
+                    .accessibilityIdentifier(preferences == nil ? "workout.savePlan" : "onboarding.finish")
+            }
+            .frame(maxWidth: 520)
+            .padding(.horizontal, 20)
+            .padding(.vertical, 10)
+            .frame(maxWidth: .infinity)
+            .background(SendoPalette.paper)
+            .overlay(alignment: .top) { Divider().overlay(SendoPalette.line) }
         }
     }
+}
 
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        guard editingStyle == .delete else { return }
-        draft.sessions.remove(at: indexPath.row)
-        tableView.reloadSections(rotationSections, with: .automatic)
-    }
+private struct RotationPreviewStyle: DisclosureGroupStyle {
+    @State private var expanded = true
 
-    private var rotationSections: IndexSet {
-        onboardingPreferences == nil ? IndexSet(integer: 1) : IndexSet([1, previewSection])
+    func makeBody(configuration: Configuration) -> some View {
+        VStack(alignment: .leading, spacing: 0) {
+            Button {
+                expanded.toggle()
+            } label: {
+                HStack {
+                    configuration.label
+                    SwiftUI.Spacer()
+                    Image(systemName: expanded ? "chevron.up" : "chevron.down")
+                        .font(.footnote)
+                }
+                .frame(minHeight: 44)
+                .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .accessibilityValue(expanded ? "Expanded" : "Collapsed")
+            if expanded { configuration.content }
+        }
     }
 }

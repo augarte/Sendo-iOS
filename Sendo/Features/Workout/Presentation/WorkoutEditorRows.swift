@@ -1,17 +1,20 @@
-import UIKit
+import SwiftUI
 
 @MainActor
 enum WorkoutEditorRows {
     static func field(_ label: String, _ field: UITextField) -> UITableViewCell {
         let title = UILabel()
         title.text = label
+        title.textColor = UIColor(SendoPalette.ink)
         title.font = .preferredFont(forTextStyle: .subheadline)
         title.adjustsFontForContentSizeCategory = true
+        field.textColor = UIColor(SendoPalette.ink)
         field.font = .preferredFont(forTextStyle: .body)
         field.adjustsFontForContentSizeCategory = true
         field.accessibilityLabel = label
 
         let cell = UITableViewCell()
+        cell.backgroundColor = UIColor(SendoPalette.panel)
         cell.selectionStyle = .none
         let stack = UIStackView(arrangedSubviews: [title, field])
         stack.axis = .vertical
@@ -31,9 +34,12 @@ enum WorkoutEditorRows {
 
     static func detail(_ title: String, detail: String? = nil, accessory: Bool = false) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.backgroundColor = UIColor(SendoPalette.panel)
         var content = cell.defaultContentConfiguration()
         content.text = title
         content.secondaryText = detail
+        content.textProperties.color = UIColor(SendoPalette.ink)
+        content.secondaryTextProperties.color = UIColor(SendoPalette.subdued)
         cell.contentConfiguration = content
         cell.accessoryType = accessory ? .disclosureIndicator : .none
         return cell
@@ -41,9 +47,10 @@ enum WorkoutEditorRows {
 
     static func action(_ title: String) -> UITableViewCell {
         let cell = UITableViewCell()
+        cell.backgroundColor = UIColor(SendoPalette.panel)
         var content = cell.defaultContentConfiguration()
         content.text = title
-        content.textProperties.color = cell.tintColor
+        content.textProperties.color = UIColor(SendoPalette.accent)
         cell.contentConfiguration = content
         cell.accessibilityTraits.insert(.button)
         return cell

@@ -1,82 +1,89 @@
-//
-//  ExerciseListViewController.swift
-//  Sendo
-//
-//  Created by Aimar Ugarte on 13/11/21.
-//
+import SwiftUI
 
-import UIKit
-import Combine
-
-class ExerciseListViewController: BaseTabViewController {
-    
-    lazy var exercisesTableView: UITableView = {
-        let table = UITableView()
-        table.translatesAutoresizingMaskIntoConstraints = false
-        table.backgroundColor = .clear
-        return table
-    }()
-    
+final class ExerciseListViewController: BaseTabViewController {
     private let exerciseViewModel: ExerciseListViewModel
-    private var cancellBag = Set<AnyCancellable>()
-    
+
     init(viewModel: ExerciseListViewModel) {
-        self.exerciseViewModel = viewModel
+        exerciseViewModel = viewModel
         super.init(title: "Exercises", image: "ListWhite")
     }
 
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+    required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        exerciseViewModel.exercises.sink { [unowned self] (_) in
-            self.exercisesTableView.reloadData()
-        }.store(in: &cancellBag)
+        embedSendoScreen(UIHostingController(rootView: ExerciseCatalogScreen(model: exerciseViewModel) { [weak self] exercise in
+            self?.navigateToViewController(viewController: ExerciseDetailViewController.create(exercise: exercise))
+        }))
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
         exerciseViewModel.fetchExercises()
-    }
-    
-    override func loadView() {
-        super.loadView()
-        setupTable()
-    }
-    
-    private func setupTable() {
-        view.addSubview(exercisesTableView)
-        NSLayoutConstraint.activate([
-            exercisesTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            exercisesTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-            exercisesTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            exercisesTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-        ])
-        exercisesTableView.delegate = self
-        exercisesTableView.dataSource = self
-        exercisesTableView.register(ExerciseListTableViewCell.self, forCellReuseIdentifier: ExerciseListTableViewCell.typeName)
     }
 }
 
-extension ExerciseListViewController: UITableViewDelegate, UITableViewDataSource {
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return exerciseViewModel.exercises.value.count
+private struct ExerciseCatalogScreen: View {
+    @ObservedObject var model: ExerciseListViewModel
+    let onExercise: (Exercise) -> Void
+    @State private var search = ""
+
+    var body: some View {
+        SendoPage(title: "Exercises", context: "Catalog") {
+            switch model.state {
+            case .loading:
+                ProgressView("Loading exercises…").frame(minHeight: 44)
+            case .failed:
+                SendoEmptyState(icon: "icloud.slash", title: "Exercises couldn’t load",
+                                detail: "Check your connection and try again. Your saved workouts are still available.")
+                Button("Retry", action: model.fetchExercises).buttonStyle(SendoButtonStyle(.primary))
+            case .loaded(let exercises):
+                SendoField(title: "Search exercises") {
+                    TextField("Exercise name or muscle group", text: $search)
+                        .accessibilityLabel("Search exercises")
+                }
+                let results = filtered(exercises)
+                if results.isEmpty {
+                    Text(search.isEmpty ? "No exercises available" : "No matching exercises").font(.headline)
+                    if !search.isEmpty {
+                        Text("Try a different name or muscle group.").font(.footnote).foregroundStyle(SendoPalette.subdued)
+                        Button("Clear search") { search = "" }.buttonStyle(SendoButtonStyle(.link))
+                    }
+                } else {
+                    LazyVStack(spacing: 0) {
+                        ForEach(results, id: \.id) { exercise in
+                            Button { onExercise(exercise) } label: {
+                                HStack {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(exercise.title).font(.headline)
+                                        if !exercise.primary.isEmpty {
+                                            Text(exercise.primary.joined(separator: " · "))
+                                                .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                                        }
+                                    }
+                                    SwiftUI.Spacer()
+                                    Image(systemName: "chevron.right").font(.footnote).foregroundStyle(SendoPalette.accent)
+                                }
+                                .padding(.vertical, 9)
+                                .frame(minHeight: 48)
+                                .contentShape(.rect)
+                            }
+                            .buttonStyle(.plain)
+                            .accessibilityIdentifier("catalog.exercise.\(exercise.id)")
+                            Divider().overlay(SendoPalette.line)
+                        }
+                    }
+                }
+            }
+        }
     }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: ExerciseListTableViewCell.typeName)! as! ExerciseListTableViewCell
-        cell.configureCell(exercise: exercise)
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let exercise = exerciseViewModel.exercises.value[indexPath.row]
-        let exerciseDetailVC = ExerciseDetailViewController.create(exercise: exercise)
-        navigateToViewController(viewController: exerciseDetailVC)
+
+    private func filtered(_ exercises: [Exercise]) -> [Exercise] {
+        let term = search.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !term.isEmpty else { return exercises }
+        return exercises.filter { exercise in
+            ([exercise.title] + exercise.primary + exercise.equipment).contains { $0.localizedStandardContains(term) }
+        }
     }
 }

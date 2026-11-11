@@ -1,113 +1,105 @@
 import Combine
-import UIKit
+import SwiftUI
 
-final class WorkoutStartingPlanViewController: UITableViewController {
-    private let preferences: TrainingPreferences
+final class WorkoutStartingPlanViewController: SendoHostingController<StartingPlanScreen> {
     private let catalog: any ExerciseCatalog
     private let onSave: (WorkoutPlan) throws -> Void
-    private let sessionCountField = UITextField()
-    private var templateRequest: AnyCancellable?
-    private let templateRow = IndexPath(row: 0, section: 1)
+    private let model: StartingPlanPresentation
+    private var request: AnyCancellable?
 
     init(preferences: TrainingPreferences, catalog: any ExerciseCatalog, onSave: @escaping (WorkoutPlan) throws -> Void) {
-        self.preferences = preferences
         self.catalog = catalog
         self.onSave = onSave
-        super.init(style: .insetGrouped)
+        model = StartingPlanPresentation()
+        super.init(rootView: StartingPlanScreen(preferences: preferences, model: model))
+        rootView.onBack = { [weak self] in self?.navigationController?.popViewController(animated: true) }
+        rootView.onTemplate = { [weak self] in self?.loadTemplate() }
+        rootView.onManual = { [weak self] in
+            self?.openReview(WorkoutPlan(name: "My workout plan", sessions: []))
+        }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Choose a starting plan"
-        navigationItem.prompt = "2 of 3"
-        sessionCountField.text = "5"
-        sessionCountField.keyboardType = .numberPad
-        sessionCountField.accessibilityIdentifier = "onboarding.sessionCount"
-        tableView.keyboardDismissMode = .onDrag
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int { 2 }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : 2
-    }
-
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 0 ? "\(preferences.weeklyDays) days per week · \(preferences.equipment.title)" : nil
-    }
-
-    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        section == 0 ? "Choose a rotation length for the template. Your next session carries over into the next week." : nil
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            return WorkoutEditorRows.field("Sessions in the template", sessionCountField)
-        }
-        if indexPath == templateRow {
-            return WorkoutEditorRows.action(templateRequest == nil ? "Use a template" : "Loading template…")
-        }
-        return WorkoutEditorRows.action("Build manually")
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 1 else { return }
-        view.endEditing(true)
-        if indexPath == templateRow {
-            loadTemplate()
-        } else {
-            finishRequest()
-            openReview(WorkoutPlan(name: "My workout plan", sessions: []))
-        }
-    }
-
     private func loadTemplate() {
-        guard templateRequest == nil else { return }
-        guard let count = Int(sessionCountField.text ?? ""), StarterWorkoutTemplate.supportedSessionCounts.contains(count) else {
-            showTemplateError(StarterWorkoutTemplate.TemplateError.invalidSessionCount.localizedDescription)
+        guard request == nil else { return }
+        guard let count = Int(model.sessionCount), StarterWorkoutTemplate.supportedSessionCounts.contains(count) else {
+            model.error = StarterWorkoutTemplate.TemplateError.invalidSessionCount.localizedDescription
             return
         }
 
-        templateRequest = catalog.fetchExerciseList()
-            .first()
-            .receive(on: DispatchQueue.main)
-            .sink { [weak self] completion in
-                guard let self, self.templateRequest != nil else { return }
-                self.finishRequest()
-                if case .failure = completion, self.navigationController?.topViewController === self {
-                    self.showTemplateError("Couldn’t load exercises. Try again or build your plan manually.")
-                }
-            } receiveValue: { [weak self] exercises in
-                guard let self, self.navigationController?.topViewController === self else { return }
-                self.finishRequest()
-                do {
-                    let plan = try StarterWorkoutTemplate.makePlan(
-                        sessionCount: count, equipment: self.preferences.equipment, catalog: exercises
-                    )
-                    self.openReview(plan)
-                } catch {
-                    self.showTemplateError(error.localizedDescription)
-                }
+        model.error = nil
+        model.isLoading = true
+        request = catalog.fetchExerciseList().first().receive(on: DispatchQueue.main).sink { [weak self] completion in
+            self?.request = nil
+            self?.model.isLoading = false
+            if case .failure = completion {
+                self?.model.error = "Couldn’t load exercises. Try again or build your plan manually."
             }
-        tableView.reloadRows(at: [templateRow], with: .none)
-    }
-
-    private func finishRequest() {
-        templateRequest = nil
-        tableView.reloadRows(at: [templateRow], with: .none)
-    }
-
-    private func showTemplateError(_ message: String) {
-        let alert = UIAlertController(title: "Template unavailable", message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default))
-        present(alert, animated: true)
+        } receiveValue: { [weak self] exercises in
+            guard let self, self.navigationController?.topViewController === self else { return }
+            do {
+                let plan = try StarterWorkoutTemplate.makePlan(
+                    sessionCount: count, equipment: self.rootView.preferences.equipment, catalog: exercises
+                )
+                self.openReview(plan)
+            } catch {
+                self.model.error = error.localizedDescription
+            }
+        }
     }
 
     private func openReview(_ plan: WorkoutPlan) {
-        let editor = WorkoutPlanEditorViewController(plan: plan, catalog: catalog, onboardingPreferences: preferences, onSave: onSave)
+        request = nil
+        model.isLoading = false
+        let editor = WorkoutPlanEditorViewController(plan: plan, catalog: catalog, onboardingPreferences: rootView.preferences, onSave: onSave)
         navigationController?.pushViewController(editor, animated: true)
+    }
+}
+
+@MainActor
+final class StartingPlanPresentation: ObservableObject {
+    @Published var sessionCount = "5"
+    @Published var isLoading = false
+    @Published var error: String?
+}
+
+struct StartingPlanScreen: View {
+    let preferences: TrainingPreferences
+    @ObservedObject var model: StartingPlanPresentation
+    var onBack: () -> Void = {}
+    var onTemplate: () -> Void = {}
+    var onManual: () -> Void = {}
+
+    var body: some View {
+        SendoPage(
+            title: "Choose a starting plan", context: "2 of 3",
+            subtitle: "\(preferences.weeklyDays) \(preferences.weeklyDays == 1 ? "day" : "days") per week · \(preferences.equipment.title)",
+            back: ("Back", onBack)
+        ) {
+            VStack(alignment: .leading, spacing: 6) {
+                SendoField(title: "Sessions in the rotation") {
+                    TextField("5", text: $model.sessionCount)
+                        .keyboardType(.numberPad)
+                        .monospacedDigit()
+                        .accessibilityLabel("Sessions in the rotation")
+                        .accessibilityIdentifier("onboarding.sessionCount")
+                }
+                Text("Your next session carries over into the next week.")
+                    .font(.footnote).foregroundStyle(SendoPalette.subdued)
+            }
+            VStack(alignment: .leading, spacing: 8) {
+                SendoEyebrow(text: "Starter template")
+                Text("Start with a template").font(.headline)
+                Text("Review a rotation built from exercises for your equipment.")
+                    .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                Button(model.isLoading ? "Loading template…" : "Use a template", action: onTemplate)
+                    .buttonStyle(SendoButtonStyle(.primary))
+                    .disabled(model.isLoading)
+            }
+            .modifier(SendoPanel())
+            if let error = model.error { Text(error).font(.footnote).foregroundStyle(SendoPalette.error) }
+            Button("Build manually", action: onManual).buttonStyle(SendoButtonStyle(.secondary))
+        }
     }
 }

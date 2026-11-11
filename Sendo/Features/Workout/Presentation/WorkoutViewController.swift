@@ -1,9 +1,9 @@
-import UIKit
+import SwiftUI
 
-final class WorkoutViewController: BaseTabViewController, UITableViewDataSource {
+final class WorkoutViewController: BaseTabViewController {
     private let viewModel: WorkoutViewModel
     private let catalog: any ExerciseCatalog
-    private let tableView = UITableView(frame: .zero, style: .insetGrouped)
+    private var screen: UIHostingController<WorkoutHomeScreen>?
     private var loadError: Error?
     private var didOfferSetup = false
 
@@ -17,17 +17,13 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tableView.dataSource = self
-        tableView.allowsSelection = false
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(tableView)
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
+        view.backgroundColor = UIColor(SendoPalette.paper)
         loadWorkout()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
     }
 
     func offerSetupIfNeeded() {
@@ -50,50 +46,27 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
     }
 
     private func render() {
-        let plan = viewModel.state?.plan
-        let showsPlan = plan != nil && loadError == nil
-        tableView.isHidden = !showsPlan
-        if loadError == nil {
-            let setup = UIBarButtonItem(
-                image: UIImage(systemName: "slider.horizontal.3"), style: .plain,
-                target: self, action: #selector(showTrainingSetup)
-            )
-            setup.accessibilityLabel = showsPlan ? "Training preferences" : "Set up training"
-            navigationItem.leftBarButtonItem = setup
-        } else {
-            navigationItem.leftBarButtonItem = nil
-        }
-        navigationItem.rightBarButtonItem = showsPlan
-            ? UIBarButtonItem(title: "Edit plan", style: .plain, target: self, action: #selector(editPlan))
-            : nil
-
-        if showsPlan {
-            contentUnavailableConfiguration = nil
-            tableView.reloadData()
-            return
-        }
-
-        var configuration = UIContentUnavailableConfiguration.empty()
-        configuration.image = UIImage(systemName: loadError == nil ? "list.bullet.rectangle" : "exclamationmark.circle")
-        configuration.text = loadError == nil ? "No workout plan yet" : "Couldn’t load your workout plan"
-        configuration.secondaryText = loadError == nil
-            ? "Build a plan from the exercise library. Your sessions repeat in order as you train."
-            : "Try opening your saved workout plan again."
-        configuration.button = .filled()
-        configuration.button.title = loadError == nil ? "Create a plan" : "Retry"
-        configuration.buttonProperties.primaryAction = UIAction { [weak self] _ in
-            guard let self else { return }
-            if self.loadError == nil {
-                self.editPlan()
-            } else {
-                self.loadWorkout()
-                self.offerSetupIfNeeded()
+        let content = WorkoutHomeScreen(
+            state: viewModel.state, failed: loadError != nil,
+            onPlan: { [weak self] in self?.editPlan() },
+            onSetup: { [weak self] in self?.showTrainingSetup() },
+            onRetry: { [weak self] in
+                self?.loadWorkout()
+                self?.offerSetupIfNeeded()
             }
+        )
+        if let screen {
+            screen.rootView = content
+        } else {
+            let screen = UIHostingController(rootView: content)
+            embedSendoScreen(screen)
+            self.screen = screen
         }
-        contentUnavailableConfiguration = configuration
     }
 
-    @objc private func showTrainingSetup() {
+    var trainingState: WorkoutTrainingState? { viewModel.state }
+
+    func showTrainingSetup() {
         guard let state = viewModel.state, loadError == nil else { return }
         let isEditingPreferences = state.plan != nil
         let preferences = TrainingPreferences(
@@ -121,12 +94,14 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
             }
         }
         let navigation = UINavigationController(rootViewController: setup)
+        navigation.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
+        navigation.modalPresentationStyle = .fullScreen
         navigation.isModalInPresentation = state.shouldOfferSetup
         let presenter: UIViewController = tabBarController ?? self
         presenter.present(navigation, animated: true)
     }
 
-    @objc private func editPlan() {
+    private func editPlan() {
         guard let state = viewModel.state, loadError == nil else { return }
         let draft = state.plan ?? WorkoutPlan(name: "My workout plan", sessions: [])
         let editor = WorkoutPlanEditorViewController(plan: draft, catalog: catalog) { [weak self] plan in
@@ -134,33 +109,81 @@ final class WorkoutViewController: BaseTabViewController, UITableViewDataSource 
             try self.viewModel.save(plan)
             self.render()
         }
-        present(UINavigationController(rootViewController: editor), animated: true)
+        let navigation = UINavigationController(rootViewController: editor)
+        navigation.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
+        navigation.modalPresentationStyle = .fullScreen
+        present(navigation, animated: true)
     }
+}
 
-    func numberOfSections(in tableView: UITableView) -> Int { 2 }
+private struct WorkoutHomeScreen: View {
+    let state: WorkoutTrainingState?
+    let failed: Bool
+    let onPlan: () -> Void
+    let onSetup: () -> Void
+    let onRetry: () -> Void
 
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 1 : viewModel.state?.plan?.sessions.count ?? 0
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        section == 0 ? "Next session" : "Session rotation"
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let state = viewModel.state, let plan = state.plan else { return UITableViewCell() }
-        if indexPath.section == 0 {
-            let nextSession = state.nextSession
-            let position = plan.sessions.firstIndex { $0.id == nextSession?.id }.map { $0 + 1 } ?? 1
-            var details = [plan.name, "Session \(position) of \(plan.sessions.count)"]
-            if let days = state.weeklyTrainingDays {
-                details.append(days == 1 ? "1 training day per week" : "\(days) training days per week")
+    var body: some View {
+        SendoPage(title: "Workout", context: "Training log") {
+            if failed {
+                empty(icon: "exclamationmark.circle", title: "Couldn’t load your workout plan",
+                      detail: "Try opening your saved workout plan again.", action: "Retry", perform: onRetry)
+            } else if let state, let plan = state.plan, let next = state.nextSession {
+                let position = (plan.sessions.firstIndex { $0.id == next.id } ?? 0) + 1
+                VStack(alignment: .leading, spacing: 6) {
+                    SendoEyebrow(text: "Next session")
+                    Text(next.name).font(.title3.weight(.semibold))
+                    Text(summary(plan: plan, position: position, days: state.weeklyTrainingDays))
+                        .font(.footnote).foregroundStyle(SendoPalette.subdued).monospacedDigit()
+                        .accessibilityIdentifier("workout.nextSummary")
+                }
+                .modifier(SendoPanel())
+                HStack {
+                    Text("Your plan").font(.headline)
+                    SwiftUI.Spacer()
+                    Button("Edit plan", action: onPlan).buttonStyle(SendoButtonStyle(.link))
+                }
+                VStack(spacing: 0) {
+                    ForEach(Array(plan.sessions.enumerated()), id: \.element.id) { index, session in
+                        HStack(alignment: .firstTextBaseline) {
+                            Text("\(index + 1). \(session.name)")
+                            SwiftUI.Spacer()
+                            Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
+                                .foregroundStyle(SendoPalette.subdued).font(.footnote)
+                        }
+                        .padding(.vertical, 10)
+                        Divider().overlay(SendoPalette.line)
+                    }
+                }
+                VStack(alignment: .leading, spacing: 6) {
+                    Text("History").font(.headline)
+                    if state.history.isEmpty {
+                        Text("No completed workouts yet. Your first session will appear here.")
+                            .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                    } else {
+                        Text(state.history.count.formatted() + (state.history.count == 1 ? " completed workout" : " completed workouts"))
+                            .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                    }
+                }
+                Button("Training preferences", action: onSetup).buttonStyle(SendoButtonStyle(.link))
+            } else {
+                empty(icon: "dumbbell", title: "No training plan yet",
+                      detail: "Create a plan so your next session is ready to start.", action: "Create a plan", perform: onPlan)
+                Button("Set up training", action: onSetup).buttonStyle(SendoButtonStyle(.link))
             }
-            return WorkoutEditorRows.detail(nextSession?.name ?? plan.name, detail: details.joined(separator: " · "))
         }
-        let session = plan.sessions[indexPath.row]
-        return WorkoutEditorRows.detail(
-            "\(indexPath.row + 1). \(session.name)", detail: WorkoutEditorRows.exerciseCount(session.exercises.count)
-        )
+    }
+
+    private func empty(icon: String, title: String, detail: String, action: String, perform: @escaping () -> Void) -> some View {
+        VStack(alignment: .leading, spacing: 10) {
+            SendoEmptyState(icon: icon, title: title, detail: detail)
+            Button(action, action: perform).buttonStyle(SendoButtonStyle(.primary))
+        }
+    }
+
+    private func summary(plan: WorkoutPlan, position: Int, days: Int?) -> String {
+        var details = [plan.name, "Session \(position) of \(plan.sessions.count)"]
+        if let days { details.append(days == 1 ? "1 training day per week" : "\(days) training days per week") }
+        return details.joined(separator: " · ")
     }
 }

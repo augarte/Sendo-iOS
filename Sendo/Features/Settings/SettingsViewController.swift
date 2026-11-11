@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Combine
 
 class SettingsViewController: SendoViewController {
     
@@ -37,27 +36,24 @@ class SettingsViewController: SendoViewController {
     }()
     
     lazy var darkModeSwitch: UISwitch = {
-        let dmSwitch = UISwitch()
-        return dmSwitch
+        let toggle = UISwitch()
+        toggle.addTarget(self, action: #selector(darkModeSwitchAction(_:)), for: .valueChanged)
+        return toggle
     }()
-    
-    private var myCancellable: AnyCancellable?
-    private var darkMode = false
     
     static func create() -> SettingsViewController {
         return SettingsViewController(title: "Settings")
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let preferences = UserDefaults.standard
-        if preferences.object(forKey: "darkMode") == nil {
-            preferences.set(darkMode, forKey: "darkMode")
-        } else {
-            darkMode = preferences.bool(forKey: "darkMode")
-        }
-        darkModeSwitch.setOn(darkMode, animated: false)
+        darkModeSwitch.setOn(UserDefaults.standard.bool(forKey: "darkMode"), animated: false)
     }
     
     override func loadView() {
@@ -80,9 +76,10 @@ class SettingsViewController: SendoViewController {
 
 extension SettingsViewController {
     
-    @IBAction func darkModeSwitchAction(_ sender: Any) {
-        let preferences = UserDefaults.standard
-        preferences.set(!darkMode, forKey: "darkMode")
-        preferences.synchronize()
+    @objc private func darkModeSwitchAction(_ sender: UISwitch) {
+        UserDefaults.standard.set(sender.isOn, forKey: "darkMode")
+        let style = Self.preferredInterfaceStyle
+        tabBarController?.overrideUserInterfaceStyle = style
+        overrideUserInterfaceStyle = style
     }
 }

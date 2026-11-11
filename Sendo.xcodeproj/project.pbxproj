@@ -25,6 +25,7 @@
 		20B96EC2272475BC000B9C1D /* WorkoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */; };
 		07BCB70E2242BA943B99DE0D /* WorkoutEditorRows.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CE099498E080BC71FB4F21 /* WorkoutEditorRows.swift */; };
 		20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20B96EC3272484D6000B9C1D /* SendoViewController.swift */; };
+		A972C714B9AEAD4D280842E4 /* SendoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AE1273AFE99AC54F01D5D /* SendoScreen.swift */; };
 		20C524692724D43A00741057 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524682724D43A00741057 /* Utils.swift */; };
 		20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C5246E2724E58E00741057 /* GoogleService-Info.plist */; };
 		20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */; };
@@ -121,6 +122,7 @@
 		20B96EC1272475BC000B9C1D /* WorkoutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WorkoutViewController.swift; sourceTree = "<group>"; };
 		70CE099498E080BC71FB4F21 /* WorkoutEditorRows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutEditorRows.swift; sourceTree = "<group>"; };
 		20B96EC3272484D6000B9C1D /* SendoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendoViewController.swift; sourceTree = "<group>"; };
+		EF1AE1273AFE99AC54F01D5D /* SendoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendoScreen.swift; sourceTree = "<group>"; };
 		20C524682724D43A00741057 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20C5246E2724E58E00741057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
@@ -270,6 +272,7 @@
 			children = (
 				EA3FFAEF28E9BA90007681C9 /* Constants.swift */,
 				20B96EC3272484D6000B9C1D /* SendoViewController.swift */,
+				EF1AE1273AFE99AC54F01D5D /* SendoScreen.swift */,
 			);
 			path = DesignSystem;
 			sourceTree = "<group>";
@@ -797,6 +800,7 @@
 				EA1412CD2844281E00E2B3E6 /* BaseTabViewController.swift in Sources */,
 				20DDAC61273F2EDD0072BB76 /* ProfileViewController.swift in Sources */,
 				20B96EC4272484D6000B9C1D /* SendoViewController.swift in Sources */,
+				A972C714B9AEAD4D280842E4 /* SendoScreen.swift in Sources */,
 				20B96EC027247526000B9C1D /* HomeTabBarViewController.swift in Sources */,
 				EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */,
 				EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */,

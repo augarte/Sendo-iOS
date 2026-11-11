@@ -33,13 +33,12 @@ open class SendoViewController: UIViewController {
     
     open override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let preferences = UserDefaults.standard
-        var darkMode = false
-        if preferences.object(forKey: "darkMode") != nil {
-            darkMode = preferences.bool(forKey: "darkMode")
-        }
-        overrideUserInterfaceStyle = darkMode ? .dark : .light
+        overrideUserInterfaceStyle = Self.preferredInterfaceStyle
     }
+    static var preferredInterfaceStyle: UIUserInterfaceStyle {
+        UserDefaults.standard.bool(forKey: "darkMode") ? .dark : .light
+    }
+
 }
 
 // MARK: - Navigation
@@ -52,6 +51,7 @@ extension SendoViewController {
     func showModalView(viewController: UIViewController) {
         viewController.modalPresentationStyle = .automatic
         let nvc = UINavigationController(rootViewController: viewController)
+        nvc.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
         present(nvc, animated: true)
     }
 }

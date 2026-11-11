@@ -1,4 +1,4 @@
-import UIKit
+import SwiftUI
 
 final class SessionEditorViewController: UITableViewController {
     private let catalog: any ExerciseCatalog
@@ -15,8 +15,16 @@ final class SessionEditorViewController: UITableViewController {
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.backgroundColor = UIColor(SendoPalette.paper)
+        tableView.separatorColor = UIColor(SendoPalette.line)
+        view.tintColor = UIColor(SendoPalette.accent)
         title = "Session"
         nameField.text = draft.name
         nameField.placeholder = "Session name"

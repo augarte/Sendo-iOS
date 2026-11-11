@@ -5,7 +5,7 @@
 //  Created by Aimar Ugarte on 23/10/21.
 //
 
-import UIKit
+import SwiftUI
 
 class HomeTabBarViewController: UITabBarController {
     
@@ -24,12 +24,7 @@ class HomeTabBarViewController: UITabBarController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let preferences = UserDefaults.standard
-        var darkMode = false
-        if preferences.object(forKey: "darkMode") != nil {
-            darkMode = preferences.bool(forKey: "darkMode")
-        }
-        overrideUserInterfaceStyle = darkMode ? .dark : .light
+        overrideUserInterfaceStyle = SendoViewController.preferredInterfaceStyle
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -44,10 +39,15 @@ class HomeTabBarViewController: UITabBarController {
     }
 
     private func applyStyle() {
-        tabBar.backgroundColor = UIColor(named:"PrimaryColor")
-        tabBar.barTintColor = UIColor(named:"PrimaryColor")
-        view.backgroundColor = UIColor(named:"PrimaryColor")
-        tabBar.barStyle = .black
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.backgroundColor = UIColor(SendoPalette.paper)
+        appearance.shadowColor = UIColor(SendoPalette.line)
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
+        tabBar.tintColor = UIColor(SendoPalette.accent)
+        tabBar.unselectedItemTintColor = UIColor(SendoPalette.subdued)
+        view.backgroundColor = UIColor(SendoPalette.paper)
     }
 }
 
@@ -61,20 +61,22 @@ private extension HomeTabBarViewController {
         let exerciseListVC = ExerciseListViewController(viewModel: ExerciseListViewModel(service: catalog))
         let progressVC = ProgressViewController(viewModel: AppEnvironment.progressViewModel())
         let profileVC = ProfileViewController.create()
+        profileVC.trainingState = { [weak workoutVC] in workoutVC?.trainingState }
+        profileVC.editTraining = { [weak workoutVC] in workoutVC?.showTrainingSetup() }
         
         self.viewControllers = [
-            createTabBarItem(title: workoutVC.titleName, tabImage: workoutVC.tabImage, viewController: workoutVC),
-            createTabBarItem(title: exerciseListVC.titleName, tabImage: exerciseListVC.tabImage, viewController: exerciseListVC),
+            createTabBarItem(title: workoutVC.titleName, tabImage: "dumbbell", viewController: workoutVC),
+            createTabBarItem(title: exerciseListVC.titleName, tabImage: "list.bullet", viewController: exerciseListVC),
             //UIViewController(),
-            createTabBarItem(title: progressVC.titleName, tabImage: progressVC.tabImage, viewController: progressVC),
-            createTabBarItem(title: profileVC.titleName, tabImage: profileVC.tabImage, viewController: profileVC)
+            createTabBarItem(title: progressVC.titleName, tabImage: "chart.xyaxis.line", viewController: progressVC),
+            createTabBarItem(title: profileVC.titleName, tabImage: "person", viewController: profileVC)
         ]
         //self.delegate = self
     }
     
     func createTabBarItem(title: String, tabImage: String, viewController: SendoViewController) -> UINavigationController {
         let navigationController = UINavigationController(rootViewController: viewController)
-        let tabItem = UITabBarItem(title: viewController.title, image: UIImage(named: tabImage), selectedImage: UIImage(named: tabImage))
+        let tabItem = UITabBarItem(title: viewController.title, image: UIImage(systemName: tabImage), selectedImage: UIImage(systemName: tabImage))
         tabItem.title = title
         viewController.tabBarItem = tabItem
         

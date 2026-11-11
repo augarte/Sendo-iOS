@@ -1,90 +1,114 @@
-import UIKit
+import SwiftUI
 
-final class ExercisePrescriptionViewController: UITableViewController {
+final class ExercisePrescriptionViewController: SendoHostingController<ExercisePrescriptionScreen> {
     private let catalog: any ExerciseCatalog
-    private let isNew: Bool
-    private let onSave: (PlannedExercise) -> Void
-    private var draft: PlannedExercise
-    private let setsField = UITextField()
-    private let minimumRepsField = UITextField()
-    private let maximumRepsField = UITextField()
-    private let loadField = UITextField()
+    private let model: ExercisePrescriptionPresentation
 
     init(exercise: PlannedExercise, isNew: Bool, catalog: any ExerciseCatalog, onSave: @escaping (PlannedExercise) -> Void) {
-        draft = exercise
-        self.isNew = isNew
         self.catalog = catalog
-        self.onSave = onSave
-        super.init(style: .insetGrouped)
+        model = ExercisePrescriptionPresentation(exercise: exercise)
+        super.init(rootView: ExercisePrescriptionScreen(model: model, isNew: isNew, onSave: onSave))
+        rootView.onCancel = { [weak self] in self?.navigationController?.popViewController(animated: true) }
+        rootView.onSwap = { [weak self] in self?.swapExercise() }
     }
 
     required init?(coder: NSCoder) { fatalError("init(coder:) has not been implemented") }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        title = "Exercise"
-        setsField.text = String(draft.sets)
-        minimumRepsField.text = String(draft.minimumReps)
-        maximumRepsField.text = String(draft.maximumReps)
-        for field in [setsField, minimumRepsField, maximumRepsField] { field.keyboardType = .numberPad }
-        loadField.keyboardType = .decimalPad
-        loadField.text = draft.startingLoadKilograms?.formatted(.number.grouping(.never).precision(.fractionLength(0...16)))
-        loadField.placeholder = "Optional"
-        loadField.accessibilityIdentifier = "workout.startingLoad"
-        tableView.keyboardDismissMode = .onDrag
-        let save = UIBarButtonItem(title: isNew ? "Add" : "Done", style: .done, target: self, action: #selector(save))
-        save.accessibilityIdentifier = "workout.saveExercise"
-        navigationItem.rightBarButtonItem = save
-    }
-
-    @objc private func save() {
-        let loadText = loadField.text?.trimmingCharacters(in: .whitespacesAndNewlines) ?? ""
-        do {
-            guard let sets = Int(setsField.text ?? ""), let minimum = Int(minimumRepsField.text ?? ""),
-                  let maximum = Int(maximumRepsField.text ?? "") else {
-                throw WorkoutError.invalidPrescription
-            }
-            let load = try loadText.isEmpty ? nil : Double(loadText, format: .number.grouping(.never), lenient: false)
-            draft.sets = sets
-            draft.minimumReps = minimum
-            draft.maximumReps = maximum
-            draft.startingLoadKilograms = load
-            try draft.validate()
-            onSave(draft)
-        } catch {
-            WorkoutEditorRows.showError(WorkoutError.invalidPrescription, on: self)
-        }
-    }
-
-    override func numberOfSections(in tableView: UITableView) -> Int { 2 }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        section == 0 ? 2 : 4
-    }
-
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.section == 0 {
-            return indexPath.row == 0 ? WorkoutEditorRows.detail(draft.title) : WorkoutEditorRows.action("Swap exercise")
-        }
-        switch indexPath.row {
-        case 0: return WorkoutEditorRows.field("Sets", setsField)
-        case 1: return WorkoutEditorRows.field("Minimum reps", minimumRepsField)
-        case 2: return WorkoutEditorRows.field("Maximum reps", maximumRepsField)
-        default: return WorkoutEditorRows.field("Starting load (kg)", loadField)
-        }
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: true)
-        guard indexPath.section == 0, indexPath.row == 1 else { return }
-        let picker = ExercisePickerViewController(catalog: catalog, replacing: draft.exerciseID) { [weak self] exercise in
+    private func swapExercise() {
+        let picker = ExercisePickerViewController(catalog: catalog, replacing: model.exercise.exerciseID) { [weak self] exercise in
             guard let self else { return }
-            self.draft.exerciseID = exercise.id
-            self.draft.title = exercise.title
-            self.loadField.text = nil
-            self.tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+            self.model.exercise.exerciseID = exercise.id
+            self.model.exercise.title = exercise.title
+            self.model.load = ""
             self.navigationController?.popViewController(animated: true)
         }
         navigationController?.pushViewController(picker, animated: true)
+    }
+}
+
+@MainActor
+final class ExercisePrescriptionPresentation: ObservableObject {
+    @Published var exercise: PlannedExercise
+    @Published var sets: String
+    @Published var minimum: String
+    @Published var maximum: String
+    @Published var load: String
+
+    init(exercise: PlannedExercise) {
+        self.exercise = exercise
+        sets = String(exercise.sets)
+        minimum = String(exercise.minimumReps)
+        maximum = String(exercise.maximumReps)
+        load = exercise.startingLoadKilograms?.formatted(.number.grouping(.never).precision(.fractionLength(0...16))) ?? ""
+    }
+
+    func prescription() throws -> PlannedExercise {
+        guard let sets = Int(sets), let minimum = Int(minimum), let maximum = Int(maximum) else {
+            throw WorkoutError.invalidPrescription
+        }
+        let text = load.trimmingCharacters(in: .whitespacesAndNewlines)
+        var updated = exercise
+        updated.sets = sets
+        updated.minimumReps = minimum
+        updated.maximumReps = maximum
+        updated.startingLoadKilograms = try text.isEmpty ? nil : Double(text, format: .number.grouping(.never), lenient: false)
+        try updated.validate()
+        return updated
+    }
+}
+
+struct ExercisePrescriptionScreen: View {
+    @ObservedObject var model: ExercisePrescriptionPresentation
+    let isNew: Bool
+    let onSave: (PlannedExercise) -> Void
+    var onCancel: () -> Void = {}
+    var onSwap: () -> Void = {}
+    @State private var showsError = false
+    @Environment(\.dynamicTypeSize) private var typeSize
+
+    var body: some View {
+        SendoPage(title: isNew ? "Add exercise" : "Edit exercise", back: ("Cancel", onCancel)) {
+            SendoField(title: "Exercise") {
+                Button(action: onSwap) {
+                    HStack {
+                        Text(model.exercise.title).foregroundStyle(SendoPalette.ink)
+                        SwiftUI.Spacer()
+                        Image(systemName: "chevron.up.chevron.down").font(.caption)
+                    }
+                    .frame(minHeight: 44)
+                    .contentShape(.rect)
+                }
+                .accessibilityLabel("Swap exercise")
+                .accessibilityValue(model.exercise.title)
+            }
+            Text("The picker suggests similar exercises that use compatible equipment.")
+                .font(.footnote).foregroundStyle(SendoPalette.subdued)
+
+            let columns = Array(repeating: GridItem(.flexible(), alignment: .top), count: typeSize.isAccessibilitySize ? 1 : 2)
+            LazyVGrid(columns: columns, spacing: 10) {
+                field("Sets", text: $model.sets)
+                field("Starting load (kg)", text: $model.load, placeholder: "Optional", keyboard: .decimalPad)
+                field("Minimum reps", text: $model.minimum)
+                field("Maximum reps", text: $model.maximum)
+            }
+            if showsError {
+                Text(WorkoutError.invalidPrescription.localizedDescription)
+                    .font(.footnote).foregroundStyle(SendoPalette.error)
+            }
+            Button(isNew ? "Add exercise" : "Apply changes") {
+                do { onSave(try model.prescription()) } catch { showsError = true }
+            }
+            .buttonStyle(SendoButtonStyle(.primary))
+            .accessibilityIdentifier("workout.saveExercise")
+        }
+    }
+
+    private func field(
+        _ title: String, text: Binding<String>, placeholder: String = "", keyboard: UIKeyboardType = .numberPad
+    ) -> some View {
+        SendoField(title: title) {
+            TextField(placeholder, text: text).keyboardType(keyboard).monospacedDigit().accessibilityLabel(title)
+                .accessibilityIdentifier(keyboard == .decimalPad ? "workout.startingLoad" : title)
+        }
     }
 }

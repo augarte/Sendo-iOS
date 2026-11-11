@@ -5,7 +5,7 @@
 //  Created by Aimar Ugarte on 13/11/21.
 //
 
-import UIKit
+import SwiftUI
 import Combine
 import AuthenticationServices
 import Firebase
@@ -14,24 +14,11 @@ import GoogleSignIn
 
 class ProfileViewController: BaseTabViewController {
     
-    private enum Constants {
-        static let margin: CGFloat = Spacer.size05
-    }
-    
-    private lazy var loginView: ProfileLoginView = {
-        let view = ProfileLoginView()
-        view.translatesAutoresizingMaskIntoConstraints = false
-        view.tapLogginButtonSubject.sink { [weak self] type in
-            guard let self else { return }
-            switch type {
-            case .google: self.signInGoogle()
-            case .apple: self.signInApple()
-            }
-        }
-        .store(in: &cancellBag)
-        return view
-    }()
-    
+    var trainingState: () -> WorkoutTrainingState? = { nil }
+    var editTraining: () -> Void = {}
+    private var screen: UIHostingController<ProfileScreen>?
+    private var account: FirebaseSessionStore.Account?
+
     private var currentNonce: String?
     private var cancellBag = Set<AnyCancellable>()
     private let authViewModel = AuthViewModel()
@@ -43,43 +30,101 @@ class ProfileViewController: BaseTabViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        authViewModel.authUser.sink { [weak self] (_) in
-            guard let authUser = self?.authViewModel.authUser.value else { return }
-            self?.title = authUser.name
+        AppEnvironment.session?.$account.sink { [weak self] account in
+            self?.account = account
+            self?.render()
         }.store(in: &cancellBag)
+        render()
     }
-    
-    override func loadView() {
-        super.loadView()
-        addToolbarItem()
-        setupLoginView()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: animated)
+        render()
     }
-    
-    private func setupLoginView() {
-        view.addSubview(loginView)
-        NSLayoutConstraint.activate([
-            loginView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            loginView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            loginView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            loginView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ])
-        loginView.setupView()
+
+    private func render() {
+        let content = ProfileScreen(
+            name: account?.isGuest == false ? account?.name : nil,
+            signedIn: account?.isGuest == false,
+            training: trainingState(),
+            onEdit: { [weak self] in self?.editTraining() },
+            onSettings: { [weak self] in self?.navigateToViewController(viewController: SettingsViewController.create()) },
+            onSignIn: { [weak self] type in
+                switch type {
+                case .google: self?.signInGoogle()
+                case .apple: self?.signInApple()
+                }
+            }
+        )
+        if let screen {
+            screen.rootView = content
+        } else {
+            let screen = UIHostingController(rootView: content)
+            embedSendoScreen(screen)
+            self.screen = screen
+        }
     }
 }
 
-// MARK: - Toolbar
-private extension ProfileViewController {
-    
-    func addToolbarItem(){
-        let settings = UIBarButtonItem(image: UIImage(systemName: "gear"), style: .plain, target: self, action: #selector(openSettings(sender:)))
-        settings.accessibilityLabel = "Settings"
-        settings.accessibilityIdentifier = "profile.settings"
-        navigationItem.rightBarButtonItem = settings
+private struct ProfileScreen: View {
+    let name: String?
+    let signedIn: Bool
+    let training: WorkoutTrainingState?
+    let onEdit: () -> Void
+    let onSettings: () -> Void
+    let onSignIn: (ProfileLoginView.LoginType) -> Void
+
+    var body: some View {
+        SendoPage(title: "Profile", context: "Preferences") {
+            VStack(alignment: .leading, spacing: 7) {
+                SendoEyebrow(text: "Account")
+                Text(signedIn ? (name ?? "Signed in") : "Training as a guest").font(.headline)
+                if !signedIn {
+                    Text("Sign in to sync your measurements across devices.")
+                        .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                    ProviderButtons(onSignIn: onSignIn).frame(height: 104).padding(.top, 4)
+                }
+            }
+            .modifier(SendoPanel())
+            row("Training days", value: training?.weeklyTrainingDays.map(String.init) ?? "Not set")
+            row("Equipment", value: training?.equipment?.title ?? "Not set")
+            Button("Edit training preferences", action: onEdit).buttonStyle(SendoButtonStyle(.link))
+            Button("Settings", action: onSettings)
+                .buttonStyle(SendoButtonStyle(.link))
+                .accessibilityIdentifier("profile.settings")
+        }
     }
-    
-    @objc func openSettings(sender: UIBarButtonItem) {
-        let settingsVC = SettingsViewController.create()
-        navigateToViewController(viewController: settingsVC)
+
+    private func row(_ title: String, value: String) -> some View {
+        VStack(spacing: 10) {
+            HStack {
+                Text(title)
+                SwiftUI.Spacer()
+                Text(value).font(.footnote).foregroundStyle(SendoPalette.subdued)
+            }
+            Divider().overlay(SendoPalette.line)
+        }
+    }
+}
+
+private struct ProviderButtons: UIViewRepresentable {
+    let onSignIn: (ProfileLoginView.LoginType) -> Void
+
+    final class Coordinator {
+        var subscription: AnyCancellable?
+    }
+
+    func makeCoordinator() -> Coordinator { Coordinator() }
+
+    func makeUIView(context: Context) -> ProfileLoginView {
+        let view = ProfileLoginView()
+        view.setupView()
+        return view
+    }
+
+    func updateUIView(_ view: ProfileLoginView, context: Context) {
+        context.coordinator.subscription = view.tapLogginButtonSubject.sink(receiveValue: onSignIn)
     }
 }
 
