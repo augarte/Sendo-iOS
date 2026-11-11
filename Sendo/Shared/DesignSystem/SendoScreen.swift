@@ -37,7 +37,12 @@ struct SendoPage<Content: View>: View {
                     Button(back.title, action: back.action)
                         .buttonStyle(SendoButtonStyle(.link))
                 } else {
-                    Text("Sendo").font(.title3.weight(.heavy)).tracking(-1)
+                    Text("Sendo")
+                        .font(.title3.bold())
+                        .lineLimit(1)
+                        .fixedSize()
+                        .layoutPriority(1)
+                        .accessibilityIdentifier("sendo.wordmark")
                 }
                 SwiftUI.Spacer()
                 if let context {

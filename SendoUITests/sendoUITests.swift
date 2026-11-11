@@ -22,6 +22,9 @@ final class SendoUITests: XCTestCase {
 
         let bodyweight = app.buttons["Bodyweight"]
         XCTAssertTrue(bodyweight.waitForExistence(timeout: 5))
+        let wordmark = app.staticTexts["sendo.wordmark"]
+        XCTAssertTrue(wordmark.isHittable)
+        XCTAssertEqual(wordmark.label, "Sendo")
         capture(app, named: "Training setup")
         bodyweight.tap()
         app.buttons["Continue"].tap()
