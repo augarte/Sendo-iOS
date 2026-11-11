@@ -60,11 +60,13 @@ enum AppEnvironment {
             .appendingPathComponent("Workouts.json"))
     }
 
+    @MainActor
     static func exercises() -> any ExerciseCatalog {
         #if DEBUG
         if usesFixtures { return FixtureExercises() }
         #endif
-        return FirebaseDatabaseServices.shared()
+        let authReady = session?.$didRestoreAuth.eraseToAnyPublisher() ?? Just(true).eraseToAnyPublisher()
+        return FirebaseDatabaseServices(authReady: authReady)
     }
 }
 

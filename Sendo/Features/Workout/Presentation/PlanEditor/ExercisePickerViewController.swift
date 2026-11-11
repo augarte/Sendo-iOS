@@ -5,7 +5,7 @@ final class ExercisePickerViewController: UITableViewController, UISearchResults
     private enum CatalogState {
         case loading
         case loaded([Exercise])
-        case failed
+        case failed(String)
     }
 
     private let catalog: any ExerciseCatalog
@@ -51,8 +51,8 @@ final class ExercisePickerViewController: UITableViewController, UISearchResults
         request = catalog.fetchExerciseList()
             .receive(on: DispatchQueue.main)
             .sink { [weak self] completion in
-                guard case .failure = completion else { return }
-                self?.state = .failed
+                guard case .failure(let error) = completion else { return }
+                self?.state = .failed(ExerciseCatalogError.message(for: error))
                 self?.render()
             } receiveValue: { [weak self] exercises in
                 self?.state = .loaded(exercises)
@@ -70,9 +70,10 @@ final class ExercisePickerViewController: UITableViewController, UISearchResults
             var configuration = UIContentUnavailableConfiguration.loading()
             configuration.text = "Loading exercises…"
             emptyState = configuration
-        case .failed:
+        case .failed(let message):
             var configuration = UIContentUnavailableConfiguration.empty()
             configuration.text = "Couldn’t load exercises"
+            configuration.secondaryText = message
             configuration.button = .filled()
             configuration.button.title = "Retry"
             configuration.buttonProperties.primaryAction = UIAction { [weak self] _ in self?.loadCatalog() }

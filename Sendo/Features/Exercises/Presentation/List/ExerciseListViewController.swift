@@ -34,9 +34,9 @@ private struct ExerciseCatalogScreen: View {
             switch model.state {
             case .loading:
                 ProgressView("Loading exercises…").frame(minHeight: 44)
-            case .failed:
+            case .failed(let message):
                 SendoEmptyState(icon: "icloud.slash", title: "Exercises couldn’t load",
-                                detail: "Check your connection and try again. Your saved workouts are still available.")
+                                detail: message + " Your saved workouts are still available.")
                 Button("Retry", action: model.fetchExercises).buttonStyle(SendoButtonStyle(.primary))
             case .loaded(let exercises):
                 SendoField(title: "Search exercises") {

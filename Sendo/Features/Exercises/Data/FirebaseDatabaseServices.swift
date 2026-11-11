@@ -10,14 +10,29 @@ import Combine
 import FirebaseDatabase
 
 final class FirebaseDatabaseServices: ExerciseCatalog {
-    private static let instance = FirebaseDatabaseServices()
+    private let authReady: AnyPublisher<Bool, Never>
 
-    private init() {}
-
-    static func shared() -> FirebaseDatabaseServices { instance }
+    init(authReady: AnyPublisher<Bool, Never>) {
+        self.authReady = authReady
+    }
 
     func fetchExerciseList() -> AnyPublisher<[Exercise], Error> {
-        FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title")
+        authReady
+            .filter { $0 }
+            .first()
+            .setFailureType(to: Error.self)
+            .flatMap { _ in
+                FirebaseDatabaseManager.shared.fetchDatabase(child: "exercises", orderedBy: "title")
+            }
+            .mapError { error -> Error in
+                // Realtime Database reports a rules rejection as com.firebase code 1.
+                let databaseError = error as NSError
+                if databaseError.domain == "com.firebase", databaseError.code == 1 {
+                    return ExerciseCatalogError.accessDenied
+                }
+                return error
+            }
+            .timeout(.seconds(20), scheduler: DispatchQueue.main, customError: { ExerciseCatalogError.unavailable })
             .map { snapshot in
                 snapshot.children.compactMap { child in
                     guard let child = child as? DataSnapshot else { return nil }

@@ -12,6 +12,7 @@ final class FirebaseSessionStore {
     }
 
     @Published private(set) var account: Account?
+    @Published private(set) var didRestoreAuth = false
     private let auth: Auth
     private let database: Firestore
     private let merges: GuestMeasurementMerges
@@ -106,6 +107,7 @@ final class FirebaseSessionStore {
                 }
                 isTransitioning = false
             }
+            didRestoreAuth = true
         }
         await resumePendingMerges()
         publishAccount()

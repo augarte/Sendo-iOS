@@ -33,8 +33,8 @@ final class WorkoutStartingPlanViewController: SendoHostingController<StartingPl
         request = catalog.fetchExerciseList().first().receive(on: DispatchQueue.main).sink { [weak self] completion in
             self?.request = nil
             self?.model.isLoading = false
-            if case .failure = completion {
-                self?.model.error = "Couldn’t load exercises. Try again or build your plan manually."
+            if case .failure(let error) = completion {
+                self?.model.error = ExerciseCatalogError.message(for: error)
             }
         } receiveValue: { [weak self] exercises in
             guard let self, self.navigationController?.topViewController === self else { return }
