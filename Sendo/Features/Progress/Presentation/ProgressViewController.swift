@@ -75,17 +75,43 @@ private struct MeasurementsScreen: View {
     var body: some View {
         SendoPage(title: "Progress", context: "Measurements") {
             if let latest = state.measurements.first {
-                VStack(alignment: .leading, spacing: 6) {
-                    SendoEyebrow(text: "Latest weight")
-                    Text(weight(latest)).font(.title3.weight(.semibold)).monospacedDigit()
-                    Text(latest.measuredAt.formatted(date: .abbreviated, time: .omitted))
-                        .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                VStack(alignment: .leading, spacing: 12) {
+                    HStack(alignment: .bottom, spacing: 12) {
+                        VStack(alignment: .leading, spacing: 2) {
+                            SendoEyebrow(text: "Latest weight", color: SendoPalette.heroSubdued)
+                            HStack(alignment: .firstTextBaseline, spacing: 8) {
+                                SendoDisplayText(latest.value.clean, size: 92, relativeTo: .largeTitle)
+                                    .monospacedDigit()
+                                if let unit = latest.unit {
+                                    SendoDisplayText(unit.rawValue, size: 30, weight: .heavy, relativeTo: .title2)
+                                        .foregroundStyle(SendoPalette.heroSubdued)
+                                }
+                            }
+                            .lineLimit(1)
+                            .minimumScaleFactor(0.5)
+                            .accessibilityElement(children: .ignore)
+                            .accessibilityLabel(weight(latest))
+                        }
+                        SwiftUI.Spacer(minLength: 0)
+                        VStack(alignment: .trailing, spacing: 6) {
+                            if let change = change(at: 0) {
+                                Text("\(change.clean)%")
+                                    .font(.subheadline.weight(.bold)).monospacedDigit()
+                                    .foregroundStyle(SendoPalette.hero)
+                                    .padding(.horizontal, 8).padding(.vertical, 3)
+                                    .background(SendoPalette.heroInk, in: .rect(cornerRadius: 6))
+                            }
+                            Text(latest.measuredAt.formatted(date: .abbreviated, time: .omitted))
+                                .font(.footnote).foregroundStyle(SendoPalette.heroSubdued)
+                        }
+                        .padding(.bottom, 8)
+                    }
                     if state.measurements.count > 1 {
-                        MeasurementChart(measurements: state.measurements).frame(height: 160)
+                        MeasurementChart(measurements: state.measurements).frame(height: 110)
                             .accessibilityLabel("Weight history chart")
                     }
                 }
-                .modifier(SendoPanel())
+                .modifier(SendoHero())
             } else if state.isLoading {
                 ProgressView("Loading measurements…").frame(minHeight: 44)
             } else if let error = state.loadError {
@@ -100,35 +126,40 @@ private struct MeasurementsScreen: View {
                 .accessibilityIdentifier("progress.addMeasurement")
 
             if !state.measurements.isEmpty {
-                Text("History").font(.headline)
-                ForEach(Array(state.measurements.enumerated()), id: \.element.id) { index, measurement in
-                    HStack {
-                        Button { onEdit(measurement) } label: {
-                            HStack {
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(weight(measurement)).monospacedDigit()
+                VStack(spacing: 0) {
+                    SendoDisplayText("History", size: 26, weight: .heavy, relativeTo: .title3)
+                        .accessibilityAddTraits(.isHeader)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .padding(.bottom, 6)
+                    ForEach(Array(state.measurements.enumerated()), id: \.element.id) { index, measurement in
+                        Divider().overlay(SendoPalette.line)
+                        HStack(spacing: 0) {
+                            Button { onEdit(measurement) } label: {
+                                HStack(alignment: .firstTextBaseline, spacing: 10) {
+                                    Text(weight(measurement)).font(.body.weight(.semibold)).monospacedDigit()
                                     if let change = change(at: index) {
                                         Text("\(change.clean)%")
                                             .font(.footnote).monospacedDigit()
                                             .foregroundStyle(SendoPalette.subdued)
                                     }
+                                    SwiftUI.Spacer()
+                                    Text(measurement.measuredAt.formatted(date: .abbreviated, time: .omitted))
+                                        .font(.subheadline).foregroundStyle(SendoPalette.subdued)
                                 }
-                                SwiftUI.Spacer()
-                                Text(measurement.measuredAt.formatted(date: .abbreviated, time: .omitted))
-                                    .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                                .frame(minHeight: 54)
+                                .contentShape(.rect)
                             }
-                            .frame(minHeight: 44)
-                            .contentShape(.rect)
+                            .buttonStyle(.plain)
+                            Menu {
+                                Button("Delete weight", systemImage: "trash", role: .destructive) { onDelete(measurement) }
+                            } label: {
+                                Image(systemName: "ellipsis")
+                                    .foregroundStyle(SendoPalette.subdued)
+                                    .frame(width: 44, height: 44, alignment: .trailing).contentShape(.rect)
+                            }
+                            .accessibilityLabel("Measurement actions")
                         }
-                        .buttonStyle(.plain)
-                        Menu {
-                            Button("Delete weight", systemImage: "trash", role: .destructive) { onDelete(measurement) }
-                        } label: {
-                            Image(systemName: "ellipsis").frame(width: 44, height: 44).contentShape(.rect)
-                        }
-                        .accessibilityLabel("Measurement actions")
                     }
-                    Divider().overlay(SendoPalette.line)
                 }
             }
         }
@@ -156,6 +187,7 @@ private struct MeasurementChart: UIViewRepresentable {
 
     func makeUIView(context: Context) -> SimpleLineChart {
         let chart = SimpleLineChart()
+        chart.setChartStyle(chartStyle: SLCChartStyle(backgroundGradient: false, solidBackgroundColor: .clear))
         chart.backgroundColor = .clear
         return chart
     }
@@ -172,7 +204,9 @@ private struct MeasurementChart: UIViewRepresentable {
             points.insert(SLCData(x: now, y: latest.y), at: 0)
         }
         let dataSet = SLCDataSet(graphPoints: points)
-        dataSet.setLineStyle(SLCLineStyle(lineColor: UIColor(SendoPalette.accent)))
+        dataSet.setLineStyle(SLCLineStyle(
+            lineColor: UIColor(SendoPalette.heroInk), lineStroke: 3, circleDiameter: 8, lineShadow: false
+        ))
         chart.loadPoints(dataSet: dataSet)
     }
 }

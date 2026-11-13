@@ -5,7 +5,7 @@
 //  Created by Aimar Ugarte on 23/10/21.
 //
 
-import UIKit
+import SwiftUI
 import GoogleSignIn
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -20,6 +20,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = (scene as? UIWindowScene) else { return }
           
         let window = UIWindow(windowScene: windowScene)
+        window.tintColor = UIColor(SendoPalette.accent)
+        window.overrideUserInterfaceStyle = SendoAppearance.interfaceStyle
         window.rootViewController = HomeTabBarViewController.create() // Your initial view controller.
         window.makeKeyAndVisible()
         self.window = window

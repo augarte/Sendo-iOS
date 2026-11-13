@@ -5,7 +5,7 @@
 //  Created by Aimar Ugarte on 23/10/21.
 //
 
-import UIKit
+import SwiftUI
 
 open class SendoViewController: UIViewController {
     
@@ -28,17 +28,10 @@ open class SendoViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         title = titleName
-        view.backgroundColor = UIColor(named:"PrimaryColor")
+        view.backgroundColor = UIColor(SendoPalette.paper)
+        view.tintColor = UIColor(SendoPalette.accent)
     }
     
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        overrideUserInterfaceStyle = Self.preferredInterfaceStyle
-    }
-    static var preferredInterfaceStyle: UIUserInterfaceStyle {
-        UserDefaults.standard.bool(forKey: "darkMode") ? .dark : .light
-    }
-
 }
 
 // MARK: - Navigation
@@ -51,7 +44,27 @@ extension SendoViewController {
     func showModalView(viewController: UIViewController) {
         viewController.modalPresentationStyle = .automatic
         let nvc = UINavigationController(rootViewController: viewController)
-        nvc.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
         present(nvc, animated: true)
+    }
+}
+
+
+/// The app's light/dark choice. It is applied to the window once, so every screen and sheet follows without
+/// each view controller overriding its own trait collection.
+enum SendoAppearance {
+    private static let key = "darkMode"
+
+    static var isDark: Bool { UserDefaults.standard.bool(forKey: key) }
+    static var interfaceStyle: UIUserInterfaceStyle { isDark ? .dark : .light }
+
+    @MainActor
+    static func setDark(_ dark: Bool) {
+        UserDefaults.standard.set(dark, forKey: key)
+        let windows = UIApplication.shared.connectedScenes.flatMap { ($0 as? UIWindowScene)?.windows ?? [] }
+        for window in windows {
+            UIView.transition(with: window, duration: 0.2, options: .transitionCrossDissolve) {
+                window.overrideUserInterfaceStyle = interfaceStyle
+            }
+        }
     }
 }

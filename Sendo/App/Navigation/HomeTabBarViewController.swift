@@ -22,11 +22,6 @@ class HomeTabBarViewController: UITabBarController {
         setupTabBarItems()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        overrideUserInterfaceStyle = SendoViewController.preferredInterfaceStyle
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         //setupCenterButton()
@@ -43,6 +38,11 @@ class HomeTabBarViewController: UITabBarController {
         appearance.configureWithDefaultBackground()
         appearance.backgroundColor = UIColor(SendoPalette.paper)
         appearance.shadowColor = UIColor(SendoPalette.line)
+        let titleFont = UIFont.systemFont(ofSize: 12, weight: .heavy, width: .condensed)
+        for item in [appearance.stackedLayoutAppearance, appearance.inlineLayoutAppearance, appearance.compactInlineLayoutAppearance] {
+            item.normal.titleTextAttributes = [.font: titleFont]
+            item.selected.titleTextAttributes = [.font: titleFont]
+        }
         tabBar.standardAppearance = appearance
         tabBar.scrollEdgeAppearance = appearance
         tabBar.tintColor = UIColor(SendoPalette.accent)

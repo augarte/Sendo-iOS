@@ -65,8 +65,7 @@ enum AppEnvironment {
         #if DEBUG
         if usesFixtures { return FixtureExercises() }
         #endif
-        let authReady = session?.$didRestoreAuth.eraseToAnyPublisher() ?? Just(true).eraseToAnyPublisher()
-        return FirebaseDatabaseServices(authReady: authReady)
+        return BundledExerciseCatalog()
     }
 }
 
