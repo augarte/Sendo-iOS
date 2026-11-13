@@ -40,6 +40,12 @@ Weekly training frequency is a preference independent of the ordered sessions in
 
 Workout storage is on this device. One atomic record saves the plan, rotation position, active workout, and completed logs together. Active workouts and logs retain a session snapshot so later plan edits preserve the recorded exercises. A finished workout with at least one logged set advances the rotation. Ending an empty workout leaves the current position intact.
 
+## Exercise catalog
+
+The catalog ships inside the app as the `ExerciseCatalog` data set in `Assets.xcassets/Exercises`: a JSON array of exercise records, sorted by title when loaded. It needs no network or sign-in. To add or change exercises, edit that JSON, keep existing IDs unchanged because plans reference them, and release an update. Exercise images are still loaded from the URLs in each record's `png` field.
+
+Muscle filters group the catalog's anatomical names into ten groups (`MuscleGroup`): chest, back, shoulders, biceps, triceps, core, quads, hamstrings, glutes and calves. An exercise belongs to the groups of its primary muscles. Favourites are exercise IDs stored in `UserDefaults` on this device and are not synced to an account.
+
 ## First workout setup
 
 On first launch without a saved plan, Workout offers setup for weekly training days and available equipment. The guest can review a starter template or build a plan in the same editor used after setup. Templates resolve exercises from the catalog and retain their IDs. A missing template exercise leaves manual setup available.

@@ -28,7 +28,6 @@
 		A972C714B9AEAD4D280842E4 /* SendoScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1AE1273AFE99AC54F01D5D /* SendoScreen.swift */; };
 		20C524692724D43A00741057 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524682724D43A00741057 /* Utils.swift */; };
 		20C5247D2724EB2900741057 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 20C5246E2724E58E00741057 /* GoogleService-Info.plist */; };
-		20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */; };
 		20C524812724EF1C00741057 /* Exercise.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524802724EF1C00741057 /* Exercise.swift */; };
 		6CD5C076F1438573B313A33B /* ExerciseCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDF7130402278845E8897438 /* ExerciseCatalog.swift */; };
 		20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20C524822724F00600741057 /* ExerciseListViewModel.swift */; };
@@ -36,7 +35,6 @@
 		20DDAC63273F2EEF0072BB76 /* ExerciseListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */; };
 		20DDAC6B27412A690072BB76 /* ExerciseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */; };
 		20F2D426275CECF200A56B83 /* SDWebImage in Frameworks */ = {isa = PBXBuildFile; productRef = 20F2D425275CECF200A56B83 /* SDWebImage */; };
-		EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA07CE1C2845495F0053B768 /* SettingsViewController.swift */; };
 		EA0C1A1D28496B32009223D8 /* ProgressTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */; };
 		EA0C1A2328496E68009223D8 /* NewEntryDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */; };
 		EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA0FF044284BF0A50047B447 /* AuthViewModel.swift */; };
@@ -47,7 +45,8 @@
 		EA3D141B2826E62600387419 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141A2826E62600387419 /* AppConfiguration.swift */; };
 		EA3D14202826E67800387419 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D141F2826E67800387419 /* Endpoint.swift */; };
 		EA3D14222826E68000387419 /* NetworkServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14212826E68000387419 /* NetworkServiceManager.swift */; };
-		EA3D14252826E6B500387419 /* FirebaseDatabaseServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */; };
+		EA3D14272826E6B500387419 /* FavoriteExercises.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14262826E6B500387419 /* FavoriteExercises.swift */; };
+		EA3D14252826E6B500387419 /* BundledExerciseCatalog.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14242826E6B500387419 /* BundledExerciseCatalog.swift */; };
 		EA3D14272826E6C700387419 /* NetworkServicesEndpoints.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */; };
 		EA3D142A2826E7D200387419 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D14292826E7D200387419 /* Alamofire */; };
 		EA3D142D2826E81500387419 /* AlamofireImage in Frameworks */ = {isa = PBXBuildFile; productRef = EA3D142C2826E81500387419 /* AlamofireImage */; };
@@ -125,14 +124,12 @@
 		EF1AE1273AFE99AC54F01D5D /* SendoScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendoScreen.swift; sourceTree = "<group>"; };
 		20C524682724D43A00741057 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
 		20C5246E2724E58E00741057 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseManager.swift; sourceTree = "<group>"; };
 		20C524802724EF1C00741057 /* Exercise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exercise.swift; sourceTree = "<group>"; };
 		CDF7130402278845E8897438 /* ExerciseCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseCatalog.swift; sourceTree = "<group>"; };
 		20C524822724F00600741057 /* ExerciseListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewModel.swift; sourceTree = "<group>"; };
 		20DDAC60273F2EDD0072BB76 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		20DDAC62273F2EEF0072BB76 /* ExerciseListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseListViewController.swift; sourceTree = "<group>"; };
 		20DDAC6927412A690072BB76 /* ExerciseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseTableViewCell.swift; sourceTree = "<group>"; };
-		EA07CE1C2845495F0053B768 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		EA0C1A1C28496B32009223D8 /* ProgressTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressTableCell.swift; sourceTree = "<group>"; };
 		EA0C1A2228496E68009223D8 /* NewEntryDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewEntryDialog.swift; sourceTree = "<group>"; };
 		EA0FF044284BF0A50047B447 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
@@ -143,7 +140,8 @@
 		EA3D141A2826E62600387419 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		EA3D141F2826E67800387419 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		EA3D14212826E68000387419 /* NetworkServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServiceManager.swift; sourceTree = "<group>"; };
-		EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirebaseDatabaseServices.swift; sourceTree = "<group>"; };
+		EA3D14262826E6B500387419 /* FavoriteExercises.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteExercises.swift; sourceTree = "<group>"; };
+		EA3D14242826E6B500387419 /* BundledExerciseCatalog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundledExerciseCatalog.swift; sourceTree = "<group>"; };
 		EA3D14262826E6C700387419 /* NetworkServicesEndpoints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServicesEndpoints.swift; sourceTree = "<group>"; };
 		EA3D143428270B1300387419 /* NetworkServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkServices.swift; sourceTree = "<group>"; };
 		EA3D14432827F01D00387419 /* ExerciseDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExerciseDetailViewController.swift; sourceTree = "<group>"; };
@@ -301,7 +299,6 @@
 		E0991CD08B49783B334F38C7 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
-				20C5247E2724EBF600741057 /* FirebaseDatabaseManager.swift */,
 				EA3D144F2828227C00387419 /* FirebaseFirestoreManager.swift */,
 				67B51088F034FE5D2FEA4D48 /* FirebaseSessionStore.swift */,
 			);
@@ -314,7 +311,6 @@
 				F02FD2D1DEA77776E77D1A04 /* Exercises */,
 				680C5283F08B083E54A3AF7A /* Profile */,
 				013B7A69FEED86A56F0AABD4 /* Progress */,
-				07D2BE2D424B347DC574C62B /* Settings */,
 				86D1D0CC6A0DF5ED91D54F41 /* Workout */,
 			);
 			path = Features;
@@ -377,14 +373,6 @@
 				A792F3914798CA250026D894 /* StarterWorkoutTemplate.swift */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		07D2BE2D424B347DC574C62B /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				EA07CE1C2845495F0053B768 /* SettingsViewController.swift */,
-			);
-			path = Settings;
 			sourceTree = "<group>";
 		};
 		013B7A69FEED86A56F0AABD4 /* Progress */ = {
@@ -545,7 +533,8 @@
 		EE967CE73C61FC5AFF86A101 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				EA3D14242826E6B500387419 /* FirebaseDatabaseServices.swift */,
+				EA3D14242826E6B500387419 /* BundledExerciseCatalog.swift */,
+				EA3D14262826E6B500387419 /* FavoriteExercises.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -782,7 +771,8 @@
 				EA3D14442827F01D00387419 /* ExerciseDetailViewController.swift in Sources */,
 				EA3D14222826E68000387419 /* NetworkServiceManager.swift in Sources */,
 				EA3D14272826E6C700387419 /* NetworkServicesEndpoints.swift in Sources */,
-				EA3D14252826E6B500387419 /* FirebaseDatabaseServices.swift in Sources */,
+				EA3D14252826E6B500387419 /* BundledExerciseCatalog.swift in Sources */,
+				EA3D14272826E6B500387419 /* FavoriteExercises.swift in Sources */,
 				20B96EBC272474B6000B9C1D /* ProgressViewController.swift in Sources */,
 				EA0FF047284BF0EE0047B447 /* AuthUser.swift in Sources */,
 				EA3D143528270B1300387419 /* NetworkServices.swift in Sources */,
@@ -816,7 +806,6 @@
 				E2809AE74B795CA4AB3A4DF0 /* ExercisePrescriptionViewController.swift in Sources */,
 				EA3D14192826E61E00387419 /* Extensions.swift in Sources */,
 				EAD2D11A29199366003A975D /* WorkoutPlanEditorViewController.swift in Sources */,
-				20C5247F2724EBF600741057 /* FirebaseDatabaseManager.swift in Sources */,
 				EAC9AED328423D7F00608A32 /* AppleAuthorizationButton.swift in Sources */,
 				20858D62272448B200993B5E /* sendo.xcdatamodeld in Sources */,
 				20C524832724F00600741057 /* ExerciseListViewModel.swift in Sources */,
@@ -824,7 +813,6 @@
 				EA0FF045284BF0A50047B447 /* AuthViewModel.swift in Sources */,
 				EA6D90272AB5CC3500BFB498 /* FirestoreMeasurementRepository.swift in Sources */,
 				A49352151AF04930F917F73E /* GuestMeasurementMerges.swift in Sources */,
-				EA07CE1D2845495F0053B768 /* SettingsViewController.swift in Sources */,
 				EA3FFAF028E9BA90007681C9 /* Constants.swift in Sources */,
 				20B96EBA272473D0000B9C1D /* ProgressViewModel.swift in Sources */,
 			);
