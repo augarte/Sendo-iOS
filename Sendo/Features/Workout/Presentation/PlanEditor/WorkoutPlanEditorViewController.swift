@@ -106,10 +106,13 @@ struct WorkoutPlanEditorScreen: View {
                 ForEach(Array(model.draft.sessions.enumerated()), id: \.element.id) { index, session in
                     HStack {
                         Button { onOpen(session) } label: {
-                            VStack(alignment: .leading, spacing: 3) {
-                                Text(session.name).font(.headline)
-                                Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
-                                    .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                            HStack(spacing: 14) {
+                                SendoPlate(number: index + 1, style: SendoSessionColor(hex: session.colorHex, index: index))
+                                VStack(alignment: .leading, spacing: 3) {
+                                    Text(session.name).font(.headline)
+                                    Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
+                                        .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                                }
                             }
                             .frame(maxWidth: .infinity, minHeight: 52, alignment: .leading)
                             .contentShape(.rect)

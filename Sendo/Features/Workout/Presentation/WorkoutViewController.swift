@@ -94,7 +94,6 @@ final class WorkoutViewController: BaseTabViewController {
             }
         }
         let navigation = UINavigationController(rootViewController: setup)
-        navigation.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
         navigation.modalPresentationStyle = .fullScreen
         navigation.isModalInPresentation = state.shouldOfferSetup
         let presenter: UIViewController = tabBarController ?? self
@@ -110,7 +109,6 @@ final class WorkoutViewController: BaseTabViewController {
             self.render()
         }
         let navigation = UINavigationController(rootViewController: editor)
-        navigation.overrideUserInterfaceStyle = Self.preferredInterfaceStyle
         navigation.modalPresentationStyle = .fullScreen
         present(navigation, animated: true)
     }
@@ -129,43 +127,73 @@ private struct WorkoutHomeScreen: View {
                 empty(icon: "exclamationmark.circle", title: "Couldn’t load your workout plan",
                       detail: "Try opening your saved workout plan again.", action: "Retry", perform: onRetry)
             } else if let state, let plan = state.plan, let next = state.nextSession {
-                let position = (plan.sessions.firstIndex { $0.id == next.id } ?? 0) + 1
-                VStack(alignment: .leading, spacing: 6) {
-                    SendoEyebrow(text: "Next session")
-                    Text(next.name).font(.title3.weight(.semibold))
-                    Text(summary(plan: plan, position: position, days: state.weeklyTrainingDays))
-                        .font(.footnote).foregroundStyle(SendoPalette.subdued).monospacedDigit()
+                let nextIndex = plan.sessions.firstIndex { $0.id == next.id } ?? 0
+                let nextStyle = SendoSessionColor(hex: next.colorHex, index: nextIndex)
+                VStack(alignment: .leading, spacing: 14) {
+                    HStack(spacing: 12) {
+                        VStack(alignment: .leading, spacing: 4) {
+                            SendoEyebrow(text: "Next session", color: nextStyle.ink)
+                            SendoDisplayText(next.name, size: 54, relativeTo: .largeTitle)
+                                .minimumScaleFactor(0.5)
+                                .lineLimit(2)
+                        }
+                        SwiftUI.Spacer(minLength: 0)
+                        nextBadge(number: nextIndex + 1, style: nextStyle)
+                    }
+                    Rectangle().fill(nextStyle.ink).frame(height: 1.5)
+                    Text(summary(plan: plan, position: nextIndex + 1, days: state.weeklyTrainingDays))
+                        .font(.footnote.weight(.semibold)).monospacedDigit()
                         .accessibilityIdentifier("workout.nextSummary")
                 }
-                .modifier(SendoPanel())
-                HStack {
-                    Text("Your plan").font(.headline)
-                    SwiftUI.Spacer()
-                    Button("Edit plan", action: onPlan).buttonStyle(SendoButtonStyle(.link))
-                }
+                .modifier(SendoHero(fill: nextStyle.fill, ink: nextStyle.ink, outlined: true))
                 VStack(spacing: 0) {
+                    HStack {
+                        SendoDisplayText("Your plan", size: 26, weight: .heavy, relativeTo: .title3)
+                            .accessibilityAddTraits(.isHeader)
+                        SwiftUI.Spacer()
+                        Button("Edit plan", action: onPlan).buttonStyle(SendoButtonStyle(.link))
+                    }
                     ForEach(Array(plan.sessions.enumerated()), id: \.element.id) { index, session in
-                        HStack(alignment: .firstTextBaseline) {
-                            Text("\(index + 1). \(session.name)")
-                            SwiftUI.Spacer()
-                            Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
-                                .foregroundStyle(SendoPalette.subdued).font(.footnote)
-                        }
-                        .padding(.vertical, 10)
                         Divider().overlay(SendoPalette.line)
+                        HStack(spacing: 14) {
+                            SendoPlate(number: index + 1, style: SendoSessionColor(hex: session.colorHex, index: index))
+                            Text(session.name).font(.body.weight(.semibold))
+                            if session.id == next.id { nextTag(style: nextStyle) }
+                            SwiftUI.Spacer(minLength: 8)
+                            Text(WorkoutEditorRows.exerciseCount(session.exercises.count))
+                                .foregroundStyle(SendoPalette.subdued).font(.subheadline)
+                        }
+                        .frame(minHeight: 58)
+                        .accessibilityElement(children: .combine)
+                    }
+                    Divider().overlay(SendoPalette.line)
+                }
+                HStack(spacing: 12) {
+                    VStack(alignment: .leading, spacing: 2) {
+                        Text("History").font(.headline)
+                        Text(historyDetail(state.history.count))
+                            .font(.subheadline).foregroundStyle(SendoPalette.subdued)
+                    }
+                    SwiftUI.Spacer(minLength: 0)
+                    if !state.history.isEmpty {
+                        SendoDisplayText(state.history.count.formatted(), size: 46, relativeTo: .title)
                     }
                 }
-                VStack(alignment: .leading, spacing: 6) {
-                    Text("History").font(.headline)
-                    if state.history.isEmpty {
-                        Text("No completed workouts yet. Your first session will appear here.")
-                            .font(.footnote).foregroundStyle(SendoPalette.subdued)
-                    } else {
-                        Text(state.history.count.formatted() + (state.history.count == 1 ? " completed workout" : " completed workouts"))
-                            .font(.footnote).foregroundStyle(SendoPalette.subdued)
+                .modifier(SendoPanel())
+                .accessibilityElement(children: .ignore)
+                .accessibilityLabel("History, " + (state.history.isEmpty ? "" : state.history.count.formatted() + " ")
+                                    + historyDetail(state.history.count))
+                Button(action: onSetup) {
+                    HStack {
+                        Text("Training preferences").font(.subheadline.weight(.bold))
+                        SwiftUI.Spacer()
+                        Image(systemName: "chevron.right").font(.footnote.weight(.bold))
                     }
+                    .padding(.horizontal, 4)
+                    .frame(minHeight: 44)
+                    .contentShape(.rect)
                 }
-                Button("Training preferences", action: onSetup).buttonStyle(SendoButtonStyle(.link))
+                .buttonStyle(.plain)
             } else {
                 empty(icon: "dumbbell", title: "No training plan yet",
                       detail: "Create a plan so your next session is ready to start.", action: "Create a plan", perform: onPlan)
@@ -178,6 +206,35 @@ private struct WorkoutHomeScreen: View {
         VStack(alignment: .leading, spacing: 10) {
             SendoEmptyState(icon: icon, title: title, detail: detail)
             Button(action, action: perform).buttonStyle(SendoButtonStyle(.primary))
+        }
+    }
+
+    private func nextBadge(number: Int, style: SendoSessionColor) -> some View {
+        Text(number.formatted())
+            .font(.system(size: 38, weight: .black).width(.compressed))
+            .foregroundStyle(style.fill)
+            .frame(width: 60, height: 60)
+            .overlay { Circle().strokeBorder(style.fill, lineWidth: 2) }
+            .frame(width: 84, height: 84)
+            .background(style.ink, in: .circle)
+            .accessibilityHidden(true)
+    }
+
+    private func nextTag(style: SendoSessionColor) -> some View {
+        Text("NEXT")
+            .font(.caption2.weight(.heavy)).tracking(1)
+            .foregroundStyle(style.ink)
+            .padding(.horizontal, 6).padding(.vertical, 2)
+            .background(style.fill, in: .rect(cornerRadius: 4))
+            .overlay { RoundedRectangle(cornerRadius: 4).strokeBorder(SendoPalette.plateOutline, lineWidth: 1.5) }
+            .accessibilityLabel("Next")
+    }
+
+    private func historyDetail(_ count: Int) -> String {
+        switch count {
+        case 0: "No completed workouts yet. Your first session will appear here."
+        case 1: "completed workout"
+        default: "completed workouts"
         }
     }
 

@@ -22,6 +22,8 @@ struct PlannedSession: Codable, Equatable, Identifiable {
     var id = UUID()
     var name: String
     var exercises: [PlannedExercise]
+    /// Six-digit RGB hex chosen by the user. Nil follows the session's position in the rotation.
+    var colorHex: String?
 
     func validate() throws {
         guard !name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
