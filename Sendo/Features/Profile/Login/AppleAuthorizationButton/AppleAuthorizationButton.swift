@@ -1,46 +1,27 @@
-//
-//  AppleAuthorizationButton.swift
-//  Sendo
-//
-//  Created by Aimar Ugarte on 28/5/22.
-//
-
-import UIKit
 import AuthenticationServices
+import SwiftUI
 
-@IBDesignable
-class AppleAuthorizationButton: UIButton {
+/// The system Sign in with Apple button. It keeps Apple's required logo and wording; only the corner radius follows Sendo's buttons.
+struct AppleAuthorizationButton: UIViewRepresentable {
+    let style: ASAuthorizationAppleIDButton.Style
+    let action: () -> Void
 
-    private var authorizationButton: ASAuthorizationAppleIDButton!
-    
-    override public init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-    
-    override public func draw(_ rect: CGRect) {
-        super.draw(rect)
-        
-        authorizationButton = ASAuthorizationAppleIDButton(authorizationButtonType: .default, authorizationButtonStyle: .black)
-        addSubview(authorizationButton)
+    func makeCoordinator() -> Coordinator { Coordinator() }
 
-        authorizationButton.addTarget(self, action: #selector(authorizationAppleIDButtonTapped(_:)), for: .touchUpInside)
+    func makeUIView(context: Context) -> ASAuthorizationAppleIDButton {
+        let button = ASAuthorizationAppleIDButton(authorizationButtonType: .signIn, authorizationButtonStyle: style)
+        button.cornerRadius = 12
+        button.addTarget(context.coordinator, action: #selector(Coordinator.tapped), for: .touchUpInside)
+        return button
+    }
 
-        authorizationButton.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            authorizationButton.topAnchor.constraint(equalTo: self.topAnchor, constant: 0.0),
-            authorizationButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 0.0),
-            authorizationButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: 0.0),
-            authorizationButton.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 0.0),
-        ])
+    func updateUIView(_ button: ASAuthorizationAppleIDButton, context: Context) {
+        context.coordinator.action = action
     }
-    
-    @objc func authorizationAppleIDButtonTapped(_ sender: Any) {
-        // Forward the touch up inside event to MyAuthorizationAppleIDButton
-        sendActions(for: .touchUpInside)
+
+    final class Coordinator: NSObject {
+        var action: () -> Void = {}
+
+        @objc func tapped() { action() }
     }
-    
 }

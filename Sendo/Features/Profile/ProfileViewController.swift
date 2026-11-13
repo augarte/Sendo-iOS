@@ -47,9 +47,9 @@ class ProfileViewController: BaseTabViewController {
         let content = ProfileScreen(
             name: account?.isGuest == false ? account?.name : nil,
             signedIn: account?.isGuest == false,
+            photoURL: account?.isGuest == false ? account?.photoURL : nil,
             training: trainingState(),
             onEdit: { [weak self] in self?.editTraining() },
-            onSettings: { [weak self] in self?.navigateToViewController(viewController: SettingsViewController.create()) },
             onSignIn: { [weak self] type in
                 switch type {
                 case .google: self?.signInGoogle()
@@ -70,61 +70,87 @@ class ProfileViewController: BaseTabViewController {
 private struct ProfileScreen: View {
     let name: String?
     let signedIn: Bool
+    let photoURL: URL?
     let training: WorkoutTrainingState?
     let onEdit: () -> Void
-    let onSettings: () -> Void
     let onSignIn: (ProfileLoginView.LoginType) -> Void
+    @State private var isDark = SendoAppearance.isDark
 
     var body: some View {
-        SendoPage(title: "Profile", context: "Preferences") {
-            VStack(alignment: .leading, spacing: 7) {
-                SendoEyebrow(text: "Account")
-                Text(signedIn ? (name ?? "Signed in") : "Training as a guest").font(.headline)
+        SendoPage(title: "Profile") {
+            let accountName = signedIn ? (name ?? "Signed in") : "Training as a guest"
+            VStack(alignment: .leading, spacing: 12) {
+                HStack(spacing: 16) {
+                    if signedIn, let initial = accountName.first {
+                        avatar(initial: initial)
+                    }
+                    VStack(alignment: .leading, spacing: 4) {
+                        SendoEyebrow(text: "Account", color: SendoPalette.heroSubdued)
+                        SendoDisplayText(accountName, size: 36, relativeTo: .title)
+                            .minimumScaleFactor(0.6)
+                            .lineLimit(2)
+                    }
+                }
                 if !signedIn {
                     Text("Sign in to sync your measurements across devices.")
-                        .font(.footnote).foregroundStyle(SendoPalette.subdued)
-                    ProviderButtons(onSignIn: onSignIn).frame(height: 104).padding(.top, 4)
+                        .font(.footnote).foregroundStyle(SendoPalette.heroSubdued)
+                    ProfileLoginView(onSignIn: onSignIn)
                 }
             }
-            .modifier(SendoPanel())
-            row("Training days", value: training?.weeklyTrainingDays.map(String.init) ?? "Not set")
-            row("Equipment", value: training?.equipment?.title ?? "Not set")
-            Button("Edit training preferences", action: onEdit).buttonStyle(SendoButtonStyle(.link))
-            Button("Settings", action: onSettings)
-                .buttonStyle(SendoButtonStyle(.link))
-                .accessibilityIdentifier("profile.settings")
-        }
-    }
-
-    private func row(_ title: String, value: String) -> some View {
-        VStack(spacing: 10) {
-            HStack {
-                Text(title)
-                SwiftUI.Spacer()
-                Text(value).font(.footnote).foregroundStyle(SendoPalette.subdued)
+            .modifier(SendoHero())
+            HStack(spacing: 12) {
+                tile("Training days", value: training?.weeklyTrainingDays.map(String.init) ?? "Not set")
+                tile("Equipment", value: training?.equipment?.title ?? "Not set")
             }
-            Divider().overlay(SendoPalette.line)
+            Button("Edit training preferences", action: onEdit).buttonStyle(SendoButtonStyle(.secondary))
+        }
+        .overlay(alignment: .topTrailing) {
+            Button {
+                isDark.toggle()
+                SendoAppearance.setDark(isDark)
+            } label: {
+                Image(systemName: isDark ? "sun.max" : "moon")
+                    .font(.title3.weight(.semibold))
+                    .frame(width: 44, height: 44)
+                    .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .padding(.trailing, 12)
+            .accessibilityLabel(isDark ? "Switch to light mode" : "Switch to dark mode")
+            .accessibilityIdentifier("profile.darkMode")
         }
     }
-}
 
-private struct ProviderButtons: UIViewRepresentable {
-    let onSignIn: (ProfileLoginView.LoginType) -> Void
-
-    final class Coordinator {
-        var subscription: AnyCancellable?
+    /// The account photo when the provider gives one, over the name's initial so there is never an empty circle.
+    private func avatar(initial: Character) -> some View {
+        ZStack {
+            Circle().fill(SendoPalette.heroInk)
+            Text(String(initial))
+                .font(.system(size: 34, weight: .black).width(.compressed))
+                .textCase(.uppercase)
+                .foregroundStyle(SendoPalette.hero)
+            if let photoURL {
+                AsyncImage(url: photoURL) { phase in
+                    if case .success(let image) = phase { image.resizable().scaledToFill() }
+                }
+            }
+        }
+        .frame(width: 60, height: 60)
+        .clipShape(.circle)
+        .accessibilityHidden(true)
     }
 
-    func makeCoordinator() -> Coordinator { Coordinator() }
-
-    func makeUIView(context: Context) -> ProfileLoginView {
-        let view = ProfileLoginView()
-        view.setupView()
-        return view
-    }
-
-    func updateUIView(_ view: ProfileLoginView, context: Context) {
-        context.coordinator.subscription = view.tapLogginButtonSubject.sink(receiveValue: onSignIn)
+    private func tile(_ title: String, value: String) -> some View {
+        VStack(alignment: .leading, spacing: 4) {
+            SendoDisplayText(value, size: 64, relativeTo: .largeTitle)
+                .minimumScaleFactor(0.35)
+                .lineLimit(1)
+                .frame(height: 64, alignment: .bottomLeading)
+            Text(title).font(.subheadline).foregroundStyle(SendoPalette.subdued)
+        }
+        .modifier(SendoPanel())
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel("\(title), \(value)")
     }
 }
 

@@ -9,10 +9,10 @@ final class FirebaseSessionStore {
         let uid: String
         let name: String?
         let isGuest: Bool
+        let photoURL: URL?
     }
 
     @Published private(set) var account: Account?
-    @Published private(set) var didRestoreAuth = false
     private let auth: Auth
     private let database: Firestore
     private let merges: GuestMeasurementMerges
@@ -107,7 +107,6 @@ final class FirebaseSessionStore {
                 }
                 isTransitioning = false
             }
-            didRestoreAuth = true
         }
         await resumePendingMerges()
         publishAccount()
@@ -119,7 +118,13 @@ final class FirebaseSessionStore {
     }
 
     private func makeAccount(_ user: User) -> Account {
-        Account(uid: user.uid, name: user.displayName, isGuest: user.isAnonymous)
+        let photo = user.photoURL ?? user.providerData.lazy.compactMap(\.photoURL).first
+        return Account(uid: user.uid, name: user.displayName, isGuest: user.isAnonymous, photoURL: photo.map(Self.sharper))
+    }
+
+    /// Google serves a 96-pixel avatar by default, which is soft at the size the profile shows it.
+    private static func sharper(_ url: URL) -> URL {
+        URL(string: url.absoluteString.replacingOccurrences(of: "=s96-c", with: "=s256-c")) ?? url
     }
 
     private enum SessionError: LocalizedError {

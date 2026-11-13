@@ -141,14 +141,16 @@ final class SendoUITests: XCTestCase {
         XCTAssertTrue(app.buttons["progress.addMeasurement"].exists)
     }
 
-    func testProfileOpensSettings() {
+    func testProfileTogglesDarkMode() {
         let app = launchApp()
         app.tabBars.buttons["Profile"].tap()
-        app.buttons["profile.settings"].tap()
-
-        XCTAssertTrue(app.navigationBars["Settings"].exists)
-        XCTAssertTrue(app.staticTexts["Dark mode"].exists)
-        XCTAssertTrue(app.switches.firstMatch.exists)
+        let toggle = app.buttons["profile.darkMode"]
+        XCTAssertTrue(toggle.waitForExistence(timeout: 5))
+        let before = toggle.label
+        toggle.tap()
+        XCTAssertNotEqual(toggle.label, before)
+        toggle.tap()
+        XCTAssertEqual(toggle.label, before)
     }
 
     private func launchApp() -> XCUIApplication {

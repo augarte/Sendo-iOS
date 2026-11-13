@@ -1,61 +1,48 @@
-//
-//  ProfileLoginView.swift
-//  Sendo
-//
-//  Created by Aimar Ugarte on 2/10/22.
-//
+import AuthenticationServices
+import SwiftUI
 
-import Foundation
-import UIKit
-import Firebase
-import GoogleSignIn
-import Combine
-
-class ProfileLoginView: UIView {
-    
+/// Sign-in buttons that follow Sendo's button shape. Both providers keep their required logo and wording:
+/// Apple's system button, and Google's unmodified "G" with the "Sign in with Google" label.
+struct ProfileLoginView: View {
     enum LoginType {
         case google
         case apple
     }
-    
-    var tapLogginButtonSubject = PassthroughSubject<LoginType, Never>()
-    
-    lazy var appleLoginButton: AppleAuthorizationButton = {
-        let button = AppleAuthorizationButton.init()
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (signinApplePress))
-        button.addGestureRecognizer(gesture)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    lazy var googleLoginButton: GIDSignInButton = {
-        let button = GIDSignInButton()
-        let gesture = UITapGestureRecognizer(target: self, action:  #selector (signinGooglePress))
-        button.addGestureRecognizer(gesture)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    func setupView() {
-        let providers = UIStackView(arrangedSubviews: [appleLoginButton, googleLoginButton])
-        providers.axis = .vertical
-        providers.distribution = .fillEqually
-        providers.spacing = 8
-        providers.translatesAutoresizingMaskIntoConstraints = false
-        addSubview(providers)
-        NSLayoutConstraint.activate([
-            providers.topAnchor.constraint(equalTo: topAnchor),
-            providers.bottomAnchor.constraint(equalTo: bottomAnchor),
-            providers.leadingAnchor.constraint(equalTo: leadingAnchor),
-            providers.trailingAnchor.constraint(equalTo: trailingAnchor)
-        ])
+
+    let onSignIn: (LoginType) -> Void
+    @Environment(\.colorScheme) private var scheme
+
+    var body: some View {
+        VStack(spacing: 10) {
+            AppleAuthorizationButton(style: onBoneHero ? .black : .white) { onSignIn(.apple) }
+                .id(scheme)
+                .frame(height: 52)
+            googleButton
+        }
     }
 
-    @objc private func signinGooglePress(){
-        tapLogginButtonSubject.send(.google)
+    /// The account hero is bone in dark mode and black in light mode, so each provider uses its matching theme.
+    private var onBoneHero: Bool { scheme == .dark }
+
+    private var googleButton: some View {
+        Button { onSignIn(.google) } label: {
+            HStack(spacing: 10) {
+                Image("GoogleG").resizable().frame(width: 18, height: 18).accessibilityHidden(true)
+                Text("Sign in with Google").font(.system(size: 17, weight: .medium))
+            }
+            .foregroundStyle(onBoneHero ? rgb(0xE3E3E3) : rgb(0x1F1F1F))
+            .frame(maxWidth: .infinity, minHeight: 52)
+            .background(onBoneHero ? rgb(0x131314) : rgb(0xFFFFFF), in: .rect(cornerRadius: 12))
+            .overlay {
+                RoundedRectangle(cornerRadius: 12)
+                    .strokeBorder(onBoneHero ? rgb(0x8E918F) : rgb(0x747775), lineWidth: 1)
+            }
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
     }
-    
-    @objc private func signinApplePress(){
-        tapLogginButtonSubject.send(.apple)
+
+    private func rgb(_ hex: UInt32) -> Color {
+        Color(red: Double(hex >> 16) / 255, green: Double((hex >> 8) & 255) / 255, blue: Double(hex & 255) / 255)
     }
 }
